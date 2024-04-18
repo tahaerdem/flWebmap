@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>FaultLines WebMap BETA</title>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+        <link href="api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet"/>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            #map {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+        <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoidGFoYWVyZGVtb3p0dXJrIiwiYSI6ImNqZmZ1Nm9zNzM4N3gycW1tMGVreHJ0enQifQ.m_BVyHJ6Ukop8vUSasQv2w';
+            const map = new mapboxgl.Map{
+                container:'map',
+                style:'mapbox://styles/tahaerdemozturk/clv5cs6xl02j301pkfk03dq9h',
+                center: [41.015137, 28.979530],
+                zoom: 12
+            }
+        </script>
+    </body>
+</html>
