@@ -23,10 +23,11 @@
                 zoom: 13,
             });
 
-
-
-
-            map.addControl(new mapboxgl.MapboxSearchBox());
+            const geocoder = new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+            });
+            map.addControl(geocoder);
     
             map.addControl(new mapboxgl.NavigationControl());
             map.doubleClickZoom.enable();
