@@ -49,8 +49,32 @@
 
             const geocoder = new MapboxGeocoder({
                 accessToken: mapboxgl.accessToken,
+
+                // Limit seach results to Australia.
+                countries: 'au',
+
+                // Use a bounding box to further limit results
+                // to the geographic bounds representing the
+                // region of New South Wales.
+                bbox: [139.965, -38.03, 155.258, -27.839],
+
+                // Apply a client-side filter to further limit results
+                // to those strictly within the New South Wales region.
+                filter: function (item) {
+                    // returns true if item contains New South Wales region
+                    return item.context.some((i) => {
+                        // ID is in the form {index}.{id} per https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
+                        // This example searches for the `region`
+                        // named `New South Wales`.
+                        return (
+                            i.id.split('.').shift() === 'region' &&
+                            i.text === 'New South Wales'
+                        );
+                    });
+                },
                 mapboxgl: mapboxgl
-            });
+            })
+
             map.addControl(geocoder);
     
             map.addControl(new mapboxgl.NavigationControl());
