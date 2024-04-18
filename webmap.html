@@ -10,6 +10,24 @@
         <style>
             body { margin: 0; padding: 0; }
             #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+            #searchBox {
+                width: 300px; /* Set the width of the search box */
+                padding: 8px 12px; /* Padding inside the search box */
+                font-size: 16px; /* Text size in the search box */
+                border: 2px solid #413d35; /* Border color and size */
+                border-radius: 8px; /* Rounded corners */
+                outline: none; /* Removes the outline */
+                color: #2b2925; /* Text color */
+                background-color: #ece9dd; /* Background color */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift the element off the page */
+                transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus effects */
+            }
+            
+            #searchBox:focus {
+                border-color: #005792; /* Changes border color on focus */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* More prominent shadow on focus */
+            }
+            
         </style>
     </head>
     <body>
