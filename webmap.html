@@ -20,6 +20,10 @@
                 center: [28.979530,41.015137],
                 zoom: 9,
             });
+
+            const search = new MapboxSearchBox();
+            search.accessToken = 'pk.eyJ1IjoidGFoYWVyZGVtb3p0dXJrIiwiYSI6ImNqZmZ1Nm9zNzM4N3gycW1tMGVreHJ0enQifQ.m_BVyHJ6Ukop8vUSasQv2w';
+            map.addControl(search);
         
             map.addControl(new mapboxgl.NavigationControl());
             map.doubleClickZoom.enable();
