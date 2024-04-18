@@ -5,6 +5,8 @@
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
         <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
         <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css' rel='stylesheet' />
+        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js'></script>
         <style>
             body { margin: 0; padding: 0; }
             #map { position: absolute; top: 0; bottom: 0; width: 100%; }
@@ -20,6 +22,8 @@
                 center: [28.83635628167491,41.00183027261981],
                 zoom: 13,
             });
+
+
 
 
             map.addControl(new mapboxgl.MapboxSearchBox());
