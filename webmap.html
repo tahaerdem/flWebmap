@@ -22,7 +22,8 @@
             });
         
             map.addControl(new mapboxgl.NavigationControl());
-            map.scrollZoom();
+            map.doubleClickZoom.enable();
+            map.scrollZoom.enable();
         
             map.on('style.load', () => {
                 map.setFog({}); // Set the default atmosphere style
