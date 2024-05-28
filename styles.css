@@ -1,0 +1,55 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    font-family: 'Akzidenz-Grotesk Pro', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 118.8%;
+    letter-spacing: -0.045em;
+    text-align: center;
+    color: #FFC56E;
+}
+
+.main-header {
+    background-color: #FFFDDE;
+    height: 95vh;
+    display: flex;
+}
+
+main {
+    padding: 20px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

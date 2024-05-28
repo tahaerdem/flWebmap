@@ -3,6 +3,7 @@
     <head>
         <title>FaultLines Research</title>
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="styles.css">
 
         <meta name="application-name" content="FaultLines">
         <meta name="apple-mobile-web-app-title" content="FaultLines">
@@ -10,50 +11,16 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/flWebmap/resources/favicon/fl-favicon-32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/flWebmap/resources/favicon/fl-favicon-16.png">
 
-
-
-
         <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
         <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
         <link href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css' rel='stylesheet' />
         <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js'></script>
-        <style>
-            body { margin: 0; padding: 0; }
-            #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-            /* Styles the container of the geocoder */
-            #geocoder {
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift the element off the page */
-                border-radius: 8px; /* Rounded corners */
-                font-size: 16px; /* Font size */
-                width: 300px; /* Set the width of the search box */
-            }
-            #mapboxgl-ctrl-geocoder {
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift the element off the page */
-                border-radius: 8px; /* Rounded corners */
-                font-size: 16px; /* Font size */
-                width: 300px; /* Set the width of the search box */
-            }
-
-            /* Styles the input field within the geocoder */
-            #mapboxgl-ctrl-geocoder--input {
-                padding: 8px 12px; /* Padding for the input field */
-                color: #2b2925; /* Text color */
-                border: 2px solid #413d35; /* Border color and size */
-                background-color: #ece9dd; /* Background color */
-                outline: none; /* Removes outline on focus */
-                transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus effects */
-            }
-
-            #mapboxgl-ctrl-geocoder--input:focus {
-                border-color: #005792; /* Darker border on focus */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* More prominent shadow on focus */
-            }
-            
-
-            
-        </style>
     </head>
+    
     <body>
+        <div id="main-header">
+            <h1>AT THE FAULT LINES</h1>
+        </div>
         <div id="map"></div>
         <div id="geocoder" class="geocoder"></div>
         <script>
@@ -137,7 +104,6 @@
             });
         
             spinGlobe();
-        </script>
-        
+        </script> 
     </body>
 </html>
