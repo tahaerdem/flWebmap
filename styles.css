@@ -187,25 +187,6 @@ figcaption {
     margin: 20px 0px -20px 0px;
 }
 
-.logo {
-    position: fixed;
-    display: block;
-    z-index: -15;
-    text-align: left;
-}
-
-.logobar-lleft {
-    position: fixed;
-    display: flex;
-    top: 15px;
-    left: 15px;
-    text-decoration: none;
-    color: #FFB84D;
-    font-size: 14px;
-    z-index: -15;
-    text-align: left;
-}
-
 section {
     display: flex;
     margin: 0;
