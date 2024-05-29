@@ -175,7 +175,7 @@ h4 {
     margin: 0px;
 }
 
-h6.image-footnote {
+figcaption {
     font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
     font-weight: 500;
     font-size: 9.5px;
