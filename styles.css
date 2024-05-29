@@ -15,13 +15,35 @@ p, h1, h2, h3 {
 p {
     font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.5625em;
     letter-spacing: -0.001em;
     text-align: left;
     color:#363636;
     overflow-wrap: break-word;
 
+}
+
+.inline-quote::before {
+    content: open-quote;
+    color: #ccc;
+}
+
+.inline-quote::after {
+    content: close-quote;
+    color: #ccc;
+}
+
+p.section-text {
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.5625em;
+    letter-spacing: -0.001em;
+    text-align: left;
+    color: #482011;
+    overflow-wrap: break-word;
+    margin: 0 20px 0 20px;
 }
 
 h1 {
@@ -35,11 +57,20 @@ h1 {
 }
 
 h2 {
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
-    font-weight: 400;
-    font-size: 15px;
+    font-family: 'Akzidenz-Grotesk Pro', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 36px;
     letter-spacing: -0.005em;
     text-align: center;
+}
+
+h2.styled-quote {
+    position: relative;
+    margin: 0px 0px 100px 0px;
+    text-transform: uppercase;
+    font-size: 3em;
+    line-height: 1.6;
+    color: #FF9917;
 }
 
 h1.main-title {
@@ -102,6 +133,21 @@ h3.subtitle {
         font-size: 13px;
     }
 }
+
+
+h6.image-footnote {
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 9.5px;
+    line-height: 1.5625em;
+    letter-spacing: -0.001em;
+    text-align: center;
+    color:#6b6b6b;
+    overflow-wrap: break-word;
+    margin: 20px 30px 40px 30px;
+}
+
+
 
 #titlebox {
     background-color: #FFFDDE;
@@ -181,6 +227,78 @@ main {
     flex-direction: column;
     justify-content: center;
     width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#adana {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 1000px;
+    background-color: #F98700;
+    padding: 0;
+    margin: 0;
+}
+
+#hatay {
+    width: 100%;
+    height: 1000px;
+    background-color: #F96900;
+    padding: 0;
+    margin: 0;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.section-header {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: baseline;
+    border-top: 3px solid #482011;
+    padding: 10px 0;
+    margin: 60px;
+}
+
+.section-header h1 {
+    color: #482011;
+    font-size: 3em;
+    padding-right: 20px;
+}
+
+.section-stats {
+    font-family: 'GT Pressura Mono', 'Helvetica Neue', sans-serif;
+    font-size: 0.9em;
+    color: #482011;
+    text-align: left;
+    padding: 0 20px;
+}
+
+.section-content {
+    display: inline-flex;
+    flex-direction: column;
+    align-self: flex-end;
+    padding: 10px 0;
+    margin: 60px;
+    margin-top:auto;
+}
+
+#maras {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 1000px;
+    background-color: #F94B00;
+    padding: 0;
+    margin: 0;
 }
 
 .text-container {
@@ -199,6 +317,7 @@ main {
 
 .sticky-map-one {
     position: sticky;
+    z-index: -10;
     top: 2vh;
     height: 104vh;
 }
@@ -206,6 +325,60 @@ main {
 .spacer {
     height: 230vh;
 }
+
+.image-container-fullwidth{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.image-comparison-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 49.9%; /* Adjust the width to ensure there's space between the images */
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.label-l {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 8px;
+    font-size: 10px;
+    border-radius: 0px;
+}
+
+.label-r {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 8px;
+    font-size: 10px;
+    border-radius: 0px;
+}
+
 
 footer {
     background-color: #333;
