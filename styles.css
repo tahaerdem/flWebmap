@@ -4,7 +4,24 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #fff;
+}
+
+p, h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.5625em;
+    letter-spacing: -0.001em;
+    text-align: left;
+    color:#363636;
+    overflow-wrap: break-word;
+
 }
 
 h1 {
@@ -17,31 +34,177 @@ h1 {
     color: #FFC56E;
 }
 
-.main-header {
+h2 {
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    text-align: center;
+}
+
+h1.main-title {
+    margin: 0 0 0.6em 0;
+    padding: 0;
+
+    @media screen and (min-width: 769px) {
+        font-size: 7vh;
+        margin: 0 0 1.6em 0;
+    }
+
+    @media screen and (max-width: 768px) and (min-width: 569px) {
+        font-size: 8vw;
+        line-height: 16vh;
+        margin: 0 0 1.6em 0;
+    }
+
+    @media screen and (max-width: 569px) and (min-width: 369px) {
+        width: 65vw;
+        font-size: 6.35vh;
+        line-height: 1.2em;
+        margin: 0 0 1.6em 0;
+    }
+
+    @media screen and (max-width: 369px) {
+        width: 65vw;
+        font-size: 18vw;
+        line-height: 1.2em;
+        margin: 0 0 1.6em 0;
+    }
+}
+
+h3 {
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    text-align: center;
+}
+
+h3.nav {
+    line-height: 1.25em;
+    text-align: left;
+}
+
+h3.subtitle {
+    line-height: 1.25em;
+    color: #7A4A38;
+    margin: 0 20px 0 20px;
+
+    @media screen and (max-width: 759px) and (min-width: 359px) {
+        position: absolute;
+        top: calc(100% - 200px);
+        font-size: 13px;
+    }
+
+    @media screen and (max-width: 359px) {
+        position: absolute;
+        top: calc(100% - 200px);
+        font-size: 13px;
+    }
+}
+
+#titlebox {
     background-color: #FFFDDE;
-    height: 95vh;
+    height: 90vh;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    position: absolute; 
+    justify-content: space-between;
+    z-index: 2;
+    padding: 50px 0 0 0;
+}
+
+.navbar-left {
+    display: flex;
+    padding: 0 0 0 50px;
+    align-items: left;
+    text-align: left;
+}
+
+.navbar-right {
+    display: flex;
+    padding: 0 50px 0;
+    align-items: right;
+    text-align: right;
+}
+
+.navbar-item {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #FFB84D;
+    font-size: 14px;
+}
+
+.navbar-item-cu-short {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #FFB84D;
+    font-size: 14px;
+
+    @media (min-width: 768px) {
+        display: none;
+    }
+}
+
+.navbar-item-cu-medium {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #FFB84D;
+    font-size: 14px;
+}
+
+.navbar-item-cu-long {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #FFB84D;
+    font-size: 14px;
+
+    @media (max-width: 1250px) {
+        display: none;
+    }
+}
+
+.navbar-item:hover {
+    text-decoration: underline;
 }
 
 main {
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
 }
 
-p {
-    font-size: 18px;
-    line-height: 1.6;
+.text-container {
+    display: inline-block;
+    justify-content: center;
+    margin: 0 calc((100% - 600px) / 2) 100px calc((100% - 600px) / 2);
+    width: 600px;
 }
 
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
+.image-container {
+    display: inline-block;
+    justify-content: center;
+    margin: 0 calc((100% - 600px) / 2) 100px calc((100% - 600px) / 2);
+    width: 600px;
 }
 
-button:hover {
-    background-color: #45a049;
+.sticky-map-one {
+    position: sticky;
+    top: 1vh;
+    height: 200vh;
+}
+
+.spacer {
+    height: 200vh;
 }
 
 footer {
@@ -52,4 +215,92 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+#map { position: absolute; top: 0; bottom: 0; width: 100%; } /* Styles the container of the geocoder */
+
+#geocoder {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift the element off the page */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    width: 300px; /* Set the width of the search box */
+}
+
+#mapboxgl-ctrl-geocoder {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift the element off the page */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    width: 300px; /* Set the width of the search box */
+}
+
+#mapboxgl-ctrl-geocoder--input {
+    padding: 8px 12px; /* Padding for the input field */
+    color: #2b2925; /* Text color */
+    border: 2px solid #413d35; /* Border color and size */
+    background-color: #ece9dd; /* Background color */
+    outline: none; /* Removes outline on focus */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus effects */
+}
+
+#mapboxgl-ctrl-geocoder--input:focus {
+    border-color: #005792; /* Darker border on focus */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* More prominent shadow on focus */
+}
+
+@media (max-width: 1249px) and (min-width: 768px) {
+    .navbar-item-cu-short {
+        display: none;
+    }
+    .navbar-item-cu-medium {
+        display: block;
+    }
+    .navbar-item-cu-long {
+        display: none;
+    }
+
+    .text-container {
+    }
+}
+
+@media (min-width: 1250px) {
+    .navbar-item-cu-short {
+        display: none;
+    }
+    .navbar-item-cu-medium {
+        display: none;
+    }
+    .navbar-item-cu-long {
+        display: block;
+    }
+    .text-container {
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-item-cu-short {
+        display: block;
+    }
+    .navbar-item-cu-medium {
+        display: none;
+    }
+    .navbar-item-cu-long {
+        display: none;
+    }
+    .navbar-item {
+        display: none;
+    }
+    .navbar-item:first-child {
+        display: block;
+        flex-grow: 1;
+    }
+
+    .text-container {
+        align-self: center;
+        width: 70%;
+    }
+
+    .image-container {
+        align-self: center;
+        width: 80%;
+    }
 }
