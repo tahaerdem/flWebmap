@@ -135,7 +135,11 @@ h3.nav {
     text-align: left;
 }
 
-.title-wrapper.sub-title {
+h2.title-wrapper.sub-title {
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: -0.005em;
     line-height: 1.25em;
     color: #7A4A38;
     margin: 0 20px 0 20px;
