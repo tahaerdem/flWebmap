@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #fff;
+    counter-reset: titleCounter;
 }
 
 p, h1, h2, h3 {
@@ -18,13 +19,11 @@ p {
     font-size: 15px;
     line-height: 1.5625em;
     letter-spacing: -0.001em;
-    text-align: left;
+    text-align: justify;
     color:#363636;
     overflow-wrap: break-word;
 
 }
-
-
 
 .inline-quote::before {
     content: open-quote;
@@ -65,9 +64,36 @@ h2 {
     text-align: center;
 }
 
+h2.title {
+    position: relative;
+    counter-increment: titleCounter;
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-size: 20px;    
+    font-weight: 560;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    text-align: left;
+}
+
+/*
+h2.title::before {
+    content: counter(titleCounter) ". " ;
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-size: 20px;    
+    font-weight: 560;
+    text-align: left;
+    position: absolute;
+    left: -30px; 
+}
+*/
+
+h2.title.new-container {
+    margin-top: -5em;
+}
+
 h2.styled-quote {
     position: relative;
-    margin: 0px 0px 100px 0px;
+    margin: 0px 0px \0px 0px;
     text-transform: uppercase;
     font-size: 3em;
     line-height: 1.6;
@@ -112,6 +138,28 @@ h3 {
     text-align: center;
 }
 
+h3.title {
+    font-size: 16px;    
+    font-weight: 560;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    text-align: left;
+}
+
+h3.title.new-container {
+    margin-top: -5em;
+}
+
+/*
+h3.title::after {
+    content: '';
+    display: block;
+    border-bottom: 1px solid var(--color-stroke-quaternary,#DFDFDF);
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+*/
+
 h3.nav {
     line-height: 1.25em;
     text-align: left;
@@ -155,8 +203,6 @@ h6.image-footnote {
     overflow-wrap: break-word;
     margin: 20px 30px 40px 30px;
 }
-
-
 
 #titlebox {
     background-color: #FFFDDE;
@@ -240,6 +286,28 @@ main {
     margin: 0;
 }
 
+hr {
+    display: block;
+    border-top: none;
+    border-bottom: 1px solid var(--color-stroke-quaternary,#DFDFDF);
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    margin-left: calc((100% - 600px) / 2) 100px calc((100% - 600px) / 2);
+}
+
+.callout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow:hidden;
+    align-items: left;
+    height: fit-content;
+    padding: 15px 0px 15px 15px;
+    margin: 20px 0px 20px 0px;
+    border: 1px #b5b5b5;
+    background-color: #f7f7f7;
+}
+
 #adana {
     height: 1000px;
     background-color: #F98700;
@@ -260,6 +328,11 @@ main {
     @media screen and (max-width: 1000px) {
         height: fit-content;
     }
+}
+
+.turkey-provinces-map {
+    display: flex;
+
 }
 
 section.timeline {
@@ -402,9 +475,11 @@ section.provinces {
 
 .sticky-map-one {
     position: sticky;
+    display: flex;
+    align-items: flex-start;
     z-index: -10;
-    top: 2vh;
-    height: 104vh;
+    margin: auto;
+    height: 100vh;
 }
 
 .spacer {
@@ -470,10 +545,10 @@ section.provinces {
 
 .cards-container {
     display: flex;
-    justify-content: center; /* Center the cards horizontally */
-    align-items: flex-start; /* Align the cards at the top */
+    justify-content: center;
+    align-items: flex-start;
     padding: 0 40px 80px 40px;
-    background-color: #ffffff; /* White background for the section */
+    background-color: #ffffff;
 
     @media screen and (max-width: 1000px) and (min-width: 400px) {
         height: fit-content;
@@ -504,8 +579,8 @@ section.provinces {
 
 .card {
     padding: 0 20px 0 0px;
-    margin: 0 20px; /* Space between cards */
-    max-width: 250px; /* Set a maximum width for the cards */
+    margin: 0 20px;
+    max-width: 250px;
     text-align: center;
 
     @media screen and (max-width: 768px) and (min-width: 400px) {
@@ -521,11 +596,11 @@ section.provinces {
 }
 
 .card-image {
-    background-color: #e4e4e4; /* Placeholder color for the image */
+    background-color: #e4e4e4;
     border-radius: 50%;
     width: 150px;
     height: 150px;
-    margin: 0 auto 20px; /* Center the image and add bottom margin */
+    margin: 0 auto 20px;
 
 
     @media screen and (max-width: 768px) and (min-width: 400px) {
@@ -540,14 +615,22 @@ section.provinces {
     }
 }
 
-h3.card-title {
-    font-size: 16px;
+h4.card-title {
+    font-size: 15px;
     margin: 40px 0 10px 0;  
     @media screen and (max-width: 400px) {
         font-size: 13px;
         margin: -5px 0 5px 0;
     }
 }
+
+p.callout {
+    font-size: 13px;
+    width: calc(100% - 50px);
+    letter-spacing: 0.05em;
+    margin: 0 0;
+}
+
 
 p.card-description {
     font-size: 14px;

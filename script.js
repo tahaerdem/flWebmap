@@ -14,8 +14,8 @@ window.addEventListener('scroll', function() {
 
     // Define the range of scroll position for the script to be active
     let minScrollPosition = 1099; // 20% of the page height
-    let maxScrollPosition = 1906; // 80% of the page height
-    let reverseScrollPosition = 4600; // Position to start reverse drawing
+    let maxScrollPosition = 1506; // 80% of the page height
+    let reverseScrollPosition = 2000; // Position to start reverse drawing
 
     if (scrollPosition >= minScrollPosition && scrollPosition <= maxScrollPosition) {
         paths.forEach((path) => {
