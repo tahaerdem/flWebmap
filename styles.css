@@ -290,11 +290,14 @@ section {
 
 .section-map {
     position: absolute;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 80px;
-    margin-right: 40px;
+    margin-right: 0px;
     right:60px;
     height: 840px;
+    max-width:620px;
+    min-width: 400px;
+    width:42vw;
 }
 
 .section-header h1 {
@@ -312,7 +315,7 @@ section {
 }
 
 .section-content {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-self: flex-end;
     padding: 10px 0;
@@ -323,8 +326,6 @@ section {
 .section-content-paragraph {
     margin-right: 55%;
 }
-
-
 
 .text-container {
     display: inline-block;
@@ -349,6 +350,10 @@ section {
 
 .spacer {
     height: 230vh;
+}
+
+.section-break {
+    height: 5vh;
 }
 
 .image-container-fullwidth{
