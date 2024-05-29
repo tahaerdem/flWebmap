@@ -24,6 +24,8 @@ p {
 
 }
 
+
+
 .inline-quote::before {
     content: open-quote;
     color: #ccc;
@@ -104,7 +106,7 @@ h1.main-title {
 
 h3 {
     font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 15px;
     letter-spacing: -0.005em;
     text-align: center;
@@ -132,7 +134,6 @@ h3.subtitle {
         font-size: 13px;
     }
 }
-
 
 h6.image-footnote {
     font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
@@ -450,6 +451,107 @@ section {
     border-radius: 0px;
 }
 
+.cards-section {
+    display: flex;
+    justify-content: center; /* Center the cards horizontally */
+    align-items: flex-start; /* Align the cards at the top */
+    padding: 40px;
+    background-color: #ffffff; /* White background for the section */
+
+    @media screen and (max-width: 1000px) and (min-width: 400px) {
+        height: fit-content;
+    }
+    @media screen and (min-width: 1500px) and (max-width: 2000px) {
+        width: calc(100% - 500px);
+        padding-left: 250px;
+        padding-right: 250px;
+    }
+    @media screen and (min-width: 2000px) and (max-width: 2500px) {
+        width: calc(100% - 1000px);
+        padding-left: 500px;
+        padding-right: 500px;
+    }
+    @media screen and (min-width: 2500px) {
+        width: calc(100% - 1500px);
+        padding-left: 750px;
+        padding-right: 750px;
+    }
+    @media screen and (max-width: 400px) {
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+        gap: 20px;
+    }
+}
+
+.card {
+    padding: 0 20px 0 0px;
+    margin: 0 20px; /* Space between cards */
+    max-width: 250px; /* Set a maximum width for the cards */
+    text-align: center;
+
+    @media screen and (max-width: 768px) and (min-width: 400px) {
+        margin: 0 8px;
+        padding: 0;
+    }
+
+    @media screen and (max-width: 400px) {
+        width: 200px;
+        margin: 0 0 10px 0;
+        justify-items: center;
+    }
+}
+
+.card-image {
+    background-color: #e4e4e4; /* Placeholder color for the image */
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px; /* Center the image and add bottom margin */
+
+
+    @media screen and (max-width: 768px) and (min-width: 400px) {
+        width: 100px;
+        height: 100px;
+    }
+
+    @media screen and (max-width: 400px) {
+        width: 100px;
+        height: 100px;
+        padding: 0;
+    }
+}
+
+h3.card-title {
+    font-size: 16px;
+    margin: 40px 0 10px 0;  
+    @media screen and (max-width: 400px) {
+        font-size: 13px;
+        margin: -5px 0 5px 0;
+    }
+}
+
+p.card-description {
+    font-size: 14px;
+    text-align: justify;
+    @media screen and (max-width: 768px) and (min-width: 400px) {
+        font-size: 11px;
+        text-align: center;
+    }
+    @media screen and (max-width: 400px) {
+        font-size: 11px;
+        line-height: 0.93rem;
+        text-align: center;
+        padding:  0 10px 0 10px;
+    }
+}
+
+.card-description-long {
+    color: #949494;
+    @media screen and (max-width: 768px) {
+        display:none;
+    }
+}
 
 footer {
     background-color: #333;
