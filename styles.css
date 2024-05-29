@@ -100,36 +100,6 @@ h2.styled-quote {
     color: #FF9917;
 }
 
-h1.main-title {
-    margin: 0 0 0.6em 0;
-    padding: 0;
-
-    @media screen and (min-width: 769px) {
-        font-size: 7vh;
-        margin: 0 0 1.6em 0;
-    }
-
-    @media screen and (max-width: 768px) and (min-width: 569px) {
-        font-size: 8vw;
-        line-height: 16vh;
-        margin: 0 0 1.6em 0;
-    }
-
-    @media screen and (max-width: 569px) and (min-width: 369px) {
-        width: 65vw;
-        font-size: 6.35vh;
-        line-height: 1.2em;
-        margin: 0 0 1.6em 0;
-    }
-
-    @media screen and (max-width: 369px) {
-        width: 65vw;
-        font-size: 18vw;
-        line-height: 1.2em;
-        margin: 0 0 1.6em 0;
-    }
-}
-
 h3 {
     font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
     font-weight: 500;
@@ -165,21 +135,30 @@ h3.nav {
     text-align: left;
 }
 
-h3.subtitle {
+.title-wrapper.sub-title {
     line-height: 1.25em;
     color: #7A4A38;
     margin: 0 20px 0 20px;
 
+    @media screen and (min-width: 759px) {
+        display: block;
+        position: relative;
+        bottom: 0%;
+    }
+
     @media screen and (max-width: 759px) and (min-width: 359px) {
-        position: absolute;
-        top: calc(100% - 200px);
+        display: block;
+        position: relative;
+        bottom: 0%;
         font-size: 13px;
     }
 
     @media screen and (max-width: 359px) {
-        position: absolute;
-        top: calc(100% - 200px);
-        font-size: 13px;
+        display: block;
+        position: relative;
+        bottom: 20%
+        padding: 20px;
+        font-size: 12px;
     }
 }
 
@@ -204,13 +183,60 @@ h6.image-footnote {
     margin: 20px 30px 40px 30px;
 }
 
-#titlebox {
-    background-color: #FFFDDE;
-    height: 90vh;
+section {
     display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+section.title-wrapper {
     flex-direction: column;
+    min-height: 850px;
+    height: 90vh;
+    background-color: #FFFDDE;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+}
+
+h1.title-wrapper.text {
+    margin: 0 0 0.6em 0;
+    padding: 0;
+
+    @media screen and (min-width: 1020px) {
+        font-size: 100px;
+        padding-top: calc((50vh / 2) - 50px);
+        margin: 0 0 1.6em 0;
+    }
+
+    @media screen and (max-width: 1019px) and (min-width: 769px) {
+        font-size: 8.5vw;
+        padding-top: calc((50vh / 2) - 50px);
+        margin: 0 0 1.6em 0;
+    }
+
+    @media screen and (max-width: 768px) and (min-width: 569px) {
+        font-size: 14vw;
+        width: 65vw;
+        line-height: 1.2em;
+        padding-top: calc((50vh / 2) - 50px);
+        margin: 0 0 1.6em 0;
+    }
+
+    @media screen and (max-width: 569px) and (min-width: 369px) {
+        width: 65vw;
+        font-size: 18vw;
+        line-height: 1.2em;
+        padding-top: calc((50vh / 2) - 50px);
+        margin: 0 0 1.6em 0;
+    }
+
+    @media screen and (max-width: 369px) {
+        width: 65vw;
+        font-size: 18vw;
+        line-height: 1.2em;
+        padding-top: calc((50vh / 2) - 50px);
+        margin: 0 0 1.6em 0;
+    }
 }
 
 .navbar {
@@ -281,6 +307,16 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+article {
+    display: block;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -311,6 +347,10 @@ hr {
 #adana {
     height: 1000px;
     background-color: #F98700;
+    @media screen and (max-width: 1000px) {
+        height: fit-content;
+        min-height: 1350px;
+    }
 }
 
 #hatay {
@@ -336,6 +376,8 @@ hr {
 }
 
 section.timeline {
+    display: flex;
+    flex-direction: column; 
     margin: 0px 0;
 }
 
@@ -374,7 +416,7 @@ section.provinces {
 
 .section-wrapper {
     display: block;
-    self-align: center;
+    align-self: center;
     margin: 60px;
     max-width: 1750px;
 }
@@ -462,7 +504,8 @@ section.provinces {
 .text-container {
     display: inline-block;
     justify-content: center;
-    margin: 80px calc((100% - 600px) / 2) 100px calc((100% - 600px) / 2);
+    align-self: center;
+    margin: 80px calc((100% - 600px) / 2);
     width: 600px;
 }
 
@@ -799,8 +842,10 @@ footer {
     }
 
     .text-container {
-        align-self: center;
-        width: 70%;
+        padding: 0 15vw;
+        margin-left: calc((100% - 600px) / 6);
+        margin-right: calc((100% - 600px) / 6);
+        width: fit-content;
     }
 
     .image-container {
