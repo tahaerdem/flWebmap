@@ -50,6 +50,6 @@ window.addEventListener('load', function() {
     let svgImageHeight = svgImage.getBoundingClientRect().height;
     let stickyElement = document.querySelector('.sticky-map-one'); // replace '.sticky-map-one' with your sticky element selector
 
-    let topValue = (viewportHeight / 2) - ((svgImageHeight*constraintRatio) / 5);
+    let topValue = (viewportHeight / 2) - ((svgImageHeight*constraintRatio) / 6);
     stickyElement.style.top = topValue + 'px';
 });
