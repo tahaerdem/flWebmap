@@ -199,12 +199,12 @@ main {
 
 .sticky-map-one {
     position: sticky;
-    top: 1vh;
-    height: 200vh;
+    top: 2vh;
+    height: 104vh;
 }
 
 .spacer {
-    height: 200vh;
+    height: 230vh;
 }
 
 footer {

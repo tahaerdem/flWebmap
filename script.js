@@ -1,3 +1,5 @@
+// script.js
+
 let paths = document.querySelectorAll('path');
 paths.forEach((path) => {
     let pathLength = path.getTotalLength();
@@ -13,6 +15,7 @@ window.addEventListener('scroll', function() {
     // Define the range of scroll position for the script to be active
     let minScrollPosition = 1099; // 20% of the page height
     let maxScrollPosition = 1906; // 80% of the page height
+    let reverseScrollPosition = 4600; // Position to start reverse drawing
 
     if (scrollPosition >= minScrollPosition && scrollPosition <= maxScrollPosition) {
         paths.forEach((path) => {
@@ -20,22 +23,33 @@ window.addEventListener('scroll', function() {
             let drawLength = pathLength * scrollPercentage;
             path.style.strokeDashoffset = pathLength - drawLength;
         });
-    } else if (scrollPosition > maxScrollPosition) {
+    } else if (scrollPosition > maxScrollPosition && scrollPosition < reverseScrollPosition) {
         paths.forEach((path) => {
             let pathLength = path.getTotalLength();
             path.style.strokeDashoffset = 0;
         });
+    }  else if (scrollPosition >= reverseScrollPosition) {
+        let reverseScrollPercentage = (scrollPosition - reverseScrollPosition) / 800;
+        paths.forEach((path) => {
+            let pathLength = path.getTotalLength();
+            let drawLength = pathLength * reverseScrollPercentage;
+            if (drawLength < pathLength) {
+                path.style.strokeDashoffset = drawLength;
+            } else {
+                path.style.strokeDashoffset = pathLength;
+            }
+        });
     }
 });
 
-window.addEventListener('scroll', () => {
-    const stickyElement = document.querySelector('.sticky-map-one');
-    const rect = stickyElement.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
+window.addEventListener('load', function() {
+    let viewportHeight = window.innerHeight;
+    let svgImage = document.querySelector('#turkey-provinces-map'); // replace '#currentSvg' with your SVG image selector
+    let svgImageWidth = svgImage.getBoundingClientRect().width;
+    let constraintRatio = svgImageWidth / 600;
+    let svgImageHeight = svgImage.getBoundingClientRect().height;
+    let stickyElement = document.querySelector('.sticky-map-one'); // replace '.sticky-map-one' with your sticky element selector
 
-    if (rect.top < viewportHeight / 2) {
-        stickyElement.style.top = `${(viewportHeight / 2)-150}px`;
-    } else {
-        stickyElement.style.top = `50%`;
-    }
+    let topValue = (viewportHeight / 2) - ((svgImageHeight*constraintRatio) / 5);
+    stickyElement.style.top = topValue + 'px';
 });
