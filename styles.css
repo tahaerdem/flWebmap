@@ -184,7 +184,7 @@ figcaption {
     text-align: center;
     color:#6b6b6b;
     overflow-wrap: break-word;
-    margin: 20px 30px 40px 30px;
+    margin: 20px 30px 40px 0px;
 }
 
 section {
