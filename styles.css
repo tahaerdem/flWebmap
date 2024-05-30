@@ -144,6 +144,7 @@ ol {
 
 li {
     padding-left: 10px;
+    padding-bottom: 5px;
 }
 
 .footnote-li {
@@ -1013,7 +1014,7 @@ footer {
     background-image: url('resources/images/back-arrow.svg');  
     background-color: transparent;
     transition: opacity 250ms ease-out;
-    z-index: 10000;
+    z-index: -10000;
 }
 
 .back-arrow:hover {
