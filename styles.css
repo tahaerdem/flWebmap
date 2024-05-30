@@ -25,11 +25,33 @@ p {
 
 }
 
+p.byline {
+    font-family: 'Libre Franklin', 'Akzidenz-Grotesk Pro', 'Helvetica Neue', sans-serif;
+    font-weight: 450;
+    font-size: 12px;
+    line-height: 1.5625em;
+    letter-spacing: -0.045em;
+    text-align: center;
+    color: #837964;
+    overflow-wrap: break-word;
+}
+
 .byline {
     font-family: 'Libre Franklin', 'Akzidenz-Grotesk Pro', 'Helvetica Neue', sans-serif;
     font-weight: 450;
     font-size: 12px;
     line-height: 1.5625em;
+    letter-spacing: -0.045em;
+    text-align: center;
+    color: #837964;
+    overflow-wrap: break-word;
+}
+
+p.byline.dateline {
+    font-family: 'Libre Franklin', 'Akzidenz-Grotesk Pro', 'Helvetica Neue', sans-serif;
+    font-weight: 450;
+    font-size: 12px;
+    line-height: 4.5625em;
     letter-spacing: -0.045em;
     text-align: center;
     color: #837964;
