@@ -918,3 +918,23 @@ footer {
         width: 80%;
     }
 }
+
+.back-arrow {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 25px;
+    height: 25px;
+    background-image: url('resources/images/back-arrow.svg');  
+    background-color: transparent;
+    transition: opacity 250ms ease-out;
+    z-index: 10000;
+}
+
+.back-arrow:hover {
+    cursor: pointer;
+}
+
+.back-arrow.show {
+    opacity: 1;
+}
