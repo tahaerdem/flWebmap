@@ -8,6 +8,10 @@ body {
     counter-reset: titleCounter;
 }
 
+.hidden {
+    display: none;
+}
+
 p, h1, h2, h3 {
     margin: 0;
     padding: 0;
@@ -246,20 +250,17 @@ h2.title-wrapper.sub-title {
     margin: 0 20px 0 20px;
 
     @media screen and (min-width: 759px) {
-        display: block;
         position: relative;
         bottom: 0%;
     }
 
     @media screen and (max-width: 759px) and (min-width: 359px) {
-        display: block;
         position: relative;
         bottom: 0%;
         font-size: 13px;
     }
 
     @media screen and (max-width: 359px) {
-        display: block;
         position: relative;
         bottom: 20%
         padding: 20px;
