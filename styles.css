@@ -69,7 +69,7 @@ p.byline.dateline {
     overflow-wrap: break-word;
 }
 
-a.byline-href {
+a.byline-href:any-link {
     font-family: 'Libre Franklin', 'Akzidenz-Grotesk Pro', 'Helvetica Neue', sans-serif;
     font-weight: 450;
     font-size: 12px;
