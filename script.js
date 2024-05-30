@@ -57,7 +57,7 @@ window.addEventListener('load', function() {
 let backArrow = document.getElementsById("back-arrow");
 window.onscroll = function() {moveTop()};
 
-function moveTop() {
+function scrollFunction() {
   if (document.body.scrollTop > 2000 || document.documentElement.scrollTop > 2000) {
     backArrow.style.display = "block";
   } else {
@@ -67,14 +67,3 @@ function moveTop() {
 function moveTop() {
     window.scrollTo({ top: 0, behavior: 'smooth', easing: 'ease-in' });
 }
-
-function moveTop() {
-    if (document.body.scrollTop > 2000 || document.documentElement.scrollTop > 2000) {
-      backArrow.style.display = "block";
-    } else {
-      backArrow.style.display = "none";
-    }
-  }
-  function moveTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth', easing: 'ease-in' });
-  }
