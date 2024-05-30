@@ -388,6 +388,7 @@ section.title-wrapper {
     background-color: #FFFDDE;
     align-items: center;
     justify-content: space-around;
+    z-index: 11;
 }
 
 .navbar {
@@ -1014,7 +1015,7 @@ footer {
     background-image: url('resources/images/back-arrow.svg');  
     background-color: transparent;
     transition: opacity 250ms ease-out;
-    z-index: -10000;
+    z-index: 1;
 }
 
 .back-arrow:hover {
