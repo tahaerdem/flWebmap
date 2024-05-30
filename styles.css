@@ -26,6 +26,7 @@ p {
     text-align: justify;
     color:#363636;
     overflow-wrap: break-word;
+    z-index: 1;
 
 }
 
@@ -38,6 +39,7 @@ p.byline {
     text-align: center;
     color: #837964;
     overflow-wrap: break-word;
+    z-index: 1;
 }
 
 .byline {
@@ -198,6 +200,7 @@ h1.title-wrapper.main-title {
     margin: 0 0 0.6em 0;
     padding: 0;
     text-transform: uppercase;
+    z-index: 1;
 
     @media screen and (min-width: 1020px) {
         font-size: 100px;
@@ -388,7 +391,7 @@ section.title-wrapper {
     background-color: #FFFDDE;
     align-items: center;
     justify-content: space-around;
-    z-index: 11;
+    z-index: -20;
 }
 
 .navbar {
@@ -911,7 +914,7 @@ h4.timeline.date.bottom {
     transform: translate(-50%, 50%);
 }
 
-#map { position: absolute; top: 0; bottom: 0; width: 100%; } /* Styles the container of the geocoder */
+#map { position: fixed; top: 0; bottom: 0; width: 100%; z-index:0 }
 
 #geocoder {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift the element off the page */
