@@ -31,18 +31,17 @@
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
         <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
         <script>
-            // gsap animation
+            // GSAP ScrollTrigger
             document.addEventListener("DOMContentLoaded", (event) => {
                 gsap.registerPlugin(ScrollTrigger) 
 
                 let tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: '.card',
-                        start: '-50% bottom',
-                        end: '500% center',
+                        start: '50% bottom',
+                        end: '200% center',
                         scrub: 1,
-                        markers: true,
-                        toggleActions: 'onEnter onLeave onEnterBack onLeaveBack'
+                        markers: 0,
                     }
                 });
     
@@ -51,22 +50,30 @@
                 });
             });
             
-            // smooth scroll
-            const lenis = new Lenis({
-                duration: 0.4,
-                syncTouch: true,
-            });
+            // Enable smooth scroll for desktop
+            function isMobileDevice() {
+                return /Mobi|Android/i.test(navigator.userAgent);
+              }
+              
+              if (!isMobileDevice()) {
+                const lenis = new Lenis({
+                    duration: 0.4,
+                    syncTouch: true,
+                });
 
-            lenis.on('scroll', (e) => {
-                console.log(e)
-            });
+                lenis.on('scroll', (e) => {
+                    console.log(e)
+                });
 
-            function raf(time) {
-                lenis.raf(time)
-                requestAnimationFrame(raf)
-            };
+                function raf(time) {
+                    lenis.raf(time)
+                    requestAnimationFrame(raf)
+                };
 
-            requestAnimationFrame(raf);
+                requestAnimationFrame(raf);
+              } else {
+                console.log("Mobile device detected. Smooth scroll disabled.");
+              }
         </script>
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" href="styles.css">
@@ -366,7 +373,6 @@
                     <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. <span class="card-description-long">Suspendisse laoreet, leo id maximus malesuada, risus lorem malesuada arcu, ac rhoncus nunc nisi et purus.</span></p>
                 </div>
             </section>
-            <div class="card-spacer"></div>
 
             <div class="text-container">
                 <p>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices.</p>

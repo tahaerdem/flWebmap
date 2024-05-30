@@ -740,6 +740,8 @@ section.provinces {
 
 .card-spacer {
     height: 500px;
+    position: sticky;
+    
 }
 
 .cards-container {
