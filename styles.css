@@ -205,8 +205,8 @@ h1.title-wrapper.main-title {
     z-index: 1;
 
     @media screen and (min-width: 1020px) {
-        font-size: 100px;
-        padding-top: calc((50vh / 2) - 50px);
+        font-size: 120px;
+        padding-top: calc((50vh / 2) - 150px);
         margin: 0 0 1.6em 0;
     }
 
@@ -393,7 +393,7 @@ section.title-wrapper {
     background-color: #FFFDDE;
     align-items: center;
     justify-content: space-around;
-    z-index: -20;
+    z-index: 0;
 }
 
 .navbar {
@@ -402,7 +402,7 @@ section.title-wrapper {
     align-items: center;
     position: absolute; 
     justify-content: space-between;
-    z-index: 2;
+    z-index: 50;
     padding: 50px 0 0 0;
 
     @media screen and (max-width: 1019px) {
@@ -478,6 +478,7 @@ main {
     width: 100%;
     padding: 0;
     margin: 0;
+    z-index: 0;
 }
 
 article {
@@ -487,6 +488,8 @@ article {
     width: 100%;
     padding: 0;
     margin: 0;
+    z-index: 0;
+
 }
 
 hr {
@@ -674,6 +677,7 @@ section.provinces {
     align-self: center;
     margin: 80px calc((100% - 600px) / 2);
     width: 600px;
+    z-index: 10;
 }
 
 .image-container {
@@ -1128,5 +1132,5 @@ footer.footer-item:hover {
     width: 100%;
     height: 100vh;
     background: rgba(255, 255, 255, 0); /* Transparent */
-    z-index: 10; /* Above the map */
+    z-index: 1; /* Above the map */
 }

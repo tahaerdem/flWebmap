@@ -19,7 +19,8 @@ zoom = calculateZoom(viewportWidth);
 
 const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/light-v11',
+    color: 'white',
+    style: 'mapbox://styles/tahaerdemozturk/clwt6u2xg05k601nx3zbs1cun',
     zoom: zoom,
     center: [38.9637, 35.2433],
     scrollZoom: false,
@@ -86,9 +87,9 @@ window.addEventListener('scroll', function() {
 map.on('style.load', () => {
     map.setFog({
         'range': [-1, 2],
-        'horizon-blend': 0.01,
+        'horizon-blend': 0.012,
         'color': '#fff',
-        'high-color': 'transparent',
+        'high-color': '#fff',
         'space-color': 'transparent',
         'star-intensity': 1
     });
