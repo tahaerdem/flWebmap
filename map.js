@@ -1,7 +1,7 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGFoYWVyZGVtb3p0dXJrIiwiYSI6ImNqZmZ1Nm9zNzM4N3gycW1tMGVreHJ0enQifQ.m_BVyHJ6Ukop8vUSasQv2w';
 let viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-let zoom = Math.log2(viewportWidth / 600);
+let zoom = Math.log2(viewportWidth / 400);
 
 const htyLng = 38.9637;
 const htyLat = 35.2433;
@@ -15,11 +15,15 @@ const map = new mapboxgl.Map({
     scrollZoom: false,
     doubleClickZoom: false,
     boxZoom: false,
+    dragRotate: false,
+    dragPan: false,
+    touchZoomRotate: false,
+    attributionControl: false,
 });
 
 window.addEventListener('resize', function() {
     viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-    zoom = Math.log2(viewportWidth / 600);
+    zoom = Math.log2(viewportWidth / 400);
     map.setZoom(zoom);
 });
 
@@ -32,32 +36,38 @@ window.addEventListener('scroll', function() {
     const currentLng = currentCenter.lng;
     const currentLat = currentCenter.lat;
 
-    const newLng = currentLng + scrollPercentage * 22; // Example: adjust longitude
-    const newLat = currentLat + scrollPercentage * 25; // Example: adjust latitude
-    
-    map.setCenter([newLng, newLat]);
+    const newLng = currentLng + scrollPercentage * 12; // Example: adjust longitude
+    const newLat = currentLat + scrollPercentage * 15; // Example: adjust latitude
+
+    const negLng = currentLng - scrollPercentage * 15; // Example: adjust longitude
+    const negLat = currentLat - scrollPercentage * 12; // Example: adjust latitude
 
     // Define the range of scroll position for the script to be active
     let minScrollPosition = 0; // 20% of the page height
-    let maxScrollPosition = 0.3; // 80% of the page height
-    let reverseScrollPosition = 0.3; // Position to start reverse drawing
+    let maxScrollPosition = 0.5; // 80% of the page height
+    let reverseScrollPosition = 0.5; // Position to start reverse drawing
 
     if (scrollPercentage >= minScrollPosition && scrollPercentage <= maxScrollPosition) {
-        let zoomRange = 20; // Adjust this value to control the zoom range
-        let zoom = Math.log2(viewportWidth / 600) + (zoomRange * (scrollPercentage - minScrollPosition));
+        let zoomRange = 10; // Adjust this value to control the zoom range
+        let zoom = Math.log2(viewportWidth / 400) + (zoomRange * (scrollPercentage - minScrollPosition));
         map.setZoom(zoom);
+
+        map.setCenter([newLng, newLat]);
     } else if (scrollPercentage > maxScrollPosition && scrollPercentage < reverseScrollPosition) {
-        let zoomRange = 20; // Adjust this value to control the zoom range
-        let zoom = Math.log2(viewportWidth / 600) - (zoomRange * (scrollPercentage - maxScrollPosition));
+        let zoomRange = 10; // Adjust this value to control the zoom range
+        let zoom = Math.log2(viewportWidth / 400) - (zoomRange * (scrollPercentage - maxScrollPosition));
         map.setZoom(zoom);
+        map.setCenter([newLng, newLat]);
     } else if (scrollPercentage >= reverseScrollPosition) {
         let zoomRange = 20; // Adjust this value to control the zoom range
-        let zoom = Math.log2(viewportWidth / 600) - (zoomRange * (scrollPercentage - reverseScrollPosition));
+        let zoom = Math.log2(viewportWidth / 400) - (zoomRange * (scrollPercentage - reverseScrollPosition));
         map.setZoom(zoom);
+        map.setCenter([negLng, negLat]);
     } else {
         let zoomRange = 20; // Adjust this value to control the zoom range
-        let zoom = Math.log2(viewportWidth / 600) + (zoomRange * scrollPercentage);
+        let zoom = Math.log2(viewportWidth / 400) - (zoomRange * scrollPercentage);
         map.setZoom(zoom);
+        map.setCenter([negLng, negLat]);
     }
 });
 
