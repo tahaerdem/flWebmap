@@ -84,6 +84,80 @@ a.byline-href:hover {
     overflow-wrap: break-word;
 }
 
+a.footnote, sup.fn a {
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: .65rem;
+    text-decoration: none;
+    color: #2b2925;
+    border: 1px #2b2925 solid;
+    border-radius: 9px;
+    padding: .125rem .255rem .125rem;
+    margin: 0 .25rem;
+    margin-bottom: .25rem;
+    position: relative;
+    top:-.125rem
+}
+
+a.footnote:hover, sup.fn a:hover {
+    text-decoration: none !important;
+    color:beige;
+    background-color: #2b2925;
+    border:1px #2b2925 solid !important;
+    cursor: pointer;
+}
+
+a.footnote-li, sup.fn a {
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-weight: 450;
+    font-size: 13px;
+    line-height: 1.5625em;
+    letter-spacing: -0.001em;
+    text-align: justify;
+    color:#363636;
+    overflow-wrap: break-word;
+    text-decoration: underline;
+}
+
+a.footnote-li:hover, sup.fn a:hover {
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.5625em;
+    letter-spacing: -0.001em;
+    text-align: justify;
+    color:#363636;
+    overflow-wrap: break-word;
+}
+
+ol {
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.5625em;
+    letter-spacing: -0.001em;
+    text-align: justify;
+    color:#363636;
+    overflow-wrap: break-word;
+    padding-left: 15px;
+}
+
+li {
+    padding-left: 10px;
+}
+
+.footnote-li {
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.5625em;
+    letter-spacing: -0.001em;
+    text-align: justify;
+    color:#363636;
+    overflow-wrap: break-word;
+    text-decoration: none;
+}
+
 p.byline-author {
     text-transform: capitalize;
 }
@@ -180,8 +254,19 @@ h2.title {
     text-align: left;
 }
 
-/*
-h2.title::before {
+h2.title-section {
+    position: relative;
+    counter-increment: titleCounter;
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-size: 20px;    
+    font-weight: 560;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    text-align: left;
+}
+
+
+h2.title-section::before {
     content: counter(titleCounter) ". " ;
     font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
     font-size: 20px;    
@@ -190,7 +275,7 @@ h2.title::before {
     position: absolute;
     left: -30px; 
 }
-*/
+
 
 h2.title.new-container {
     margin-top: -5em;
