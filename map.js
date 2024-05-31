@@ -3,26 +3,48 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidGFoYWVyZGVtb3p0dXJrIiwiYSI6ImNqZmZ1Nm9zNzM4N
 let viewportWidth = window.innerWidth || document.documentElement.clientWidth;
 let zoom;
 
-// Function to calculate zoom based on viewport width
-function calculateZoom(viewportWidth) {
-    if (viewportWidth > 1179) {
-        return Math.log2(1100 / 400); // Calculate zoom for 1100px width
-    } else  if (viewportWidth < 1179 && viewportWidth > 765) {
-        return Math.log2(1100 / 400); // Calculate zoom for 1100px width
-    } else {
-        return Math.log2(viewportWidth / 200);
-    }
-}
-
 // Set the initial zoom level
 zoom = calculateZoom(viewportWidth);
+let zoomInitial = zoom;
+
+const easingFunctions = {
+    // start slow and gradually increase speed
+    easeInCubic: function (t) {
+        return t * t * t;
+    },
+    // start fast with a long, slow wind-down
+    easeOutQuint: function (t) {
+        return 1 - Math.pow(1 - t, 5);
+    },
+    // slow start and finish with fast middle
+    easeInOutCirc: function (t) {
+        return t < 0.5
+            ? (1 - Math.sqrt(1 - Math.pow(2 * t, 2))) / 2
+            : (Math.sqrt(1 - Math.pow(-2 * t + 2, 2)) + 1) / 2;
+    },
+    // fast start with a "bounce" at the end
+    easeOutBounce: function (t) {
+        const n1 = 7.5625;
+        const d1 = 2.75;
+
+        if (t < 1 / d1) {
+            return n1 * t * t;
+        } else if (t < 2 / d1) {
+            return n1 * (t -= 1.5 / d1) * t + 0.75;
+        } else if (t < 2.5 / d1) {
+            return n1 * (t -= 2.25 / d1) * t + 0.9375;
+        } else {
+            return n1 * (t -= 2.625 / d1) * t + 0.984375;
+        }
+    }
+};
 
 const map = new mapboxgl.Map({
     container: 'map',
     color: 'white',
-    style: 'mapbox://styles/tahaerdemozturk/clwt6u2xg05k601nx3zbs1cun',
+    style: 'mapbox://styles/tahaerdemozturk/clwt6u2xg05k601nx3zbs1cun/draft',
     zoom: zoom,
-    center: [38.9637, 35.2433],
+    center: [15.9637, -28.2433],
     scrollZoom: false,
     doubleClickZoom: false,
     boxZoom: false,
@@ -40,48 +62,106 @@ window.addEventListener('resize', function() {
     map.setZoom(zoom);
 });
 
-// Update zoom level on window scroll
+function getScrollPositionY() {
+    return window.scrollY || document.documentElement.scrollTop;
+}
+
+// Event listener to handle scroll events
 window.addEventListener('scroll', function() {
-    let scrollPosition = document.documentElement.scrollTop + document.body.scrollTop;
-    let scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    let scrollPercentage = scrollPosition / scrollHeight;
-
-    const currentCenter = map.getCenter();
-    const currentLng = currentCenter.lng;
-    const currentLat = currentCenter.lat;
-
-    const newLng = currentLng + scrollPercentage * 12;
-    const newLat = currentLat + scrollPercentage * 15;
-
-    const negLng = currentLng - scrollPercentage * 15;
-    const negLat = currentLat - scrollPercentage * 12;
-
-    let minScrollPosition = 0;
-    let maxScrollPosition = 0.5;
-    let reverseScrollPosition = 0.5;
-
-    if (scrollPercentage >= minScrollPosition && scrollPercentage <= maxScrollPosition) {
-        let zoomRange = 10;
-        let zoom = calculateZoom(viewportWidth) + (zoomRange * (scrollPercentage - minScrollPosition));
-        map.setZoom(zoom);
-        map.setCenter([newLng, newLat]);
-    } else if (scrollPercentage > maxScrollPosition && scrollPercentage < reverseScrollPosition) {
-        let zoomRange = 10;
-        let zoom = calculateZoom(viewportWidth) - (zoomRange * (scrollPercentage - maxScrollPosition));
-        map.setZoom(zoom);
-        map.setCenter([newLng, newLat]);
-    } else if (scrollPercentage >= reverseScrollPosition) {
-        let zoomRange = 20;
-        let zoom = calculateZoom(viewportWidth) - (zoomRange * (scrollPercentage - reverseScrollPosition));
-        map.setZoom(zoom);
-        map.setCenter([negLng, negLat]);
-    } else {
-        let zoomRange = 20;
-        let zoom = calculateZoom(viewportWidth) - (zoomRange * scrollPercentage);
-        map.setZoom(zoom);
-        map.setCenter([negLng, negLat]);
-    }
+    var scrollTop = getScrollPositionY();
+//    console.log('Scroll position:', scrollTop);
+    return scrollTop;
 });
+
+document.addEventListener("DOMContentLoaded", (event) => {
+    let frameAA = gsap.timeline({
+        scrollTrigger: {
+            start: '6% bottom',
+            end: '250% -100%',
+            scrub: true,
+            markers: 1,
+            invalidateOnRefresh: true, // Ensure recalculating on refresh
+
+            onUpdate: self => {
+                const velocity = self.getVelocity();
+                const center = map.getCenter();
+                const targetLng = 37.032;
+                const targetLat = 37.166;
+                const originalLng = 15.2433;
+                const originalLat = -28.9637;
+                const targetZoom = 8;
+                const originalZoom = calculateZoom(viewportWidth);
+                const scrollProgress = frameAA.scrollTrigger ? frameAA.scrollTrigger.progress : 0;
+
+                let lngStep, latStep, zoomStep;
+
+                if (velocity > 0 && window.scrollY > 0) {
+                    // Forward animation steps
+                    lngStep = (targetLng - center.lng) / 20;
+                    latStep = (targetLat - center.lat) / 20;
+                    zoomStep = (targetZoom - map.getZoom()) / 25;
+                    console.log('1', velocity);
+                } else if (velocity > 0 && window.scrollY < 0) {
+                    lngStep = (originalLng - center.lng) / 120;
+                    latStep = (originalLat - center.lat) / 120;
+                    zoomStep = (originalZoom - map.getZoom()) / 25;
+                    console.log('Hello', scrollTop);
+                } else if (velocity < 0 && window.scrollY > 0) {
+                    // Reverse animation steps
+                    lngStep = (originalLng - center.lng) / 20;
+                    latStep = (originalLat - center.lat) / 20;
+                    zoomStep = (originalZoom - map.getZoom()) / 25;
+                    console.log('3', velocity);
+                } else if (velocity < 0 && window.scrollY <= 0) {
+                    if (center.lng === originalLng && center.lat === originalLat && map.getZoom() === original) {
+                        console.log('BACK TO OG', velocity);
+                    } else {
+                        map.flyTo({
+                            center: [originalLng, originalLat],
+                            zoom: originalZoom,
+                            duration: 0,
+
+                        })
+                    }
+                    lngStep = (originalLng - center.lng) / 120;
+                    latStep = (originalLat - center.lat) / 120;
+                    zoomStep = (originalZoom - map.getZoom()) / 25;
+                    console.log('4', velocity);
+                } else {
+                    // No animation steps
+                    lngStep = 0;
+                    latStep = 0;
+                    zoomStep = 0;
+                }
+
+                map.easeTo({
+                    center: [center.lng + lngStep, center.lat + latStep],
+                    zoom: map.getZoom() + zoomStep,
+                    duration: 0,
+                    easing: t => t // linear easing
+                });
+            },
+        },
+        opacity: 1, // Adjust opacity as needed
+        ease: "none",
+    });
+});
+
+
+
+// Function to calculate zoom based on viewport width
+function calculateZoom(viewportWidth) {
+    if (viewportWidth > 1179) {
+        return Math.log2(1100 / 400); // Calculate zoom for 1100px width
+    } else  if (viewportWidth < 1179 && viewportWidth > 765) {
+        return Math.log2(1100 / 400); // Calculate zoom for 1100px width
+    } else {
+        return Math.log2(viewportWidth / 200);
+    }
+}
+
+
+// Update zoom level on window scroll
 
 
 map.on('style.load', () => {
