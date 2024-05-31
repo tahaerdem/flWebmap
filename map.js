@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             start: '6% bottom',
             end: '250% -100%',
             scrub: true,
-            markers: 1,
+            markers: 0,
             invalidateOnRefresh: true, // Ensure recalculating on refresh
 
             onUpdate: self => {
