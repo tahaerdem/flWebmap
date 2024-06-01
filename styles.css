@@ -199,45 +199,36 @@ h1 {
 }
 
 h1.title-wrapper.main-title {
-    margin: 0 0 0.6em 0;
-    padding: 0;
     text-transform: uppercase;
-    z-index: 1;
+    z-index: 11;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-self: center;
+    justify-self: center;
 
-    @media screen and (min-width: 1020px) {
-        font-size: 120px;
-        padding-top: calc((50vh / 2) - 150px);
-        margin: 0 0 1.6em 0;
+    @media screen and (min-width: 1691px) {
+        width: 90%;
+        font-size: 10vh;
     }
 
-    @media screen and (max-width: 1019px) and (min-width: 769px) {
-        font-size: 8.5vw;
-        padding-top: calc((50vh / 2) - 50px);
-        margin: 0 0 1.6em -;
+    @media screen and (max-width: 1690px) and (min-width: 1200px) {
+        width: 50vw;
+        font-size: 10vw;
+        line-height: 1.1em;
     }
 
-    @media screen and (max-width: 768px) and (min-width: 569px) {
+    @media screen and (max-width: 1199px) and (min-width: 769px) {
+        width: 65vw;
+        font-size: 13vw;
+        line-height: 1.1em;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 65vw;
         font-size: 20vw;
-        width: 65vw;
         line-height: 1.2em;
-        padding-top: calc((50vh / 2) - 50px);
-        margin: 0 0 1.6em -;
-    }
-
-    @media screen and (max-width: 569px) and (min-width: 369px) {
-        width: 65vw;
-        font-size: 18vw;
-        line-height: 1.2em;
-        padding-top: calc((50vh / 2) - 50px);
-        margin: 0 0 1.6em 0;
-    }
-
-    @media screen and (max-width: 369px) {
-        width: 65vw;
-        font-size: 18vw;
-        line-height: 1.2em;
-        padding-top: calc((50vh / 2) - 50px);
-        margin: 0 0 1.2em 0;
     }
 }
 
@@ -394,6 +385,19 @@ section.title-wrapper {
     align-items: center;
     justify-content: space-around;
     z-index: 0;
+}
+
+section.title-header {
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    flex-direction: column;
+    width: 100%;
+    min-height: 850px;
+    height: 90vh;
+    background-color: transparent;
+    justify-content: space-around;
+    z-index: 100;
 }
 
 .navbar {
