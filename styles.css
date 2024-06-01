@@ -213,15 +213,9 @@ h1.title-wrapper.main-title {
         line-height: 1.1em;
     }
 
-    @media screen and (max-width: 768px) and (min-width: 350px) {
+    @media screen and (max-width: 768px) {
         width: 75vw;
         font-size: 20vw;
-        line-height: 1.2em;
-    }
-    
-    @media screen and (max-width: 350px) {
-        width: 100vw;
-        font-size: 10vw;
         line-height: 1.2em;
     }
 
