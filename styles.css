@@ -6,6 +6,7 @@ body {
     padding: 0;
     background-color: #fff;
     counter-reset: titleCounter;
+    overflow-y: hidden;
 }
 
 .hidden {
