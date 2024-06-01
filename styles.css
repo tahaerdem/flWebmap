@@ -220,17 +220,14 @@ h1.title-wrapper.main-title {
     }
 
     @media screen and (max-height: 850px) {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        position: absolute;
         font-size: 10vh;
         line-height: 1.2em;
     }    
 }
 
 section.title-byline {
-    position:absolute;
+    position: absolute;
     top: 0px;
     left: 0px;
     flex-direction: column-reverse;
@@ -271,12 +268,6 @@ section.title-byline {
     flex-direction: column;
     align-self: center;
     margin-bottom: 20px;
-
-    @media screen and (max-height: 850px) {
-        position:fixed;
-        bottom: 10px;
-    }
-
 }
 
 h2 {
