@@ -17,6 +17,30 @@ p, h1, h2, h3 {
     padding: 0;
 }
 
+a {
+    text-decoration: underline;
+    color: #4c4848;
+    font-weight: 500;
+}
+
+a:active {
+    text-decoration: underline;
+    color: #4c4848;
+    font-weight: 500;
+}
+
+a:visited {
+    text-decoration: underline;
+    color: #4c4848;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #84786c;
+    font-weight: 500;
+
+}
 
 
 p {
@@ -29,6 +53,10 @@ p {
     color:#363636;
     overflow-wrap: break-word;
     z-index: 1;
+
+    @media screen and (max-width: 700px) {
+        font-size: 13.65px;
+    }
 
 }
 
@@ -341,6 +369,14 @@ h3.title {
     text-align: left;
 }
 
+h3.title.secondary {
+    font-size: 15px;    
+    font-weight: 550;
+    margin-top: 0.35em;
+    margin-bottom: 1em;
+    text-align: left;
+}
+
 h3.title.new-container {
     margin-top: -5em;
 }
@@ -529,15 +565,16 @@ main {
 }
 
 article {
-    display: block;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
     padding: 0;
     margin: 0;
-    z-index: 0;
-
+    z-index: 2;
 }
+
+
 
 hr {
     display: block;
@@ -718,13 +755,28 @@ section.provinces {
         }
 }
 
+.textbox-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 10;
+}
+
 .text-container {
-    display: inline-block;
+    display: flex;
+    flex-direction: column; 
     justify-content: center;
     align-self: center;
-    margin: 80px calc((100% - 600px) / 2);
-    width: 600px;
+    margin: 80px auto;
+    max-width: 600px;
     z-index: 10;
+    
+    @media screen and (max-width: 700px) {
+        margin: 20px 20px;
+    }
 }
 
 .image-container {
@@ -1017,9 +1069,6 @@ h4.timeline.date.bottom {
     .navbar-item-cu-long {
         display: none;
     }
-
-    .text-container {
-    }
 }
 
 @media (min-width: 1250px) {
@@ -1031,8 +1080,6 @@ h4.timeline.date.bottom {
     }
     .navbar-item-cu-long {
         display: block;
-    }
-    .text-container {
     }
 }
 
@@ -1054,17 +1101,37 @@ h4.timeline.date.bottom {
         flex-grow: 1;
     }
 
-    .text-container {
-        padding: 0 15vw;
-        margin-left: calc((100% - 600px) / 6);
-        margin-right: calc((100% - 600px) / 6);
-        width: fit-content;
-    }
+}
 
-    .image-container {
-        align-self: center;
-        width: 80%;
+.textbox {
+    display: inline-flexbox;
+    position: relative;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    padding: 25px;
+    z-index: 4;
+    background-color:#fbfbfb;
+}
+
+.ti {
+    @media screen and (max-width: 768px) {
+    padding: 17.5px;
     }
+}
+
+.tb {
+    padding: 0;
+    width: fit-content;
+    z-index: 5;
+}
+
+.tp {
+    padding-bottom: 1em;
+}
+
+.image-container {
+    align-self: center;
+    width: 80%;
 }
 
 .back-arrow {
@@ -1181,3 +1248,4 @@ footer.footer-item:hover {
     background: rgba(255, 255, 255, 0); /* Transparent */
     z-index: 1; /* Above the map */
 }
+
