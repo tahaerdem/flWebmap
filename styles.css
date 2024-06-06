@@ -502,7 +502,7 @@ h2.title-wrapper.sub-title {
 
     @media screen and (max-width: 359px) {
         position: relative;
-        bottom: 20%
+        bottom: 20%;
         padding: 20px;
         font-size: 12px;
     }
@@ -522,7 +522,7 @@ figcaption {
     font-weight: 500;
     font-size: 9.5px;
     line-height: 1.5625em;
-    letter-spacing: -0.001em;å
+    letter-spacing: -0.001em;
     text-align: center;
     color:#6b6b6b;
     overflow-wrap: break-word;
@@ -1297,7 +1297,7 @@ footer {
     background-color: #FFFDDE;
     align-items: center;
     position: relative; 
-    flex-direction: ;
+    flex-direction: column;
     justify-content: center;
     padding: 0px 0 0 0;
 }
@@ -1309,7 +1309,7 @@ footer {
     background-color: transparent;
     align-items: center;
     position: relative; 
-    flex-direction: ;
+    flex-direction: column;
     justify-content: center;
     padding: 0px 0 0 0;
 }
