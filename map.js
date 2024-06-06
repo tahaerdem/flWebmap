@@ -1,20 +1,27 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGFoYWVyZGVtb3p0dXJrIiwiYSI6ImNqZmZ1Nm9zNzM4N3gycW1tMGVreHJ0enQifQ.m_BVyHJ6Ukop8vUSasQv2w';
 let viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-let zoom;
-
+let zoom = calculateZoom(viewportWidth);
+let initialZoom = zoom;
 let initialLng = 15.2433;
 let initialLat = -28.9637;
 
-zoom = calculateZoom(viewportWidth);
-let zoomInitial = zoom;
-let initialZoom = calculateZoom(viewportWidth);
 
 function checkScrollTop() {
     // Check if the scroll position is at the top
     if (window.scrollY === 0) {
         console.log("The page is scrolled back to the top.");
         // You can add any other actions you want to take here
+    }
+}
+
+function calculateZoom(viewportWidth) {
+    if (viewportWidth > 1179) {
+        return Math.log2(1100 / 400); // Calculate zoom for 1100px width
+    } else  if (viewportWidth < 1179 && viewportWidth > 765) {
+        return Math.log2(1100 / 400); // Calculate zoom for 1100px width
+    } else {
+        return Math.log2(viewportWidth / 200);
     }
 }
 
@@ -34,13 +41,6 @@ const map = new mapboxgl.Map({
     attributionControl: false,
 });
 
-// Update zoom level on window resize
-window.addEventListener('resize', function() {
-    viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-    zoom = calculateZoom(viewportWidth);
-    map.setZoom(zoom);
-});
-
 function getScrollPositionY() {
     return window.scrollY || document.documentElement.scrollTop;
 }
@@ -51,6 +51,18 @@ window.addEventListener('scroll', function() {
 //    console.log('Scroll position:', scrollTop);
     return scrollTop;
 });
+
+window.addEventListener('resize', function() {
+
+    viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    if (window.scrollY === 0) {
+        zoom = calculateZoom(viewportWidth);
+        map.setZoom(zoom);
+    } else {
+        console.log("The page is already scrolled down.");
+    }
+});
+
 document.addEventListener("DOMContentLoaded", (event) => {
 
     function frame01() {
@@ -64,10 +76,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 markers: false,
                 
                 onEnter: self => {
-                    console.log('Entered')
                 },
     
                 onUpdate: self => {
+
+
                     console.log('ScrollTrigger onUpdate called'); // Debugging log
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
@@ -82,12 +95,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 15;
-                        console.log('Forward velocity:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (initialLng - center.lng) / 20;
                         latStep = (initialLat - center.lat) / 20;
                         zoomStep = (initialZoom - map.getZoom()) / 25;
-                        console.log('Backward velocity:', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -103,7 +114,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 },
     
                 onLeave: self => {
-                    console.log('Counter Left')
                 },
             },
         });
@@ -243,18 +253,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     checkScrollTop();
 });
 
-// Function to calculate zoom based on viewport width
-function calculateZoom(viewportWidth) {
-    if (viewportWidth > 1179) {
-        return Math.log2(1100 / 400); // Calculate zoom for 1100px width
-    } else  if (viewportWidth < 1179 && viewportWidth > 765) {
-        return Math.log2(1100 / 400); // Calculate zoom for 1100px width
-    } else {
-        return Math.log2(viewportWidth / 200);
-    }
-}
 
-// Update zoom level on window scroll
 map.on('style.load', () => {
     map.setFog({
         'range': [-1, 2],
