@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>At the Fault Lines</title>
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "about": "A geospatial intelligence research project.",
+              "datePublished": "2024-05-29T08:00:00-04:00",
+              "dateModified": "2024-05-29T08:00:00-04:00",
+              "author": [{
+                  "@type": "Person",
+                  "name": "Taha Erdem Ozturk",
+                  "url": "https://tahaerdemozturk.com"
+                },
+                {
+                   "@type": "Organization",
+                   "name": "Columbia University Center for Spatial Research",
+                   "url": "https://c4sr.columbia.edu"
+                },
+                {
+                   "@type": "Organization",
+                   "name": "FaultLines AI",
+                   "url": "https://faultlines.ai"   
+              }]
+            }
+            </script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="theme-color" content="#FFFDDE" media="(prefers-color-scheme: light)">
+        <meta name="theme-color" content="#FFFDDE" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://use.typekit.net/oew1nxa.css">
+
+        <meta name="application-name" content="FaultLines">
+        <meta name="A geospatial intelligence research project. Developed by Taha Erdem Ozturk at the Center for Spatial Research, Columbia GSAPP.">
+        <meta name="apple-mobile-web-app-title" content="FaultLines">
+        <meta name=”keywords” content="geospatial ai, ai, artificial intelligence, spatial research, architecture, earthquake, risk assessment, columbia gsapp">
+        <meta name=”author” content="Taha Erdem Ozturk">
+        <link rel="apple-touch-icon" href="/flWebmap/resources/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/flWebmap/resources/favicon/fl-favicon-32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/flWebmap/resources/favicon/fl-favicon-16.png">
+
+        <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+        <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css' rel='stylesheet' />
+        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js'></script>
+    </head>
+
+    <body>
+        <header class="navbar" id="navbar">
+            <div class="navbar-left">
+                <a href="#" class="navbar-item-cu-short" >Columbia<br>GSAPP</a>
+                <a href="#" class="navbar-item-cu-medium">Columbia University<br>GSAPP</a>
+                <a href="#" class="navbar-item-cu-long">Columbia University<br>Graduate School of Architecture, Planning, and Preservation</a>
+            </div>
+            <div class="navbar-right">
+                <a href="/flWebmap/about.html" class="navbar-item">About</a>
+                <a href="/flWebmap/research.html" class="navbar-item">Research</a>
+                <a href="/flWebmap/map.html" class="navbar-item">Interactive Map</a>
+            </div>
+        </header>
+        <section class="title-byline">
+            <div class="byline-dateline" id="byLine"><p class="byline">By <a href="http://tahaerdemozturk.com" class="byline-author byline-href"  itemprop="author creator" itemtype="https://schema.org/Person">Taha Erdem Ozturk</a> for <a href="https://c4sr.columbia.edu" class="byline-author byline-href" itemprop="author creator" itemtype="https://schema.org/Organization" href="">Center for Spatial Research</a>,</p><p class="byline">Columbia University in the City of New York</p><p class="dateline">Published on: <time class="dateline" datetime="2024-05-29T13:21:13-04:00">29 May 2024</span></p></div></div>
+        </section>
+
+        <section class="title-wrapper">
+        </section>
+
+        <main>
+        </main>
+
+        <script src="script.js"></script>
+        <div id="map"></div>
+        <div id="geocoder" class="geocoder"></div>
+        <script src="map-test.js"></script>
+<div id="map-hidden">
+    
+            <div id="map"></div>
+            <div id="geocoder" class="geocoder"></div>
+            <script>
+                mapboxgl.accessToken = 'pk.eyJ1IjoidGFoYWVyZGVtb3p0dXJrIiwiYSI6ImNqZmZ1Nm9zNzM4N3gycW1tMGVreHJ0enQifQ.m_BVyHJ6Ukop8vUSasQv2w';
+
+                const map2 = new mapboxgl.Map({
+                    container: 'map',
+                    color: 'white',
+                    style: 'mapbox://styles/tahaerdemozturk/clwt6u2xg05k601nx3zbs1cun',
+                    zoom: zoom,
+                    center: [15.9637, -28.2433],
+                    scrollZoom: false,
+                    doubleClickZoom: false,
+                    boxZoom: false,
+                    dragRotate: false,
+                    dragPan: false,
+                    touchZoomRotate: false,
+                    touchPitchHandler: false,
+                    attributionControl: false,
+                });
+            </script> 
+        </div>
+        
+        <footer>
+            <div class="footer" style="position:absolute, bottom: 0px">
+                    <div class="footer-item">
+                        <a class="footer-item" href="#">About Us</a>
+                        <a class="footer-item" href="#">Contact Us</a>
+                        <a class="footer-item" href="#">Privacy Policy</a>
+                        <a class="footer-item" href="#">Terms of Use</a>
+                    </div>
+                    <div class="footer-right">
+                        <a class="footer-item" href="#"></a>
+                        <a class="footer-item" href="#"></a>
+                        <a class="footer-item" href="#"></a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -218,7 +218,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    var master = gsap.timeline();
+    var master = gsap.timeline({
+        markers: false;
+        }
+    );
 
     master
     .add(frame01())
