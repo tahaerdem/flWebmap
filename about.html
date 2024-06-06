@@ -30,31 +30,7 @@
             </script>
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-        <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
-        <script>
-            // GSAP ScrollTrigger
-            document.addEventListener("DOMContentLoaded", (event) => {
-                gsap.registerPlugin(ScrollTrigger) 
 
-                let tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: '.card',
-                        start: '50% bottom',
-                        end: '200% center',
-                        scrub: 1,
-                        markers: 0,
-                    }
-                });
-    
-                tl.to('.card', {
-                    y: -500,
-                    opacity: 1,
-                    duration: 2.5,
-                    ease: "none",
-                });
-                
-            });
-        </script>
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="theme-color" content="#FFFDDE" media="(prefers-color-scheme: light)">
         <meta name="theme-color" content="#FFFDDE" media="(prefers-color-scheme: dark)">
@@ -112,100 +88,8 @@
                     </div>
             </article>
         </main>
+
         <script src="script.js"></script>
-        
-        <div id="map"></div>
-        <div id="geocoder" class="geocoder"></div>
-
-<!-- <div id="map-hidden">
-    
-            <div id="map"></div>
-            <div id="geocoder" class="geocoder"></div>
-            <script>
-                mapboxgl.accessToken = 'pk.eyJ1IjoidGFoYWVyZGVtb3p0dXJrIiwiYSI6ImNqZmZ1Nm9zNzM4N3gycW1tMGVreHJ0enQifQ.m_BVyHJ6Ukop8vUSasQv2w';
-                const map = new mapboxgl.Map({
-                    container:'map',
-                    style:'mapbox://styles/tahaerdemozturk/ck2ep0pi700301co76q7h64o8/draft',
-                    center: [28.83635628167491,41.00183027261981],
-                    zoom: 13,
-                });
-    
-                const geocoder = new MapboxGeocoder({
-                    accessToken: mapboxgl.accessToken,
-    
-                    countries: 'tr',
-    
-                    bbox: [27.945099,40.746217,29.963837,41.591824],
-    
-                    filter: function (item) {
-                        return item.context.some((i) => {
-                            return (
-                                i.id.split('.').shift() === 'region' &&
-                                i.text === 'Istanbul'
-                            );
-                        });
-                    },
-                    mapboxgl: mapboxgl
-                })
-    
-                map.addControl(geocoder);
-        
-                map.addControl(new mapboxgl.NavigationControl());
-                map.doubleClickZoom.enable();
-                map.scrollZoom.enable();
-            
-                map.on('style.load', () => {
-                    map.setFog({}); // Set the default atmosphere style
-                });
-            
-                // The following values can be changed to control rotation speed:
-            
-                // At low zooms, complete a revolution every two minutes.
-                const secondsPerRevolution = 240;
-                // Above zoom level 5, do not rotate.
-                const maxSpinZoom = 5;
-                // Rotate at intermediate speeds between zoom levels 3 and 5.
-                const slowSpinZoom = 3;
-            
-                let userInteracting = false;
-                const spinEnabled = true;
-            
-                function spinGlobe() {
-                    const zoom = map.getZoom();
-                    if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
-                        let distancePerSecond = 360 / secondsPerRevolution;
-                        if (zoom > slowSpinZoom) {
-                            // Slow spinning at higher zooms
-                            const zoomDif =
-                                (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
-                            distancePerSecond *= zoomDif;
-                        }
-                        const center = map.getCenter();
-                        center.lng -= distancePerSecond;
-                        // Smoothly animate the map over one second.
-                        // When this animation is complete, it calls a 'moveend' event.
-                        map.easeTo({ center, duration: 1000, easing: (n) => n });
-                    }
-                }
-            
-                // Pause spinning on interaction
-                map.on('mousedown', () => {
-                    userInteracting = true;
-                });
-                map.on('dragstart', () => {
-                    userInteracting = true;
-                });
-            
-                // When animation is complete, start spinning if there is no ongoing interaction
-                map.on('moveend', () => {
-                    spinGlobe();
-                });
-            
-                spinGlobe();
-            </script> 
-        </div>
-    -->
-
         <div class="back-arrow" id="back-arrow" onclick="moveTop()"></div>
         
         <footer>
