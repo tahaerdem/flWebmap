@@ -1,7 +1,9 @@
 /* styles.css */
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Helvetica Neue', 'Akzidenz-Grotesk Pro', 'neue-haas-grotesk-text', sans-serif;
+    font-weight: 400;
+    font-style: normal;
     margin: 0;
     padding: 0;
     background-color: #fff;
@@ -13,6 +15,9 @@ body {
 }
 
 p, h1, h2, h3 {
+    font-family: 'Helvetica Neue', 'Akzidenz-Grotesk Pro', 'neue-haas-grotesk-text', sans-serif;
+    font-weight: 400;
+    font-style: normal;
     margin: 0;
     padding: 0;
 }
@@ -23,9 +28,49 @@ a {
     font-weight: 500;
 }
 
+a.navbar-item {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
+a.navbar-item-cu-short {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
+a.navbar-item-cu-medium {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
+a.navbar-item-cu-long {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
 a:active {
     text-decoration: underline;
     color: #4c4848;
+    font-weight: 500;
+}
+
+a:active.navbar-item {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
+a:active.navbar-item-cu-short {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
+a:active.navbar-item-cu-medium {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
+a:active.navbar-item-cu-long {
+    color: #FFB84D;
     font-weight: 500;
 }
 
@@ -35,16 +80,54 @@ a:visited {
     font-weight: 500;
 }
 
+a:visited.navbar-item {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
+a:visited.navbar-item-cu-short {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
+a:visited.navbar-item-cu-medium {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
+a:visited.navbar-item-cu-long {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
 a:hover {
     text-decoration: underline;
     color: #84786c;
     font-weight: 500;
+}
 
+a:hover.navbar-item {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
+a:hover.navbar-item-cu-short {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
+a:hover.navbar-item-cu-medium {
+    color: #FFB84D;
+    font-weight: 500;
+}
+
+a:hover.navbar-item-cu-long {
+    color: #FFB84D;
+    font-weight: 500;
 }
 
 
 p {
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
     font-weight: 400;
     font-size: 15px;
     line-height: 1.5625em;
@@ -105,7 +188,7 @@ a.byline-href:hover {
 }
 
 a.footnote, sup.fn a {
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-family: 'neue-haas-grotesk-text', 'Helvetica Neue', 'PP Neue Montreal', sans-serif;
     font-weight: 500;
     font-size: .65rem;
     text-decoration: none;
@@ -205,8 +288,9 @@ p.byline-author {
 }
 
 h1 {
-    font-family: 'Akzidenz-Grotesk Pro', 'Helvetica Neue', sans-serif;
+    font-family: 'Helvetica Neue', 'Akzidenz-Grotesk Pro', 'neue-haas-grotesk-display', sans-serif;
     font-weight: 500;
+    font-style: normal;
     font-size: 64px;
     line-height: 118.8%;
     letter-spacing: -0.045em;
@@ -485,9 +569,9 @@ section.title-header {
     align-items: center;
     position: absolute; 
     justify-content: space-between;
-    z-index: 50;
+    z-index: 500;
     padding: 50px 0 0 0;
-
+    color: #FFC56E;
     @media screen and (max-width: 1019px) {
         padding: 30px 0 0 0;
     }
@@ -756,13 +840,30 @@ section.provinces {
 }
 
 .textbox-container {
+    position: sticky;
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
     margin: auto;
     justify-content: center;
-    align-items: center;
     padding: 20px;
     z-index: 10;
+}
+
+.tb3 {
+    top: 30%;
+}
+
+.tb4 {
+    top: 40%;
+}
+
+.tb5 {
+    top: 50%;
+}
+
+.tb6 {
+    top: 60%;
 }
 
 .text-container {
@@ -790,13 +891,25 @@ section.provinces {
     position: sticky;
     display: flex;
     align-items: flex-start;
-    z-index: -10;
+    z-index: 10;
     margin: auto;
     height: 100vh;
 }
 
 .spacer {
     height: 230vh;
+}
+
+.spacer.s1 {
+    height: 100vh;
+}
+
+.spacer.s2 {
+    height: 200vh;
+}
+
+.spacer.s25 {
+    height: 250vh;
 }
 
 .section-break {
@@ -1108,6 +1221,7 @@ h4.timeline.date.bottom {
     position: relative;
     max-width: 400px;
     border: 1px solid #ccc;
+    border-radius: 5px;
     padding: 25px;
     z-index: 4;
     background-color:#fbfbfb;

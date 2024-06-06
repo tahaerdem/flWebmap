@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>At the Fault Lines</title>
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "about": "A geospatial intelligence research project.",
+              "datePublished": "2024-05-29T08:00:00-04:00",
+              "dateModified": "2024-05-29T08:00:00-04:00",
+              "author": [{
+                  "@type": "Person",
+                  "name": "Taha Erdem Ozturk",
+                  "url": "https://tahaerdemozturk.com"
+                },
+                {
+                   "@type": "Organization",
+                   "name": "Columbia University Center for Spatial Research",
+                   "url": "https://c4sr.columbia.edu"
+                },
+                {
+                   "@type": "Organization",
+                   "name": "FaultLines AI",
+                   "url": "https://faultlines.ai"   
+              }]
+            }
+            </script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+        <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+        <script>
+            // GSAP ScrollTrigger
+            document.addEventListener("DOMContentLoaded", (event) => {
+                gsap.registerPlugin(ScrollTrigger) 
+
+                let tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: '.card',
+                        start: '50% bottom',
+                        end: '200% center',
+                        scrub: 1,
+                        markers: 0,
+                    }
+                });
+    
+                tl.to('.card', {
+                    y: -500,
+                    opacity: 1,
+                    duration: 2.5,
+                    ease: "none",
+                });
+                
+            });
+        </script>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="theme-color" content="#FFFDDE" media="(prefers-color-scheme: light)">
+        <meta name="theme-color" content="#FFFDDE" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="styles.css">
+
+        <meta name="application-name" content="FaultLines">
+        <meta name="A geospatial intelligence research project. Developed by Taha Erdem Ozturk at the Center for Spatial Research, Columbia GSAPP.">
+        <meta name="apple-mobile-web-app-title" content="FaultLines">
+        <meta name=”keywords” content="geospatial ai, ai, artificial intelligence, spatial research, architecture, earthquake, risk assessment, columbia gsapp">
+        <meta name=”author” content="Taha Erdem Ozturk">
+        <link rel="apple-touch-icon" href="/flWebmap/resources/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/flWebmap/resources/favicon/fl-favicon-32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/flWebmap/resources/favicon/fl-favicon-16.png">
+
+        <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+        <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+        
+        <link href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css' rel='stylesheet' />
+        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js'></script>
+    </head>
+
+    <body>
+        <header class="navbar" id="navbar">
+            <div class="navbar-left">
+                <a href="#" class="navbar-item navbar-item-cu-short" >Columbia<br>GSAPP</a>
+                <a href="#" class="navbar-item navbar-item-cu-medium">Columbia University<br>GSAPP</a>
+                <a href="#" class="navbar-item navbar-item-cu-long">Columbia University<br>Graduate School of Architecture, Planning, and Preservation</a>
+            </div>
+            <div class="navbar-right">
+                <a href="/about.html" class="navbar-item">About</a>
+                <a href="#" class="navbar-item">Publication</a>
+                <a href="#" class="navbar-item">Interactive Map</a>
+            </div>
+        </header>
+        <section class="title-byline">
+            <div class="byline-dateline" id="byLine"><p class="byline">By <a href="http://tahaerdemozturk.com" class="byline-author byline-href"  itemprop="author creator" itemtype="https://schema.org/Person">Taha Erdem Ozturk</a> for <a href="https://c4sr.columbia.edu" class="byline-author byline-href" itemprop="author creator" itemtype="https://schema.org/Organization" href="">Center for Spatial Research</a>,</p><p class="byline">Columbia University in the City of New York</p><p class="dateline">Published on: <time class="dateline" datetime="2024-05-29T13:21:13-04:00">29 May 2024</span></p></div></div>
+        </section>
+        <section class="title-header">
+            <h1 class="title-wrapper main-title" id="mainTitle">At The Fault Lines</h1><div id="overlay"></div>
+        </section>
+        <section class="title-wrapper">
+        </section>
+
+        <main>
+            <article>
+                    <div class="textbox-container tb6">
+                        <div class="textbox ti" id="SEC01-TB02">
+                            <h3 class="title secondary">First Earthquake</h3>
+                            <div class="tb">
+                                <p>
+                                    The 7.8-magnitude earthquake that struck southern Turkey and northern Syria in early February killed tens of thousands of people, flattened wide areas of cities and sent the region, which was already grappling with a refugee crisis and over a decade of war, into a monumental recovery effort.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            </article>
+        </main>
+        <script src="script.js"></script>
+        
+        <div id="map"></div>
+        <div id="geocoder" class="geocoder"></div>
+
+<!-- <div id="map-hidden">
+    
+            <div id="map"></div>
+            <div id="geocoder" class="geocoder"></div>
+            <script>
+                mapboxgl.accessToken = 'pk.eyJ1IjoidGFoYWVyZGVtb3p0dXJrIiwiYSI6ImNqZmZ1Nm9zNzM4N3gycW1tMGVreHJ0enQifQ.m_BVyHJ6Ukop8vUSasQv2w';
+                const map = new mapboxgl.Map({
+                    container:'map',
+                    style:'mapbox://styles/tahaerdemozturk/ck2ep0pi700301co76q7h64o8/draft',
+                    center: [28.83635628167491,41.00183027261981],
+                    zoom: 13,
+                });
+    
+                const geocoder = new MapboxGeocoder({
+                    accessToken: mapboxgl.accessToken,
+    
+                    countries: 'tr',
+    
+                    bbox: [27.945099,40.746217,29.963837,41.591824],
+    
+                    filter: function (item) {
+                        return item.context.some((i) => {
+                            return (
+                                i.id.split('.').shift() === 'region' &&
+                                i.text === 'Istanbul'
+                            );
+                        });
+                    },
+                    mapboxgl: mapboxgl
+                })
+    
+                map.addControl(geocoder);
+        
+                map.addControl(new mapboxgl.NavigationControl());
+                map.doubleClickZoom.enable();
+                map.scrollZoom.enable();
+            
+                map.on('style.load', () => {
+                    map.setFog({}); // Set the default atmosphere style
+                });
+            
+                // The following values can be changed to control rotation speed:
+            
+                // At low zooms, complete a revolution every two minutes.
+                const secondsPerRevolution = 240;
+                // Above zoom level 5, do not rotate.
+                const maxSpinZoom = 5;
+                // Rotate at intermediate speeds between zoom levels 3 and 5.
+                const slowSpinZoom = 3;
+            
+                let userInteracting = false;
+                const spinEnabled = true;
+            
+                function spinGlobe() {
+                    const zoom = map.getZoom();
+                    if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
+                        let distancePerSecond = 360 / secondsPerRevolution;
+                        if (zoom > slowSpinZoom) {
+                            // Slow spinning at higher zooms
+                            const zoomDif =
+                                (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
+                            distancePerSecond *= zoomDif;
+                        }
+                        const center = map.getCenter();
+                        center.lng -= distancePerSecond;
+                        // Smoothly animate the map over one second.
+                        // When this animation is complete, it calls a 'moveend' event.
+                        map.easeTo({ center, duration: 1000, easing: (n) => n });
+                    }
+                }
+            
+                // Pause spinning on interaction
+                map.on('mousedown', () => {
+                    userInteracting = true;
+                });
+                map.on('dragstart', () => {
+                    userInteracting = true;
+                });
+            
+                // When animation is complete, start spinning if there is no ongoing interaction
+                map.on('moveend', () => {
+                    spinGlobe();
+                });
+            
+                spinGlobe();
+            </script> 
+        </div>
+    -->
+
+        <div class="back-arrow" id="back-arrow" onclick="moveTop()"></div>
+        
+        <footer>
+            <div class="footer">
+                    <div class="footer-item">
+                        <a class="footer-item" href="#">About Us</a>
+                        <a class="footer-item" href="#">Contact Us</a>
+                        <a class="footer-item" href="#">Privacy Policy</a>
+                        <a class="footer-item" href="#">Terms of Use</a>
+                    </div>
+                    <div class="footer-right">
+                        <a class="footer-item" href="#"></a>
+                        <a class="footer-item" href="#"></a>
+                        <a class="footer-item" href="#"></a>
+                </div>
+            </div>
+    </body>
+
+</html>
