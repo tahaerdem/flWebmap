@@ -522,7 +522,7 @@ figcaption {
     font-weight: 500;
     font-size: 9.5px;
     line-height: 1.5625em;
-    letter-spacing: -0.001em;
+    letter-spacing: -0.001em;å
     text-align: center;
     color:#6b6b6b;
     overflow-wrap: break-word;
@@ -533,6 +533,14 @@ section {
     display: flex;
     margin: 0;
     padding: 0;
+    z-index: 2;
+}
+
+.SEC01 {
+    z-index: 3;
+    flex-direction: column;
+    justify-content: center;
+    background-color: transparent;
 }
 
 section.title-wrapper {
@@ -840,7 +848,6 @@ section.provinces {
 }
 
 .textbox-container {
-    position: sticky;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -848,6 +855,10 @@ section.provinces {
     justify-content: center;
     padding: 20px;
     z-index: 10;
+}
+
+.tb-st {
+    position: sticky;
 }
 
 .tb3 {
@@ -1257,11 +1268,12 @@ h4.timeline.date.bottom {
     background-image: url('resources/images/back-arrow.svg');  
     background-color: transparent;
     transition: opacity 250ms ease-out;
-    z-index: 1;
+    z-index: 100;
 }
 
 .back-arrow:hover {
     cursor: pointer;
+    opacity: 0.5;
 }
 
 .back-arrow.show {
