@@ -211,14 +211,63 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    function frame04() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#SEC03",
+                start: 'bottom 90%',
+                end: '500% top',
+                pin: true,
+                scrub: true,
+                markers: false, // Set to true for debugging, set to false to remove markers
+                
+                onUpdate: self => {
+                    console.log('ScrollTrigger onUpdate called'); // Debugging log
+                    const velocity = self.getVelocity();
+                    console.log('Velocity:', velocity); // Debugging log
+                    const center = map.getCenter();
+                    const targetLat = 38.011;
+                    const targetLng = 37.194;
+                    const targetZoom = 9;
+    
+                    let lngStep, latStep, zoomStep;
+    
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (targetZoom - map.getZoom()) / 15;
+                        console.log('Forward velocity:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (8 - map.getZoom()) / 15;
+                        console.log('Backward velocity:', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+    
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+                },
+            },
+        });
+    }
+
+
     var master = gsap.timeline();
 
     master
-    .add(frame01())
-    .add(frame02(), { onLeave: frame01 })
-    .add(frame03(), { onLeave: frame02 })
-
-    
+    .add(frame01()) //Zoom into the earthquake zone
+    .add(frame02(), { onLeave: frame01 }) //Zoom into the earthquake zone
+    .add(frame03(), { onLeave: frame02 }) //First Earthquake
+    .add(frame04(), { onLeave: frame03 }) //Second Earthquake
 
     function checkScrollTop() {
         // Check if the scroll position is at the top
