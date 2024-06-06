@@ -74,9 +74,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 pin: false,
                 scrub: true,
                 markers: false,
-                
-                onEnter: self => {
-                },
     
                 onUpdate: self => {
 
