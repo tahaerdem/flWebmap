@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 end: '700% top',
                 pin: true,
                 scrub: true,
-                markers: true, // Set to true for debugging, set to false to remove markers
+                markers: false, // Set to true for debugging, set to false to remove markers
 
                 onUpdate: self => {
                     console.log('ScrollTrigger onUpdate called'); // Debugging log
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 end: '500% top',
                 pin: true,
                 scrub: true,
-                markers: true, // Set to true for debugging, set to false to remove markers
+                markers: false, // Set to true for debugging, set to false to remove markers
                 
                 onUpdate: self => {
                     console.log('ScrollTrigger onUpdate called'); // Debugging log
