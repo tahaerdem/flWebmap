@@ -465,7 +465,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     function frame08() {
         var tl = gsap.timeline({
             scrollTrigger: {
-                trigger: "#SEC03",
+                trigger: "#SEC04",
                 start: 'top 60%', //Make it stop near the top, if wanna center it do 'top top'
                 end: '1000% top',
                 pin: true,
@@ -477,7 +477,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const center = map.getCenter();
                     const targetLat = 39.123;
                     const targetLng = 34.534;
-                    const targetZoom = 6.5;
+                    const targetZoom = 6;
     
                     let lngStep, latStep, zoomStep;
     
@@ -506,12 +506,55 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     });
     
                 },
+    
+            },
+        });
+    }
 
-                onLeave: self => {
-                    map.jumpTo({
-                        center: [39.123, 34.534],
-                        zoom: 5,
+    //1999
+    function frame09() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#SEC05",
+                start: 'top 60%', //Make it stop near the top, if wanna center it do 'top top'
+                end: '1000% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 40.748;
+                    const targetLng = 29.864;
+                    const targetZoom = 6.5;
+    
+                    let lngStep, latStep, zoomStep;
+    
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (targetZoom - map.getZoom()) / 15;
+                        console.log('F09:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (6 - map.getZoom()) / 15;
+                        console.log('F09', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+    
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
                     });
+    
                 },
     
             },
@@ -528,7 +571,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .add(frame05(), { onLeave: frame04 }) 
     .add(frame06(), { onLeave: frame05 }) 
     .add(frame07(), { onLeave: frame06 }) 
-    .add(frame08(), { onLeave: frame07 }) 
+    .add(frame08(), { onLeave: frame07 })
+    .add(frame09(), { onLeave: frame08 })
 
 
 
