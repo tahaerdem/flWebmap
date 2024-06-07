@@ -1,7 +1,9 @@
 /* styles.css */
 
 body {
-    font-family: 'Helvetica Neue', 'Akzidenz-Grotesk Pro', 'neue-haas-grotesk-text', sans-serif;
+
+    font-family: 'Helvetica Neue', 'Inter', 'Akzidenz-Grotesk Pro', 'neue-haas-grotesk-text', sans-serif;
+    font-feature-settings: 'liga' 1, 'calt' 1;
     font-weight: 400;
     font-style: normal;
     margin: 0;
@@ -15,7 +17,8 @@ body {
 }
 
 p, h1, h2, h3 {
-    font-family: 'Helvetica Neue', 'Akzidenz-Grotesk Pro', 'neue-haas-grotesk-text', sans-serif;
+    font-family: 'Helvetica Neue', 'Inter', 'Akzidenz-Grotesk Pro', 'neue-haas-grotesk-text', sans-serif;
+    font-feature-settings: 'liga' 1, 'calt' 1;
     font-weight: 400;
     font-style: normal;
     margin: 0;
@@ -277,7 +280,7 @@ p.byline-author {
 }
 
 .section-text {
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-family: 'PP Neue Montreal', 'Helvetica Neue', 'Inter', sans-serif;
     font-weight: 500;
     font-size: 15px;
     line-height: 1.5625em;
@@ -288,7 +291,7 @@ p.byline-author {
 }
 
 h1 {
-    font-family: 'Helvetica Neue', 'Akzidenz-Grotesk Pro', 'neue-haas-grotesk-display', sans-serif;
+    font-family: 'Helvetica Neue', 'Inter', 'Akzidenz-Grotesk Pro', 'neue-haas-grotesk-display', sans-serif;
     font-weight: 500;
     font-style: normal;
     font-size: 64px;
@@ -536,13 +539,15 @@ section {
     z-index: 2;
 }
 
-.SEC01 {
+.storyboard {
     z-index: 3;
     flex-direction: column;
     justify-content: center;
     background-color: transparent;
 }
 
+.date-time {
+}
 .fs {
     z-index: 5;
     flex-direction: column;
@@ -819,7 +824,7 @@ section.provinces {
 }
 
 .section-stats {
-    font-family: 'GT Pressura Mono', 'Helvetica Neue', sans-serif;
+    font-family: 'GT Pressura Mono', 'Helvetica Neue', 'Inter', sans-serif;
     font-size: 0.9em;
     color: #482011;
     text-align: left;
@@ -867,8 +872,27 @@ section.provinces {
     z-index: 10;
 }
 
+.ctr {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: auto;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+    z-index: 10;
+}
+
 .tb-st {
     position: sticky;
+}
+
+.tb-top {
+    top: 0px;
+}
+
+.tb1 {
+    top: 10%;
 }
 
 .tb3 {
@@ -921,16 +945,40 @@ section.provinces {
     height: 230vh;
 }
 
+.spacer.s1f {
+    height: 10vh;
+}
+
+.spacer.s1q {
+    height: 25vh;
+}
+
+.spacer.s1h {
+    height: 50vh;
+}
+
 .spacer.s1 {
     height: 100vh;
+}
+
+.spacer.s15 {
+    height: 150vh;
 }
 
 .spacer.s2 {
     height: 200vh;
 }
 
+.spacer.s225 {
+    height: 225vh;
+}
+
 .spacer.s25 {
     height: 250vh;
+}
+
+.spacer.s5 {
+    height: 500vh;
 }
 
 .section-break {
@@ -1246,6 +1294,30 @@ h4.timeline.date.bottom {
     padding: 25px;
     z-index: 4;
     background-color:#fbfbfb;
+}
+
+.tb-align-r {
+    @media screen and (min-width: 769px){
+        position: relative;
+        left: 500px;
+    }
+
+    @media screen and (max-width: 768px){
+        position: relative;
+        left: 0px;
+    }
+}
+
+.tb-align-l {
+    @media screen and (min-width: 769px){
+        position: relative;
+        right: 500px;
+    }
+
+    @media screen and (max-width: 768px){
+        position: relative;
+        right: 0px;
+    }
 }
 
 .ti {
