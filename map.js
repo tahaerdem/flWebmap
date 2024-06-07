@@ -561,6 +561,56 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    //Istanbul
+    function frame10() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#SEC06",
+                start: 'top 60%', //Make it stop near the top, if wanna center it do 'top top'
+                end: '1000% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 41.008;
+                    const targetLng = 28.978;
+                    const targetZoom = 9;
+    
+                    let lngStep, latStep, zoomStep;
+    
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (targetZoom - map.getZoom()) / 15;
+                        console.log('F10:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (6.5 - map.getZoom()) / 15;
+                        console.log('F10', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+    
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+    
+                },
+    
+            },
+        });
+    }
+
     var master = gsap.timeline();
 
     master
@@ -573,6 +623,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .add(frame07(), { onLeave: frame06 }) 
     .add(frame08(), { onLeave: frame07 })
     .add(frame09(), { onLeave: frame08 })
+    .add(frame10(), { onLeave: frame09 })
 
 
 
