@@ -2,7 +2,7 @@
 
 body {
 
-    font-family: 'Helvetica Neue', 'Inter', 'Akzidenz-Grotesk Pro', 'neue-haas-grotesk-text', sans-serif;
+    font-family:  'neue-haas-grotesk-text', 'Inter', 'Helvetica Neue', 'Akzidenz-Grotesk Pro',sans-serif;
     font-feature-settings: 'liga' 1, 'calt' 1;
     font-weight: 400;
     font-style: normal;
@@ -17,7 +17,7 @@ body {
 }
 
 p, h1, h2, h3 {
-    font-family: 'Helvetica Neue', 'Inter', 'Akzidenz-Grotesk Pro', 'neue-haas-grotesk-text', sans-serif;
+    font-family: 'neue-haas-grotesk-text', 'Inter', 'Helvetica Neue', 'Akzidenz-Grotesk Pro', sans-serif;
     font-feature-settings: 'liga' 1, 'calt' 1;
     font-weight: 400;
     font-style: normal;
@@ -191,7 +191,7 @@ a.byline-href:hover {
 }
 
 a.footnote, sup.fn a {
-    font-family: 'neue-haas-grotesk-text', 'Helvetica Neue', 'PP Neue Montreal', sans-serif;
+    font-family: 'neue-haas-grotesk-text', 'Helvetica Neue', sans-serif;
     font-weight: 500;
     font-size: .65rem;
     text-decoration: none;
@@ -214,7 +214,7 @@ a.footnote:hover, sup.fn a:hover {
 }
 
 a.footnote-li, sup.fn a {
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-family: 'Helvetica Neue', sans-serif;
     font-weight: 450;
     font-size: 13px;
     line-height: 1.5625em;
@@ -226,7 +226,7 @@ a.footnote-li, sup.fn a {
 }
 
 a.footnote-li:hover, sup.fn a:hover {
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-family: 'Helvetica Neue', sans-serif;
     font-weight: 500;
     font-size: 13px;
     line-height: 1.5625em;
@@ -237,7 +237,7 @@ a.footnote-li:hover, sup.fn a:hover {
 }
 
 ol {
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-family: 'Helvetica Neue', sans-serif;
     font-weight: 500;
     font-size: 13px;
     line-height: 1.5625em;
@@ -254,7 +254,7 @@ li {
 }
 
 .footnote-li {
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-family: 'Helvetica Neue', sans-serif;
     font-weight: 400;
     font-size: 13px;
     line-height: 1.5625em;
@@ -280,7 +280,7 @@ p.byline-author {
 }
 
 .section-text {
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', 'Inter', sans-serif;
+    font-family: 'Helvetica Neue', 'Inter', sans-serif;
     font-weight: 500;
     font-size: 15px;
     line-height: 1.5625em;
@@ -386,7 +386,7 @@ section.title-byline {
 }
 
 h2 {
-    font-family: 'Akzidenz-Grotesk Pro', 'Helvetica Neue', sans-serif;
+    font-family: 'neue-haas-grotesk-text', 'Inter', 'Helvetica Neue', sans-serif;
     font-weight: 500;
     font-size: 36px;
     letter-spacing: -0.005em;
@@ -396,7 +396,7 @@ h2 {
 h2.title {
     position: relative;
     counter-increment: titleCounter;
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-family: 'neue-haas-grotesk-text', 'Inter', 'Helvetica Neue', sans-serif;
     font-size: 20px;    
     font-weight: 560;
     margin-top: 1em;
@@ -407,7 +407,7 @@ h2.title {
 h2.title-section {
     position: relative;
     counter-increment: titleCounter;
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-family: 'neue-haas-grotesk-text', 'Inter', 'Helvetica Neue', sans-serif;
     font-size: 20px;    
     font-weight: 560;
     margin-top: 1em;
@@ -418,7 +418,7 @@ h2.title-section {
 
 h2.title-section::before {
     content: counter(titleCounter) ". " ;
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-family: 'neue-haas-grotesk-text', 'Inter', 'Helvetica Neue', sans-serif;
     font-size: 20px;    
     font-weight: 560;
     text-align: left;
@@ -441,7 +441,7 @@ h2.styled-quote {
 }
 
 h3 {
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-family: 'neue-haas-grotesk-text', 'Inter', 'Helvetica Neue', sans-serif;
     font-weight: 500;
     font-size: 15px;
     letter-spacing: -0.005em;
@@ -484,7 +484,7 @@ h3.nav {
 }
 
 h2.title-wrapper.sub-title {
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-family: 'Helvetica Neue',  sans-serif;
     font-weight: 500;
     font-size: 15px;
     letter-spacing: -0.005em;
@@ -521,7 +521,7 @@ h4 {
 }
 
 figcaption {
-    font-family: 'PP Neue Montreal', 'Helvetica Neue', sans-serif;
+    font-family: 'Helvetica Neue', 'neue-haas-grotesk-text', 'Inter', sans-serif;
     font-weight: 500;
     font-size: 9.5px;
     line-height: 1.5625em;
@@ -925,21 +925,38 @@ section.provinces {
     }
 }
 
-.container-title {
+.text-container-overlay {
     display: flex;
-    flex-direction: column; 
-    justify-content: left;
-    align-self: center;
-    text-justify: left;
-    margin: 80px auto;
-    max-width: 1200px;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 350px;
     z-index: 10;
-    
+}
+
+.container-overlay-main {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100%;
+    z-index: 10;
+    gap: 25px;
+    max-width: 900px;
+    background-color: transparent;
     @media screen and (max-width: 700px) {
         margin: 20px 20px;
     }
 }
 
+.container-overlay-sub {
+    display: inline-flex;
+    align-items: flex-end;
+    height: 100%;
+    max-width: 260px;
+    z-index: 10;
+    color: white;
+    font-size: smaller;
+    background-color: transparent;
+};
 
 .image-container {
     display: inline-block;
