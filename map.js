@@ -57,8 +57,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     function frame01() {
         var tl = gsap.timeline({
             scrollTrigger: {
-                trigger: "#mainTitle",
-                start: 'center top',
+                trigger: "#mainTitle",                start: 'bottom top',
                 end: '250% -100%',
                 pin: false,
                 scrub: true,
@@ -116,7 +115,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             scrollTrigger: {
                 trigger: "#SEC01",
                 start: 'center center',
-                end: '1200% top',
+                end: '1100% top',
                 pin: true,
                 scrub: true,
                 markers: false, // Set to true for debugging, set to false to remove markers
@@ -184,7 +183,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                 onLeave: self => {
                     map.jumpTo({
-                        center: [37.032, 37.166],
+                        center: [37.166, 37.032],
                         zoom: 7.5,
                     });
                 },
@@ -204,9 +203,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 markers: false, // Set to true for debugging, set to false to remove markers
                 
                 onUpdate: self => {
-                    console.log('ScrollTrigger onUpdate called'); // Debugging log
                     const velocity = self.getVelocity();
-                    console.log('Velocity:', velocity); // Debugging log
                     const center = map.getCenter();
                     const targetLng = 37.032;
                     const targetLat = 37.166;
@@ -218,13 +215,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         // Forward animation steps
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
-                        zoomStep = (targetZoom - map.getZoom()) / 15;
-                        console.log('Forward velocity:', velocity);
+                        zoomStep = (targetZoom - map.getZoom()) / 150;
+                        console.log('F03:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
-                        lngStep = (targetLng - center.lng) / 20;
-                        latStep = (targetLat - center.lat) / 20;
-                        zoomStep = (7.5 - map.getZoom()) / 15;
-                        console.log('Backward velocity:', velocity);
+                        lngStep = (targetLng - center.lng) / 100;
+                        latStep = (targetLat - center.lat) / 100;
+                        zoomStep = (7.5 - map.getZoom()) / 150;
+                        console.log('F03:', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -244,24 +241,76 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    //First earthquake story scroller
     function frame04() {
         var tl = gsap.timeline({
             scrollTrigger: {
-                trigger: "#SEC02",
-                start: 'bottom 95%',
-                end: '500% top',
+                trigger: "#TL02",
+                start: 'top 95%',
+                end: 'bottom top',
                 pin: false,
                 scrub: true,
-                markers: true, // Set to true for debugging, set to false to remove markers
+                markers: false, // Set to true for debugging, set to false to remove markers
                 
                 onUpdate: self => {
-                    console.log('ScrollTrigger onUpdate called'); // Debugging log
                     const velocity = self.getVelocity();
-                    console.log('Velocity:', velocity); // Debugging log
                     const center = map.getCenter();
-                    const targetLat = 37.032;
-                    const targetLng = 37.166;
+                    const targetLat = 38.010;
+                    const targetLng = 37.197;
+                    const targetZoom = 7.5;
+    
+                    let lngStep, latStep, zoomStep;
+    
+                    if (velocity > 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (targetZoom - map.getZoom()) / 15;
+                        console.log('FRAME04:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (7.5 - map.getZoom()) / 15;
+                        console.log('FRAME04', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+    
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+    
+                },
+
+                onLeave: self => {
+                    map.jumpTo({
+                        center: [37.197, 38.010],
+                        zoom: 7.5,
+                    });
+                },
+    
+            },
+        });
+    }
+
+    function frame05() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#TL03",
+                start: '50% top', //Make it stop near the top, if wanna center it do 'top top'
+                end: '600% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+                
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 38.010;
+                    const targetLng = 37.197;
                     const targetZoom = 9;
     
                     let lngStep, latStep, zoomStep;
@@ -271,12 +320,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 15;
-                        console.log('Forward velocity:', velocity);
+                        console.log('FRAME05:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
-                        zoomStep = (8 - map.getZoom()) / 15;
-                        console.log('Backward velocity:', velocity);
+                        zoomStep = (7.5 - map.getZoom()) / 15;
+                        console.log('FRAME05', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -289,62 +338,76 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         duration: 0,
                         easing: t => t // linear easing
                     });
+    
                 },
+
+                onLeave: self => {
+                    map.jumpTo({
+                        center: [37.197, 38.010],
+                        zoom: 9,
+                    });
+                },
+    
             },
         });
     }
 
-   //Grab the first earthquake timeline
-   function frame05() {
-    var tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: "#TL02",
-            start: 'top top',
-            end: '620% top',
-            pin: true,
-            scrub: true,
-            markers: false, // Set to true for debugging, set to false to remove markers
-            
-            onUpdate: self => {
-                console.log('ScrollTrigger onUpdate called'); // Debugging log
-                const velocity = self.getVelocity();
-                console.log('Velocity:', velocity); // Debugging log
-                const center = map.getCenter();
-                const targetLng = 37.032;
-                const targetLat = 37.166;
-                const targetZoom = 9;
+    function frame06() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS01",
+                start: 'center center', //Make it stop near the top, if wanna center it do 'top top'
+                end: 'bottom top',
+                pin: true,
+                scrub: true,
+                markers: true,
+                
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 38.010;
+                    const targetLng = 37.197;
+                    const targetZoom = 9;
+    
+                    let lngStep, latStep, zoomStep;
+    
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (targetZoom - map.getZoom()) / 15;
+                        console.log('FRAME05:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (7.5 - map.getZoom()) / 15;
+                        console.log('FRAME05', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+    
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+    
+                },
 
-                let lngStep, latStep, zoomStep;
-
-                if (velocity > 0 && window.scrollY > 0) {
-                    // Forward animation steps
-                    lngStep = (targetLng - center.lng) / 20;
-                    latStep = (targetLat - center.lat) / 20;
-                    zoomStep = (targetZoom - map.getZoom()) / 15;
-                    console.log('Forward velocity:', velocity);
-                } else if (velocity < 0 && window.scrollY > 0) {
-                    lngStep = (targetLng - center.lng) / 20;
-                    latStep = (targetLat - center.lat) / 20;
-                    zoomStep = (7.5 - map.getZoom()) / 15;
-                    console.log('Backward velocity:', velocity);
-                } else {
-                    lngStep = 0;
-                    latStep = 0;
-                    zoomStep = 0;
-                }
-
-                map.easeTo({
-                    center: [center.lng + lngStep, center.lat + latStep],
-                    zoom: map.getZoom() + zoomStep,
-                    duration: 0,
-                    easing: t => t // linear easing
-                });
-
+                onLeave: self => {
+                    map.jumpTo({
+                        center: [37.197, 38.010],
+                        zoom: 9,
+                    });
+                },
+    
             },
+        });
+    }
 
-        },
-    });
-}
 
 
     var master = gsap.timeline();
@@ -352,9 +415,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     master
     .add(frame01()) //Zoom into the earthquake zone
     .add(frame02(), { onLeave: frame01 }) //Zoom into the earthquake zone
-    .add(frame03(), { onLeave: frame02 }) //First Earthquake
-    .add(frame04(), { onLeave: frame03 }) //Second Earthquake
-    .add(frame05(), { onLeave: frame04 }) //Second Earthquake
+    .add(frame03(), { onLeave: frame02 }) 
+    .add(frame04(), { onLeave: frame03 }) 
+    .add(frame05(), { onLeave: frame04 }) 
+    .add(frame06(), { onLeave: frame05 }) 
+
 
 
     function checkScrollTop() {
