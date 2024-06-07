@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             scrollTrigger: {
                 trigger: "#SEC01",
                 start: 'center center',
-                end: '1100% top',
+                end: '1200% top',
                 pin: true,
                 scrub: true,
                 markers: false, // Set to true for debugging, set to false to remove markers
@@ -241,6 +241,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    //Grab the second earthquake timeline
     function frame04() {
         var tl = gsap.timeline({
             scrollTrigger: {
@@ -249,7 +250,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 end: 'bottom top',
                 pin: false,
                 scrub: true,
-                markers: false, // Set to true for debugging, set to false to remove markers
+                markers: false,
                 
                 onUpdate: self => {
                     const velocity = self.getVelocity();
@@ -296,6 +297,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    //Zoom into second EQ
     function frame05() {
         var tl = gsap.timeline({
             scrollTrigger: {
@@ -352,22 +354,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    //Black Section Timeline
     function frame06() {
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS01",
-                start: 'center center', //Make it stop near the top, if wanna center it do 'top top'
+                start: 'top center', //Make it stop near the top, if wanna center it do 'top top'
                 end: 'bottom top',
-                pin: true,
+                pin: false,
                 scrub: true,
-                markers: true,
+                markers: false,
                 
                 onUpdate: self => {
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
-                    const targetLat = 38.010;
-                    const targetLng = 37.197;
-                    const targetZoom = 9;
+                    const targetLat = 38.410;
+                    const targetLng = 39.939;
+                    const targetZoom = 6.5;
     
                     let lngStep, latStep, zoomStep;
     
@@ -376,12 +379,62 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 15;
-                        console.log('FRAME05:', velocity);
+                        console.log('FRAME06:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (9 - map.getZoom()) / 15;
+                        console.log('FRAME06', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+    
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+    
+                },
+    
+            },
+        });
+    }
+
+    //Eastern Anatolia
+    function frame07() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS02",
+                start: 'top top', //Make it stop near the top, if wanna center it do 'top top'
+                end: '500% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+                
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 38.410;
+                    const targetLng = 39.939;
+                    const targetZoom = 6.5;
+    
+                    let lngStep, latStep, zoomStep;
+    
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (targetZoom - map.getZoom()) / 15;
+                        console.log('FRAME07:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (7.5 - map.getZoom()) / 15;
-                        console.log('FRAME05', velocity);
+                        console.log('FRAME07', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -399,8 +452,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                 onLeave: self => {
                     map.jumpTo({
-                        center: [37.197, 38.010],
-                        zoom: 9,
+                        center: [39.939, 38.410],
+                        zoom: 6.5,
                     });
                 },
     
@@ -408,7 +461,62 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    //All of Turkey
+    function frame08() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#SEC03",
+                start: 'top 60%', //Make it stop near the top, if wanna center it do 'top top'
+                end: '1000% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+                
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 39.123;
+                    const targetLng = 34.534;
+                    const targetZoom = 6.5;
+    
+                    let lngStep, latStep, zoomStep;
+    
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (targetZoom - map.getZoom()) / 15;
+                        console.log('FRAME07:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (6.5 - map.getZoom()) / 15;
+                        console.log('FRAME07', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+    
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+    
+                },
 
+                onLeave: self => {
+                    map.jumpTo({
+                        center: [39.123, 34.534],
+                        zoom: 5,
+                    });
+                },
+    
+            },
+        });
+    }
 
     var master = gsap.timeline();
 
@@ -419,6 +527,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .add(frame04(), { onLeave: frame03 }) 
     .add(frame05(), { onLeave: frame04 }) 
     .add(frame06(), { onLeave: frame05 }) 
+    .add(frame07(), { onLeave: frame06 }) 
+    .add(frame08(), { onLeave: frame07 }) 
+
+
 
 
 
