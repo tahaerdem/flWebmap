@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 end: () => `+=${window.innerHeight * 1.425}`,
                 pin: true,
                 scrub: true,
-                markers: true, // Set to true for debugging, set to false to remove markers
+                markers: false, // Set to true for debugging, set to false to remove markers
 
                 onUpdate: self => {
                     const startDate = new Date("February 1, 2024 00:00:00");
@@ -519,7 +519,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 end: '5000% top',
                 pin: true,
                 scrub: true,
-                markers: true,
+                markers: false,
                 
                 onUpdate: self => {
                     const velocity = self.getVelocity();

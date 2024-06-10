@@ -896,17 +896,6 @@ section.provinces {
     z-index: 10;
 }
 
-.ctr {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: auto;
-    justify-content: center;
-    width: 100%;
-    padding: 20px;
-    z-index: 10;
-}
-
 .tb-st {
     position: sticky;
 }
@@ -1412,34 +1401,49 @@ h4.timeline.date.bottom {
     padding: 25px;
     z-index: 4;
     background-color:#fbfbfb;
+    justify-content: center;
+}
+
+.tb-ctr {
+    justify-content: center;
 }
 
 .tb-align-r {
-    @media screen and (min-width: 769px){
+    @media screen and (min-width: 1601px) {
         position: relative;
-        left: 500px;
+        left: 450px;
     }
 
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 1600px) and (min-width: 1100px) {
+        position: relative;
+        left: 350px;
+    }
+
+    @media screen and (max-width: 1099px) {
         position: relative;
         left: 0px;
     }
 }
 
 .tb-align-l {
-    @media screen and (min-width: 769px){
+    @media screen and (min-width: 1601px) {
         position: relative;
-        right: 500px;
+        right: 450px;
     }
 
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 1600px) and (min-width: 1100px) {
+        position: relative;
+        right: 350px;
+    }
+
+    @media screen and (max-width: 1099px) {
         position: relative;
         right: 0px;
     }
 }
 
 .ti {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1600px) {
     padding: 17.5px;
     }
 }
