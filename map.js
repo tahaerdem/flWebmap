@@ -21,7 +21,7 @@ function checkScrollTop() {
 const map = new mapboxgl.Map({
     container: 'map',
     color: 'white',
-    style: 'mapbox://styles/tahaerdemozturk/clwt6u2xg05k601nx3zbs1cun/draft',
+    style: 'mapbox://styles/tahaerdemozturk/clwt6u2xg05k601nx3zbs1cun',
     zoom: zoom,
     center: [15.9637, -28.2433],
     scrollZoom: false,
@@ -57,7 +57,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     function frame01() {
         var tl = gsap.timeline({
             scrollTrigger: {
-                trigger: "#mainTitle",                start: 'bottom top',
+                trigger: "#mainTitle",
+                start: 'bottom top',
                 end: '250% -100%',
                 pin: false,
                 scrub: true,
@@ -115,14 +116,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
             scrollTrigger: {
                 trigger: "#SEC01",
                 start: 'center center',
-                end: '1200% top',
+                end: '1100% top',
                 pin: true,
                 scrub: true,
-                markers: false, // Set to true for debugging, set to false to remove markers
+                markers: true, // Set to true for debugging, set to false to remove markers
 
                 onUpdate: self => {
                     const startDate = new Date("February 1, 2024 00:00:00");
-                    const endDate = new Date("February 6, 2024 04:27:00");
+                    const endDate = new Date("February 6, 2024 04:17:35");
                     const totalDuration = endDate - startDate;
                     const dateTimeElement = document.getElementById("date-time");
 
@@ -146,9 +147,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     // Update the text element
                     dateTimeElement.textContent = formattedTime;
 
-                    console.log('ScrollTrigger onUpdate called'); // Debugging log
                     const velocity = self.getVelocity();
-                    console.log('Velocity:', velocity); // Debugging log
                     const center = map.getCenter();
                     const targetLng = 37.032;
                     const targetLat = 37.166;
@@ -409,8 +408,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS02",
-                start: 'top top', //Make it stop near the top, if wanna center it do 'top top'
-                end: '500% top',
+                start: 'top top',
+                end: '2000% top',
                 pin: true,
                 scrub: true,
                 markers: false,
@@ -461,13 +460,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    //All of Turkey
+    //North Anatolia Textbox
     function frame08() {
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#SEC04",
                 start: 'top 60%', //Make it stop near the top, if wanna center it do 'top top'
-                end: '1000% top',
+                end: '500% top',
                 pin: true,
                 scrub: true,
                 markers: false,
@@ -486,12 +485,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 15;
-                        console.log('FRAME07:', velocity);
+                        console.log('FRAME08:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (6.5 - map.getZoom()) / 15;
-                        console.log('FRAME07', velocity);
+                        console.log('FRAME08', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -511,8 +510,58 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    //1999
+    //North Anatolia Timeline
     function frame09() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS04",
+                start: 'top top',
+                end: '5000% top',
+                pin: true,
+                scrub: true,
+                markers: true,
+                
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 39.123;
+                    const targetLng = 34.534;
+                    const targetZoom = 6;
+    
+                    let lngStep, latStep, zoomStep;
+    
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (targetZoom - map.getZoom()) / 15;
+                        console.log('FRAME09:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 20;
+                        latStep = (targetLat - center.lat) / 20;
+                        zoomStep = (6.5 - map.getZoom()) / 15;
+                        console.log('FRAME09', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+    
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+    
+                },
+    
+            },
+        });
+    }
+
+    //1999 Textbox
+    function frame10() {
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#SEC05",
@@ -527,20 +576,20 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const center = map.getCenter();
                     const targetLat = 40.748;
                     const targetLng = 29.864;
-                    const targetZoom = 6.5;
+                    const targetZoom = 8;
     
                     let lngStep, latStep, zoomStep;
     
                     if (velocity > 0 && window.scrollY > 0) {
                         // Forward animation steps
-                        lngStep = (targetLng - center.lng) / 20;
-                        latStep = (targetLat - center.lat) / 20;
-                        zoomStep = (targetZoom - map.getZoom()) / 15;
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (targetZoom - map.getZoom()) / 20;
                         console.log('F09:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
-                        lngStep = (targetLng - center.lng) / 20;
-                        latStep = (targetLat - center.lat) / 20;
-                        zoomStep = (6 - map.getZoom()) / 15;
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (6 - map.getZoom()) / 20;
                         console.log('F09', velocity);
                     } else {
                         lngStep = 0;
@@ -561,12 +610,62 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    //1999 Timeline
+    function frame11() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS06",
+                start: 'top top', //Make it stop near the top, if wanna center it do 'top top'
+                end: '2500% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 40.748;
+                    const targetLng = 29.864;
+                    const targetZoom = 8;
+    
+                    let lngStep, latStep, zoomStep;
+    
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (targetZoom - map.getZoom()) / 20;
+                        console.log('F11:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (6 - map.getZoom()) / 20;
+                        console.log('F11', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+    
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+    
+                },
+    
+            },
+        });
+    }
+
     //Istanbul
-    function frame10() {
+    function frame12() {
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#SEC06",
-                start: 'top 60%', //Make it stop near the top, if wanna center it do 'top top'
+                start: 'top 60%',
                 end: '1000% top',
                 pin: true,
                 scrub: true,
@@ -583,14 +682,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
                     if (velocity > 0 && window.scrollY > 0) {
                         // Forward animation steps
-                        lngStep = (targetLng - center.lng) / 20;
-                        latStep = (targetLat - center.lat) / 20;
-                        zoomStep = (targetZoom - map.getZoom()) / 15;
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (targetZoom - map.getZoom()) / 20;
                         console.log('F10:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
-                        lngStep = (targetLng - center.lng) / 20;
-                        latStep = (targetLat - center.lat) / 20;
-                        zoomStep = (6.5 - map.getZoom()) / 15;
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (8 - map.getZoom()) / 15;
                         console.log('F10', velocity);
                     } else {
                         lngStep = 0;
@@ -611,6 +710,157 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    //Istanbul Timeline
+    function frame13() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS08",
+                start: 'top top', //Make it stop near the top, if wanna center it do 'top top'
+                end: '5000% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 41.008;
+                    const targetLng = 28.978;
+                    const targetZoom = 9;
+    
+                    let lngStep, latStep, zoomStep;
+    
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (targetZoom - map.getZoom()) / 20;
+                        console.log('F10:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (8 - map.getZoom()) / 15;
+                        console.log('F10', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+    
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+    
+                },
+    
+            },
+        });
+    }
+
+    //Next steps for Istanbul
+    function frame14() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS10",
+                start: 'top top', //Make it stop near the top, if wanna center it do 'top top'
+                end: '1250% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 41.008;
+                    const targetLng = 28.978;
+                    const targetZoom = 9;
+    
+                    let lngStep, latStep, zoomStep;
+    
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (targetZoom - map.getZoom()) / 20;
+                        console.log('F10:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (8 - map.getZoom()) / 15;
+                        console.log('F10', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+    
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+    
+                },
+    
+            },
+        });
+    }
+
+    //Ways to Detect Risky Buildings
+    function frame15() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS12",
+                start: 'top top', //Make it stop near the top, if wanna center it do 'top top'
+                end: '2500% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 41.008;
+                    const targetLng = 28.978;
+                    const targetZoom = 9;
+    
+                    let lngStep, latStep, zoomStep;
+    
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (targetZoom - map.getZoom()) / 20;
+                        console.log('F10:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (8 - map.getZoom()) / 15;
+                        console.log('F10', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+    
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+    
+                },
+    
+            },
+        });
+    }
+
+
     var master = gsap.timeline();
 
     master
@@ -624,10 +874,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .add(frame08(), { onLeave: frame07 })
     .add(frame09(), { onLeave: frame08 })
     .add(frame10(), { onLeave: frame09 })
-
-
-
-
+    .add(frame11(), { onLeave: frame10 })
+    .add(frame12(), { onLeave: frame11 })
+    .add(frame13(), { onLeave: frame12 })
+    .add(frame14(), { onLeave: frame13 })
+    .add(frame15(), { onLeave: frame14 })
 
     function checkScrollTop() {
         // Check if the scroll position is at the top

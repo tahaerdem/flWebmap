@@ -393,6 +393,17 @@ h2 {
     text-align: center;
 }
 
+h2.ti-tl {
+    font-size: 2em;
+    letter-spacing: -0.005em;
+    text-align: left;
+    color: white;
+
+    @media screen and (max-height: 769px) { 
+        font-size: 1.6em;
+    }
+}
+
 h2.title {
     position: relative;
     counter-increment: titleCounter;
@@ -539,6 +550,11 @@ section {
     z-index: 2;
 }
 
+.footnotes {
+    width: 100%;
+    background-color: #fff;
+}
+
 .storyboard {
     z-index: 3;
     flex-direction: column;
@@ -548,11 +564,12 @@ section {
 
 .date-time {
 }
+
 .fs {
     z-index: 5;
     flex-direction: column;
     justify-content: center;
-    background-color: #fff;
+    background-color: #000;
     padding-top: 20px;
     padding-bottom: 20px;
     width: 100%;
@@ -681,7 +698,9 @@ article {
     z-index: 2;
 }
 
-
+article.story {
+    background-color: #FFF;
+}
 
 hr {
     display: block;
@@ -690,6 +709,11 @@ hr {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
     margin-left: calc((100% - 600px) / 2) 100px calc((100% - 600px) / 2);
+}
+
+.title-line {
+    border-bottom: 2px solid var(--color-stroke-quaternary,#000);
+    margin: -1em 0 1.5em 0;
 }
 
 .callout {
@@ -701,8 +725,8 @@ hr {
     height: fit-content;
     padding: 15px 0px 15px 15px;
     margin: 20px 0px 20px 0px;
-    border: 1px #b5b5b5;
-    background-color: #f7f7f7;
+    border: 1px #a6a197;
+    background-color: #e4e2d7;
 }
 
 #adana {
@@ -864,7 +888,7 @@ section.provinces {
 
 .textbox-container {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
     margin: auto;
     justify-content: center;
@@ -874,7 +898,7 @@ section.provinces {
 
 .ctr {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
     margin: auto;
     justify-content: center;
@@ -929,8 +953,13 @@ section.provinces {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 20px 350px;
+    margin: 20px 10vw;
     z-index: 10;
+    max-width: 100%;
+
+    @media screen and (max-width: 1200px) {
+        margin: 20px 40px;
+    }
 }
 
 .container-overlay-main {
@@ -942,21 +971,51 @@ section.provinces {
     gap: 25px;
     max-width: 900px;
     background-color: transparent;
-    @media screen and (max-width: 700px) {
-        margin: 20px 20px;
-    }
+    vertical-align: bottom;
 }
 
 .container-overlay-sub {
     display: inline-flex;
     align-items: flex-end;
     height: 100%;
-    max-width: 260px;
+    max-width: 240px;
     z-index: 10;
     color: white;
     font-size: smaller;
     background-color: transparent;
-};
+    vertical-align: bottom;
+}
+
+.container-overlay-sub-p {
+    display: inline-block;
+    max-width: 240px;
+    z-index: 10;
+    background-color: transparent;
+    vertical-align: bottom;
+}
+
+.sum {
+    font-weight: 500;
+    
+    @media screen and (max-width: 900px) and (min-width: 601px) {
+        display: inline-block;
+        text-align: right;
+        vertical-align: bottom;
+        margin-right: -50px;
+    }
+
+    @media screen and (max-width: 600px) {
+        display: none;
+    }
+}
+
+.non-sum {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    @media screen and (max-width: 900px) {
+        display: none; 
+    }
+}
 
 .image-container {
     display: inline-block;
@@ -980,6 +1039,10 @@ section.provinces {
 
 .spacer.s1f {
     height: 10vh;
+}
+
+.spacer.s1f2 {
+    height: 20vh;
 }
 
 .spacer.s1q {
@@ -1010,9 +1073,31 @@ section.provinces {
     height: 250vh;
 }
 
+.spacer.s3 {
+    height: 300vh;
+}
+
+.spacer.s35 {
+    height: 350vh;
+}
+
+.spacer.s4 {
+    height: 400vh;
+}
+
+.spacer.s45 {
+    height: 450vh;
+}
+
 .spacer.s5 {
     height: 500vh;
 }
+
+.spacer.s75 {
+    height: 750vh;
+}
+
+
 
 .section-break {
     height: 5vh;
@@ -1366,7 +1451,8 @@ h4.timeline.date.bottom {
 }
 
 .tp {
-    padding-bottom: 1em;
+    margin-top: 10px;
+    margin-bottom: -10px;
 }
 
 .image-container {
@@ -1405,6 +1491,7 @@ footer {
     flex-direction: column;
     justify-content: center;
     padding: 0px 0 0 0;
+    z-index: 5;
 }
 
 .footer-container {
@@ -1490,3 +1577,8 @@ footer.footer-item:hover {
     z-index: 1; /* Above the map */
 }
 
+.counter-subtitle{
+    margin-top: 5px;
+    opacity: 1; /* Start with opacity 0 */
+    transition: opacity 0.5s, transform 0.5s;
+}
