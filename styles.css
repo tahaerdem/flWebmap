@@ -1477,10 +1477,6 @@ h4.timeline.date.bottom {
     opacity: 0.5;
 }
 
-.back-arrow.show {
-    opacity: 1;
-}
-
 footer {
     display: flex;
     width: 100%;

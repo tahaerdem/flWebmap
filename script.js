@@ -126,16 +126,24 @@ window.addEventListener('load', function() {
     stickyElement.style.top = topValue + 'px';
 });
 
-let backArrow = document.getElementsById("back-arrow");
-window.onscroll = function() {moveTop()};
+let backArrow = document.getElementsById("back-arrow")
+window.onscroll = function() { scrollFunction(); };
 
 function scrollFunction() {
-  if (document.body.scrollTop > 2000 || document.documentElement.scrollTop > 2000) {
-    backArrow.style.display = "block";
-  } else {
-    backArrow.style.display = "none";
+    // Calculate 150% of the viewport height
+    let scrollHeight = window.innerHeight * 1.5;
+    
+    // Check if the page is scrolled beyond 150% of viewport height
+    if (document.body.scrollTop > scrollHeight || document.documentElement.scrollTop > scrollHeight) {
+      backArrow.style.display = "block";
+    } else {
+      backArrow.style.display = "none";
+    }
   }
-}
-function moveTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth', easing: 'ease-in' });
-}
+  
+  // Smooth scroll to top function
+  function moveTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  
+backArrow.addEventListener("click", moveTop);

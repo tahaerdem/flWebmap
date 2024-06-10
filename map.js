@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             scrollTrigger: {
                 trigger: "#SEC01",
                 start: 'center center',
-                end: '1100% top',
+                end: () => `+=${window.innerHeight * 1.425}`,
                 pin: true,
                 scrub: true,
                 markers: true, // Set to true for debugging, set to false to remove markers
