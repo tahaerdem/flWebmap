@@ -126,7 +126,7 @@ window.addEventListener('load', function() {
     stickyElement.style.top = topValue + 'px';
 });
 
-let backArrow = document.getElementsById("back-arrow")
+let backArrow = document.getElementsById("backArrow");
 window.onscroll = function() { scrollFunction(); };
 
 function scrollFunction() {

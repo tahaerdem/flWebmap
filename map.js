@@ -52,7 +52,6 @@ window.addEventListener('scroll', function() {
     return scrollTop;
 });
 document.addEventListener("DOMContentLoaded", (event) => {
-
     //Title to Globe
     function frame01() {
         var tl = gsap.timeline({
@@ -189,57 +188,134 @@ document.addEventListener("DOMContentLoaded", (event) => {
             },
         });
     }
-
-    //Grab the first earthquake timeline
+    
+    //First Earthquake
     function frame03() {
-        var tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#TL01",
-                start: 'top top',
-                end: '2000% top',
-                pin: true,
-                scrub: true,
-                markers: false, // Set to true for debugging, set to false to remove markers
-                
-                onUpdate: self => {
-                    const velocity = self.getVelocity();
-                    const center = map.getCenter();
-                    const targetLng = 37.032;
-                    const targetLat = 37.166;
-                    const targetZoom = 9;
+        const coordinates = [
+            //Starting point
+            [36.4818,36.2997],
+            [36.7170,36.4946],
+            [37.1285,36.6830],
+            [37.2000,36.7487],
+            [37.1970,36.7482],
+            [37.4294,36.8945],
+            [37.5298,37.2406],
+            [37.6186,37.4264],
+            [37.7963,37.6593],
+            [37.8382,37.7488],
+            [37.9009,37.8230],
+            [37.9323,37.9489],
+            [38.0372,38.3183],
+            [38.0445,38.4375],
+            [38.1123,38.5916],
+            [38.2478,38.8551],
+            [38.3224,39.0115],
+            [38.5740,39.6450],
+            [38.5852,39.7409],
+            [38.7394,40.0488],
+            [38.8462,40.5308],
+            [38.8580,40.5620],
+            [38.9846,40.7070],
+            [39.1666,40.8970],
+            [39.1713,40.9177],
+            //EAF to NAF
+            [39.3175,41.1361],
+            //1939 Erzincan
+            [39.9046,39.5871],
+            //1942 Tokat
+            [40.8681,36.4691],
+            //1943 Tosya
+            [40.8650,33.6504],
+            //1944 Bolu Gerede
+            [40.6944,32.9928],
+            //1957 Abant
+            [40.72969,31.09031],
+            //1967 Mudurnu
+            [40.66871,30.69164],
+            //1999
+            [40.74739,29.86486],
+            //Istanbul
+            [40.7852,28.9431]
+        ];
+
+        map.on('style.load', () => {
+            console.log("Style loaded");
     
-                    let lngStep, latStep, zoomStep;
+            // Ensure the source and layer are loaded
+            map.once('idle', () => {
+                console.log("Map is idle");
     
-                    if (velocity > 0 && window.scrollY > 0) {
-                        // Forward animation steps
-                        lngStep = (targetLng - center.lng) / 20;
-                        latStep = (targetLat - center.lat) / 20;
-                        zoomStep = (targetZoom - map.getZoom()) / 150;
-                        console.log('F03:', velocity);
-                    } else if (velocity < 0 && window.scrollY > 0) {
-                        lngStep = (targetLng - center.lng) / 100;
-                        latStep = (targetLat - center.lat) / 100;
-                        zoomStep = (7.5 - map.getZoom()) / 150;
-                        console.log('F03:', velocity);
-                    } else {
-                        lngStep = 0;
-                        latStep = 0;
-                        zoomStep = 0;
+                if (coordinates.length) {
+                    console.log("Provided Coordinates:", coordinates);
+    
+                    // Function to calculate distance between two points
+                    const calculateDistance = (point1, point2) => {
+                        const [lng1, lat1] = point1;
+                        const [lng2, lat2] = point2;
+                        return Math.sqrt(Math.pow(lng2 - lng1, 2) + Math.pow(lat2 - lat1, 2));
+                    };
+    
+                    // Interpolate between two points
+                    const interpolate = (point1, point2, t) => {
+                        const [lng1, lat1] = point1;
+                        const [lng2, lat2] = point2;
+                        const lng = lng1 + (lng2 - lng1) * t;
+                        const lat = lat1 + (lat2 - lat1) * t;
+                        return [lng, lat];
+                    };
+    
+                    // Calculate total length of the path
+                    let totalLength = 0;
+                    const lengths = [];
+                    for (let i = 0; i < coordinates.length - 1; i++) {
+                        const length = calculateDistance(coordinates[i], coordinates[i + 1]);
+                        lengths.push(length);
+                        totalLength += length;
                     }
     
-                    map.easeTo({
-                        center: [center.lng + lngStep, center.lat + latStep],
-                        zoom: map.getZoom() + zoomStep,
-                        duration: 0,
-                        easing: t => t // linear easing
+                    // Interpolated path based on the scroll progress
+                    var tl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: "#TL01",
+                            start: 'top top',
+                            end: '2000% top',
+                            pin: true,
+                            scrub: true,
+                            markers: true,
+    
+                            onUpdate: self => {
+                                const progress = self.progress * totalLength;
+                                let currentLength = 0;
+                                let index = 0;
+                                while (index < lengths.length && currentLength + lengths[index] < progress) {
+                                    currentLength += lengths[index];
+                                    index++;
+                                }
+    
+                                const remainingLength = progress - currentLength;
+                                const t = remainingLength / lengths[index];
+                                const target = interpolate(coordinates[index], coordinates[index + 1], t);
+    
+                                const targetLng = target[0];
+                                const targetLat = target[1];
+                                const targetZoom = 9;
+    
+                                map.easeTo({
+                                    center: [targetLat, targetLng],
+                                    zoom: targetZoom,
+                                    duration: 0, // Keep duration 0 for smooth continuous movement
+                                    easing: t => t // linear easing
+                                });
+                            },
+                        },
                     });
-
-                },
-
-            },
+                } else {
+                    console.log('No coordinates provided.');
+                }
+            });
         });
     }
-
+    
     //Grab the second earthquake timeline
     function frame04() {
         var tl = gsap.timeline({
