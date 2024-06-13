@@ -751,6 +751,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Istanbul
     function frame12() {
+        const layerToToggle = 'ISO-land';
+        // Check if the layer exists in the map style
+        if (map.getLayer(layerToToggle)) {
+            console.log(`Layer ${layerToToggle} found.`);
+        } else {
+            console.log(`Layer ${layerToToggle} not found.`);
+        }
+        
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#SEC06",
@@ -761,6 +769,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 markers: false,
 
                 onUpdate: self => {
+                    const f12progress = self.progress;
+
+                    if (f12progress > 0) {
+                        map.setLayoutProperty(layerToToggle, 'visibility', 'visible');
+                    } else {
+                        map.setLayoutProperty(layerToToggle, 'visibility', 'none');
+                    }
+
+
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
                     const targetLat = 41.008;
@@ -800,8 +817,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     //Istanbul Timeline
-    function frame13() {
-    
+    function frame13() {    
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS08",
@@ -812,14 +828,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 markers: false,
 
                 onUpdate: self => {
-                    const f13progress = self.progress;
-
-                    if (f13progress > 0.5) {
-                        map.setLayoutProperty('ISO-land', 'visibility', 'visible');
-                    } else {
-                        map.setLayoutProperty('ISO-land', 'visibility', 'none');
-                    }
-
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
                     const targetLat = 41.008;
@@ -833,12 +841,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F10:', velocity);
+                        console.log('F13:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (8 - map.getZoom()) / 15;
-                        console.log('F10', velocity);
+                        console.log('F13', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
