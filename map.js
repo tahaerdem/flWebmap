@@ -206,6 +206,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const targetLng = 37.032;
                     const targetLat = 37.166;
                     const targetZoom = 7.5;
+                    const f02Lng = 37.032;
+                    const f02Lat = 37.166;
+                    const f02Zoom = 5;
     
                     let lngStep, latStep, zoomStep;
     
@@ -213,13 +216,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         // Forward animation steps
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
-                        zoomStep = (targetZoom - map.getZoom()) / 150;
-                        console.log('F03:', velocity);
+                        zoomStep = (targetZoom - map.getZoom()) / 25;
+                        console.log('Forward velocity:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
-                        lngStep = (targetLng - center.lng) / 100;
-                        latStep = (targetLat - center.lat) / 100;
-                        zoomStep = (7.5 - map.getZoom()) / 150;
-                        console.log('F03:', velocity);
+                        lngStep = (f02Lng - center.lng) / 100;
+                        latStep = (f02Lat - center.lat) / 100;
+                        zoomStep = (f02Zoom - map.getZoom()) / 50;
+                        console.log('Backward velocity:', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -259,16 +262,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
                     let lngStep, latStep, zoomStep;
     
+                    const f03Lng = 37.032;
+                    const f03Lat = 37.166;
+                    const f03Zoom = 7.55;
+        
                     if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
-                        zoomStep = (targetZoom - map.getZoom()) / 15;
-                        console.log('FRAME04:', velocity);
+                        zoomStep = (targetZoom - map.getZoom()) / 100;
+                        console.log('Forward velocity:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
-                        lngStep = (targetLng - center.lng) / 20;
-                        latStep = (targetLat - center.lat) / 20;
-                        zoomStep = (7.5 - map.getZoom()) / 15;
-                        console.log('FRAME04', velocity);
+                        lngStep = (f03Lng - center.lng) / 100;
+                        latStep = (f03Lat - center.lat) / 100;
+                        zoomStep = (f03Zoom - map.getZoom()) / 50;
+                        console.log('Backward velocity:', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -280,14 +288,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         zoom: map.getZoom() + zoomStep,
                         duration: 0,
                         easing: t => t // linear easing
-                    });
-    
-                },
-
-                onLeave: self => {
-                    map.jumpTo({
-                        center: [37.197, 38.010],
-                        zoom: 7.5,
                     });
                 },
     
@@ -649,7 +649,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-
     //1999 Textbox
     function frame10() {
         var tl = gsap.timeline({
@@ -802,6 +801,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Istanbul Timeline
     function frame13() {
+    
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS08",
@@ -812,6 +812,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 markers: false,
 
                 onUpdate: self => {
+                    const f13progress = self.progress;
+
+                    if (f13progress > 0.5) {
+                        map.setLayoutProperty('ISO-land', 'visibility', 'visible');
+                    } else {
+                        map.setLayoutProperty('ISO-land', 'visibility', 'none');
+                    }
+
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
                     const targetLat = 41.008;
