@@ -752,13 +752,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     //Istanbul
     function frame12() {
         const layerToToggle = 'ISO-land';
-        // Check if the layer exists in the map style
-        if (map.getLayer(layerToToggle)) {
-            console.log(`Layer ${layerToToggle} found.`);
-        } else {
-            console.log(`Layer ${layerToToggle} not found.`);
-        }
-        
+
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#SEC06",
@@ -818,6 +812,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Istanbul Timeline
     function frame13() {    
+        const layerToToggle = 'L3_Shelter';
+        
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS08",
@@ -828,6 +824,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 markers: false,
 
                 onUpdate: self => {
+                    const progress = self.progress;
+
+                    if (progress > 0) {
+                        map.setLayoutProperty(layerToToggle, 'visibility', 'visible');
+                    } else {
+                        map.setLayoutProperty(layerToToggle, 'visibility', 'none');
+                    }
+
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
                     const targetLat = 41.008;
