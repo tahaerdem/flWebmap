@@ -241,57 +241,48 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
         
-    //Grab the second earthquake timeline
     function frame04() {
-        var tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#TL02",
-                start: '20% top',
-                end: 'bottom top',
-                pin: false,
-                scrub: true,
-                markers: true,
-                
-                onUpdate: self => {
-                    const velocity = self.getVelocity();
-                    const center = map.getCenter();
-                    const targetLat = 38.010;
-                    const targetLng = 37.197;
-                    const targetZoom = 7.5;
+        const earthquakeLayer = 'feb6-eq-circle-stroke';
+        const sourceLayer = 'usgs-feb67-eq-data-0ezrpr';
     
-                    let lngStep, latStep, zoomStep;
+        map.on('idle', () => {
+            const features = map.querySourceFeatures('composite', {
+                sourceLayer: sourceLayer,
+            }).sort((a, b) => a.properties.updated - b.properties.updated);
     
-                    const f03Lng = 37.032;
-                    const f03Lat = 37.166;
-                    const f03Zoom = 7.55;
-        
-                    if (velocity > 0 && window.scrollY > 0) {
-                        lngStep = (targetLng - center.lng) / 100;
-                        latStep = (targetLat - center.lat) / 100;
-                        zoomStep = (targetZoom - map.getZoom()) / 100;
-                        console.log('F04:', velocity);
-                    } else if (velocity < 0 && window.scrollY > 0) {
-                        lngStep = (f03Lng - center.lng) / 100;
-                        latStep = (f03Lat - center.lat) / 100;
-                        zoomStep = (f03Zoom - map.getZoom()) / 50;
-                        console.log('f04:', velocity);
-                    } else {
-                        lngStep = 0;
-                        latStep = 0;
-                        zoomStep = 0;
-                    }
+            if (features.length === 0) {
+                console.error('No earthquake features found');
+                return;
+            }
     
-                    map.easeTo({
-                        center: [center.lng + lngStep, center.lat + latStep],
-                        zoom: map.getZoom() + zoomStep,
-                        duration: 0,
-                        easing: t => t,
-                    });
+            var tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#TL02",
+                    start: '20% top',
+                    end: 'bottom top',
+                    pin: false,
+                    scrub: true,
+                    markers: true,
+    
+                    onUpdate: self => {
+                        const progress = self.progress;
+                        const totalFeatures = features.length;
+                        const currentFeatureIndex = Math.floor(progress * totalFeatures);
+    
+                        // Filter and show earthquakes sequentially
+                        const filter = [
+                            "all",
+                            ["<=", ["get", "updated"], features[currentFeatureIndex].properties.updated]
+                        ];
+                        map.setFilter(earthquakeLayer, filter);
+    
+                        console.log(`Showing earthquakes up to: ${new Date(features[currentFeatureIndex].properties.updated * 1000).toISOString()}`);
+                    },
                 },
-    
-            },
+            });
         });
     }
+    
 
     //Zoom into second EQ
     function frame05() {
