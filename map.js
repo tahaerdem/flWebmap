@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             },
         });
     }
-        
+
     function frame04() {
         const earthquakeLayer = 'feb6-eq-circle-stroke';
         const sourceLayer = 'usgs-feb67-eq-data-0ezrpr';
@@ -264,25 +264,49 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     scrub: true,
                     markers: true,
     
+                    onEnter: () => {
+                        map.setLayoutProperty(earthquakeLayer, 'visibility', 'visible');
+                    },
+                    onLeave: () => {
+                        map.setLayoutProperty(earthquakeLayer, 'visibility', 'visible');
+                    },
+                    onEnterBack: () => {
+                        map.setLayoutProperty(earthquakeLayer, 'visibility', 'visible');
+                    },
+                    onLeaveBack: () => {
+                        map.setLayoutProperty(earthquakeLayer, 'visibility', 'none');
+                    },
                     onUpdate: self => {
                         const progress = self.progress;
                         const totalFeatures = features.length;
                         const currentFeatureIndex = Math.floor(progress * totalFeatures);
     
-                        // Filter and show earthquakes sequentially
-                        const filter = [
-                            "all",
-                            ["<=", ["get", "updated"], features[currentFeatureIndex].properties.updated]
-                        ];
-                        map.setFilter(earthquakeLayer, filter);
+                        const velocity = self.getVelocity();
     
-                        console.log(`Showing earthquakes up to: ${new Date(features[currentFeatureIndex].properties.updated * 1000).toISOString()}`);
+                        if (velocity > 0 && window.scrollY > 0) {
+                            // Forward animation steps
+                            const filter = [
+                                "all",
+                                ["<=", ["get", "updated"], features[currentFeatureIndex].properties.updated]
+                            ];
+                            map.setFilter(earthquakeLayer, filter);
+    
+                            console.log(`Showing earthquakes up to: ${new Date(features[currentFeatureIndex].properties.updated * 1000).toISOString()}`);
+                        } else if (velocity < 0 && window.scrollY > 0) {
+                            // Reverse animation steps
+                            const filter = [
+                                "all",
+                                ["<=", ["get", "updated"], features[Math.max(currentFeatureIndex - 1, 0)].properties.updated]
+                            ];
+                            map.setFilter(earthquakeLayer, filter);
+    
+                            console.log(`Reversing earthquakes to: ${new Date(features[Math.max(currentFeatureIndex - 1, 0)].properties.updated * 1000).toISOString()}`);
+                        }
                     },
                 },
             });
         });
     }
-    
 
     //Zoom into second EQ
     function frame05() {
