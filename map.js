@@ -21,7 +21,7 @@ function checkScrollTop() {
 const map = new mapboxgl.Map({
     container: 'map',
     color: 'white',
-    style: 'mapbox://styles/tahaerdemozturk/clwt6u2xg05k601nx3zbs1cun',
+    style: 'mapbox://styles/tahaerdemozturk/clwt6u2xg05k601nx3zbs1cun/draft',
     zoom: zoom,
     center: [15.9637, -28.2433],
     scrollZoom: false,
@@ -111,6 +111,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Counter
     function frame02() {
+        const layersToToggle = [];
+        const layersToHide = ['feb6-eq-circle-stroke-start', 'feb6-eq-circle-stroke-start-t', 'feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
+
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#SEC01",
@@ -179,10 +182,32 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     });
                 },
 
+                onEnter: () => {
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+
+                onEnterBack: () => {
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+
+                onLeaveBack: () => {
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+
                 onLeave: self => {
                     map.jumpTo({
                         center: [37.166, 37.032],
                         zoom: 5,
+                    });
+
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
                 },
             },
@@ -191,6 +216,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
     //Grab the first earthquake timeline
     function frame03() {
+        const layersToToggle = ['feb6-eq-circle-stroke-start', 'feb6-eq-circle-stroke-start-t'];
+        const layersToHide = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
+
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#TL01",
@@ -199,6 +227,42 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 pin: true,
                 scrub: true,
                 markers: false,
+
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+
+                onLeave: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
                 
                 onUpdate: self => {
                     const velocity = self.getVelocity();
@@ -242,74 +306,103 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     function frame04() {
+        const layersToToggle = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
+
         const earthquakeLayer = 'feb6-eq-circle-stroke';
         const sourceLayer = 'usgs-feb67-eq-data-0ezrpr';
+        const startTime = 1675646254342;
+        const endTime = 1675679088811;
     
         map.on('idle', () => {
             const features = map.querySourceFeatures('composite', {
                 sourceLayer: sourceLayer,
-            }).sort((a, b) => a.properties.updated - b.properties.updated);
+            }).sort((a, b) => a.properties.time - b.properties.time)
+            .filter(f => f.properties.time >= startTime && f.properties.time <= endTime);
     
             if (features.length === 0) {
-                console.error('No earthquake features found');
+                console.error('No earthquake features found in the specified time range');
                 return;
             }
     
             var tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#TL02",
-                    start: '20% top',
+                    start: 'top bottom',
                     end: 'bottom top',
                     pin: false,
                     scrub: true,
-                    markers: true,
+                    markers: false,
     
                     onEnter: () => {
+                        layersToToggle.forEach(layerId => {
+                            map.setLayoutProperty(layerId, 'visibility', 'visible');
+                        });
                         map.setLayoutProperty(earthquakeLayer, 'visibility', 'visible');
                     },
-                    onLeave: () => {
-                        map.setLayoutProperty(earthquakeLayer, 'visibility', 'visible');
-                    },
+
                     onEnterBack: () => {
+                        layersToToggle.forEach(layerId => {
+                            map.setLayoutProperty(layerId, 'visibility', 'visible');
+                        });
                         map.setLayoutProperty(earthquakeLayer, 'visibility', 'visible');
                     },
                     onLeaveBack: () => {
+                        layersToToggle.forEach(layerId => {
+                            map.setLayoutProperty(layerId, 'visibility', 'visible');
+                        });
                         map.setLayoutProperty(earthquakeLayer, 'visibility', 'none');
                     },
                     onUpdate: self => {
-                        const progress = self.progress;
+                        const progress = self.progress * 2;
                         const totalFeatures = features.length;
                         const currentFeatureIndex = Math.floor(progress * totalFeatures);
     
                         const velocity = self.getVelocity();
     
-                        if (velocity > 0 && window.scrollY > 0) {
-                            // Forward animation steps
-                            const filter = [
+                        let filter, currentDate;
+                        if (velocity >= 0 && window.scrollY > 0) {
+                            filter = [
                                 "all",
-                                ["<=", ["get", "updated"], features[currentFeatureIndex].properties.updated]
+                                ["<=", ["get", "time"], features[currentFeatureIndex].properties.time]
                             ];
-                            map.setFilter(earthquakeLayer, filter);
-    
-                            console.log(`Showing earthquakes up to: ${new Date(features[currentFeatureIndex].properties.updated * 1000).toISOString()}`);
+                            currentDate = features[currentFeatureIndex].properties.time;
                         } else if (velocity < 0 && window.scrollY > 0) {
-                            // Reverse animation steps
-                            const filter = [
+                            const progress = self.progress * 4;
+                            filter = [
                                 "all",
-                                ["<=", ["get", "updated"], features[Math.max(currentFeatureIndex - 1, 0)].properties.updated]
+                                ["<=", ["get", "time"], features[Math.max(currentFeatureIndex - 1, 0)].properties.time]
                             ];
-                            map.setFilter(earthquakeLayer, filter);
-    
-                            console.log(`Reversing earthquakes to: ${new Date(features[Math.max(currentFeatureIndex - 1, 0)].properties.updated * 1000).toISOString()}`);
+                            currentDate = features[Math.max(currentFeatureIndex - 1, 0)].properties.time;
                         }
+    
+                        map.setFilter(earthquakeLayer, filter);
+                    },
+
+                    onLeave: () => {
+                        map.setLayoutProperty(earthquakeLayer, 'visibility', 'visible');
+                        const lastFeature = features[features.length - 1];
+                        const filter = [
+                            "all",
+                            ["<=", ["get", "time"], lastFeature.properties.time]
+                        ];
+                        map.setFilter(earthquakeLayer, filter);
+
+                        layersToToggle.forEach(layerId => {
+                            map.setLayoutProperty(layerId, 'visibility', 'visible');
+                        });
                     },
                 },
             });
         });
     }
+    
+    
 
     //Zoom into second EQ
     function frame05() {
+        const layersToToggle = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
+        const layersToHide = [];
+        
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#TL03",
@@ -318,6 +411,33 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 pin: true,
                 scrub: true,
                 markers: false,
+
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
                 
                 onUpdate: self => {
                     const velocity = self.getVelocity();
@@ -329,16 +449,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     let lngStep, latStep, zoomStep;
     
                     if (velocity > 0 && window.scrollY > 0) {
-                        // Forward animation steps
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 15;
-                        console.log('FRAME05:', velocity);
+                        console.log('F05:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (7.5 - map.getZoom()) / 15;
-                        console.log('FRAME05', velocity);
+                        console.log('F05', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -358,6 +477,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     map.jumpTo({
                         center: [37.197, 38.010],
                         zoom: 7.5,
+                    });
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
                 },
     
@@ -474,6 +599,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //North Anatolia Textbox
     function frame08() {
+        const layersToToggle = [];
+        const layersToHide = ['feb6-eq-circle-stroke-start-t', 'feb6-eq-circle-stroke-end-t'];
+
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#SEC04",
@@ -482,6 +610,33 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 pin: true,
                 scrub: true,
                 markers: false,
+
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+        
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+        
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
                 
                 onUpdate: self => {
                     const velocity = self.getVelocity();
@@ -522,6 +677,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     map.jumpTo({
                         center: [34.534, 39.123],
                         zoom: 6,
+                    });
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
                 },
     
@@ -787,9 +948,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
-                    const targetLat = 41.008;
+                    const targetLat = 41.158;
                     const targetLng = 28.978;
-                    const targetZoom = 9.5;
+                    const targetZoom = 8.75;
     
                     let lngStep, latStep, zoomStep;
     
@@ -825,34 +986,59 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Istanbul Timeline
     function frame13() {    
-        const layerToToggle = 'L3_Shelter';
+        const layersToToggle = ['L3_Shelter', 'ISO-land', 'ISO-water','L3_AdminBoundaries','L2_AdminBoundaries'];
+        const layersToHide = ['settlement-major-label','settlement-minor-lab','country-label','Turkey-L01','Fault-Paths-L01','Fault-Paths-L03','1939','1939-T','1939-P','1942','1942-T','1942-P','1943','1943-T','1944','1944-T','1944-P','1957','1957-T','1957-P','1967','1967-T','1967-P','1999','1999-T','hillshade'];
         
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS08",
-                start: 'top top', //Make it stop near the top, if wanna center it do 'top top'
+                start: 'top top', // Make it stop near the top, if wanna center it do 'top top'
                 end: '5000% top',
                 pin: true,
                 scrub: true,
                 markers: false,
 
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeave: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                },
                 onUpdate: self => {
-                    const progress = self.progress;
-
-                    if (progress > 0) {
-                        map.setLayoutProperty(layerToToggle, 'visibility', 'visible');
-                    } else {
-                        map.setLayoutProperty(layerToToggle, 'visibility', 'none');
-                    }
-
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
-                    const targetLat = 41.008;
+                    const targetLat = 41.158;
                     const targetLng = 28.978;
-                    const targetZoom = 9.5;
-    
+                    const targetZoom = 8.75;
+
                     let lngStep, latStep, zoomStep;
-    
+
                     if (velocity > 0 && window.scrollY > 0) {
                         // Forward animation steps
                         lngStep = (targetLng - center.lng) / 30;
@@ -869,22 +1055,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         latStep = 0;
                         zoomStep = 0;
                     }
-    
+
                     map.easeTo({
                         center: [center.lng + lngStep, center.lat + latStep],
                         zoom: map.getZoom() + zoomStep,
                         duration: 0,
                         easing: t => t // linear easing
                     });
-    
+
                 },
-    
             },
         });
     }
 
     //Next steps for Istanbul
     function frame14() {
+
+        const layersToToggle = ['L3_Population', 'ISO-land', 'ISO-water','L3_AdminBoundaries','L2_AdminBoundaries'];
+        const layersToHide = ['L3_Shelter'];
+
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS10",
@@ -894,26 +1083,58 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 scrub: true,
                 markers: false,
 
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeave: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                },
                 onUpdate: self => {
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
-                    const targetLat = 41.008;
+                    const targetLat = 41.158;
                     const targetLng = 28.978;
-                    const targetZoom = 9.5;
-    
+                    const targetZoom = 8.75;
+
                     let lngStep, latStep, zoomStep;
-    
+
                     if (velocity > 0 && window.scrollY > 0) {
                         // Forward animation steps
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F10:', velocity);
+                        console.log('F13:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (8 - map.getZoom()) / 15;
-                        console.log('F10', velocity);
+                        console.log('F13', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -947,9 +1168,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 onUpdate: self => {
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
-                    const targetLat = 41.008;
+                    const targetLat = 41.158;
                     const targetLng = 28.978;
-                    const targetZoom = 9.5;
+                    const targetZoom = 8.75;
     
                     let lngStep, latStep, zoomStep;
     
