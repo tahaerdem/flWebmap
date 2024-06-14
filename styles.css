@@ -716,6 +716,11 @@ hr {
     margin: -1em 0 1.5em 0;
 }
 
+.tb-line {
+    border-bottom: 2px solid var(--color-stroke-quaternary,#000);
+    margin: -0.6em 0 1em 0;
+}
+
 .callout {
     display: flex;
     flex-direction: column;
@@ -1398,10 +1403,24 @@ h4.timeline.date.bottom {
     max-width: 400px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 25px;
+    padding: 25px 25px 35px 25px;
     z-index: 4;
     background-color:#fbfbfb;
     justify-content: center;
+}
+
+.textbox.tb-dark {
+    border: 2px solid #373636;
+    background-color:#282525;
+}
+
+.tb-darkmd {
+    color: #fff;
+    border-color: #fff;
+}
+
+.tb-darkp {
+    color: #e2e2e2;
 }
 
 .tb-ctr {

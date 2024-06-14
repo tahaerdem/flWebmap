@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 end: '2000% top',
                 pin: true,
                 scrub: true,
-                markers: false, // Set to true for debugging, set to false to remove markers
+                markers: false,
                 
                 onUpdate: self => {
                     const velocity = self.getVelocity();
@@ -213,16 +213,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     let lngStep, latStep, zoomStep;
     
                     if (velocity > 0 && window.scrollY > 0) {
-                        // Forward animation steps
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 25;
-                        console.log('Forward velocity:', velocity);
+                        console.log('F03:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (f02Lng - center.lng) / 100;
                         latStep = (f02Lat - center.lat) / 100;
                         zoomStep = (f02Zoom - map.getZoom()) / 50;
-                        console.log('Backward velocity:', velocity);
+                        console.log('F03:', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -233,7 +232,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         center: [center.lng + lngStep, center.lat + latStep],
                         zoom: map.getZoom() + zoomStep,
                         duration: 0,
-                        easing: t => t // linear easing
+                        easing: t => t
                     });
 
                 },
@@ -247,11 +246,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#TL02",
-                start: 'top 95%',
+                start: '20% top',
                 end: 'bottom top',
                 pin: false,
                 scrub: true,
-                markers: false,
+                markers: true,
                 
                 onUpdate: self => {
                     const velocity = self.getVelocity();
@@ -267,16 +266,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const f03Zoom = 7.55;
         
                     if (velocity > 0 && window.scrollY > 0) {
-                        // Forward animation steps
-                        lngStep = (targetLng - center.lng) / 20;
-                        latStep = (targetLat - center.lat) / 20;
+                        lngStep = (targetLng - center.lng) / 100;
+                        latStep = (targetLat - center.lat) / 100;
                         zoomStep = (targetZoom - map.getZoom()) / 100;
-                        console.log('Forward velocity:', velocity);
+                        console.log('F04:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (f03Lng - center.lng) / 100;
                         latStep = (f03Lat - center.lat) / 100;
                         zoomStep = (f03Zoom - map.getZoom()) / 50;
-                        console.log('Backward velocity:', velocity);
+                        console.log('f04:', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -287,7 +285,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         center: [center.lng + lngStep, center.lat + latStep],
                         zoom: map.getZoom() + zoomStep,
                         duration: 0,
-                        easing: t => t // linear easing
+                        easing: t => t,
                     });
                 },
     
