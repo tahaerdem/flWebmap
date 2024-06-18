@@ -51,6 +51,8 @@ window.addEventListener('scroll', function() {
 //    console.log('Scroll position:', scrollTop);
     return scrollTop;
 });
+
+
 document.addEventListener("DOMContentLoaded", (event) => {
     //Title to Globe
     function frame01() {
@@ -213,7 +215,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
             },
         });
     }
-    
+
+
     //Grab the first earthquake timeline
     function frame03() {
         const layersToToggle = ['feb6-eq-circle-stroke-start', 'feb6-eq-circle-stroke-start-t'];
@@ -290,7 +293,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = 0;
                         latStep = 0;
                         zoomStep = 0;
-                    }
+                    } 
     
                     map.easeTo({
                         center: [center.lng + lngStep, center.lat + latStep],
@@ -299,12 +302,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         easing: t => t
                     });
 
+
                 },
 
             },
         });
     }
 
+    //Grab the second earthquake timeline
     function frame04() {
         const layersToToggle = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
 
@@ -395,8 +400,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             });
         });
     }
-    
-    
 
     //Zoom into second EQ
     function frame05() {
@@ -492,14 +495,45 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Black Section Timeline
     function frame06() {
+
+        const layersToToggle = ['Fault-Paths-L01-EAF'];
+        const layersToHide = ['Fault-Paths-L02-NAF'];
+
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS01",
-                start: 'top center', //Make it stop near the top, if wanna center it do 'top top'
+                start: 'top center',
                 end: 'bottom top',
                 pin: false,
                 scrub: true,
                 markers: false,
+
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
                 
                 onUpdate: self => {
                     const velocity = self.getVelocity();
@@ -534,6 +568,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         easing: t => t // linear easing
                     });
     
+                },
+
+                onLeave: self => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
                 },
     
             },
@@ -599,8 +642,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //North Anatolia Textbox
     function frame08() {
-        const layersToToggle = [];
+        const layersToToggle = ['Fault-Paths-L02-NAF'];
         const layersToHide = ['feb6-eq-circle-stroke-start-t', 'feb6-eq-circle-stroke-end-t'];
+        const hideonLeave = ['Fault-Paths-L02-EAF'];
 
         var tl = gsap.timeline({
             scrollTrigger: {
@@ -682,6 +726,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
                     layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    hideonLeave.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
                 },
@@ -925,7 +972,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Istanbul
     function frame12() {
-        const layerToToggle = 'ISO-land';
+        const layersToToggle = ['L2_AdminBoundaries_Base','L3_AdminBoundaries_Base',,'L3_Base','ISO-land'];
+        const layersToHide = [];
 
         var tl = gsap.timeline({
             scrollTrigger: {
@@ -936,16 +984,40 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 scrub: true,
                 markers: false,
 
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeave: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                },
+
                 onUpdate: self => {
-                    const f12progress = self.progress;
-
-                    if (f12progress > 0) {
-                        map.setLayoutProperty(layerToToggle, 'visibility', 'visible');
-                    } else {
-                        map.setLayoutProperty(layerToToggle, 'visibility', 'none');
-                    }
-
-
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
                     const targetLat = 41.158;
@@ -977,7 +1049,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         duration: 0,
                         easing: t => t // linear easing
                     });
-    
+
                 },
     
             },
@@ -986,7 +1058,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Istanbul Timeline
     function frame13() {    
-        const layersToToggle = ['L3_Shelter', 'ISO-land', 'ISO-water','L3_AdminBoundaries','L2_AdminBoundaries'];
+        const layersToToggle = ['L3_Shelter', 'L3_AdminBoundaries','L2_AdminBoundaries','ISO-land'];
         const layersToHide = ['settlement-major-label','settlement-minor-lab','country-label','Turkey-L01','Fault-Paths-L01','Fault-Paths-L03','1939','1939-T','1939-P','1942','1942-T','1942-P','1943','1943-T','1944','1944-T','1944-P','1957','1957-T','1957-P','1967','1967-T','1967-P','1999','1999-T','hillshade'];
         
         var tl = gsap.timeline({
@@ -1327,4 +1399,26 @@ map.on('rotateend', () => {
 // When animation is complete, start spinning if there is no ongoing interaction
 map.on('moveend', () => {
     spinGlobe();
+});
+
+const istMap = new mapboxgl.Map({
+    container: 'ist-map',
+    style: 'mapbox://styles/tahaerdemozturk/clwt6u2xg05k601nx3zbs1cun/draft',
+    zoom: 8,
+    center: [28.997,41.198],
+    scrollZoom: false,
+    doubleClickZoom: false,
+    boxZoom: false,
+    dragRotate: false,
+    dragPan: false,
+    touchZoomRotate: false,
+    touchPitchHandler: false,
+    attributionControl: false,
+});
+
+istMap.on('style.load', () => {
+    const layersToToggle = ['L3_AdminBoundaries','L2_AdminBoundaries','L3_Population','ISO-land'];
+    layersToToggle.forEach(layerId => {
+        istMap.setLayoutProperty(layerId, 'visibility', 'visible');
+    });
 });
