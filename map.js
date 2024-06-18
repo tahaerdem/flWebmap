@@ -358,7 +358,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         map.setLayoutProperty(earthquakeLayer, 'visibility', 'none');
                     },
                     onUpdate: self => {
-                        const progress = self.progress * 2;
+                        const progress = self.progress * 4;
                         const totalFeatures = features.length;
                         const currentFeatureIndex = Math.floor(progress * totalFeatures);
     
@@ -379,7 +379,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                             ];
                             currentDate = features[Math.max(currentFeatureIndex - 1, 0)].properties.time;
                         }
-    
                         map.setFilter(earthquakeLayer, filter);
                     },
 
@@ -1422,3 +1421,28 @@ istMap.on('style.load', () => {
         istMap.setLayoutProperty(layerId, 'visibility', 'visible');
     });
 });
+
+const bounds = [
+    [27.82,40.64], // Southwest coordinates
+    [30.44,41.65]  // Northeast coordinates
+];
+
+// Function to fit map to the defined bounds
+function fitMapToBounds() {
+    istMap.fitBounds(bounds, {
+        padding: { top: 0, bottom: 0, left: 0, right: 0 },
+        animate: false
+    });
+    istMap.jumpTo({
+        center: [28.997,41.198],
+    });       
+}
+
+// Add an event listener for the resize event
+window.addEventListener('resize', () => {
+    istMap.resize(); // Ensure the map resizes
+    fitMapToBounds(); // Fit the map to the bounds
+});
+
+// Initial call to fit the map to the bounds
+fitMapToBounds();

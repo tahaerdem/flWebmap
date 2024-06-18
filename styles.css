@@ -573,7 +573,13 @@ section {
     background-color: #000;
     padding-top: 20px;
     padding-bottom: 20px;
+}
 
+
+.hidden-svg {
+    position: absolute;
+    width: 0;
+    height: 0;
 }
 
 section.title-wrapper {
@@ -1342,7 +1348,7 @@ h4.timeline.date.bottom {
 
 #map { position: fixed; top: 0; bottom: 0; width: 100%; z-index:0 }
 
-#ist-map { position: block; max-width: 600px; width: 100%; height: 800px; align-self: center; }
+#ist-map { position: inline-block; max-width: 600px; width: 100%; aspect-ratio: 1/0.6; align-self: center; }
 
 #geocoder {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift the element off the page */

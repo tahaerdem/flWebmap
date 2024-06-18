@@ -247,8 +247,14 @@
                 </div>
             </section>
 
-            <div class="spacer s25"></div>
+            <svg class="hidden-svg">
+                <filter id="dither">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.8" result="noise" />
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+                </filter>
+            </svg>
 
+            <div class="spacer s25"></div>
             <section class="fs" id="FS03">
                 <div class="text-container" id="The North Anatolian Fault">
                     <p>The North Anatolian fault is a major strike-slip fault zone that stretches over 1200 kilometers across northern Turkey.</p>
