@@ -402,7 +402,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Zoom into second EQ
     function frame05() {
-        const layersToToggle = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
+        const layersToToggle = ['Fault-Paths-L01-NAF', 'feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t', 'Fault-Paths-L01-EAF'];
         const layersToHide = [];
         
         var tl = gsap.timeline({
@@ -494,10 +494,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Black Section Timeline
     function frame06() {
-
         const layersToToggle = ['Fault-Paths-L01-EAF'];
-        const layersToHide = ['Fault-Paths-L02-NAF'];
-
+        const layersToHide = [];
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS01",
@@ -515,7 +513,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
                 },
-
                 onEnterBack: () => {
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
@@ -524,7 +521,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
                 },
-
                 onLeaveBack: () => {
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
@@ -592,6 +588,33 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 pin: true,
                 scrub: true,
                 markers: false,
+
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
                 
                 onUpdate: self => {
                     const velocity = self.getVelocity();
