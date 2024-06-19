@@ -540,7 +540,7 @@ figcaption {
     text-align: center;
     color:#6b6b6b;
     overflow-wrap: break-word;
-    margin: 20px 0px -20px 0px;
+    margin: 20px 0px 20px 0px;
 }
 
 section {
@@ -725,7 +725,7 @@ hr {
     align-items: left;
     height: fit-content;
     padding: 15px 0px 15px 15px;
-    margin: 20px 0px 20px 0px;
+    margin: 40px 0px 40px 0px;
     border: 1px #a6a197;
     background-color: #e4e2d7;
 }
@@ -925,9 +925,7 @@ section.provinces {
     top: 60%;
 }
 
-.figcaption {
-    margin-bottom: 25px;
-}
+
 
 .text-container {
     display: flex;
@@ -1052,6 +1050,10 @@ section.provinces {
     height: 230vh;
 }
 
+.spacer.smin {
+    height: 4vh;
+}
+
 .spacer.s1f {
     height: 10vh;
 }
@@ -1112,7 +1114,10 @@ section.provinces {
     height: 750vh;
 }
 
-
+figure {
+    width: 100%;
+    padding: 0;
+}
 
 .section-break {
     height: 5vh;
@@ -1124,7 +1129,27 @@ section.provinces {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin: 0;
+    margin: 40px 0px 40px;
+    padding: 0;
+}
+
+.image-container-start{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0px 0px 20px;
+    padding: 0;
+}
+
+.image-container-inline{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0px 20px;
     padding: 0;
 }
 
@@ -1250,11 +1275,27 @@ section.provinces {
 
 h4.card-title {
     font-size: 15px;
-    margin: 40px 0 10px 0;  
+    margin: 20px 0 10px 0;  
     @media screen and (max-width: 400px) {
         font-size: 13px;
         margin: -5px 0 5px 0;
     }
+}
+
+h4.card-title-top {
+    font-size: 13px;
+    text-transform: capitalize;
+    font-weight: 500;
+    color: #949494;
+    margin: 0px 0 20px 0;  
+    @media screen and (max-width: 400px) {
+        font-size: 13px;
+        margin: -5px 0 5px 0;
+    }
+}
+
+.mono {
+    font-family: 'IBM Plex Mono', monospace;
 }
 
 p.callout {
@@ -1267,7 +1308,7 @@ p.callout {
 
 p.card-description {
     font-size: 14px;
-    text-align: justify;
+    text-align: center;
     @media screen and (max-width: 768px) and (min-width: 400px) {
         font-size: 11px;
         text-align: center;
