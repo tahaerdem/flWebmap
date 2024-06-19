@@ -761,7 +761,7 @@ hr {
 
 }
 
-section.timeline {
+.timeline {
     display: flex;
     flex-direction: column; 
     margin: 0px 0;
@@ -1298,7 +1298,6 @@ p.card-description {
     left: 50%;
     width: 1px; /* Adjust the width of the stroke as needed */
     background-color: #333; /* Adjust the color of the stroke as needed */
-    transform: translateX(-50%);
 }
 
 h4.timeline.title {

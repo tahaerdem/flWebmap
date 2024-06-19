@@ -202,9 +202,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 },
 
                 onLeave: self => {
-                    map.jumpTo({
+                    map.easeToTo({
                         center: [37.166, 37.032],
                         zoom: 5,
+                        duration: 1,
+                        easing: t => t // linear easing
                     });
 
                     layersToHide.forEach(layerId => {
@@ -302,6 +304,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 },
             },
         });
+
     }
 
     //Grab the second earthquake timeline
@@ -332,6 +335,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     pin: false,
                     scrub: true,
                     markers: false,
+
+                    onRefresh: () => {
+
+                    },
     
                     onEnter: () => {
                         layersToToggle.forEach(layerId => {

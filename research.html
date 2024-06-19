@@ -49,11 +49,13 @@
 
         <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
         <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
-        <link href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css' rel='stylesheet' />
+        <link href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css' rel='stylesheet'/>
         <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js'></script>
     </head>
 
     <body>
+        <div id="map"></div>
+        <div id="geocoder" class="geocoder"></div>
         <header>
         <div class="navbar" id="navbar">
             <div class="navbar-left">
@@ -744,12 +746,8 @@
     </section>
         </main>
         <script src="script.js"></script>
-        <div id="map"></div>
-        <div id="geocoder" class="geocoder"></div>
         <script src="map.js"></script>
-
         <div class="back-arrow" id="backArrow" onclick="moveTop()"></div>
-
         <footer id="footer">
             <div class="footer-section" id="footer-section">
                 <h3>Sections</h3>
