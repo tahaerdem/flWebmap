@@ -45,6 +45,12 @@ window.addEventListener('scroll', function() {
     return scrollTop;
 });
 
+window.addEventListener('resize', () => {
+    ScrollTrigger.refresh();
+    istMap.resize(); // Ensure the map resizes
+    fitMapToBounds(); // Fit the map to the bounds
+});
+
 
 document.addEventListener("DOMContentLoaded", (event) => {
     //Title to Globe
@@ -209,7 +215,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-
     //Grab the first earthquake timeline
     function frame03() {
         const layersToToggle = ['feb6-eq-circle-stroke-start', 'feb6-eq-circle-stroke-start-t'];
@@ -294,8 +299,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         duration: 0,
                         easing: t => t
                     });
-
-
                 },
 
             },
@@ -640,8 +643,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         zoom: map.getZoom() + zoomStep,
                         duration: 0,
                         easing: t => t // linear easing
-                    });
-    
+                    });    
                 },
 
                 onLeave: self => {
@@ -651,6 +653,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     });
                 },
 
+                onRefresh: self => {
+                    const pinnedElement = self.pin;
+                    pinnedElement.style.width = '100%';
+                    pinnedElement.style.maxWidth = '100%';
+                },
 
             },
         });
@@ -799,6 +806,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 pin: true,
                 scrub: true,
                 markers: false,
+
+                onRefresh: self => {
+                    const pinnedElement = self.pin;
+                    pinnedElement.style.width = '100%';
+                    pinnedElement.style.maxWidth = '100%';
+                },
     
 
                 onUpdate: self => {
@@ -881,7 +894,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         duration: 0, // Keep duration 0 for smooth continuous movement
                         easing: t => t // linear easing
                     });
-                }
+                },
             }
         });
     }
@@ -946,6 +959,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 pin: true,
                 scrub: true,
                 markers: false,
+
+                onRefresh: self => {
+                    const pinnedElement = self.pin;
+                    pinnedElement.style.width = '100%';
+                    pinnedElement.style.maxWidth = '100%';
+                },
 
                 onUpdate: self => {
                     const velocity = self.getVelocity();
@@ -1086,6 +1105,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 scrub: true,
                 markers: false,
 
+                onRefresh: self => {
+                    const pinnedElement = self.pin;
+                    pinnedElement.style.width = '100%';
+                    pinnedElement.style.maxWidth = '100%';
+                },
+
                 onEnter: () => {
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
@@ -1171,6 +1196,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 scrub: true,
                 markers: false,
 
+                onRefresh: self => {
+                    const pinnedElement = self.pin;
+                    pinnedElement.style.width = '100%';
+                    pinnedElement.style.maxWidth = '100%';
+                },
+
                 onEnter: () => {
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
@@ -1252,6 +1283,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 pin: true,
                 scrub: true,
                 markers: false,
+
+                onRefresh: self => {
+                    const pinnedElement = self.pin;
+                    pinnedElement.style.width = '100%';
+                    pinnedElement.style.maxWidth = '100%';
+                },
 
                 onUpdate: self => {
                     const velocity = self.getVelocity();
@@ -1346,7 +1383,6 @@ function calculateZoom(viewportWidth) {
     }
 }
 
-// Update zoom level on window scroll
 map.on('style.load', () => {
     map.setFog({
         'range': [-1, 2],
@@ -1380,39 +1416,10 @@ function spinGlobe() {
         }
         const center = map.getCenter();
         center.lng -= distancePerSecond;
-        // Smoothly animate the map over one second.
-        // When this animation is complete, it calls a 'moveend' event.
         map.easeTo({ center, duration: 1000, easing: (n) => n });
     }
 }
 
-// Pause spinning on interaction
-map.on('mousedown', () => {
-    userInteracting = true;
-});
-
-// Restart spinning the globe when interaction is complete
-map.on('mouseup', () => {
-    userInteracting = false;
-    spinGlobe();
-});
-
-// These events account for cases where the mouse has moved
-// off the map, so 'mouseup' will not be fired.
-map.on('dragend', () => {
-    userInteracting = false;
-    spinGlobe();
-});
-map.on('pitchend', () => {
-    userInteracting = false;
-    spinGlobe();
-});
-map.on('rotateend', () => {
-    userInteracting = false;
-    spinGlobe();
-});
-
-// When animation is complete, start spinning if there is no ongoing interaction
 map.on('moveend', () => {
     spinGlobe();
 });
@@ -1439,14 +1446,13 @@ istMap.on('style.load', () => {
     });
 });
 
-const bounds = [
-    [27.82,40.64], // Southwest coordinates
-    [30.44,41.65]  // Northeast coordinates
-];
-
-// Function to fit map to the defined bounds
 function fitMapToBounds() {
-    istMap.fitBounds(bounds, {
+    const istbounds = [
+        [27.82,40.64], // Istanbul Southwest coordinates
+        [30.44,41.65]  // Istanbul Northeast coordinates
+    ];
+
+    istMap.fitBounds(istbounds, {
         padding: { top: 0, bottom: 0, left: 0, right: 0 },
         animate: false
     });
@@ -1455,11 +1461,6 @@ function fitMapToBounds() {
     });       
 }
 
-// Add an event listener for the resize event
-window.addEventListener('resize', () => {
-    istMap.resize(); // Ensure the map resizes
-    fitMapToBounds(); // Fit the map to the bounds
-});
-
-// Initial call to fit the map to the bounds
 fitMapToBounds();
+
+
