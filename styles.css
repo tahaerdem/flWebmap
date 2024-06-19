@@ -565,17 +565,6 @@ section {
 .date-time {
 }
 
-.fs {
-    z-index: 5;
-    width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #000;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-
 .hidden-svg {
     position: absolute;
     width: 0;
@@ -966,6 +955,18 @@ section.provinces {
     }
 }
 
+.fs {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 5;
+    background-color: #000;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
 .text-container-overlay {
     display: flex;
     flex-direction: row;
@@ -1346,7 +1347,7 @@ h4.timeline.date.bottom {
     transform: translate(-50%, 50%);
 }
 
-#map { position: fixed; top: 0; bottom: 0; width: 100%; z-index:0 }
+#map { position: fixed; top: 0; bottom: 0; width: 100%; z-index:0; }
 
 #ist-map { position: inline-block; max-width: 600px; width: 100%; aspect-ratio: 1/0.6; align-self: center; }
 

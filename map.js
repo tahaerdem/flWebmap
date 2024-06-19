@@ -300,7 +300,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         easing: t => t
                     });
                 },
-
             },
         });
     }
