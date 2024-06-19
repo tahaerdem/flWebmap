@@ -14,7 +14,6 @@ function checkScrollTop() {
     // Check if the scroll position is at the top
     if (window.scrollY === 0) {
         console.log("The page is scrolled back to the top.");
-        // You can add any other actions you want to take here
     }
 }
 
@@ -46,11 +45,10 @@ window.addEventListener('scroll', function() {
 });
 
 window.addEventListener('resize', () => {
-    ScrollTrigger.refresh();
     istMap.resize(); // Ensure the map resizes
     fitMapToBounds(); // Fit the map to the bounds
+    //ScrollTrigger.refresh();
 });
-
 
 document.addEventListener("DOMContentLoaded", (event) => {
     //Title to Globe
@@ -337,7 +335,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     markers: false,
 
                     onRefresh: () => {
-
+                        const pinnedElement = self.pin;
+                        const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+                        const elementWidth = pinnedElement.offsetWidth;
+                        const left = (windowWidth - elementWidth) / 2;
+                        pinnedElement.style.left = `${left}px`;
                     },
     
                     onEnter: () => {
@@ -746,7 +748,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
                 },
 
-                onLeave: self => {
+                onLeave: () => {
                     map.jumpTo({
                         center: [34.534, 39.123],
                         zoom: 6,
@@ -755,9 +757,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
                     layersToHide.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'none');
-                    });
-                    hideonLeave.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
                 },
@@ -795,15 +794,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             'gem_active_faults_harmonized-9xzarf'
         ];
     
-        // Check if the layers exist in the map style
-        earthquakeLayers.forEach(layerId => {
-            if (map.getLayer(layerId)) {
-                console.log(`Layer ${layerId} found.`);
-            } else {
-                console.log(`Layer ${layerId} not found.`);
-            }
-        });
-    
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS04",
@@ -818,7 +808,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     pinnedElement.style.width = '100%';
                     pinnedElement.style.maxWidth = '100%';
                 },
-    
 
                 onUpdate: self => {
                     const progress = self.progress;
