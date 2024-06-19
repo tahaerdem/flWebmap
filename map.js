@@ -34,13 +34,6 @@ const map = new mapboxgl.Map({
     attributionControl: false,
 });
 
-// Update zoom level on window resize
-window.addEventListener('resize', function() {
-    viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-    zoom = calculateZoom(viewportWidth);
-    map.setZoom(zoom);
-});
-
 function getScrollPositionY() {
     return window.scrollY || document.documentElement.scrollTop;
 }
@@ -657,7 +650,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         zoom: 6.5,
                     });
                 },
-    
+
+
             },
         });
     }
