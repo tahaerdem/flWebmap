@@ -20,7 +20,7 @@ function checkScrollTop() {
 const map = new mapboxgl.Map({
     container: 'map',
     color: 'white',
-    style: 'mapbox://styles/tahaerdemozturk/clwt6u2xg05k601nx3zbs1cun/draft',
+    style: 'mapbox://styles/tahaerdemozturk/clwt6u2xg05k601nx3zbs1cun',
     zoom: zoom,
     center: [15.9637, -28.2433],
     scrollZoom: false,
@@ -313,6 +313,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const sourceLayer = 'usgs-feb67-eq-data-0ezrpr';
         const startTime = 1675646254342;
         const endTime = 1675679088811;
+
+        const dateDisplay = document.createElement('h3');
+        dateDisplay.style.position = 'fixed';
+        dateDisplay.id = 'date-time-scroll-counter';
+        dateDisplay.style.top = '20px';
+        dateDisplay.style.right = '20px';
+        dateDisplay.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+        dateDisplay.style.padding = '10px';
+        dateDisplay.style.borderRadius = '5px';
+        dateDisplay.style.zIndex = '9999';
+        document.body.appendChild(dateDisplay);
     
         map.on('idle', () => {
             const features = map.querySourceFeatures('composite', {
@@ -384,6 +395,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                             currentDate = features[Math.max(currentFeatureIndex - 1, 0)].properties.time;
                         }
                         map.setFilter(earthquakeLayer, filter);
+                        
+                        const date = new Date(currentDate + (8 * 60 * 60 * 1000));
+                        const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+                        const formattedDate = date.toLocaleString('en-US', options);
+                        dateDisplay.textContent = `${formattedDate}`;
                     },
 
                     onLeave: () => {
@@ -394,7 +410,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                             ["<=", ["get", "time"], lastFeature.properties.time]
                         ];
                         map.setFilter(earthquakeLayer, filter);
-
                         layersToToggle.forEach(layerId => {
                             map.setLayoutProperty(layerId, 'visibility', 'visible');
                         });
@@ -408,6 +423,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     function frame05() {
         const layersToToggle = ['Fault-Paths-L01-NAF', 'feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t', 'Fault-Paths-L01-EAF'];
         const layersToHide = [];
+        const dateDisplay = document.getElementById('date-time-scroll-counter');
         
         var tl = gsap.timeline({
             scrollTrigger: {
@@ -451,6 +467,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const targetLat = 38.010;
                     const targetLng = 37.197;
                     const targetZoom = 7.5;
+                    const progress = self.progress;
     
                     let lngStep, latStep, zoomStep;
     
@@ -464,6 +481,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (7.5 - map.getZoom()) / 15;
                         console.log('F05', velocity);
+                    } else if (progress > 0.75 && velocity > 0) {
+                        dateDisplay.style.opacity = "0";
+                    } else if (progress < 0.75 && velocity < 0) {
+                        dateDisplay.style.opacity = "1";
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -500,6 +521,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     function frame06() {
         const layersToToggle = ['Fault-Paths-L01-EAF'];
         const layersToHide = [];
+        const dateDisplay = document.getElementById('date-time-scroll-counter');
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS01",
@@ -573,6 +595,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
+                    
                     layersToHide.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
