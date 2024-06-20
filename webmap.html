@@ -32,9 +32,7 @@
               }]
             }
         </script>
-
-        <script src="https://d3js.org/topojson.v2.min.js"></script>
-
+        
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="theme-color" content="#FFFDDE" media="(prefers-color-scheme: light)">
         <meta name="theme-color" content="#FFFDDE" media="(prefers-color-scheme: dark)">
@@ -43,9 +41,6 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/flWebmap/resources/favicon/fl-favicon-16.png">
 
         <link rel="stylesheet" href="styles.css">
-        
-        <script src="https://d3js.org/d3.v7.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/topojson@3.0.2/dist/topojson.min.js"></script>
 
         <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
         <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
@@ -96,10 +91,8 @@
                     <br><br>
                 </div>
             </article>
-            <div id="map" style="position: relative; display:flex;"></div>
             <script src="https://d3js.org/d3.v6.min.js"></script>
             <script src="https://unpkg.com/topojson@3"></script>
-
             <article>
                 <div id="plot" class="plot-container">
                     <div class="info">Hover over a country</div>
@@ -115,8 +108,7 @@
             </article>
 
 
-            <script src="plot.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
         </main>
         
         <div class="back-arrow" id="backArrow" onclick="moveTop()"></div>
@@ -218,5 +210,8 @@
                 <p>CENTER FOR SPATIAL RESEARCH • COLUMBIA GSAPP</p>
             </div>
         </footer>
+
+        <script src="plot.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
     </body>
 </html>

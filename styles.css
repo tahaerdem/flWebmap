@@ -932,7 +932,7 @@ section.provinces {
     flex-direction: column; 
     justify-content: center;
     align-self: center;
-    margin: 80px auto;
+    margin: 60px auto;
     max-width: 600px;
     z-index: 10;
     
@@ -946,7 +946,7 @@ section.provinces {
     flex-direction: column; 
     justify-content: center;
     align-self: center;
-    margin: 40px 0px;
+    margin: 20px 0px;
     width: 100%;
     max-width: 600px;
     
@@ -955,13 +955,21 @@ section.provinces {
     }
 }
 
+.lct {
+    max-width: 900px;
+}
+
+.xlct {
+    max-width: 1200px;
+}
+
 #plot .info {
     height: 20px;
 }
   
 #plot .map path {
 fill: #fff;
-stroke: #aaa;
+stroke: #eee;
 }
 
 #plot .map path.onHover {
@@ -1002,6 +1010,7 @@ stroke-width: 2px;
 }
 
 .cartography-container {
+    margin: 0px 0px 0px 0px;
     width: 100%;
 }
 
