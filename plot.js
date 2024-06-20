@@ -119,7 +119,7 @@ function update(topojsonData) {
   updateMap(topojsonData);
 }
 
-d3.json('/data/plot/istanbul-base-topo.json')
+d3.json('/flWebmap/data/istanbul.topo.json')
   .then(function(json) {
     update(json);
 
