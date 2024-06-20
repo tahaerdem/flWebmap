@@ -941,16 +941,72 @@ section.provinces {
     }
 }
 
-.carto-container {
+.plot-container {
     display: flex;
     flex-direction: column; 
     justify-content: center;
     align-self: center;
-    margin: 80px auto;
+    margin: 40px 0px;
+    width: 100%;
+    max-width: 600px;
     
     @media screen and (max-width: 700px) {
-        margin: 20px 20px;
+        margin: 40px 20px;
     }
+}
+
+#plot .info {
+    height: 20px;
+}
+  
+#plot .map path {
+fill: #fff;
+stroke: #aaa;
+}
+
+#plot .map path.onHover {
+fill: #000; 
+stroke: #000;
+}
+
+#plot .map path.active {
+fill: #000; 
+stroke: #000;
+}
+
+#plot .map path.inactive {
+fill: #fff; 
+stroke: #eee;
+}
+
+#plot .bounding-box rect {
+display: none;
+fill: none;
+stroke: none;
+stroke-dasharray: 2, 1;
+}
+
+#plot .centroid {
+display: none;
+}
+
+#plot .centroid circle {
+fill: #aaa;
+display: none;
+}
+
+#plot .boundary path {
+fill: none;
+stroke: #aaa;
+stroke-width: 2px;
+}
+
+.cartography-container {
+    width: 100%;
+}
+
+.ist-p {
+    aspect-ratio: 1 / 0.55;
 }
 
 .fs {

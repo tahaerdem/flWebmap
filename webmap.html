@@ -35,54 +35,6 @@
 
         <script src="https://d3js.org/topojson.v2.min.js"></script>
 
-        <style>
-            #content .info {
-                height: 20px;
-              }
-              
-              #content .map path {
-                fill: #fff;
-                stroke: #aaa;
-              }
-            
-              #content .map path.onHover {
-                fill: #000; 
-                stroke: #000;
-              }
-              
-              #content .map path.active {
-                fill: #000; 
-                stroke: #000;
-              }
-              
-              #content .map path.inactive {
-                fill: #fff; 
-                stroke: #eee;
-              }
-            
-              #content .bounding-box rect {
-                display: none;
-                fill: none;
-                stroke: none;
-                stroke-dasharray: 2, 1;
-              }
-              
-              #content .centroid {
-                display: none;
-              }
-              
-              #content .centroid circle {
-                fill: #aaa;
-                display: none;
-              }
-            
-              #content .boundary path {
-                fill: none;
-                stroke: #aaa;
-                stroke-width: 2px;
-              }
-        </style>
-
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="theme-color" content="#FFFDDE" media="(prefers-color-scheme: light)">
         <meta name="theme-color" content="#FFFDDE" media="(prefers-color-scheme: dark)">
@@ -126,7 +78,7 @@
         
         <section class="title-wrapper">
             <section class="title-header">
-                <h1 class="title-wrapper main-title" id="mainTitle">Istanbul Maps</h1><div id="overlay"></div>
+                <h1 class="title-wrapper main-title" id="mainTitle">Maps</h1><div id="overlay"></div>
             </section>
 
             <section class="title-byline">
@@ -148,24 +100,24 @@
             <script src="https://d3js.org/d3.v6.min.js"></script>
             <script src="https://unpkg.com/topojson@3"></script>
 
+            <article>
+                <div id="plot" class="plot-container">
+                    <div class="info">Hover over a country</div>
+                    <div id="plot01" class="cartography-container ist-p">
+                        <svg class="cartography-container ist-p">
+                            <g class="map"></g>
+                            <g class="bounding-box"><rect></rect></g>
+                            <g class="centroid"><circle r="4"></circle></g>
+                            <g class="boundary"></g>
+                        </svg>
+                    </div>  
+                </div>
+            </article>
 
-            <div id="content">
-                <div class="info">Hover over a country</div>
-                <div id="plot01" width="1020px" height="600px">
-                    <svg width="1020px" height="600px">
-                        <g class="map"></g>
-                        <g class="bounding-box"><rect></rect></g>
-                        <g class="centroid"><circle r="4"></circle></g>
-                        <g class="boundary"></g>
-                    </svg>
-                </div>  
-            </div>
 
             <script src="plot.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
         </main>
-        
-
         
         <div class="back-arrow" id="backArrow" onclick="moveTop()"></div>
 
