@@ -95,7 +95,13 @@
             <script src="https://unpkg.com/topojson@3"></script>
             <article>
                 <div id="plot" class="plot-container">
+                    <div id="controls">
+                        <button onclick="switchData('population')">Population</button>
+                        <button onclick="switchData('area')">Area</button>
+                        <button onclick="switchData('income')">Income</button>
+                    </div>
                     <div class="info">Hover over a country</div>
+                    <div id="popup" class="popup"></div>
                     <div id="plot01" class="cartography-container ist-p">
                         <svg class="cartography-container ist-p">
                             <g class="map"></g>

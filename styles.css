@@ -968,45 +968,58 @@ section.provinces {
 }
   
 #plot .map path {
-fill: #fff;
-stroke: #eee;
+stroke: #fff;
 }
 
 #plot .map path.onHover {
-fill: #000; 
-stroke: #000;
+stroke: #231F20;
 }
 
 #plot .map path.active {
-fill: #000; 
-stroke: #000;
+stroke: #231F20;
 }
 
 #plot .map path.inactive {
-fill: #fff; 
-stroke: #eee;
+stroke: #fff;
 }
 
 #plot .bounding-box rect {
-display: none;
-fill: none;
-stroke: none;
-stroke-dasharray: 2, 1;
+    display: none;
+    fill: none;
+    stroke: none;
+    stroke-dasharray: 2, 1;
 }
 
 #plot .centroid {
-display: none;
+    display: none;
 }
 
 #plot .centroid circle {
-fill: #aaa;
-display: none;
+    fill: #aaa;
+    display: none;
 }
 
 #plot .boundary path {
-fill: none;
-stroke: #aaa;
-stroke-width: 2px;
+    fill: none;
+    stroke: ;
+    stroke-width: 2px;
+}
+
+#plot .popup {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #eee;
+    padding: 10px;
+    box-shadow: 5px 5px 0 0.75px rgba(0, 0, 0, 0.035);
+    z-index: 1000;
+}
+
+#plot .popup .close-btn {
+    cursor: pointer;
+    color: #ccc;
+    font-weight: bold;
+    float: right;
 }
 
 .cartography-container {
