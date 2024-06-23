@@ -1002,6 +1002,7 @@ stroke: #fff;
     width: 100%;
     justify-content: space-between;
     max-width: 600px;
+    z-index: 1001;
 }
 
 #plot .controls-container .toggles {
