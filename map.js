@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 },
 
                 onLeave: self => {
-                    map.easeToTo({
+                    map.jumpTo({
                         center: [37.166, 37.032],
                         zoom: 5,
                         duration: 1,
@@ -305,15 +305,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     }
 
-    //Grab the second earthquake timeline
     function frame04() {
         const layersToToggle = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
-
         const earthquakeLayer = 'feb6-eq-circle-stroke';
         const sourceLayer = 'usgs-feb67-eq-data-0ezrpr';
         const startTime = 1675646254342;
         const endTime = 1675679088811;
-
+      
         const dateDisplay = document.createElement('h3');
         dateDisplay.style.position = 'fixed';
         dateDisplay.id = 'date-time-scroll-counter';
@@ -324,104 +322,110 @@ document.addEventListener("DOMContentLoaded", (event) => {
         dateDisplay.style.borderRadius = '5px';
         dateDisplay.style.zIndex = '9999';
         document.body.appendChild(dateDisplay);
-    
+      
         map.on('idle', () => {
-            const features = map.querySourceFeatures('composite', {
-                sourceLayer: sourceLayer,
-            }).sort((a, b) => a.properties.time - b.properties.time)
+          const features = map.querySourceFeatures('composite', {
+            sourceLayer: sourceLayer,
+          }).sort((a, b) => a.properties.time - b.properties.time)
             .filter(f => f.properties.time >= startTime && f.properties.time <= endTime);
-    
-            if (features.length === 0) {
-                console.error('No earthquake features found in the specified time range');
-                return;
-            }
-    
-            var tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: "#TL02",
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    pin: false,
-                    scrub: true,
-                    markers: false,
-
-                    onRefresh: () => {
-                        const pinnedElement = self.pin;
-                        const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-                        const elementWidth = pinnedElement.offsetWidth;
-                        const left = (windowWidth - elementWidth) / 2;
-                        pinnedElement.style.left = `${left}px`;
-                    },
-    
-                    onEnter: () => {
-                        layersToToggle.forEach(layerId => {
-                            map.setLayoutProperty(layerId, 'visibility', 'visible');
-                        });
-                        map.setLayoutProperty(earthquakeLayer, 'visibility', 'visible');
-                    },
-
-                    onEnterBack: () => {
-                        layersToToggle.forEach(layerId => {
-                            map.setLayoutProperty(layerId, 'visibility', 'visible');
-                        });
-                        map.setLayoutProperty(earthquakeLayer, 'visibility', 'visible');
-                    },
-                    onLeaveBack: () => {
-                        layersToToggle.forEach(layerId => {
-                            map.setLayoutProperty(layerId, 'visibility', 'visible');
-                        });
-                        map.setLayoutProperty(earthquakeLayer, 'visibility', 'none');
-                    },
-                    onUpdate: self => {
-                        const progress = self.progress * 4;
-                        const totalFeatures = features.length;
-                        const currentFeatureIndex = Math.floor(progress * totalFeatures);
-    
-                        const velocity = self.getVelocity();
-    
-                        let filter, currentDate;
-                        if (velocity >= 0 && window.scrollY > 0) {
-                            filter = [
-                                "all",
-                                ["<=", ["get", "time"], features[currentFeatureIndex].properties.time]
-                            ];
-                            currentDate = features[currentFeatureIndex].properties.time;
-                        } else if (velocity < 0 && window.scrollY > 0) {
-                            const progress = self.progress * 4;
-                            filter = [
-                                "all",
-                                ["<=", ["get", "time"], features[Math.max(currentFeatureIndex - 1, 0)].properties.time]
-                            ];
-                            currentDate = features[Math.max(currentFeatureIndex - 1, 0)].properties.time;
-                        }
-                        map.setFilter(earthquakeLayer, filter);
-                        
-                        const date = new Date(currentDate + (8 * 60 * 60 * 1000));
-                        const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
-                        const formattedDate = date.toLocaleString('en-US', options);
-                        dateDisplay.textContent = `${formattedDate}`;
-                    },
-
-                    onLeave: () => {
-                        map.setLayoutProperty(earthquakeLayer, 'visibility', 'visible');
-                        const lastFeature = features[features.length - 1];
-                        const filter = [
-                            "all",
-                            ["<=", ["get", "time"], lastFeature.properties.time]
-                        ];
-                        map.setFilter(earthquakeLayer, filter);
-                        layersToToggle.forEach(layerId => {
-                            map.setLayoutProperty(layerId, 'visibility', 'visible');
-                        });
-                    },
-                },
-            });
+      
+          if (features.length === 0) {
+            console.error('No earthquake features found in the specified time range');
+            return;
+          }
+      
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: "#TL02",
+              start: 'top bottom',
+              end: 'bottom top',
+              pin: false,
+              scrub: true,
+              markers: false,
+      
+              onRefresh: self => {
+                const pinnedElement = self.pin;
+                const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+                const elementWidth = pinnedElement.offsetWidth;
+                const left = (windowWidth - elementWidth) / 2;
+                pinnedElement.style.left = `${left}px`;
+              },
+      
+              onEnter: () => {
+                layersToToggle.forEach(layerId => {
+                  map.setLayoutProperty(layerId, 'visibility', 'visible');
+                });
+                map.setLayoutProperty(earthquakeLayer, 'visibility', 'visible');
+              },
+      
+              onEnterBack: () => {
+                layersToToggle.forEach(layerId => {
+                  map.setLayoutProperty(layerId, 'visibility', 'visible');
+                });
+                map.setLayoutProperty(earthquakeLayer, 'visibility', 'visible');
+              },
+      
+              onLeaveBack: () => {
+                layersToToggle.forEach(layerId => {
+                  map.setLayoutProperty(layerId, 'visibility', 'visible');
+                });
+                map.setLayoutProperty(earthquakeLayer, 'visibility', 'none');
+              },
+      
+              onUpdate: self => {
+                const progress = self.progress * 4;
+                const totalFeatures = features.length;
+                let currentFeatureIndex = Math.floor(progress * totalFeatures);
+      
+                // Ensure currentFeatureIndex is within bounds
+                currentFeatureIndex = Math.max(0, Math.min(currentFeatureIndex, totalFeatures - 1));
+      
+                const velocity = self.getVelocity();
+      
+                let filter, currentDate;
+                if (velocity >= 0 && window.scrollY > 0) {
+                  filter = [
+                    "all",
+                    ["<=", ["get", "time"], features[currentFeatureIndex].properties.time]
+                  ];
+                  currentDate = features[currentFeatureIndex].properties.time;
+                } else if (velocity < 0 && window.scrollY > 0) {
+                  currentFeatureIndex = Math.max(currentFeatureIndex - 1, 0);
+                  filter = [
+                    "all",
+                    ["<=", ["get", "time"], features[currentFeatureIndex].properties.time]
+                  ];
+                  currentDate = features[currentFeatureIndex].properties.time;
+                }
+      
+                map.setFilter(earthquakeLayer, filter);
+      
+                const date = new Date(currentDate + (8 * 60 * 60 * 1000));
+                const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+                const formattedDate = date.toLocaleString('en-US', options);
+                dateDisplay.textContent = `${formattedDate}`;
+              },
+      
+              onLeave: () => {
+                map.setLayoutProperty(earthquakeLayer, 'visibility', 'visible');
+                const lastFeature = features[features.length - 1];
+                const filter = [
+                  "all",
+                  ["<=", ["get", "time"], lastFeature.properties.time]
+                ];
+                map.setFilter(earthquakeLayer, filter);
+                layersToToggle.forEach(layerId => {
+                  map.setLayoutProperty(layerId, 'visibility', 'visible');
+                });
+              },
+            },
+          });
         });
-    }
+      }
 
     //Zoom into second EQ
     function frame05() {
-        const layersToToggle = ['Fault-Paths-L01-NAF', 'feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t', 'Fault-Paths-L01-EAF'];
+        const layersToToggle = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t', 'Fault-Paths-L01-EAF'];
         const layersToHide = [];
         const dateDisplay = document.getElementById('date-time-scroll-counter');
         
@@ -519,7 +523,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Black Section Timeline
     function frame06() {
-        const layersToToggle = ['Fault-Paths-L01-EAF'];
+        const layersToToggle = ['Fault-Paths-L01-EAF', 'Fault-Paths-L02-NAF'];
         const layersToHide = [];
         const dateDisplay = document.getElementById('date-time-scroll-counter');
         var tl = gsap.timeline({
@@ -698,7 +702,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     function frame08() {
         const layersToToggle = ['Fault-Paths-L02-NAF'];
         const layersToHide = ['feb6-eq-circle-stroke-start-t', 'feb6-eq-circle-stroke-end-t'];
-        const hideonLeave = ['Fault-Paths-L02-EAF'];
+        const hideonLeave = ['Fault-Paths-L01-EAF'];
 
         var tl = gsap.timeline({
             scrollTrigger: {

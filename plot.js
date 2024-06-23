@@ -329,11 +329,13 @@ function loadTopojsonData(url) {
       
       update(json);
 
+      console.warning('TopoJSON data loaded:', json);
+
       window.addEventListener('resize', resize);
     })
     .catch(function(error) {
-      console.error('Error loading TopoJSON data:', error);
+      console.warning('Error loading TopoJSON data:', error);
     });
 }
 
-loadTopojsonData('/flWebMap/plot/L3.json');
+loadTopojsonData('https://raw.githubusercontent.com/tahaerdem/flWebmap/main/plot/L3.json');

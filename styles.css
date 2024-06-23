@@ -955,7 +955,6 @@ section.provinces {
     margin: 20px 0px;
     width: 100%;
     max-width: 600px;
-    z-index: 1000;
     
     @media screen and (max-width: 700px) {
         margin: 40px 20px;
@@ -1096,7 +1095,6 @@ stroke: #fff;
 .cartography-container {
     margin: 0px 0px 0px 0px;
     width: 100%;
-    z-index: 1000;
 }
 
 .ist-p {
