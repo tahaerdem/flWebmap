@@ -713,8 +713,15 @@ hr {
 }
 
 .tb-line {
+    border: none;
     border-bottom: 2px solid var(--color-stroke-quaternary,#000);
     margin: -0.6em 0 1em 0;
+}
+
+.pop-line {
+    border: none;
+    border-bottom: 2px solid var(--color-stroke-quaternary,#eee);
+    margin: 0.75em 0 0.75em 0;
 }
 
 .callout {
@@ -925,8 +932,6 @@ section.provinces {
     top: 60%;
 }
 
-
-
 .text-container {
     display: flex;
     flex-direction: column; 
@@ -945,6 +950,7 @@ section.provinces {
     display: flex;
     flex-direction: column; 
     justify-content: center;
+    align-items: center;
     align-self: center;
     margin: 20px 0px;
     width: 100%;
@@ -965,6 +971,14 @@ section.provinces {
 
 #plot .info {
     height: 20px;
+    margin-top: -0.6em;
+    font-size: smaller;
+    text-align: left;
+    font-weight: 500;
+    color: #787878;
+    border-top: 2px solid #363636;
+    padding-top: 5px;
+    text-transform: capitalize;
 }
   
 #plot .map path {
@@ -981,6 +995,18 @@ stroke: #231F20;
 
 #plot .map path.inactive {
 stroke: #fff;
+}
+
+#plot .controls-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    max-width: 600px;
+}
+
+#plot .controls-container .toggles {
+    display: block;
+    justify-content: space-between;
 }
 
 #plot .bounding-box rect {
@@ -1020,6 +1046,50 @@ stroke: #fff;
     color: #ccc;
     font-weight: bold;
     float: right;
+}
+
+#plot .toggle-bt {
+    border: none;
+    color: white;
+    background-color: #232323;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+#plot .plhdr {
+    text-align: left;
+    line-height: 0em;
+}
+
+#plot .toggle-bt:hover {
+    background-color: #232323;
+    cursor: pointer;
+}
+
+#plot .toggle-pop:hover {background-color: #3b6bc4;} 
+
+#plot .toggle-dt:hover {background-color: #479155;}
+
+#plot .toggle-sh:hover {background-color: #c34b42;}
+
+#plot .ppu {
+    display: inline-block;
+    margin: 0.2em 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: #c8c8c8;
+}
+
+#plot .ppu-line {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 200px;
 }
 
 .cartography-container {

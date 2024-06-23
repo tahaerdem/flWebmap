@@ -94,13 +94,15 @@
             <script src="https://d3js.org/d3.v6.min.js"></script>
             <script src="https://unpkg.com/topojson@3"></script>
             <article>
-                <div id="plot" class="plot-container">
-                    <div id="controls">
-                        <button onclick="switchData('population')">Population</button>
-                        <button onclick="switchData('area')">Area</button>
-                        <button onclick="switchData('income')">Income</button>
+                <div id="plot" class="plot-container xlct">
+                    <div class="controls-container" id="controls">
+                        <div><h3 class="plhdr" style="text-align:left">Istanbul</h3><br><div class="info">Hover over a county</div></div>
+                        <div class="toggles" id="toggles">
+                            <button class="toggle-bt toggle-pop" onclick="switchData('population')">Population</button>
+                            <button class="toggle-bt toggle-dt" onclick="switchData('death_toll')">Death Toll</button>
+                            <button class="toggle-bt toggle-sh" onclick="switchData('shelter')">Shelter</button>
+                        </div>
                     </div>
-                    <div class="info">Hover over a country</div>
                     <div id="popup" class="popup"></div>
                     <div id="plot01" class="cartography-container ist-p">
                         <svg class="cartography-container ist-p">
