@@ -700,7 +700,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //North Anatolia Textbox
     function frame08() {
-        const layersToToggle = ['Fault-Paths-L02-NAF'];
+        const layersToToggle = ['Fault-Paths-L02-NAF', 'ISO-land'];
         const layersToHide = ['feb6-eq-circle-stroke-start-t', 'feb6-eq-circle-stroke-end-t'];
         const hideonLeave = ['Fault-Paths-L01-EAF'];
 
@@ -973,7 +973,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //1999 Timeline
     function frame11() {
+
         var tl = gsap.timeline({
+
             scrollTrigger: {
                 trigger: "#FS06",
                 start: 'top top', //Make it stop near the top, if wanna center it do 'top top'
@@ -1022,20 +1024,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     });
     
                 },
-    
             },
         });
     }
 
-    //Istanbul
+    // Istanbul
     function frame12() {
-        const layersToToggle = ['L2_AdminBoundaries_Base','L3_AdminBoundaries_Base',,'L3_Base','ISO-land'];
-        const layersToHide = [];
+        const boundariesToToggle = ['L3_AdminBoundaries_Base', 'L2_AdminBoundaries_Base'];
+        const layersToToggle = ['L3_Base'];
+        const layersToEase = ['ISO-land'];
+        const layersToHide = ['L3_Shelter', 'L3_Population', 'L3_AdminBoundaries', 'L2_AdminBoundaries'];
 
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#SEC06",
-                start: 'top 60%',
+                start: 'top 75%',
                 end: '1000% top',
                 pin: true,
                 scrub: true,
@@ -1045,6 +1048,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
                     layersToHide.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
@@ -1052,6 +1064,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 onLeave: () => {
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
                     });
                     layersToHide.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
@@ -1061,6 +1082,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
                     layersToHide.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
@@ -1069,8 +1099,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 0);
+                        }
+                    });
                     layersToHide.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
                 },
 
@@ -1080,9 +1119,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const targetLat = 41.158;
                     const targetLng = 28.978;
                     const targetZoom = 8.75;
-    
+
                     let lngStep, latStep, zoomStep;
-    
+
                     if (velocity > 0 && window.scrollY > 0) {
                         // Forward animation steps
                         lngStep = (targetLng - center.lng) / 30;
@@ -1099,24 +1138,909 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         latStep = 0;
                         zoomStep = 0;
                     }
-    
+
                     map.easeTo({
                         center: [center.lng + lngStep, center.lat + latStep],
                         zoom: map.getZoom() + zoomStep,
                         duration: 0,
                         easing: t => t // linear easing
                     });
-
                 },
-    
+            },
+        });
+
+        map.on('load', () => {
+            setTimeout(() => {
+                if (map.getLayer('ISO-land')) {
+                    map.setPaintProperty('ISO-land', 'background-opacity', 0);
+                }
+            }, 1000);
+        });
+    }
+
+    //Population
+    function frame121() {
+        const boundariesToToggle= ['L3_AdminBoundaries', 'L2_AdminBoundaries'];
+        const layersToToggle = ['L3_Population'];
+        const layersToEase = [];
+        const layersToHide = ['L3_Shelter'];
+
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#SEC06-1",
+                start: 'top 75%',
+                end: '1000% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeave: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 0);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                },
+
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 41.058;
+                    const targetLng = 28.978;
+                    const targetZoom = 9;
+
+                    let lngStep, latStep, zoomStep;
+
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (targetZoom - map.getZoom()) / 20;
+                        console.log('F10:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (9 - map.getZoom()) / 15;
+                        console.log('F10', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+                },
+            },
+        });
+
+        map.on('load', () => {
+            setTimeout(() => {
+                if (map.getLayer('ISO-land')) {
+                    map.setPaintProperty('ISO-land', 'background-opacity', 0);
+                }
+            }, 1000);
+        });
+    }
+
+    //Shelter
+    function frame122() {
+        const boundariesToToggle= ['L3_AdminBoundaries', 'L2_AdminBoundaries'];
+        const layersToToggle = ['L3_Shelter', 'L3_AdminBoundaries', 'L2_AdminBoundaries'];
+        const layersToEase = [];
+        const layersToHide = ['L3_Population'];
+
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#SEC06-2",
+                start: 'top 75%',
+                end: '1000% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                },
+                onLeave: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                },
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                },
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 0);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                },
+
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 41.058;
+                    const targetLng = 28.978;
+                    const targetZoom = 9;
+
+                    let lngStep, latStep, zoomStep;
+
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (targetZoom - map.getZoom()) / 20;
+                        console.log('F10:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (9 - map.getZoom()) / 15;
+                        console.log('F10', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+                },
+            },
+        });
+
+        map.on('load', () => {
+            setTimeout(() => {
+                if (map.getLayer('ISO-land')) {
+                    map.setPaintProperty('ISO-land', 'background-opacity', 0);
+                }
+            }, 1000);
+        });
+    }
+
+    //Low Damage
+    function frame123() {
+        const boundariesToToggle= ['L3_AdminBoundaries', 'L2_AdminBoundaries'];
+        const layersToToggle = ['L3_LowDamage'];
+        const layersToEase = [];
+        const layersToHide = ['L3_Shelter'];
+
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#SEC06-3",
+                start: 'top 75%',
+                end: '1000% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeave: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 0);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                },
+
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 41.058;
+                    const targetLng = 28.978;
+                    const targetZoom = 9;
+
+                    let lngStep, latStep, zoomStep;
+
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (targetZoom - map.getZoom()) / 20;
+                        console.log('F12-3:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (9 - map.getZoom()) / 15;
+                        console.log('F12-3', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+                },
+            },
+        });
+
+
+    }
+
+    //Medium Damage
+    function frame124() {
+        const boundariesToToggle= ['L3_AdminBoundaries', 'L2_AdminBoundaries'];
+        const layersToToggle = ['L3_MediumDamage'];
+        const layersToEase = [];
+        const layersToHide = ['L3_LowDamage'];
+
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#SEC06-4",
+                start: 'top 75%',
+                end: '1000% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeave: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 0);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                },
+
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 41.058;
+                    const targetLng = 28.978;
+                    const targetZoom = 9;
+
+                    let lngStep, latStep, zoomStep;
+
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (targetZoom - map.getZoom()) / 20;
+                        console.log('F12-3:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (9 - map.getZoom()) / 15;
+                        console.log('F12-3', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+                },
+            },
+        });
+
+
+    }
+
+    //Heavy Damage
+    function frame125() {
+        const boundariesToToggle= ['L3_AdminBoundaries', 'L2_AdminBoundaries'];
+        const layersToToggle = ['L3_HeavyDamage'];
+        const layersToEase = [];
+        const layersToHide = ['L3_MediumDamage'];
+
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#SEC06-5",
+                start: 'top 75%',
+                end: '1000% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeave: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 0);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                },
+
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 41.058;
+                    const targetLng = 28.978;
+                    const targetZoom = 9;
+
+                    let lngStep, latStep, zoomStep;
+
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (targetZoom - map.getZoom()) / 20;
+                        console.log('F12-3:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (9 - map.getZoom()) / 15;
+                        console.log('F12-3', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+                },
+            },
+        });
+
+
+    }
+
+    //Extremely Heavy Damage
+    function frame126() {
+        const boundariesToToggle= ['L3_AdminBoundaries', 'L2_AdminBoundaries'];
+        const layersToToggle = ['L3_ExtremelyHeavyDamage'];
+        const layersToEase = [];
+        const layersToHide = ['L3_HeavyDamage'];
+
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#SEC06-6",
+                start: 'top 75%',
+                end: '1000% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeave: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 0);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                },
+
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 41.058;
+                    const targetLng = 28.978;
+                    const targetZoom = 9;
+
+                    let lngStep, latStep, zoomStep;
+
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (targetZoom - map.getZoom()) / 20;
+                        console.log('F12-3:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (9 - map.getZoom()) / 15;
+                        console.log('F12-3', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+                },
+            },
+        });
+
+
+    }
+
+    //Death Toll
+    function frame127() {
+        const boundariesToToggle= ['L3_AdminBoundaries', 'L2_AdminBoundaries'];
+        const layersToToggle = ['L3_Death'];
+        const layersToEase = [];
+        const layersToHide = ['L3_ExtremelyHeavyDamage'];
+
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#SEC06-7",
+                start: 'top 75%',
+                end: '1000% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onEnter: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeave: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onEnterBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 1);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                },
+                onLeaveBack: () => {
+                    layersToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                    });
+                    layersToEase.forEach(layerId => {
+                        if (map.getLayer(layerId)) {
+                            map.setPaintProperty(layerId, 'background-opacity-transition', { duration: 500 });
+                            map.setPaintProperty(layerId, 'background-opacity', 0);
+                        }
+                    });
+                    layersToHide.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
+                },
+
+                onUpdate: self => {
+                    const velocity = self.getVelocity();
+                    const center = map.getCenter();
+                    const targetLat = 41.058;
+                    const targetLng = 28.978;
+                    const targetZoom = 9;
+
+                    let lngStep, latStep, zoomStep;
+
+                    if (velocity > 0 && window.scrollY > 0) {
+                        // Forward animation steps
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (targetZoom - map.getZoom()) / 20;
+                        console.log('F12-3:', velocity);
+                    } else if (velocity < 0 && window.scrollY > 0) {
+                        lngStep = (targetLng - center.lng) / 30;
+                        latStep = (targetLat - center.lat) / 30;
+                        zoomStep = (9 - map.getZoom()) / 15;
+                        console.log('F12-3', velocity);
+                    } else {
+                        lngStep = 0;
+                        latStep = 0;
+                        zoomStep = 0;
+                    }
+
+                    map.easeTo({
+                        center: [center.lng + lngStep, center.lat + latStep],
+                        zoom: map.getZoom() + zoomStep,
+                        duration: 0,
+                        easing: t => t // linear easing
+                    });
+                },
             },
         });
     }
 
     //Istanbul Timeline
     function frame13() {    
-        const layersToToggle = ['L3_Shelter', 'L3_AdminBoundaries','L2_AdminBoundaries','ISO-land'];
-        const layersToHide = ['settlement-major-label','settlement-minor-lab','country-label','Turkey-L01','Fault-Paths-L01','Fault-Paths-L03','1939','1939-T','1939-P','1942','1942-T','1942-P','1943','1943-T','1944','1944-T','1944-P','1957','1957-T','1957-P','1967','1967-T','1967-P','1999','1999-T','hillshade'];
+        const boundariesToToggle = ['L3_AdminBoundaries', 'L2_AdminBoundaries'];
+        const layersToToggle = ['L3_Shelter'];
+        const layersToHide = ['settlement-minor-lab','country-label','Turkey-L01','Fault-Paths-L01','Fault-Paths-L03','1939','1939-T','1939-P','1942','1942-T','1942-P','1943','1943-T','1944','1944-T','1944-P','1957','1957-T','1957-P','1967','1967-T','1967-P','1999','1999-T','hillshade'];
         
         var tl = gsap.timeline({
             scrollTrigger: {
@@ -1134,6 +2058,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 },
 
                 onEnter: () => {
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
@@ -1142,6 +2069,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     });
                 },
                 onLeave: () => {
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
@@ -1150,6 +2080,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     });
                 },
                 onEnterBack: () => {
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
@@ -1158,6 +2091,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     });
                 },
                 onLeaveBack: () => {
+                    boundariesToToggle.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
@@ -1183,7 +2119,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
-                        zoomStep = (8 - map.getZoom()) / 15;
+                        zoomStep = (8.75 - map.getZoom()) / 15;
                         console.log('F13', velocity);
                     } else {
                         lngStep = 0;
@@ -1206,7 +2142,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     //Next steps for Istanbul
     function frame14() {
 
-        const layersToToggle = ['L3_Population', 'ISO-land', 'ISO-water','L3_AdminBoundaries','L2_AdminBoundaries'];
+        const layersToToggle = ['L3_Population', 'ISO-water','L3_AdminBoundaries','L2_AdminBoundaries'];
         const layersToHide = ['L3_Shelter'];
 
         var tl = gsap.timeline({
@@ -1274,7 +2210,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
-                        zoomStep = (8 - map.getZoom()) / 15;
+                        zoomStep = (8.75 - map.getZoom()) / 15;
                         console.log('F13', velocity);
                     } else {
                         lngStep = 0;
@@ -1325,12 +2261,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         // Forward animation steps
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
-                        zoomStep = (targetZoom - map.getZoom()) / 20;
+
                         console.log('F10:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
-                        zoomStep = (8 - map.getZoom()) / 15;
+                        zoomStep = (8.75 - map.getZoom()) / 15;
                         console.log('F10', velocity);
                     } else {
                         lngStep = 0;
@@ -1355,8 +2291,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     var master = gsap.timeline();
 
     master
-    .add(frame01()) //Zoom into the earthquake zone
-    .add(frame02(), { onLeave: frame01 }) //Zoom into the earthquake zone
+    .add(frame01())
+    .add(frame02(), { onLeave: frame01 })
     .add(frame03(), { onLeave: frame02 }) 
     .add(frame04(), { onLeave: frame03 }) 
     .add(frame05(), { onLeave: frame04 }) 
@@ -1367,7 +2303,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .add(frame10(), { onLeave: frame09 })
     .add(frame11(), { onLeave: frame10 })
     .add(frame12(), { onLeave: frame11 })
-    .add(frame13(), { onLeave: frame12 })
+    .add(frame121(), { onLeave: frame12 })
+    .add(frame122(), { onLeave: frame121 })
+    .add(frame123(), { onLeave: frame122 })
+    .add(frame124(), { onLeave: frame123 })
+    .add(frame125(), { onLeave: frame124 })
+    .add(frame126(), { onLeave: frame125 })
+    .add(frame127(), { onLeave: frame126 })
+    .add(frame13(), { onLeave: frame127 })
     .add(frame14(), { onLeave: frame13 })
     .add(frame15(), { onLeave: frame14 })
 

@@ -20,9 +20,9 @@ const dataTypes = {
 };
 
 const colorScales = {
-  population: d3.scaleSequential(d3.interpolateBlues),
-  death_toll: d3.scaleSequential(d3.interpolateGreens),
-  shelter: d3.scaleSequential(d3.interpolateReds),
+  population: d3.scaleSequential(d3.interpolateYlOrRd),
+  death_toll: d3.scaleSequential(d3.interpolateMagma),
+  shelter: d3.scaleSequential(d3.interpolateGreens),
 };
 
 function handleMouseover(d, event) {
@@ -65,7 +65,6 @@ function handleMouseover(d, event) {
 }
 
 function handleMouseout(d, event) {
-  console.log(activeElementId);
   d3.select('#plot .bounding-box rect').attr('width', 0).attr('height', 0);
   d3.select('#plot .centroid').style('display', 'none');
 
@@ -76,7 +75,7 @@ function handleMouseout(d, event) {
       .style('stroke', "#fff");
   } else {
     d3.select('#plot .info')
-    .text(`${activeElementId.properties.name}`)
+    .text(`${activeElementId}`)
     .style('left', (event.pageX + 10) + 'px')
     .style('top', (event.pageY + 10) + 'px');
   }
@@ -126,7 +125,12 @@ function handleClick(d, event) {
       .style('left', `${event.pageX + 10}px`)
       .style('top', `${event.pageY + 10}px`);
 
-      activeElementId = d.properties.namecharAt(0).toUpperCase() + d.properties.slice(1).toLowerCase();
+    console.log('Popup position:', {
+      left: `${event.pageX + 10}px`,
+      top: `${event.pageY + 10}px`
+    });
+
+    activeElementId = d.properties.name.charAt(0).toUpperCase() + d.properties.name.slice(1).toLowerCase();
 
     if (event.stopPropagation) {
       event.stopPropagation();
@@ -193,61 +197,36 @@ function updateMap(topojsonData, dataType = 'population') {
     .append('path')
     .attr('d', geoGenerator)
     .attr('fill', d => colorScale(dataTypes[dataType](d)))
-    .on('mouseover', function(d) {
-      const event = d3.event;
-      console.error('mouseover event:', event);
-      console.error('mouseover data:', d);
-      handleMouseover.call(this, d, event);
-    })
-    .on('mouseout', function(d) {
-      const event = d3.event;
-      console.error('mouseout event:', event);
-      console.error('mouseout data:', d);
-      handleMouseout.call(this, d, event);
-    })
-    .on('click', function(d) {
-      const event = d3.event;
-      console.error('click event:', event);
-      console.error('click data:', d);
-      handleClick.call(this, d, event); 
-      if (event.stopPropagation) {
-        event.stopPropagation();
-      } else {
-        console.error('stopPropagation is not a function on event:', event);
-      }
-    });
-
-  // Update selection: existing elements
-  paths.attr('d', geoGenerator)
-    .attr('fill', d => colorScale(dataTypes[dataType](d)))
-    .on('mouseover', function(d) {
-      const event = d3.event;
-      console.error('mouseover event:', event);
-      console.error('mouseover data:', d);
+    .on('mouseover', function(event, d) {
       handleMouseover.call(this, event, d);
     })
-    .on('mouseout', function(d) {
-      const event = d3.event;
-      console.error('mouseout event:', event);
-      console.error('mouseout data:', d);
+    .on('mouseout', function(event, d) {
       handleMouseout.call(this, event, d);
     })
-    .on('click', function(d) {
-      const event = d3.event;
-      console.error('click event:', event);
-      console.error('click data:', d);
-      handleClick.call(this, event, d); // Correct order: event first, then data
+    .on('click', function(event, d) {
+      handleClick.call(this, event, d);
       if (event.stopPropagation) {
         event.stopPropagation();
-      } else {
-        console.error('stopPropagation is not a function on event:', event);
       }
     });
 
-  // Exit selection: remove old elements
+  paths.attr('d', geoGenerator)
+    .attr('fill', d => colorScale(dataTypes[dataType](d)))
+    .on('mouseover', function(event, d) {
+      handleMouseover.call(this, event, d);
+    })
+    .on('mouseout', function(event, d) {
+      handleMouseout.call(this, event, d);
+    })
+    .on('click', function(event, d) {
+      handleClick.call(this, event, d);
+      if (event.stopPropagation) {
+        event.stopPropagation();
+      }
+    });
+
   paths.exit().remove();
 
-  // Boundary update
   const mergedGeometry = topojson.merge(topojsonData, topojsonData.objects[objectName].geometries);
   const mergedFeature = { type: "Feature", geometry: mergedGeometry };
 
@@ -329,12 +308,12 @@ function loadTopojsonData(url) {
       
       update(json);
 
-      console.warning('TopoJSON data loaded:', json);
+      console.log('TopoJSON data loaded:', json);
 
       window.addEventListener('resize', resize);
     })
     .catch(function(error) {
-      console.warning('Error loading TopoJSON data:', error);
+      console.log('Error loading TopoJSON data:', error);
     });
 }
 
