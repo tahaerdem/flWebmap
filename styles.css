@@ -2,7 +2,7 @@
 
 body {
 
-    font-family:  'neue-haas-grotesk-text', 'Inter', 'Helvetica Neue', 'Akzidenz-Grotesk Pro',sans-serif;
+    font-family:  'neue-haas-grotesk-text', 'Inter', 'Helvetica Neue', 'Akzidenz-Grotesk Pro', sans-serif;
     font-feature-settings: 'liga' 1, 'calt' 1;
     font-weight: 400;
     font-style: normal;
@@ -1961,3 +1961,29 @@ footer.footer-item:hover {
     font-weight:700;
     text-align:center;
 }
+
+.caption {
+    font-size: 60px;
+    font-family: "Inter", "GT";
+    color: #FF9917;
+    font-weight: 600;
+    background-color: none;
+    padding: -20px;
+    border-radius: 3px;
+    position: absolute;
+    z-index: 100000;
+    mix-blend-mode: multiply;
+}
+
+.captionable {
+    position: relative; /* Ensure the parent container has relative positioning */
+    display: inline-block; /* Ensure images are treated as block elements for positioning */
+}
+
+.caption .top-left { top: 10px; left: 10px; }
+
+.caption .top-right { top: 10px; right: 10px; }
+
+.caption .bottom-left { bottom: 10px; left: 10px; }
+
+.caption .bottom-right { bottom: 10px; right: 10px; }

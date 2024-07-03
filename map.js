@@ -425,7 +425,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Zoom into second EQ
     function frame05() {
-        const layersToToggle = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t', 'Fault-Paths-L01-EAF'];
+        const layersToToggle = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
         const layersToHide = [];
         const dateDisplay = document.getElementById('date-time-scroll-counter');
         
@@ -521,9 +521,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    //Black Section Timeline
+    //EAF Section
     function frame06() {
-        const layersToToggle = ['Fault-Paths-L01-EAF', 'Fault-Paths-L02-NAF'];
+        const layersToToggle = ['Fault-Paths-L01-EAF'];
         const layersToHide = [];
         const dateDisplay = document.getElementById('date-time-scroll-counter');
         var tl = gsap.timeline({
@@ -553,7 +553,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 },
                 onLeaveBack: () => {
                     layersToToggle.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
                     layersToHide.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
@@ -611,6 +611,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Eastern Anatolia
     function frame07() {
+        const layersToToggle = [];
+        const layersToHide = [];
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS02",
@@ -733,10 +735,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
         
                 onLeaveBack: () => {
                     layersToToggle.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
                     layersToHide.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
                 },
                 
@@ -1033,7 +1035,31 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const boundariesToToggle = ['L3_AdminBoundaries_Base', 'L2_AdminBoundaries_Base'];
         const layersToToggle = ['L3_Base'];
         const layersToEase = ['ISO-land'];
-        const layersToHide = ['L3_Shelter', 'L3_Population', 'L3_AdminBoundaries', 'L2_AdminBoundaries'];
+        const layersToHide = [
+            'L3_Shelter',
+            'L3_Population',
+            'L3_AdminBoundaries',
+            'L2_AdminBoundaries',
+            '1939',
+            '1939-T',
+            '1939-P',
+            '1942',
+            '1942-T',
+            '1942-P',
+            '1943',
+            '1943-T',
+            '1944',
+            '1944-T',
+            '1944-P',
+            '1957',
+            '1957-T',
+            '1957-P',
+            '1967',
+            '1967-T',
+            '1967-P',
+            '1999',
+            '1999-T'
+        ];
 
         var tl = gsap.timeline({
             scrollTrigger: {
@@ -1109,7 +1135,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         }
                     });
                     layersToHide.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'none');
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
                 },
 
@@ -1123,7 +1149,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     let lngStep, latStep, zoomStep;
 
                     if (velocity > 0 && window.scrollY > 0) {
-                        // Forward animation steps
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
