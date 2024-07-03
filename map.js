@@ -445,6 +445,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     layersToHide.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
+                    let counter = document.getElementById('date-time-scroll-counter');
+                    counter.style.display = "visible";
                 },
 
                 onEnterBack: () => {
@@ -454,6 +456,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     layersToHide.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
+                    let counter = document.getElementById('date-time-scroll-counter');
+                    counter.style.display = "visible";
                 },
 
                 onLeaveBack: () => {
@@ -463,6 +467,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     layersToHide.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
+                    let counter = document.getElementById('date-time-scroll-counter');
+                    counter.style.display = "visible";
                 },
                 
                 onUpdate: self => {
@@ -515,8 +521,79 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     layersToHide.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
+                    let counter = document.getElementById('date-time-scroll-counter');
+                    counter.style.display = "none";
                 },
     
+            },
+        });
+    }
+
+    //EAF Chapter Intro
+    function frame052() {
+
+
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS00",
+                start: 'top top',
+                end: '700% 27%',
+                pin: true,
+                scrub: true,
+                markers: false,
+    
+                onEnter: () => {
+                    let counter = document.getElementById('date-time-scroll-counter');
+                    counter.style.display = "none";
+                },
+                onEnterBack: () => {
+                    let counter = document.getElementById('date-time-scroll-counter');
+                    counter.style.display = "none";
+                },
+                onLeaveBack: () => {
+                    let counter = document.getElementById('date-time-scroll-counter');
+                    counter.style.display = "visible";
+                },
+    
+                onUpdate: self => {
+                    const title = document.getElementById('fs00Title');
+                    const container = document.getElementById('FS00');
+                    const windowWidth = window.innerWidth;
+                    const margin = document.getElementById('chp01');
+                    const initialContainerHeight = 300;
+                    const progress = self.progress;
+                    const titleWidth = title.getBoundingClientRect().width;
+
+                    let newFontSize = 7 - (progress * 18);
+                    let newMarginSize = 50 - (progress * 500);
+                    let newContSize = initialContainerHeight - (progress * 1050);
+
+                    if (titleWidth < 601) {
+                        const currentFontSize = title.style.fontSize;
+                        newFontSize = currentFontSize;
+                    }
+
+                    if (newFontSize < 2.45) {
+                        newFontSize = 2.45;
+                    }
+    
+                    if (newContSize < 150) {
+                        newContSize = 150;
+                    }
+
+                    if (newMarginSize < 10) {
+                        newMarginSize = 10;
+                    }
+    
+                    title.style.fontSize = `${newFontSize}vw`;
+                    container.style.height = `${newContSize}px`;
+                    margin.style.marginTop = `${newMarginSize}px`;
+                },
+    
+                onLeave: () => {
+                    let counter = document.getElementById('date-time-scroll-counter');
+                    counter.style.display = "none";
+                },
             },
         });
     }
@@ -570,16 +647,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     let lngStep, latStep, zoomStep;
     
                     if (velocity > 0 && window.scrollY > 0) {
-                        // Forward animation steps
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 15;
-                        console.log('FRAME06:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (9 - map.getZoom()) / 15;
-                        console.log('FRAME06', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -700,6 +774,56 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    //NAF Chapter Intro
+    function frame072() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS032",
+                start: 'top top',
+                end: '400% 32%',
+                pin: true,
+                scrub: true,
+                markers: false,
+    
+                onEnter: () => {},
+                onEnterBack: () => {},
+                onLeaveBack: () => {},
+    
+                onUpdate: self => {
+                    const title = document.getElementById('fs0003Title');
+                    const container = document.getElementById('FS032');
+                    const margin = document.getElementById('chp02');
+
+                    const initialContainerHeight = 300;
+                    const progress = self.progress;
+
+                    let newFontSize = 7 - (progress * 18);
+                    let newMarginSize = 50 - (progress * 500);
+                    let newContSize = initialContainerHeight - (progress * 1050);
+    
+                    if (newFontSize < 2.45) {
+                        newFontSize = 2.45;
+                    }
+    
+                    if (newContSize < 150) {
+                        newContSize = 150;
+                    }
+
+                    if (newMarginSize < 10) {
+                        newMarginSize = 10;
+                    }
+    
+                    title.style.fontSize = `${newFontSize}vw`;
+                    container.style.height = `${newContSize}px`;
+                    margin.style.marginTop = `${newMarginSize}px`;
+                },
+    
+                onLeave: () => {
+                },
+            },
+        });
+    }
+
     //North Anatolia Textbox
     function frame08() {
         const layersToToggle = ['Fault-Paths-L02-NAF', 'ISO-land'];
@@ -709,7 +833,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#SEC04",
-                start: 'top 60%', //Make it stop near the top, if wanna center it do 'top top'
+                start: 'top 60%',
                 end: '500% top',
                 pin: true,
                 scrub: true,
@@ -752,7 +876,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     let lngStep, latStep, zoomStep;
     
                     if (velocity > 0 && window.scrollY > 0) {
-                        // Forward animation steps
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 15;
@@ -969,6 +1092,56 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
                 },
     
+            },
+        });
+    }
+
+    //1999 Chapter Intro
+    function frame102() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS052",
+                start: 'top top',
+                end: '400% 32%',
+                pin: true,
+                scrub: true,
+                markers: false,
+    
+                onEnter: () => {},
+                onEnterBack: () => {},
+                onLeaveBack: () => {},
+    
+                onUpdate: self => {
+                    const title = document.getElementById('fs052Title');
+                    const container = document.getElementById('FS052');
+                    const margin = document.getElementById('chp03');
+                    
+                    const initialContainerHeight = 300;
+                    const progress = self.progress;
+
+                    let newFontSize = 7 - (progress * 18);
+                    let newMarginSize = 50 - (progress * 500);
+                    let newContSize = initialContainerHeight - (progress * 1050);
+    
+                    if (newFontSize < 2.45) {
+                        newFontSize = 2.45;
+                    }
+    
+                    if (newContSize < 150) {
+                        newContSize = 150;
+                    }
+
+                    if (newMarginSize < 10) {
+                        newMarginSize = 10;
+                    }
+    
+                    title.style.fontSize = `${newFontSize}vw`;
+                    container.style.height = `${newContSize}px`;
+                    margin.style.marginTop = `${newMarginSize}px`;
+                },
+    
+                onLeave: () => {
+                },
             },
         });
     }
@@ -2061,6 +2234,56 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    //Istanbul Intro
+    function frame132() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS072",
+                start: 'top top',
+                end: '400% 32%',
+                pin: true,
+                scrub: true,
+                markers: false,
+    
+                onEnter: () => {},
+                onEnterBack: () => {},
+                onLeaveBack: () => {},
+    
+                onUpdate: self => {
+                    const title = document.getElementById('fs072Title');
+                    const container = document.getElementById('FS072');
+                    const margin = document.getElementById('chp04');
+                    
+                    const initialContainerHeight = 300;
+                    const progress = self.progress;
+
+                    let newFontSize = 7 - (progress * 18);
+                    let newMarginSize = 50 - (progress * 500);
+                    let newContSize = initialContainerHeight - (progress * 1050);
+    
+                    if (newFontSize < 2.45) {
+                        newFontSize = 2.45;
+                    }
+    
+                    if (newContSize < 150) {
+                        newContSize = 150;
+                    }
+
+                    if (newMarginSize < 10) {
+                        newMarginSize = 10;
+                    }
+    
+                    title.style.fontSize = `${newFontSize}vw`;
+                    container.style.height = `${newContSize}px`;
+                    margin.style.marginTop = `${newMarginSize}px`;
+                },
+    
+                onLeave: () => {
+                },
+            },
+        });
+    }
+
     //Istanbul Timeline
     function frame13() {    
         const boundariesToToggle = ['L3_AdminBoundaries', 'L2_AdminBoundaries'];
@@ -2320,12 +2543,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .add(frame02(), { onLeave: frame01 })
     .add(frame03(), { onLeave: frame02 }) 
     .add(frame04(), { onLeave: frame03 }) 
-    .add(frame05(), { onLeave: frame04 }) 
+    .add(frame05(), { onLeave: frame04 })
+    .add(frame052(), { onLeave: frame05 }) 
     .add(frame06(), { onLeave: frame05 }) 
     .add(frame07(), { onLeave: frame06 }) 
+    .add(frame072(), { onLeave: frame07 }) 
     .add(frame08(), { onLeave: frame07 })
     .add(frame09(), { onLeave: frame08 })
     .add(frame10(), { onLeave: frame09 })
+    .add(frame102(), { onLeave: frame10 })
     .add(frame11(), { onLeave: frame10 })
     .add(frame12(), { onLeave: frame11 })
     .add(frame121(), { onLeave: frame12 })
@@ -2335,6 +2561,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .add(frame125(), { onLeave: frame124 })
     .add(frame126(), { onLeave: frame125 })
     .add(frame127(), { onLeave: frame126 })
+    .add(frame132(), { onLeave: frame127 })
     .add(frame13(), { onLeave: frame127 })
     .add(frame14(), { onLeave: frame13 })
     .add(frame15(), { onLeave: frame14 })
