@@ -1,5 +1,33 @@
 /* styles.css */
 
+@font-face {
+    font-family: 'Reckless';
+    src: url('https://github.com/tahaerdem/flWebmap/blob/main/resources/fonts/reckless-regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Reckless Italic';
+    src: url('https://github.com/tahaerdem/flWebmap/blob/main/resources/fonts/reckless-italic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Reckless Light';
+    src: url('https://github.com/tahaerdem/flWebmap/blob/main/resources/fonts/reckless-light.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Reckless Light Italic';
+    src: url('https://github.com/tahaerdem/flWebmap/blob/main/resources/fonts/reckless-light-italic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
 
     font-family:  'neue-haas-grotesk-text', 'Inter', 'Helvetica Neue', 'Akzidenz-Grotesk Pro', sans-serif;
