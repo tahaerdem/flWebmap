@@ -2107,3 +2107,78 @@ footer.footer-item:hover {
 .caption .bottom-left { bottom: 10px; left: 10px; }
 
 .caption .bottom-right { bottom: 10px; right: 10px; }
+
+.pancake {
+    display: flex;
+    margin-bottom: 80px;
+}
+
+.pancake.container {
+    width: 100%;
+    height: 200%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    counter-reset: carousel-counter;
+}
+
+.pancake.pck-card {
+    width: 16vw;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    align-self: flex-start;
+
+    transition: 200ms ease-in-out;
+}
+
+.pancake.pck-card:hover {
+    border-radius: 10px;
+    width: 18vw;
+    transition: 200ms ease-in-out;
+}
+
+.pancake.pck-card::before {
+    counter-increment: carousel-counter;
+    content:counter(carousel-counter);
+    display: block;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
+    font-size: 120px;
+    color: #212121;
+    margin-bottom: -130px;
+    margin-left: 15px;
+}
+
+
+.pancake.pck-title-first {
+    color: #808080;
+    padding: 0 0 0 20px;
+    font-family: 'Roboto Mono', monospace;
+    text-transform: uppercase;
+    font-size: medium;
+    width: 10%;
+}
+
+.pancake.pck-title-first::after {
+    content: '';
+    border-bottom: #fff 2px solid;
+    color: #fff;
+}
+
+.pancake.pck-title-second {
+    color: #fff;
+    padding-left: 10px;
+    font-size: medium;
+    font-family: 'Roboto Mono', monospace;
+    text-transform: uppercase;
+}
+
+.pancake.pck-title-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    flex-grow: 2;
+}

@@ -1,0 +1,29 @@
+<svg width="1000" height="1306" viewBox="0 0 1000 1306" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1000" height="1306" fill="white"/>
+<line x1="116" y1="1173" x2="884" y2="1173" stroke="black" stroke-width="30"/>
+<path d="M385 1007H425V1165H385V1007Z" fill="#FFD9D9" stroke="#F14141" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="18 18"/>
+<rect x="197.5" y="530.5" width="605" height="165" fill="#E2E2E2" stroke="black" stroke-width="5"/>
+<rect x="237.5" y="565.5" width="145" height="95" fill="#B2B6B7" stroke="black" stroke-width="5"/>
+<rect x="617.5" y="565.5" width="145" height="95" fill="#B2B6B7" stroke="black" stroke-width="5"/>
+<rect x="427.5" y="565.5" width="145" height="95" fill="#B2B6B7" stroke="black" stroke-width="5"/>
+<rect x="197.5" y="365.5" width="605" height="165" fill="#E2E2E2" stroke="black" stroke-width="5"/>
+<rect x="237.5" y="400.5" width="145" height="95" fill="#B2B6B7" stroke="black" stroke-width="5"/>
+<rect x="617.5" y="400.5" width="145" height="95" fill="#B2B6B7" stroke="black" stroke-width="5"/>
+<rect x="427.5" y="400.5" width="145" height="95" fill="#B2B6B7" stroke="black" stroke-width="5"/>
+<rect x="197.5" y="695.5" width="605" height="165" fill="#E2E2E2" stroke="black" stroke-width="5"/>
+<rect x="237.5" y="730.5" width="145" height="95" fill="#B2B6B7" stroke="black" stroke-width="5"/>
+<rect x="617.5" y="730.5" width="145" height="95" fill="#B2B6B7" stroke="black" stroke-width="5"/>
+<rect x="427.5" y="730.5" width="145" height="95" fill="#B2B6B7" stroke="black" stroke-width="5"/>
+<rect x="197.5" y="860.5" width="605" height="165" fill="#E8E9EA" stroke="black" stroke-width="5"/>
+<rect x="237.5" y="895.5" width="145" height="95" fill="#B2B6B7" stroke="black" stroke-width="5"/>
+<rect x="617.5" y="895.5" width="145" height="95" fill="#B2B6B7" stroke="black" stroke-width="5"/>
+<rect x="427.5" y="895.5" width="145" height="95" fill="#B2B6B7" stroke="black" stroke-width="5"/>
+<rect x="197.5" y="1025.5" width="31" height="135" fill="#E2E2E2" stroke="black" stroke-width="5"/>
+<rect x="771.5" y="1025.5" width="31" height="135" fill="#E2E2E2" stroke="black" stroke-width="5"/>
+<rect x="579.5" y="1025.5" width="31" height="135" fill="#E2E2E2" stroke="black" stroke-width="5"/>
+<mask id="path-22-outside-1_163_1800" maskUnits="userSpaceOnUse" x="188" y="356" width="624" height="814" fill="black">
+<rect fill="white" x="188" y="356" width="624" height="814"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M805 363H195V1023V1028V1163H231V1028H577V1163H613V1028H769V1163H805V1028V1023V363Z"/>
+</mask>
+<path d="M195 363V356H188V363H195ZM805 363H812V356H805V363ZM195 1163H188V1170H195V1163ZM231 1163V1170H238V1163H231ZM231 1028V1021H224V1028H231ZM577 1028H584V1021H577V1028ZM577 1163H570V1170H577V1163ZM613 1163V1170H620V1163H613ZM613 1028V1021H606V1028H613ZM769 1028H776V1021H769V1028ZM769 1163H762V1170H769V1163ZM805 1163V1170H812V1163H805ZM195 370H805V356H195V370ZM202 1023V363H188V1023H202ZM202 1028V1023H188V1028H202ZM202 1163V1028H188V1163H202ZM231 1156H195V1170H231V1156ZM224 1028V1163H238V1028H224ZM577 1021H231V1035H577V1021ZM584 1163V1028H570V1163H584ZM613 1156H577V1170H613V1156ZM606 1028V1163H620V1028H606ZM769 1021H613V1035H769V1021ZM776 1163V1028H762V1163H776ZM805 1156H769V1170H805V1156ZM798 1028V1163H812V1028H798ZM798 1023V1028H812V1023H798ZM798 363V1023H812V363H798Z" fill="black" mask="url(#path-22-outside-1_163_1800)"/>
+</svg>

@@ -2387,7 +2387,107 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    //Next steps for Istanbul
+    //Dissecting Collapse intro
+    function frame131() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS0911",
+                start: 'top top',
+                end: '1000% 32%',
+                pin: true,
+                scrub: true,
+                markers: false,
+    
+                onEnter: () => {},
+                onEnterBack: () => {},
+                onLeaveBack: () => {},
+    
+                onUpdate: self => {
+                    const title = document.getElementById('fs00911Title');
+                    const container = document.getElementById('FS0911');
+                    const margin = document.getElementById('chp05');
+                    
+                    const initialContainerHeight = 300;
+                    const progress = self.progress;
+
+                    let newFontSize = 7 - (progress * 18);
+                    let newMarginSize = 50 - (progress * 500);
+                    let newContSize = initialContainerHeight - (progress * 1050);
+    
+                    if (newFontSize < 2.45) {
+                        newFontSize = 2.45;
+                    }
+    
+                    if (newContSize < 150) {
+                        newContSize = 150;
+                    }
+
+                    if (newMarginSize < 10) {
+                        newMarginSize = 10;
+                    }
+    
+                    title.style.fontSize = `${newFontSize}vw`;
+                    container.style.height = `${newContSize}px`;
+                    margin.style.marginTop = `${newMarginSize}px`;
+                },
+    
+                onLeave: () => {
+                },
+            },
+        });
+    }
+
+    //Artificial Intelligence intro
+    function frame141() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS092",
+                start: 'top top',
+                end: '400% 32%',
+                pin: true,
+                scrub: true,
+                markers: true,
+    
+                onEnter: () => {},
+                onEnterBack: () => {},
+                onLeaveBack: () => {},
+    
+                onUpdate: self => {
+                    const title = document.getElementById('fs0092Title');
+                    const container = document.getElementById('FS092');
+                    const margin = document.getElementById('chp06');
+                    
+                    const initialContainerHeight = 300;
+                    const progress = self.progress;
+
+                    let newFontSize = 7 - (progress * 18);
+                    let newMarginSize = 50 - (progress * 500);
+                    let newContSize = initialContainerHeight - (progress * 1050);
+    
+                    if (newFontSize < 2.45) {
+                        newFontSize = 2.45;
+                    }
+    
+                    if (newContSize < 150) {
+                        newContSize = 150;
+                    }
+
+                    if (newMarginSize < 10) {
+                        newMarginSize = 10;
+                    }
+    
+                    title.style.fontSize = `${newFontSize}vw`;
+                    container.style.height = `${newContSize}px`;
+                    margin.style.marginTop = `${newMarginSize}px`;
+                },
+    
+                onLeave: () => {
+                },
+            },
+        });
+    }
+
+    //Artificial Intelligence
     function frame14() {
 
         const layersToToggle = ['L3_Population', 'ISO-water','L3_AdminBoundaries','L2_AdminBoundaries'];
@@ -2562,8 +2662,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .add(frame126(), { onLeave: frame125 })
     .add(frame127(), { onLeave: frame126 })
     .add(frame132(), { onLeave: frame127 })
-    .add(frame13(), { onLeave: frame127 })
-    .add(frame14(), { onLeave: frame13 })
+    .add(frame13(), { onLeave: frame132 })
+    .add(frame131(), { onLeave: frame13 })
+    .add(frame141(), { onLeave: frame131 })
+    .add(frame14(), { onLeave: frame141 })
     .add(frame15(), { onLeave: frame14 })
 
     function checkScrollTop() {
