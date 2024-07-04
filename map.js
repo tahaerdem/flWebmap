@@ -566,7 +566,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                     let newFontSize = 7 - (progress * 18);
                     let newMarginSize = 50 - (progress * 500);
-                    let newContSize = initialContainerHeight - (progress * 1050);
+                    let newContSize = initialContainerHeight - (progress * 850);
 
                     if (titleWidth < 601) {
                         const currentFontSize = title.style.fontSize;
@@ -799,7 +799,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                     let newFontSize = 7 - (progress * 18);
                     let newMarginSize = 50 - (progress * 500);
-                    let newContSize = initialContainerHeight - (progress * 1050);
+                    let newContSize = initialContainerHeight - (progress * 850);
     
                     if (newFontSize < 2.45) {
                         newFontSize = 2.45;
@@ -1121,7 +1121,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                     let newFontSize = 7 - (progress * 18);
                     let newMarginSize = 50 - (progress * 500);
-                    let newContSize = initialContainerHeight - (progress * 1050);
+                    let newContSize = initialContainerHeight - (progress * 850);
     
                     if (newFontSize < 2.45) {
                         newFontSize = 2.45;
@@ -2259,7 +2259,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                     let newFontSize = 7 - (progress * 18);
                     let newMarginSize = 50 - (progress * 500);
-                    let newContSize = initialContainerHeight - (progress * 1050);
+                    let newContSize = initialContainerHeight - (progress * 850);
     
                     if (newFontSize < 2.45) {
                         newFontSize = 2.45;
@@ -2412,7 +2412,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                     let newFontSize = 7 - (progress * 18);
                     let newMarginSize = 50 - (progress * 500);
-                    let newContSize = initialContainerHeight - (progress * 1050);
+                    let newContSize = initialContainerHeight - (progress * 850);
     
                     if (newFontSize < 2.45) {
                         newFontSize = 2.45;
@@ -2462,7 +2462,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                     let newFontSize = 7 - (progress * 18);
                     let newMarginSize = 50 - (progress * 500);
-                    let newContSize = initialContainerHeight - (progress * 1050);
+                    let newContSize = initialContainerHeight - (progress * 850);
     
                     if (newFontSize < 2.45) {
                         newFontSize = 2.45;
