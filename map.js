@@ -2579,8 +2579,59 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    //Ways to Detect Risky Buildings
+    //Interactive Map Intro
+    function frame151() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#FS00112",
+                start: 'top top',
+                end: '450% 22%',
+                pin: true,
+                scrub: true,
+                markers: false,
+    
+                onEnter: () => {},
+                onEnterBack: () => {},
+                onLeaveBack: () => {},
+    
+                onUpdate: self => {
+                    const title = document.getElementById('fs00112Title');
+                    const container = document.getElementById('FS00112');
+                    const margin = document.getElementById('chp07');
+                    
+                    const initialContainerHeight = 252;
+                    const progress = self.progress;
+
+                    let newFontSize = 7 - (progress * 18);
+                    let newMarginSize = 50 - (progress * 500);
+                    let newContSize = initialContainerHeight - (progress * 850);
+    
+                    if (newFontSize < 2.45) {
+                        newFontSize = 2.45;
+                    }
+    
+                    if (newContSize < 150) {
+                        newContSize = 150;
+                    }
+
+                    if (newMarginSize < 10) {
+                        newMarginSize = 10;
+                    }
+
+                    title.style.fontSize = `${newFontSize}vw`;
+                    margin.style.marginTop = `${newMarginSize}px`;
+                    container.style.height = `${newContSize}px`;
+
+                },
+    
+                onLeave: () => {
+                },
+            },
+        });
+    }
+
     function frame15() {
+        const tabtitle = document.getElementById('tab-title');
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS12",
@@ -2597,11 +2648,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 },
 
                 onUpdate: self => {
+                    const progress = self.progress;
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
                     const targetLat = 41.158;
                     const targetLng = 28.978;
                     const targetZoom = 8.75;
+                    tabtitle.style.color = '#fff';
+                    tabtitle.style.opacity = (progress * progress) * 50;
     
                     let lngStep, latStep, zoomStep;
     
@@ -2666,7 +2720,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .add(frame131(), { onLeave: frame13 })
     .add(frame141(), { onLeave: frame131 })
     .add(frame14(), { onLeave: frame141 })
-    .add(frame15(), { onLeave: frame14 })
+    .add(frame151(), { onLeave: frame14 })
+    .add(frame15(), { onLeave: frame151 })
 
     function checkScrollTop() {
         // Check if the scroll position is at the top

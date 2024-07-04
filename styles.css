@@ -777,7 +777,7 @@ article {
     justify-content: center;
     width: 100%;
     padding: 0;
-    margin: 0;
+    margin: 0 0 -20px 0;
     z-index: 2;
 }
 
@@ -1217,6 +1217,16 @@ stroke: #fff;
     background-color: #000;
     padding-top: 20px;
     padding-bottom: 20px;
+}
+
+.fs.fs-underlay {
+    margin-top: -50px;
+    padding-top: 100px;
+}
+
+.fs.fs-tab {
+    border:none;
+    border-bottom: 
 }
 
 .text-container-overlay {
@@ -2200,4 +2210,170 @@ footer.footer-item:hover {
     flex-direction: row;
     justify-content: left;
     flex-grow: 2;
+}
+
+#g-Algorithm_pdf-box ,
+#g-Algorithm_pdf-box .g-artboard {
+    margin:0 auto;
+    font-family: 'Roboto Mono', monospace;
+}
+#g-Algorithm_pdf-box p {
+    margin:0;
+}
+#g-Algorithm_pdf-box .g-aiAbs {
+    position:absolute;
+}
+#g-Algorithm_pdf-box .g-aiImg {
+    position:absolute;
+    top:0;
+    display:block;
+    width:100% !important;
+}
+#g-Algorithm_pdf-box .g-aiSymbol {
+    position: absolute;
+    box-sizing: border-box;
+}
+#g-Algorithm_pdf-box .g-aiPointText p { white-space: nowrap; }
+#g-Algorithm_pdf-Artboard_1 {
+    position:relative;
+    overflow:hidden;
+}
+#g-Algorithm_pdf-Artboard_1 p {
+    font-family: 'Roboto Mono', monospace;
+    font-weight:regular;
+    line-height:10px;
+    height:auto;
+    opacity:1;
+    letter-spacing:-0.06em;
+    font-size:9px;
+    text-align:left;
+    color:rgb(113,123,131);
+    text-transform:none;
+    padding-bottom:0;
+    padding-top:0;
+    mix-blend-mode:normal;
+    font-style:normal;
+    position:static;
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle0 {
+    font-weight:500;
+    line-height:41px;
+    height:41px;
+    letter-spacing:-0.099em;
+    font-size:34px;
+    color:rgb(255, 255, 255);
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle1 {
+    font-weight:500;
+    line-height:21px;
+    height:21px;
+    font-size:17px;
+    color:rgb(255, 255, 255);
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle2 {
+    font-weight:500;
+    line-height:16px;
+    height:16px;
+    letter-spacing:-0.059em;
+    font-size:14px;
+    color:rgb(255, 255, 255);
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle3 {
+    font-weight:500;
+    line-height:29px;
+    height:29px;
+    letter-spacing:0em;
+    font-size:24px;
+    color:rgb(255, 255, 255);
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle4 {
+    font-weight:500;
+    height:10px;
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle5 {
+    font-weight:500;
+    line-height:14px;
+    height:14px;
+    font-size:12px;
+    color:rgb(179,178,179);
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle6 {
+    font-weight:500;
+    line-height:16px;
+    height:16px;
+    font-size:14px;
+    color:rgb(255, 255, 255);
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle7 {
+    font-weight:500;
+    height:10px;
+    letter-spacing:0em;
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle8 {
+    font-weight:500;
+    height:10px;
+    letter-spacing:-0.059em;
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle9 {
+    font-weight:500;
+    height:10px;
+    letter-spacing:-0.1em;
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle10 {
+    font-weight:500;
+    line-height:5px;
+    height:5px;
+    letter-spacing:-0.11em;
+    font-size:4px;
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle11 {
+    font-weight:500;
+    height:10px;
+    letter-spacing:-0.109em;
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle12 {
+    font-weight:500;
+    height:10px;
+    color:rgb(113,110,100);
+}
+#g-Algorithm_pdf-Artboard_1 .g-pstyle13 {
+    font-weight:700;
+    line-height:4px;
+    height:4px;
+    letter-spacing:0em;
+    font-size:4px;
+    color:rgb(255,255,255);
+}
+#g-Algorithm_pdf-Artboard_1 .g-cstyle0 {
+    letter-spacing:-0.059em;
+}
+#g-Algorithm_pdf-Artboard_1 .g-cstyle1 {
+    letter-spacing:0em;
+}
+#g-Algorithm_pdf-Artboard_1 .g-cstyle2 {
+    letter-spacing:-0.06em;
+}
+#g-Algorithm_pdf-Artboard_1 .g-cstyle3 {
+    letter-spacing:-0.099em;
+}
+#g-Algorithm_pdf-Artboard_1 .g-cstyle4 {
+    letter-spacing:-0.109em;
+}
+#g-Algorithm_pdf-Artboard_1 .g-cstyle5 {
+    letter-spacing:-0.066em;
+}
+#g-Algorithm_pdf-Artboard_1 .g-cstyle6 {
+    letter-spacing:-0.065em;
+}
+#g-Algorithm_pdf-Artboard_1 .g-cstyle7 {
+    letter-spacing:-0.11em;
+}
+#g-Algorithm_pdf-Artboard_1 .g-cstyle8 {
+    letter-spacing:0.02em;
+}
+#g-Algorithm_pdf-Artboard_1 .g-cstyle9 {
+    letter-spacing:-0.037em;
+}
+#tab-title {
+    color: #000;
 }
