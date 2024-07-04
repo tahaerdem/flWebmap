@@ -1763,6 +1763,11 @@ h4.timeline.date.bottom {
     justify-content: center;
 }
 
+.textbox.tb-opz {
+    background-color:#fbfbfb00;
+    border: none;
+}
+
 .trp-textbox {
     display: inline-flexbox;
     position: relative;

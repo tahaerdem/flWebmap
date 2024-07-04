@@ -306,7 +306,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     function frame04() {
-        const layersToToggle = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
+        const layersToToggle = [];
+        const layersToToggleWhenLeft = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
         const earthquakeLayer = 'feb6-eq-circle-stroke';
         const sourceLayer = 'usgs-feb67-eq-data-0ezrpr';
         const startTime = 1675646254342;
@@ -414,8 +415,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                   ["<=", ["get", "time"], lastFeature.properties.time]
                 ];
                 map.setFilter(earthquakeLayer, filter);
-                layersToToggle.forEach(layerId => {
-                  map.setLayoutProperty(layerId, 'visibility', 'visible');
+                layersToToggleWhenLeft.forEach(layerId => {
+                    map.setLayoutProperty(layerId, 'visibility', 'visible');
                 });
               },
             },
