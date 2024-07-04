@@ -2446,7 +2446,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 end: '400% 32%',
                 pin: true,
                 scrub: true,
-                markers: true,
+                markers: false,
     
                 onEnter: () => {},
                 onEnterBack: () => {},
