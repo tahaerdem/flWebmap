@@ -115,7 +115,7 @@ function handleClick(d, event) {
 
     d3.select('#popup')
       .html(`
-          <div class="close-btn" onclick="hidePopup()">x</div>
+          <div class="close-btn" onclick="hidePopup()"><svg width="12" height="12" style="margin-bottom:-3px; margin-right:3px;" viewBox="0 0 59 59" fill="#c8c8c8" xmlns="http://www.w3.org/2000/svg"><path d="M51.3636 58.7273L0.09091 7.45454L7 0.545456L58.2727 51.8182L51.3636 58.7273ZM7 58.7273L0.09091 51.8182L51.3636 0.545456L58.2727 7.45454L7 58.7273Z"/></svg></div>
           <h3 style="text-align: left; margin-top: 0.35em; text-transform: capitalize; line-height: 1em">${sentenceCaseName}</h3><hr class="pop-line">
           <div class="ppu-line"><p class="ppu">Population:</p><p class="ppu">${population.toLocaleString()}</p></div>
           <div class="ppu-line"><p class="ppu">Shelter:</p><p class="ppu">${shelter.toLocaleString()}</p></div>

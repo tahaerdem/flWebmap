@@ -11,7 +11,6 @@ let zoomInitial = zoom;
 let initialZoom = calculateZoom(viewportWidth);
 
 function checkScrollTop() {
-    // Check if the scroll position is at the top
     if (window.scrollY === 0) {
         console.log("The page is scrolled back to the top.");
     }
@@ -37,10 +36,8 @@ function getScrollPositionY() {
     return window.scrollY || document.documentElement.scrollTop;
 }
 
-// Event listener to handle scroll events
 window.addEventListener('scroll', function() {
     var scrollTop = getScrollPositionY();
-//    console.log('Scroll position:', scrollTop);
     return scrollTop;
 });
 
@@ -56,11 +53,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#mainTitle",
-                start: 'bottom top',
+                start: '50% top',
                 end: '250% -100%',
                 pin: false,
                 scrub: true,
-                markers: false,
+                markers: true,
                 
                 onEnter: self => {
                     console.log('Entered')
@@ -77,7 +74,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     let lngStep, latStep, zoomStep;
     
                     if (velocity > 0 && window.scrollY > 0) {
-                        // Forward animation steps
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 15;
@@ -97,7 +93,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         center: [center.lng + lngStep, center.lat + latStep],
                         zoom: map.getZoom() + zoomStep,
                         duration: 0,
-                        easing: t => t // linear easing
+                        easing: t => t
                     });
                 },
     
@@ -422,7 +418,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             },
           });
         });
-      }
+    }
 
     //Zoom into second EQ
     function frame05() {
@@ -2747,7 +2743,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     checkScrollTop();
 });
 
-// Function to calculate zoom based on viewport width
 function calculateZoom(viewportWidth) {
     if (viewportWidth > 1179) {
         return Math.log2(1100 / 400); // Calculate zoom for 1100px width
@@ -2769,11 +2764,8 @@ map.on('style.load', () => {
     });
 });
 
-// At low zooms, complete a revolution every two minutes.
 const secondsPerRevolution = -120;
-// Above zoom level 5, do not rotate.
 const maxSpinZoom = 5;
-// Rotate at intermediate speeds between zoom levels 3 and 5.
 const slowSpinZoom = 3;
 
 let userInteracting = false;

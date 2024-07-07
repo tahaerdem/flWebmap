@@ -1075,6 +1075,10 @@ section.provinces {
     max-width: 1200px;
 }
 
+.xxlct {
+    max-width: 1500px;
+}
+
 #plot .info {
     height: 20px;
     margin-top: -0.6em;
