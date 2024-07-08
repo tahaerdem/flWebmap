@@ -1,4 +1,5 @@
 // script.js
+
 function centerElement(elementId) {
     const element = document.getElementById(elementId);
     if (!element) {

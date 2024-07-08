@@ -41,10 +41,10 @@ window.addEventListener('scroll', function() {
     return scrollTop;
 });
 
-window.addEventListener('resize', () => {
-    istMap.resize(); // Ensure the map resizes
-    fitMapToBounds(); // Fit the map to the bounds
-    //ScrollTrigger.refresh();
+document.addEventListener("resize", (event) => {
+    viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    zoom = calculateZoom(viewportWidth);
+    map.setZoom(zoom);
 });
 
 document.addEventListener("DOMContentLoaded", (event) => {
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 end: '250% -100%',
                 pin: false,
                 scrub: true,
-                markers: true,
+                markers: false,
                 
                 onEnter: self => {
                     console.log('Entered')
@@ -340,14 +340,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
               scrub: true,
               markers: false,
       
-              onRefresh: self => {
-                const pinnedElement = self.pin;
-                const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-                const elementWidth = pinnedElement.offsetWidth;
-                const left = (windowWidth - elementWidth) / 2;
-                pinnedElement.style.left = `${left}px`;
-              },
-      
               onEnter: () => {
                 layersToToggle.forEach(layerId => {
                   map.setLayoutProperty(layerId, 'visibility', 'visible');
@@ -529,7 +521,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     //EAF Chapter Intro
     function frame052() {
 
-
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS00",
@@ -555,20 +546,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 onUpdate: self => {
                     const title = document.getElementById('fs00Title');
                     const container = document.getElementById('FS00');
-                    const windowWidth = window.innerWidth;
                     const margin = document.getElementById('chp01');
                     const initialContainerHeight = 300;
                     const progress = self.progress;
-                    const titleWidth = title.getBoundingClientRect().width;
 
+                    const windowWidth = window.innerWidth;
                     let newFontSize = 7 - (progress * 18);
                     let newMarginSize = 50 - (progress * 500);
                     let newContSize = initialContainerHeight - (progress * 850);
-
-                    if (titleWidth < 601) {
-                        const currentFontSize = title.style.fontSize;
-                        newFontSize = currentFontSize;
-                    }
 
                     if (newFontSize < 2.45) {
                         newFontSize = 2.45;
@@ -581,6 +566,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     if (newMarginSize < 10) {
                         newMarginSize = 10;
                     }
+
+                    if (windowWidth < 1024) {
+                        newFontSize = 7 - (progress * 3);
+                        if (newFontSize < 6) {
+                            newFontSize = 6;
+                        }                   
+                    } 
     
                     title.style.fontSize = `${newFontSize}vw`;
                     container.style.height = `${newContSize}px`;
@@ -794,10 +786,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const initialContainerHeight = 300;
                     const progress = self.progress;
 
+                    const windowWidth = window.innerWidth;
                     let newFontSize = 7 - (progress * 18);
                     let newMarginSize = 50 - (progress * 500);
                     let newContSize = initialContainerHeight - (progress * 850);
-    
+
                     if (newFontSize < 2.45) {
                         newFontSize = 2.45;
                     }
@@ -809,6 +802,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     if (newMarginSize < 10) {
                         newMarginSize = 10;
                     }
+
+                    if (windowWidth < 1024) {
+                        newFontSize = 7 - (progress * 3);
+                        if (newFontSize < 6) {
+                            newFontSize = 6;
+                        }                   
+                    } 
     
                     title.style.fontSize = `${newFontSize}vw`;
                     container.style.height = `${newContSize}px`;
@@ -1035,8 +1035,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     map.easeTo({
                         center: [center.lng + lngStep, center.lat + latStep],
                         zoom: map.getZoom() + zoomStep,
-                        duration: 0, // Keep duration 0 for smooth continuous movement
-                        easing: t => t // linear easing
+                        duration: 0,
+                        easing: t => t
                     });
                 },
             }
@@ -1116,10 +1116,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const initialContainerHeight = 300;
                     const progress = self.progress;
 
+                    const windowWidth = window.innerWidth;
                     let newFontSize = 7 - (progress * 18);
                     let newMarginSize = 50 - (progress * 500);
                     let newContSize = initialContainerHeight - (progress * 850);
-    
+
                     if (newFontSize < 2.45) {
                         newFontSize = 2.45;
                     }
@@ -1131,6 +1132,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     if (newMarginSize < 10) {
                         newMarginSize = 10;
                     }
+
+                    if (windowWidth < 1024) {
+                        newFontSize = 7 - (progress * 3);
+                        if (newFontSize < 6) {
+                            newFontSize = 6;
+                        }                   
+                    } 
     
                     title.style.fontSize = `${newFontSize}vw`;
                     container.style.height = `${newContSize}px`;
@@ -2254,10 +2262,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const initialContainerHeight = 300;
                     const progress = self.progress;
 
+                    const windowWidth = window.innerWidth;
                     let newFontSize = 7 - (progress * 18);
                     let newMarginSize = 50 - (progress * 500);
                     let newContSize = initialContainerHeight - (progress * 850);
-    
+
                     if (newFontSize < 2.45) {
                         newFontSize = 2.45;
                     }
@@ -2269,6 +2278,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     if (newMarginSize < 10) {
                         newMarginSize = 10;
                     }
+
+                    if (windowWidth < 1024) {
+                        newFontSize = 7 - (progress * 3);
+                        if (newFontSize < 6) {
+                            newFontSize = 6;
+                        }                   
+                    } 
     
                     title.style.fontSize = `${newFontSize}vw`;
                     container.style.height = `${newContSize}px`;
@@ -2407,10 +2423,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const initialContainerHeight = 300;
                     const progress = self.progress;
 
+                    const windowWidth = window.innerWidth;
                     let newFontSize = 7 - (progress * 18);
                     let newMarginSize = 50 - (progress * 500);
                     let newContSize = initialContainerHeight - (progress * 850);
-    
+
                     if (newFontSize < 2.45) {
                         newFontSize = 2.45;
                     }
@@ -2422,6 +2439,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     if (newMarginSize < 10) {
                         newMarginSize = 10;
                     }
+
+                    if (windowWidth < 1024) {
+                        newFontSize = 7 - (progress * 3);
+                        if (newFontSize < 6) {
+                            newFontSize = 6;
+                        }                   
+                    } 
     
                     title.style.fontSize = `${newFontSize}vw`;
                     container.style.height = `${newContSize}px`;
@@ -2457,10 +2481,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const initialContainerHeight = 300;
                     const progress = self.progress;
 
+                    const windowWidth = window.innerWidth;
                     let newFontSize = 7 - (progress * 18);
                     let newMarginSize = 50 - (progress * 500);
                     let newContSize = initialContainerHeight - (progress * 850);
-    
+
                     if (newFontSize < 2.45) {
                         newFontSize = 2.45;
                     }
@@ -2472,6 +2497,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     if (newMarginSize < 10) {
                         newMarginSize = 10;
                     }
+
+                    if (windowWidth < 1024) {
+                        newFontSize = 7 - (progress * 3);
+                        if (newFontSize < 6) {
+                            newFontSize = 6;
+                        }                   
+                    } 
     
                     title.style.fontSize = `${newFontSize}vw`;
                     container.style.height = `${newContSize}px`;
@@ -2599,10 +2631,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const initialContainerHeight = 252;
                     const progress = self.progress;
 
+                    const windowWidth = window.innerWidth;
                     let newFontSize = 7 - (progress * 18);
                     let newMarginSize = 50 - (progress * 500);
                     let newContSize = initialContainerHeight - (progress * 850);
-    
+
                     if (newFontSize < 2.45) {
                         newFontSize = 2.45;
                     }
@@ -2615,10 +2648,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         newMarginSize = 10;
                     }
 
+                    if (windowWidth < 1024) {
+                        newFontSize = 7 - (progress * 3);
+                        if (newFontSize < 6) {
+                            newFontSize = 6;
+                        }                   
+                    } 
+    
                     title.style.fontSize = `${newFontSize}vw`;
-                    margin.style.marginTop = `${newMarginSize}px`;
                     container.style.height = `${newContSize}px`;
-
+                    margin.style.marginTop = `${newMarginSize}px`;
                 },
     
                 onLeave: () => {
@@ -2685,7 +2724,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             },
         });
     }
-
 
     var master = gsap.timeline();
 
