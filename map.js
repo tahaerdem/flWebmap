@@ -1158,7 +1158,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
             scrollTrigger: {
                 trigger: "#FS06",
-                start: 'top top', //Make it stop near the top, if wanna center it do 'top top'
+                start: 'top top',
                 end: '2500% top',
                 pin: true,
                 scrub: true,
@@ -1313,14 +1313,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         }
                     });
                     layersToHide.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
                 },
 
                 onUpdate: self => {
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
-                    const targetLat = 41.158;
+                    const targetLat = 41.058;
                     const targetLng = 28.978;
                     const targetZoom = 8.75;
 
