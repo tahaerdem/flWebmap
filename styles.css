@@ -1177,6 +1177,12 @@ stroke: #fff;
     line-height: 0em;
 }
 
+#plot .plhdr-w {
+    text-align: left;
+    line-height: 0em;
+    color:#fff;
+}
+
 #plot .toggle-bt:hover {
     background-color: #232323;
     cursor: pointer;
@@ -2251,6 +2257,10 @@ footer.footer-item:hover {
 
 .mgn-top-min-100 {
     margin-top: -100px;
+}
+
+.mgn-btm-min-5 {
+    margin-bottom: -5px;
 }
 
 .mgn-btm-min-10 {
