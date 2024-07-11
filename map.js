@@ -426,7 +426,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 end: '250% top',
                 pin: true,
                 scrub: true,
-                markers: true,
+                markers: false,
 
                 onEnter: () => {
                     layersToToggle.forEach(layerId => {
