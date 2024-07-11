@@ -220,7 +220,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             scrollTrigger: {
                 trigger: "#TL01",
                 start: 'top top',
-                end: '2000% top',
+                end: '1400% top',
                 pin: true,
                 scrub: true,
                 markers: false,
@@ -301,6 +301,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     }
 
+    //In-between two quakes
     function frame04() {
         const layersToToggle = [];
         const layersToToggleWhenLeft = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
@@ -412,7 +413,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    //Zoom into second EQ
+    //Grab the second earthquake timeline
     function frame05() {
         const layersToToggle = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
         const layersToHide = [];
@@ -421,11 +422,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#TL03",
-                start: '50% top', //Make it stop near the top, if wanna center it do 'top top'
-                end: '600% top',
+                start: '50% top',
+                end: '250% top',
                 pin: true,
                 scrub: true,
-                markers: false,
+                markers: true,
 
                 onEnter: () => {
                     layersToToggle.forEach(layerId => {

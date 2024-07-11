@@ -1113,6 +1113,11 @@ stroke: #fff;
     justify-content: space-between;
     max-width: 600px;
     z-index: 1001;
+    margin-bottom:-5em;
+
+    @media screen and (max-width: 900px) {
+        margin-bottom: 0px;
+    }
 }
 
 #plot .controls-container .toggles {
@@ -1225,8 +1230,7 @@ stroke: #fff;
     justify-content: center;
     z-index: 5;
     background-color: #000;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px;
 }
 
 .fs.fs-underlay {
@@ -2250,7 +2254,6 @@ footer.footer-item:hover {
 .mgn-top-20 {
     margin-top: 20px;
 }
-
 
 .mgn-top-min-5 {
     margin-top: -5px;
