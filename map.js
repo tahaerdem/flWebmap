@@ -10,6 +10,8 @@ zoom = calculateZoom(viewportWidth);
 let zoomInitial = zoom;
 let initialZoom = calculateZoom(viewportWidth);
 
+let flInitialZoom = 19;
+
 function checkScrollTop() {
     if (window.scrollY === 0) {
         console.log("The page is scrolled back to the top.");
@@ -22,6 +24,21 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/tahaerdemozturk/clwt6u2xg05k601nx3zbs1cun',
     zoom: zoom,
     center: [15.9637, -28.2433],
+    scrollZoom: false,
+    doubleClickZoom: false,
+    boxZoom: false,
+    dragRotate: false,
+    dragPan: false,
+    touchZoomRotate: false,
+    touchPitchHandler: false,
+    attributionControl: false,
+});
+
+const flMap = new mapboxgl.Map({
+    container: 'flMap',
+    style: 'mapbox://styles/tahaerdemozturk/clyhz0gtq01nt01qo3ynh5244',
+    zoom: flInitialZoom,
+    center: [28.840361, 40.998400],
     scrollZoom: false,
     doubleClickZoom: false,
     boxZoom: false,
@@ -2609,6 +2626,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+
     //Interactive Map Intro
     function frame151() {
         var tl = gsap.timeline({
@@ -2672,8 +2690,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS12",
-                start: 'top top', //Make it stop near the top, if wanna center it do 'top top'
-                end: '2500% top',
+                start: 'top top',
+                end: '7000% top',
                 pin: true,
                 scrub: true,
                 markers: false,
@@ -2692,7 +2710,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const targetLng = 28.978;
                     const targetZoom = 8.75;
                     tabtitle.style.color = '#fff';
-                    tabtitle.style.opacity = (progress * progress) * 50;
+                    tabtitle.style.opacity = (progress * progress) * 100;
     
                     let lngStep, latStep, zoomStep;
     
@@ -2726,6 +2744,50 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    function frame0001() {
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#flMap",
+                start: 'top 7%',
+                end: '200% top',
+                pin: true,
+                scrub: true,
+                markers: false,
+
+                onEnter: () => {
+                },
+    
+                onUpdate: self => {
+                    const progress = self.progress;
+                    const velocity = self.getVelocity();
+                    const flcenter = flMap.getCenter();
+                    const fltargetLat = 40.998400;
+                    const fltargetLng = 28.840361;
+    
+                    let fllngStep = 0, fllatStep = 0, flzoomStep = 0;
+    
+                    if (window.scrollY > 0) {
+                        fllngStep = (fltargetLng - flcenter.lng) / 10;
+                        fllatStep = (fltargetLat - flcenter.lat) / 10;
+                        if (velocity < 0) {
+                            flzoomStep = (20 - flMap.getZoom()) / 50;
+                        } else if (velocity > 0) {
+                            flzoomStep = (14.5 - flMap.getZoom()) / 25;
+                        }
+                    }
+    
+                    flMap.jumpTo({
+                        center: [flcenter.lng + fllngStep, flcenter.lat + fllatStep],
+                        zoom: flMap.getZoom() + flzoomStep,
+                        duration: 0,
+                        easing: t => t
+                    });
+                }
+            }
+        });
+    }
+
+
     var master = gsap.timeline();
 
     master
@@ -2758,27 +2820,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .add(frame14(), { onLeave: frame141 })
     .add(frame151(), { onLeave: frame14 })
     .add(frame15(), { onLeave: frame151 })
+    .add(frame0001(), { onLeave: frame15 })
+
 
     function checkScrollTop() {
-        // Check if the scroll position is at the top
         if (window.scrollY === 0) {
-            console.log("The page is scrolled back to the top.");
             
-            // Fly the map back to the original position
             map.flyTo({
                 center: [initialLng, initialLat],
                 zoom: initialZoom,
-                duration: 0, // Adjust the duration as needed
+                duration: 0,
             });
-            console.log("Map is reverted back to its initial position.");
-
         }
     }
 
-    // Add an event listener to check the scroll position whenever the user scrolls
     window.addEventListener('scroll', checkScrollTop);
-
-    // Initial check in case the page is already at the top when loaded
     checkScrollTop();
 });
 
