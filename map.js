@@ -2859,6 +2859,68 @@ map.on('style.load', () => {
     });
 });
 
+let flBuildingIndex = null;
+
+flMap.on('style.load', () => {
+    const layerName = '06-40187-RIGHT-Fill';
+    const sourceName = 'composite';
+    const sourceLayer = '06_40187_RIGHT-2ucst1';
+
+    if (flMap.getLayer(layerName)) {
+
+        flMap.on('mousemove', layerName, (event) => {
+            flMap.getCanvas().style.cursor = 'pointer';
+
+            if (!event.features || event.features.length === 0) {
+                return;
+            }
+
+            if (flBuildingIndex !== null) {
+                flMap.removeFeatureState({
+                    source: sourceName,
+                    sourceLayer: sourceLayer,
+                    id: flBuildingIndex
+                });
+            }
+
+            flBuildingIndex = event.features[0].id;
+            console.log('flBuildingIndex:', flBuildingIndex);
+
+            flMap.setFeatureState(
+                {
+                    source: sourceName,
+                    sourceLayer: sourceLayer,
+                    id: flBuildingIndex
+                },
+                {
+                    hover: true
+                }
+            );
+        });
+
+        flMap.on('mouseleave', layerName, () => {
+            console.log('mouseleave event triggered on layer:', layerName);
+            if (flBuildingIndex !== null) {
+                flMap.setFeatureState(
+                    {
+                        source: sourceName,
+                        sourceLayer: sourceLayer,
+                        id: flBuildingIndex
+                    },
+                    {
+                        hover: false
+                    }
+                );
+            }
+            flBuildingIndex = null;
+            flMap.getCanvas().style.cursor = '';
+        });
+
+    } else {
+        console.error('Layer does not exist:', layerName);
+    }
+});
+
 const secondsPerRevolution = -120;
 const maxSpinZoom = 5;
 const slowSpinZoom = 3;
