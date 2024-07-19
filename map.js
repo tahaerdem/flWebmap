@@ -2860,6 +2860,9 @@ map.on('style.load', () => {
 });
 
 let flBuildingIndex = null;
+const indexNoTab = document.getElementById('index-no');
+const indexNoPlaceholder = document.getElementById('index-no-placeholder');
+
 
 function debounce(func, wait) {
     let timeout;
@@ -2872,13 +2875,16 @@ function debounce(func, wait) {
 }
 
 function handleMouseEnter(event, sourceName, sourceLayer) {
+
+
     if (!event.features || event.features.length === 0) {
         return;
     }
 
     const newBuildingIndex = event.features[0].id;
+    const buildingIndexForTab = event.features[0].properties.indexL;
 
-    // Ensure only one item is hovered at a time
+
     if (flBuildingIndex !== null && flBuildingIndex !== newBuildingIndex) {
         flMap.setFeatureState(
             {
@@ -2893,6 +2899,9 @@ function handleMouseEnter(event, sourceName, sourceLayer) {
     }
 
     flBuildingIndex = newBuildingIndex;
+    indexNoTab.textContent = buildingIndexForTab;
+    indexNoPlaceholder.style.display = 'inline';
+
 
     flMap.setFeatureState(
         {
@@ -2921,8 +2930,72 @@ function handleMouseLeave(sourceName, sourceLayer) {
         );
     }
     flBuildingIndex = null;
+    indexNoTab.textContent = null;
+    indexNoPlaceholder.style.display = 'none';
+
+
     flMap.getCanvas().style.cursor = '';
 }
+
+// Function to filter features based on search input
+function filterFeatures(searchTerm) {
+    // Assuming `indexR` is a property of your features
+    flMap.queryRenderedFeatures({
+        layers: ['06-40187-RIGHT-Fill', '06-40187-LEFT-Fill']
+    }).forEach(feature => {
+        const match = feature.properties.indexR && feature.properties.indexR.toString().toLowerCase().includes(searchTerm.toLowerCase());
+        flMap.setFeatureState(
+            {
+                source: feature.source,
+                sourceLayer: feature.sourceLayer,
+                id: feature.id
+            },
+            {
+                hover: match
+            }
+        );
+    });
+}
+
+// Event listener for search input
+document.getElementById('interactive-map-search-input').addEventListener('input', debounce((event) => {
+    const searchTerm = event.target.value;
+    filterFeatures(searchTerm);
+}, 300)); // Adjust debounce delay as needed
+
+// Utility function to debounce events
+function debounce(func, wait) {
+    let timeout;
+    return function () {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+}
+
+// Function to handle clearing search results
+function clearSearchResults() {
+    flMap.queryRenderedFeatures({
+        layers: ['06-40187-RIGHT-Fill', '06-40187-LEFT-Fill']
+    }).forEach(feature => {
+        flMap.setFeatureState(
+            {
+                source: feature.source,
+                sourceLayer: feature.sourceLayer,
+                id: feature.id
+            },
+            {
+                hover: false
+            }
+        );
+    });
+}
+
+// Clear search results on focus out
+document.getElementById('interactive-map-search-input').addEventListener('focusout', () => {
+    clearSearchResults();
+});
 
 flMap.on('style.load', () => {
     const rightLayerName = '06-40187-RIGHT-Fill';

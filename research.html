@@ -946,14 +946,27 @@
             <section class="fs fs-tab fschctr" style="z-index: 101;" id="FS12">
                 <div class="text-container-overlay">
                     <div class="container-overlay-main">
-                        <h2 class="ti-tl" id="tab-title" style="font-size: medium;">FaultLines Interactive Webmap</h2>
+                        <div class="interactive-map-title">
+                            <h2 class="ti-tl" id="tab-title" style="font-size: medium;">FaultLines</h2>
+                        </div>
+                        <div class="container-overlay-sub-p">
+                            <div class="interactive-map-search-container">
+                                <input type="search" class="interactive-map-search-input" id="interactive-map-search-input" style="background-color: #000 !important;" placeholder="Search for an apartment">
+                            </div>
+                        </div>
+
                     </div>
                     
                     <div class="container-overlay-main">
-                        <div class="container-overlay-sub"><div class="container-overlay-sub-p"><span class="sum"></span><span class="non-sum"></span></div></div>
-                        <div class="container-overlay-sub"><div class="container-overlay-sub-p"><span class="non-sum"></span></div></div>
-                        <div class="container-overlay-sub"><div class="container-overlay-sub-p"><span class="non-sum"></span></div></div>
-            </div>
+                        <div class="container-overlay-sub">
+                            <div class="container-overlay-sub-p">
+                                <h2 class="ti-tl" id="tab-info" style="font-size: medium;"><span id="index-no-placeholder">Index Number: </span><span id="index-no"></span></h2>
+                            </div>
+                        </div>
+                        <div class="container-overlay-sub">
+
+                        </div>
+                    </div>
                 </div>
             </section>
             <div id="flMap"></div>
