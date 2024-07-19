@@ -2875,14 +2875,12 @@ function debounce(func, wait) {
 }
 
 function handleMouseEnter(event, sourceName, sourceLayer) {
-
-
     if (!event.features || event.features.length === 0) {
         return;
     }
 
     const newBuildingIndex = event.features[0].id;
-    const buildingIndexForTab = event.features[0].properties.indexL;
+    const buildingIndexForTab = event.features[0].properties.index;
 
 
     if (flBuildingIndex !== null && flBuildingIndex !== newBuildingIndex) {
@@ -2939,11 +2937,47 @@ function handleMouseLeave(sourceName, sourceLayer) {
 
 // Function to filter features based on search input
 function filterFeatures(searchTerm) {
-    // Assuming `indexR` is a property of your features
+    const rightLayerName = '06-40187-RIGHT-Fill';
+    const leftLayerName = '06-40187-LEFT-Fill';
+
+    // Clear all hover states first
     flMap.queryRenderedFeatures({
-        layers: ['06-40187-RIGHT-Fill', '06-40187-LEFT-Fill']
+        layers: [rightLayerName, leftLayerName]
     }).forEach(feature => {
-        const match = feature.properties.indexR && feature.properties.indexR.toString().toLowerCase().includes(searchTerm.toLowerCase());
+        flMap.setFeatureState(
+            {
+                source: feature.source,
+                sourceLayer: feature.sourceLayer,
+                index: feature.index
+            },
+            {
+                hover: false
+            }
+        );
+    });
+
+    // Query and set hover state for RIGHT layer based on indexR
+    flMap.queryRenderedFeatures({
+        layers: [rightLayerName]
+    }).forEach(feature => {
+        const match = feature.properties.indexL && feature.properties.indexL.toString().toLowerCase().includes(searchTerm.toLowerCase());
+        flMap.setFeatureState(
+            {
+                source: feature.source,
+                sourceLayer: feature.sourceLayer,
+                id: feature.id
+            },
+            {
+                hover: match
+            }
+        );
+    });
+
+    // Query and set hover state for LEFT layer based on index
+    flMap.queryRenderedFeatures({
+        layers: [leftLayerName]
+    }).forEach(feature => {
+        const match = feature.properties.index && feature.properties.index.toString().toLowerCase().includes(searchTerm.toLowerCase());
         flMap.setFeatureState(
             {
                 source: feature.source,
@@ -2976,8 +3010,11 @@ function debounce(func, wait) {
 
 // Function to handle clearing search results
 function clearSearchResults() {
+    const rightLayerName = '06-40187-RIGHT-Fill';
+    const leftLayerName = '06-40187-LEFT-Fill';
+
     flMap.queryRenderedFeatures({
-        layers: ['06-40187-RIGHT-Fill', '06-40187-LEFT-Fill']
+        layers: [rightLayerName, leftLayerName]
     }).forEach(feature => {
         flMap.setFeatureState(
             {
@@ -3000,11 +3037,11 @@ document.getElementById('interactive-map-search-input').addEventListener('focuso
 flMap.on('style.load', () => {
     const rightLayerName = '06-40187-RIGHT-Fill';
     const rightSourceName = 'composite';
-    const rightSourceLayer = '06_40187_RIGHT-2ucst1';
+    const rightSourceLayer = '06T_40187_RIGHT-76c468';
     
     const leftLayerName = '06-40187-LEFT-Fill';
     const leftSourceName = 'composite';
-    const leftSourceLayer = '05_40187_LEFT-81kqiw';
+    const leftSourceLayer = '05T_40187_LEFT-b4m6os';
 
     if (flMap.getLayer(rightLayerName)) {
         flMap.on('mouseenter', rightLayerName, (event) => handleMouseEnter(event, rightSourceName, rightSourceLayer));
@@ -3027,39 +3064,7 @@ flMap.on('style.load', () => {
                 handleMouseLeave(leftSourceName, leftSourceLayer);
             }
         }
-    }, 1000));
-});
-flMap.on('style.load', () => {
-    const rightLayerName = '06-40187-RIGHT-Fill';
-    const rightSourceName = 'composite';
-    const rightSourceLayer = '06_40187_RIGHT-2ucst1';
-    
-    const leftLayerName = '06-40187-LEFT-Fill';
-    const leftSourceName = 'composite';
-    const leftSourceLayer = '05_40187_LEFT-81kqiw';
-
-    if (flMap.getLayer(rightLayerName)) {
-        flMap.on('mouseenter', rightLayerName, (event) => handleMouseEnter(event, rightSourceName, rightSourceLayer));
-        flMap.on('mouseleave', rightLayerName, () => handleMouseLeave(rightSourceName, rightSourceLayer));
-    } else {
-        console.error('Layer does not exist:', rightLayerName);
-    }
-
-    if (flMap.getLayer(leftLayerName)) {
-        flMap.on('mouseenter', leftLayerName, (event) => handleMouseEnter(event, leftSourceName, leftSourceLayer));
-        flMap.on('mouseleave', leftLayerName, () => handleMouseLeave(leftSourceName, leftSourceLayer));
-    } else {
-        console.error('Layer does not exist:', leftLayerName);
-    }
-
-    flMap.on('mousemove', debounce((event) => {
-        if (!event.features || !event.features.length) {
-            if (flBuildingIndex !== null) {
-                handleMouseLeave(rightSourceName, rightSourceLayer);
-                handleMouseLeave(leftSourceName, leftSourceLayer);
-            }
-        }
-    }, 1000));
+    }, 300));
 });
 
 const secondsPerRevolution = -120;
