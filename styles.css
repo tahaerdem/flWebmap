@@ -2379,6 +2379,10 @@ footer.footer-item:hover {
     font-size: 40px;
     color: #fff;
     margin: 20px 0 10px 0;  
+    @media screen and (max-width: 1000px) and (min-width: 401px) {
+        font-size: 32px;
+        margin: -5px 0 5px 0;
+    }
     @media screen and (max-width: 400px) {
         font-size: 13px;
         margin: -5px 0 5px 0;

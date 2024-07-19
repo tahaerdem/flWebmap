@@ -2861,64 +2861,132 @@ map.on('style.load', () => {
 
 let flBuildingIndex = null;
 
-flMap.on('style.load', () => {
-    const layerName = '06-40187-RIGHT-Fill';
-    const sourceName = 'composite';
-    const sourceLayer = '06_40187_RIGHT-2ucst1';
+function debounce(func, wait) {
+    let timeout;
+    return function () {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+}
 
-    if (flMap.getLayer(layerName)) {
-
-        flMap.on('mousemove', layerName, (event) => {
-            flMap.getCanvas().style.cursor = 'pointer';
-
-            if (!event.features || event.features.length === 0) {
-                return;
-            }
-
-            if (flBuildingIndex !== null) {
-                flMap.removeFeatureState({
-                    source: sourceName,
-                    sourceLayer: sourceLayer,
-                    id: flBuildingIndex
-                });
-            }
-
-            flBuildingIndex = event.features[0].id;
-            console.log('flBuildingIndex:', flBuildingIndex);
-
-            flMap.setFeatureState(
-                {
-                    source: sourceName,
-                    sourceLayer: sourceLayer,
-                    id: flBuildingIndex
-                },
-                {
-                    hover: true
-                }
-            );
-        });
-
-        flMap.on('mouseleave', layerName, () => {
-            console.log('mouseleave event triggered on layer:', layerName);
-            if (flBuildingIndex !== null) {
-                flMap.setFeatureState(
-                    {
-                        source: sourceName,
-                        sourceLayer: sourceLayer,
-                        id: flBuildingIndex
-                    },
-                    {
-                        hover: false
-                    }
-                );
-            }
-            flBuildingIndex = null;
-            flMap.getCanvas().style.cursor = '';
-        });
-
-    } else {
-        console.error('Layer does not exist:', layerName);
+function handleMouseEnter(event, sourceName, sourceLayer) {
+    if (!event.features || event.features.length === 0) {
+        return;
     }
+
+    const newBuildingIndex = event.features[0].id;
+
+    // Ensure only one item is hovered at a time
+    if (flBuildingIndex !== null && flBuildingIndex !== newBuildingIndex) {
+        flMap.setFeatureState(
+            {
+                source: sourceName,
+                sourceLayer: sourceLayer,
+                id: flBuildingIndex
+            },
+            {
+                hover: false
+            }
+        );
+    }
+
+    flBuildingIndex = newBuildingIndex;
+
+    flMap.setFeatureState(
+        {
+            source: sourceName,
+            sourceLayer: sourceLayer,
+            id: flBuildingIndex
+        },
+        {
+            hover: true
+        }
+    );
+    flMap.getCanvas().style.cursor = 'pointer';
+}
+
+function handleMouseLeave(sourceName, sourceLayer) {
+    if (flBuildingIndex !== null) {
+        flMap.setFeatureState(
+            {
+                source: sourceName,
+                sourceLayer: sourceLayer,
+                id: flBuildingIndex
+            },
+            {
+                hover: false
+            }
+        );
+    }
+    flBuildingIndex = null;
+    flMap.getCanvas().style.cursor = '';
+}
+
+flMap.on('style.load', () => {
+    const rightLayerName = '06-40187-RIGHT-Fill';
+    const rightSourceName = 'composite';
+    const rightSourceLayer = '06_40187_RIGHT-2ucst1';
+    
+    const leftLayerName = '06-40187-LEFT-Fill';
+    const leftSourceName = 'composite';
+    const leftSourceLayer = '05_40187_LEFT-81kqiw';
+
+    if (flMap.getLayer(rightLayerName)) {
+        flMap.on('mouseenter', rightLayerName, (event) => handleMouseEnter(event, rightSourceName, rightSourceLayer));
+        flMap.on('mouseleave', rightLayerName, () => handleMouseLeave(rightSourceName, rightSourceLayer));
+    } else {
+        console.error('Layer does not exist:', rightLayerName);
+    }
+
+    if (flMap.getLayer(leftLayerName)) {
+        flMap.on('mouseenter', leftLayerName, (event) => handleMouseEnter(event, leftSourceName, leftSourceLayer));
+        flMap.on('mouseleave', leftLayerName, () => handleMouseLeave(leftSourceName, leftSourceLayer));
+    } else {
+        console.error('Layer does not exist:', leftLayerName);
+    }
+
+    flMap.on('mousemove', debounce((event) => {
+        if (!event.features || !event.features.length) {
+            if (flBuildingIndex !== null) {
+                handleMouseLeave(rightSourceName, rightSourceLayer);
+                handleMouseLeave(leftSourceName, leftSourceLayer);
+            }
+        }
+    }, 1000));
+});
+flMap.on('style.load', () => {
+    const rightLayerName = '06-40187-RIGHT-Fill';
+    const rightSourceName = 'composite';
+    const rightSourceLayer = '06_40187_RIGHT-2ucst1';
+    
+    const leftLayerName = '06-40187-LEFT-Fill';
+    const leftSourceName = 'composite';
+    const leftSourceLayer = '05_40187_LEFT-81kqiw';
+
+    if (flMap.getLayer(rightLayerName)) {
+        flMap.on('mouseenter', rightLayerName, (event) => handleMouseEnter(event, rightSourceName, rightSourceLayer));
+        flMap.on('mouseleave', rightLayerName, () => handleMouseLeave(rightSourceName, rightSourceLayer));
+    } else {
+        console.error('Layer does not exist:', rightLayerName);
+    }
+
+    if (flMap.getLayer(leftLayerName)) {
+        flMap.on('mouseenter', leftLayerName, (event) => handleMouseEnter(event, leftSourceName, leftSourceLayer));
+        flMap.on('mouseleave', leftLayerName, () => handleMouseLeave(leftSourceName, leftSourceLayer));
+    } else {
+        console.error('Layer does not exist:', leftLayerName);
+    }
+
+    flMap.on('mousemove', debounce((event) => {
+        if (!event.features || !event.features.length) {
+            if (flBuildingIndex !== null) {
+                handleMouseLeave(rightSourceName, rightSourceLayer);
+                handleMouseLeave(leftSourceName, leftSourceLayer);
+            }
+        }
+    }, 1000));
 });
 
 const secondsPerRevolution = -120;
