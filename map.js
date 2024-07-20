@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const earthquakeLayer = 'feb6-eq-circle-stroke';
         const sourceLayer = 'usgs-feb67-eq-data-0ezrpr';
         const startTime = 1675646254342;
-        const endTime = 1675679088811;
+        const endTime = 1675689088811;
       
         const dateDisplay = document.createElement('h3');
         dateDisplay.style.position = 'fixed';
@@ -526,7 +526,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //EAF Chapter Intro
     function frame052() {
-
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS00",
