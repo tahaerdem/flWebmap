@@ -77,11 +77,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 markers: false,
                 
                 onEnter: self => {
-                    console.log('Entered')
                 },
     
                 onUpdate: self => {
-                    console.log('ScrollTrigger onUpdate called'); // Debugging log
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
                     const targetLng = 37.032;
@@ -94,12 +92,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 15;
-                        console.log('Forward velocity:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (initialLng - center.lng) / 20;
                         latStep = (initialLat - center.lat) / 20;
                         zoomStep = (initialZoom - map.getZoom()) / 25;
-                        console.log('Backward velocity:', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -115,7 +111,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 },
     
                 onLeave: self => {
-                    console.log('Counter Left')
                 },
             },
         });
@@ -174,12 +169,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 15;
-                        console.log('Forward velocity:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (initialLng - center.lng) / 100;
                         latStep = (initialLat - center.lat) / 100;
                         zoomStep = (5 - map.getZoom()) / 25;
-                        console.log('Backward velocity:', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -294,12 +287,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 25;
-                        console.log('F03:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (f02Lng - center.lng) / 100;
                         latStep = (f02Lat - center.lat) / 100;
                         zoomStep = (f02Zoom - map.getZoom()) / 50;
-                        console.log('F03:', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -345,7 +336,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             .filter(f => f.properties.time >= startTime && f.properties.time <= endTime);
       
           if (features.length === 0) {
-            console.error('No earthquake features found in the specified time range');
             return;
           }
       
@@ -492,12 +482,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 15;
-                        console.log('F05:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (7.5 - map.getZoom()) / 15;
-                        console.log('F05', velocity);
                     } else if (progress > 0.75 && velocity > 0) {
                         dateDisplay.style.opacity = "0";
                     } else if (progress < 0.75 && velocity < 0) {
@@ -744,12 +732,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 15;
-                        console.log('FRAME07:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (7.5 - map.getZoom()) / 15;
-                        console.log('FRAME07', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -841,7 +827,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //North Anatolia Textbox
     function frame08() {
-        const layersToToggle = ['Fault-Paths-L02-NAF', 'ISO-land'];
+        const layersToToggle = ['Fault-Paths-L02-NAF'];
         const layersToHide = ['feb6-eq-circle-stroke-start-t', 'feb6-eq-circle-stroke-end-t'];
         const hideonLeave = ['Fault-Paths-L01-EAF'];
 
@@ -894,12 +880,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (targetZoom - map.getZoom()) / 15;
-                        console.log('FRAME08:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (6.5 - map.getZoom()) / 15;
-                        console.log('FRAME08', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -932,34 +916,150 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    //North Anatolia Timeline
+    //North Anatolia Earthquakes
     function frame09() {
         const earthquakeLayers = [
-            '1939',
-            '1939-T',
-            '1939-P',
-            '1942',
-            '1942-T',
-            '1942-P',
-            '1943',
-            '1943-T',
-            '1944',
-            '1944-T',
-            '1944-P',
-            '1957',
-            '1957-T',
-            '1957-P',
-            '1967',
-            '1967-T',
-            '1967-P',
-            '1999',
-            '1999-T',
+            '1939', '1939-T', '1939-P', '1942', '1942-T', '1942-P', '1943', '1943-T',
+            '1944', '1944-T', '1944-P', '1957', '1957-T', '1957-P', '1967', '1967-T', '1967-P',
+            '1999', '1999-T',
         ];
-
+    
         const sourceLayers = [
             'major-earthquakes-on-NAF-8y0uiu',
             'gem_active_faults_harmonized-9xzarf'
         ];
+    
+        let targetPositions = [];
+        let currentVisibleLayers = new Set();
+        let lastUpdateTime = 0;
+        const updateInterval = 50; // ms
+    
+        // Simple debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+    
+        // Web Worker for heavy computations
+        const worker = new Worker(URL.createObjectURL(new Blob([`
+            self.onmessage = function(e) {
+                const { earthquakeLayers, sourceLayers, map } = e.data;
+                const coordinatesCache = {};
+                const targetPositions = [];
+    
+                earthquakeLayers.forEach(layer => {
+                    for (const sourceLayer of sourceLayers) {
+                        const features = map.querySourceFeatures('composite', {
+                            sourceLayer: sourceLayer,
+                            filter: ['==', 'name', layer]
+                        });
+                        if (features.length > 0) {
+                            coordinatesCache[layer] = features[0].geometry.coordinates[0];
+                            break;
+                        }
+                    }
+                });
+    
+                const totalLayers = earthquakeLayers.length;
+                const step = 1 / totalLayers;
+    
+                for (let i = 0; i < totalLayers; i++) {
+                    const layer = earthquakeLayers[i];
+                    const coordinates = coordinatesCache[layer];
+                    if (coordinates) {
+                        const targetLat = coordinates[1];
+                        const targetLng = coordinates[0];
+                        const targetZoom = 6 + (10 - 6) * (i / totalLayers);
+                        targetPositions.push({ lat: targetLat, lng: targetLng, zoom: targetZoom });
+                    }
+                }
+    
+                self.postMessage({ targetPositions });
+            };
+        `])));
+    
+        worker.onmessage = function(e) {
+            targetPositions = e.data.targetPositions;
+        };
+    
+        map.on('styledata', function () {
+            if (map.isStyleLoaded()) {
+                worker.postMessage({ earthquakeLayers, sourceLayers, map });
+            }
+        });
+    
+        function binarySearchStep(progress) {
+            let low = 0, high = earthquakeLayers.length - 1;
+            const step = 1 / earthquakeLayers.length;
+            while (low <= high) {
+                const mid = Math.floor((low + high) / 2);
+                if ((mid * step) <= progress && progress < ((mid + 1) * step)) {
+                    return mid;
+                } else if (progress < (mid * step)) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            return low;
+        }
+    
+        function updateLayerVisibility(currentStep) {
+            const newVisibleLayers = new Set(earthquakeLayers.slice(0, currentStep + 1));
+            const toShow = [...newVisibleLayers].filter(x => !currentVisibleLayers.has(x));
+            const toHide = [...currentVisibleLayers].filter(x => !newVisibleLayers.has(x));
+            
+            if (toShow.length > 0 || toHide.length > 0) {
+                requestAnimationFrame(() => {
+                    toShow.forEach(layerId => map.setLayoutProperty(layerId, 'visibility', 'visible'));
+                    toHide.forEach(layerId => map.setLayoutProperty(layerId, 'visibility', 'none'));
+                    currentVisibleLayers = newVisibleLayers;
+                });
+            }
+        }
+    
+        const update = (self) => {
+            const now = performance.now();
+            if (now - lastUpdateTime < updateInterval) return;
+            lastUpdateTime = now;
+    
+            const progress = self.progress;
+            const currentStep = binarySearchStep(progress);
+    
+            updateLayerVisibility(currentStep);
+    
+            if (currentStep < 0 || currentStep >= targetPositions.length) return;
+    
+            const targetPosition = targetPositions[currentStep];
+            if (!targetPosition) return;
+    
+            const center = map.getCenter();
+            const currentZoom = map.getZoom();
+    
+            const lngDiff = Math.abs(targetPosition.lng - center.lng);
+            const latDiff = Math.abs(targetPosition.lat - center.lat);
+            const zoomDiff = Math.abs(targetPosition.zoom - currentZoom);
+    
+            if (lngDiff > 0.001 || latDiff > 0.001 || zoomDiff > 0.01) {
+                requestAnimationFrame(() => {
+                    map.easeTo({
+                        center: [targetPosition.lng, targetPosition.lat],
+                        zoom: targetPosition.zoom,
+                        duration: 0,
+                        easing: t => t
+                    });
+                });
+            }
+        };
+    
+        const debouncedUpdate = debounce(update, 16); // 60fps
     
         var tl = gsap.timeline({
             scrollTrigger: {
@@ -969,94 +1069,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 pin: true,
                 scrub: true,
                 markers: false,
-
                 onRefresh: self => {
                     const pinnedElement = self.pin;
                     pinnedElement.style.width = '100%';
                     pinnedElement.style.maxWidth = '100%';
                 },
-
-                onUpdate: self => {
-                    const progress = self.progress;
-                    const totalLayers = earthquakeLayers.length;
-                    const step = 1 / totalLayers;
-                    const currentStep = Math.floor(progress / step);
-    
-                    // Show the current earthquake layer based on the scroll progress
-                    earthquakeLayers.forEach((layerId, index) => {
-                        if (index <= currentStep) {
-                            map.setLayoutProperty(layerId, 'visibility', 'visible');
-                        } else {
-                            map.setLayoutProperty(layerId, 'visibility', 'none');
-                        }
-                    });
-    
-                    // Calculate the target position for the map
-                    let targetLat, targetLng, targetZoom;
-                    if (currentStep < totalLayers) {
-                        const layer = earthquakeLayers[currentStep];
-                        let coordinates = null;
-                        
-                        // Query each source layer until features are found
-                        for (const sourceLayer of sourceLayers) {
-                            const features = map.querySourceFeatures('composite', {
-                                sourceLayer: sourceLayer,
-                                filter: ['==', 'name', layer]
-                            });
-    
-                            if (features.length > 0) {
-                                coordinates = features[0].geometry.coordinates[0];
-                                break; // Stop searching once features are found
-                            }
-                        }
-    
-                        if (coordinates) {
-                            targetLat = coordinates[1];
-                            targetLng = coordinates[0];
-                            targetZoom = 6 + (10 - 6) * (progress % step) / step; // Interpolate zoom
-                            console.log(`Layer ${layer} coordinates:`, coordinates);
-                        } else {
-                            console.log(`No features found for layer ${layer}`);
-                        }
-                    } else {
-                        const layer = earthquakeLayers[totalLayers - 1];
-                        let coordinates = null;
-    
-                        // Query each source layer until features are found
-                        for (const sourceLayer of sourceLayers) {
-                            const features = map.querySourceFeatures('composite', {
-                                sourceLayer: sourceLayer,
-                                filter: ['==', 'name', layer]
-                            });
-    
-                            if (features.length > 0) {
-                                coordinates = features[0].geometry.coordinates[0];
-                                break; // Stop searching once features are found
-                            }
-                        }
-    
-                        if (coordinates) {
-                            targetLat = coordinates[1];
-                            targetLng = coordinates[0];
-                            targetZoom = 10;
-                            console.log(`Layer ${layer} coordinates:`, coordinates);
-                        } else {
-                            console.log(`No features found for layer ${layer}`);
-                        }
-                    }
-    
-                    const center = map.getCenter();
-                    const lngStep = (targetLng - center.lng) / 20;
-                    const latStep = (targetLat - center.lat) / 20;
-                    const zoomStep = (targetZoom - map.getZoom()) / 15;
-    
-                    map.easeTo({
-                        center: [center.lng + lngStep, center.lat + latStep],
-                        zoom: map.getZoom() + zoomStep,
-                        duration: 0,
-                        easing: t => t
-                    });
-                },
+                onUpdate: debouncedUpdate
             }
         });
     }
@@ -1082,16 +1100,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     let lngStep, latStep, zoomStep;
     
                     if (velocity > 0 && window.scrollY > 0) {
-                        // Forward animation steps
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F09:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (6 - map.getZoom()) / 20;
-                        console.log('F09', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -1102,7 +1117,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         center: [center.lng + lngStep, center.lat + latStep],
                         zoom: map.getZoom() + zoomStep,
                         duration: 0,
-                        easing: t => t // linear easing
+                        easing: t => t
                     });
     
                 },
@@ -1202,12 +1217,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F11:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (6 - map.getZoom()) / 20;
-                        console.log('F11', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -1228,6 +1241,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // Istanbul
     function frame12() {
+        const isoToggler = ['ISO-land'];
         const boundariesToToggle = ['L3_AdminBoundaries_Base', 'L2_AdminBoundaries_Base'];
         const layersToToggle = ['L3_Base'];
         const layersToEase = ['ISO-land'];
@@ -1267,6 +1281,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 markers: false,
 
                 onEnter: () => {
+                    isoToggler.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
@@ -1284,6 +1301,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     });
                 },
                 onLeave: () => {
+                    isoToggler.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
@@ -1301,6 +1321,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     });
                 },
                 onEnterBack: () => {
+                    isoToggler.forEach(layerId => {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    });
                     layersToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
@@ -1348,12 +1371,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F10:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (8 - map.getZoom()) / 15;
-                        console.log('F10', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -1364,7 +1385,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         center: [center.lng + lngStep, center.lat + latStep],
                         zoom: map.getZoom() + zoomStep,
                         duration: 0,
-                        easing: t => t // linear easing
+                        easing: t => t 
                     });
                 },
             },
@@ -1478,12 +1499,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F10:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (9 - map.getZoom()) / 15;
-                        console.log('F10', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -1608,12 +1627,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F10:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (9 - map.getZoom()) / 15;
-                        console.log('F10', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -1738,12 +1755,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F12-3:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (9 - map.getZoom()) / 15;
-                        console.log('F12-3', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -1862,12 +1877,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F12-3:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (9 - map.getZoom()) / 15;
-                        console.log('F12-3', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -1986,12 +1999,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F12-3:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (9 - map.getZoom()) / 15;
-                        console.log('F12-3', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -2110,12 +2121,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F12-3:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (9 - map.getZoom()) / 15;
-                        console.log('F12-3', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -2234,12 +2243,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F12-3:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (9 - map.getZoom()) / 15;
-                        console.log('F12-3', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -2390,16 +2397,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     let lngStep, latStep, zoomStep;
 
                     if (velocity > 0 && window.scrollY > 0) {
-                        // Forward animation steps
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F13:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (8.75 - map.getZoom()) / 15;
-                        console.log('F13', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -2601,12 +2605,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (targetZoom - map.getZoom()) / 20;
-                        console.log('F13:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (8.75 - map.getZoom()) / 15;
-                        console.log('F13', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -2718,13 +2720,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         // Forward animation steps
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
-
-                        console.log('F10:', velocity);
                     } else if (velocity < 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
                         zoomStep = (8.75 - map.getZoom()) / 15;
-                        console.log('F10', velocity);
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -2858,11 +2857,14 @@ map.on('style.load', () => {
         'star-intensity': 1
     });
 });
-
 let flBuildingIndex = null;
 const indexNoTab = document.getElementById('index-no');
 const indexNoPlaceholder = document.getElementById('index-no-placeholder');
+const featureIdMap = new Map();
 
+function generateUniqueId(source, sourceLayer, index) {
+    return `${source}-${sourceLayer}-${index}`;
+}
 
 function debounce(func, wait) {
     let timeout;
@@ -2879,33 +2881,38 @@ function handleMouseEnter(event, sourceName, sourceLayer) {
         return;
     }
 
-    const newBuildingIndex = event.features[0].id;
-    const buildingIndexForTab = event.features[0].properties.index;
+    const feature = event.features[0];
+    const newBuildingIndex = feature.properties.index;
+    const uniqueId = generateUniqueId(sourceName, sourceLayer, newBuildingIndex);
 
+    // Store the mapping of unique identifier to the actual feature ID
+    featureIdMap.set(uniqueId, feature.id);
 
-    if (flBuildingIndex !== null && flBuildingIndex !== newBuildingIndex) {
-        flMap.setFeatureState(
-            {
-                source: sourceName,
-                sourceLayer: sourceLayer,
-                id: flBuildingIndex
-            },
-            {
-                hover: false
-            }
-        );
+    if (flBuildingIndex !== null && flBuildingIndex !== uniqueId) {
+        const previousFeatureId = featureIdMap.get(flBuildingIndex);
+        if (previousFeatureId !== undefined) {
+            flMap.setFeatureState(
+                {
+                    source: sourceName,
+                    sourceLayer: sourceLayer,
+                    id: previousFeatureId
+                },
+                {
+                    hover: false
+                }
+            );
+        }
     }
 
-    flBuildingIndex = newBuildingIndex;
-    indexNoTab.textContent = buildingIndexForTab;
+    flBuildingIndex = uniqueId;
+    indexNoTab.textContent = newBuildingIndex;
     indexNoPlaceholder.style.display = 'inline';
-
 
     flMap.setFeatureState(
         {
             source: sourceName,
             sourceLayer: sourceLayer,
-            id: flBuildingIndex
+            id: feature.id
         },
         {
             hover: true
@@ -2916,24 +2923,60 @@ function handleMouseEnter(event, sourceName, sourceLayer) {
 
 function handleMouseLeave(sourceName, sourceLayer) {
     if (flBuildingIndex !== null) {
-        flMap.setFeatureState(
-            {
-                source: sourceName,
-                sourceLayer: sourceLayer,
-                id: flBuildingIndex
-            },
-            {
-                hover: false
-            }
-        );
+        const featureId = featureIdMap.get(flBuildingIndex);
+        if (featureId !== undefined) {
+            flMap.setFeatureState(
+                {
+                    source: sourceName,
+                    sourceLayer: sourceLayer,
+                    id: featureId
+                },
+                {
+                    hover: false
+                }
+            );
+        }
     }
+    
     flBuildingIndex = null;
     indexNoTab.textContent = null;
     indexNoPlaceholder.style.display = 'none';
 
-
     flMap.getCanvas().style.cursor = '';
 }
+
+flMap.on('style.load', () => {
+    const rightLayerName = '06-40187-RIGHT-Fill';
+    const rightSourceName = 'composite';
+    const rightSourceLayer = '06T_40187_RIGHT-76c468';
+    
+    const leftLayerName = '06-40187-LEFT-Fill';
+    const leftSourceName = 'composite';
+    const leftSourceLayer = '05T_40187_LEFT-b4m6os';
+
+    if (flMap.getLayer(rightLayerName)) {
+        flMap.on('mouseenter', rightLayerName, (event) => handleMouseEnter(event, rightSourceName, rightSourceLayer));
+        flMap.on('mouseleave', rightLayerName, () => handleMouseLeave(rightSourceName, rightSourceLayer));
+    } else {
+        console.error('Layer does not exist:', rightLayerName);
+    }
+
+    if (flMap.getLayer(leftLayerName)) {
+        flMap.on('mouseenter', leftLayerName, (event) => handleMouseEnter(event, leftSourceName, leftSourceLayer));
+        flMap.on('mouseleave', leftLayerName, () => handleMouseLeave(leftSourceName, leftSourceLayer));
+    } else {
+        console.error('Layer does not exist:', leftLayerName);
+    }
+
+    flMap.on('mousemove', debounce((event) => {
+        if (!event.features || !event.features.length) {
+            if (flBuildingIndex !== null) {
+                handleMouseLeave(rightSourceName, rightSourceLayer);
+                handleMouseLeave(leftSourceName, leftSourceLayer);
+            }
+        }
+    }, 300));
+});
 
 // Function to filter features based on search input
 function filterFeatures(searchTerm) {
@@ -2995,7 +3038,7 @@ function filterFeatures(searchTerm) {
 document.getElementById('interactive-map-search-input').addEventListener('input', debounce((event) => {
     const searchTerm = event.target.value;
     filterFeatures(searchTerm);
-}, 300)); // Adjust debounce delay as needed
+}, 300));
 
 // Utility function to debounce events
 function debounce(func, wait) {
@@ -3034,39 +3077,6 @@ document.getElementById('interactive-map-search-input').addEventListener('focuso
     clearSearchResults();
 });
 
-flMap.on('style.load', () => {
-    const rightLayerName = '06-40187-RIGHT-Fill';
-    const rightSourceName = 'composite';
-    const rightSourceLayer = '06T_40187_RIGHT-76c468';
-    
-    const leftLayerName = '06-40187-LEFT-Fill';
-    const leftSourceName = 'composite';
-    const leftSourceLayer = '05T_40187_LEFT-b4m6os';
-
-    if (flMap.getLayer(rightLayerName)) {
-        flMap.on('mouseenter', rightLayerName, (event) => handleMouseEnter(event, rightSourceName, rightSourceLayer));
-        flMap.on('mouseleave', rightLayerName, () => handleMouseLeave(rightSourceName, rightSourceLayer));
-    } else {
-        console.error('Layer does not exist:', rightLayerName);
-    }
-
-    if (flMap.getLayer(leftLayerName)) {
-        flMap.on('mouseenter', leftLayerName, (event) => handleMouseEnter(event, leftSourceName, leftSourceLayer));
-        flMap.on('mouseleave', leftLayerName, () => handleMouseLeave(leftSourceName, leftSourceLayer));
-    } else {
-        console.error('Layer does not exist:', leftLayerName);
-    }
-
-    flMap.on('mousemove', debounce((event) => {
-        if (!event.features || !event.features.length) {
-            if (flBuildingIndex !== null) {
-                handleMouseLeave(rightSourceName, rightSourceLayer);
-                handleMouseLeave(leftSourceName, leftSourceLayer);
-            }
-        }
-    }, 300));
-});
-
 const secondsPerRevolution = -120;
 const maxSpinZoom = 5;
 const slowSpinZoom = 3;
@@ -3093,44 +3103,4 @@ function spinGlobe() {
 map.on('moveend', () => {
     spinGlobe();
 });
-
-const istMap = new mapboxgl.Map({
-    container: 'ist-map',
-    style: 'mapbox://styles/tahaerdemozturk/clwt6u2xg05k601nx3zbs1cun/draft',
-    zoom: 8,
-    center: [28.997,41.198],
-    scrollZoom: false,
-    doubleClickZoom: false,
-    boxZoom: false,
-    dragRotate: false,
-    dragPan: false,
-    touchZoomRotate: false,
-    touchPitchHandler: false,
-    attributionControl: false,
-});
-
-istMap.on('style.load', () => {
-    const layersToToggle = ['L3_AdminBoundaries','L2_AdminBoundaries','L3_Population','ISO-land'];
-    layersToToggle.forEach(layerId => {
-        istMap.setLayoutProperty(layerId, 'visibility', 'visible');
-    });
-});
-
-function fitMapToBounds() {
-    const istbounds = [
-        [27.82,40.64], // Istanbul Southwest coordinates
-        [30.44,41.65]  // Istanbul Northeast coordinates
-    ];
-
-    istMap.fitBounds(istbounds, {
-        padding: { top: 0, bottom: 0, left: 0, right: 0 },
-        animate: false
-    });
-    istMap.jumpTo({
-        center: [28.997,41.198],
-    });       
-}
-
-fitMapToBounds();
-
 
