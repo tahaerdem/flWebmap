@@ -2323,6 +2323,14 @@ footer.footer-item:hover {
     margin-bottom: -10px;
 }
 
+.mgn-btm-10 {
+    margin-bottom: 10px;
+}
+
+.mgn-btm-20 {
+    margin-bottom: 20px;
+}
+
 .mgn-btm-min-25 {
     margin-bottom: -25px;
 }

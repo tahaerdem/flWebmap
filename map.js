@@ -2331,7 +2331,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             scrollTrigger: {
                 trigger: "#FS08",
                 start: 'top top', // Make it stop near the top, if wanna center it do 'top top'
-                end: '5000% top',
+                end: '2000% top',
                 pin: true,
                 scrub: true,
                 markers: false,
@@ -2427,7 +2427,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             scrollTrigger: {
                 trigger: "#FS0911",
                 start: 'top top',
-                end: '1000% 32%',
+                end: '2000% 32%',
                 pin: true,
                 scrub: true,
                 markers: false,
@@ -2485,7 +2485,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             scrollTrigger: {
                 trigger: "#FS092",
                 start: 'top top',
-                end: '400% 32%',
+                end: '4000% 32%',
                 pin: true,
                 scrub: true,
                 markers: false,
@@ -2626,7 +2626,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             },
         });
     }
-
 
     //Interactive Map Intro
     function frame151() {
@@ -2815,8 +2814,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .add(frame13(), { onLeave: frame132 })
     .add(frame131(), { onLeave: frame13 })
     .add(frame141(), { onLeave: frame131 })
-    .add(frame14(), { onLeave: frame141 })
-    .add(frame151(), { onLeave: frame14 })
+    .add(frame151(), { onLeave: frame141 })
     .add(frame15(), { onLeave: frame151 })
     .add(frame0001(), { onLeave: frame15 })
 
