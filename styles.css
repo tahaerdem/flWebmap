@@ -573,7 +573,28 @@ h3.title.new-container {
     margin-top: -5em;
 }
 
+h3.title.quartinary {
+    font-family: 'Helvetica Neue', 'Roboto Mono', sans-serif;
+    color: #2b2925 !important;
+    text-transform: uppercase;
+    font-size: 4em;
+    font-weight: 550;
+    margin-top: 0.2em;
+    margin-bottom: 0.05em;
+    letter-spacing: -0.00075em;
+    text-align: left;
+}
 
+h3.title.quinary {
+    font-family: 'Roboto Mono', monospace;
+    color: #2b2925 !important;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-weight: 550;
+    margin-top: -0.1em;
+    margin-bottom: 3em;
+    text-align: left;
+}
 
 h3.nav {
     line-height: 1.25em;
@@ -2315,16 +2336,28 @@ footer.footer-item:hover {
     margin-top: -100px;
 }
 
+.mgn-btm-1p5 {
+    margin-bottom: 1.5px;
+}
+
+.mgn-btm-2p5 {
+    margin-bottom: 2.5px;
+}
+
+.mgn-btm-5 {
+    margin-bottom: 5px;
+}
+
 .mgn-btm-min-5 {
     margin-bottom: -5px;
 }
 
-.mgn-btm-min-10 {
-    margin-bottom: -10px;
-}
-
 .mgn-btm-10 {
     margin-bottom: 10px;
+}
+
+.mgn-btm-min-10 {
+    margin-bottom: -10px;
 }
 
 .mgn-btm-20 {
@@ -2592,4 +2625,8 @@ footer.footer-item:hover {
 
 #index-no-placeholder {
     display: none;
+}
+
+.txct {
+    text-align: center !important;
 }
