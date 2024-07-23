@@ -419,8 +419,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
           });
         });
     }
-
-    //Grab the second earthquake timeline
+    
+    //Get the second timeline
     function frame05() {
         const layersToToggle = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
         const layersToHide = [];
