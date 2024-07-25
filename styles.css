@@ -2316,6 +2316,10 @@ footer.footer-item:hover {
     margin-top: 20px;
 }
 
+.mgn-top-min-2p5 {
+    margin-top: -2.5px;
+}
+
 .mgn-top-min-5 {
     margin-top: -5px;
 }
@@ -2336,11 +2340,23 @@ footer.footer-item:hover {
     margin-top: -100px;
 }
 
+.mgn-btm-0 {
+    margin-bottom: 0;
+}
+
+.mgn-btm-min-1 {
+    margin-bottom: 1px;
+}
+
 .mgn-btm-1p5 {
     margin-bottom: 1.5px;
 }
 
 .mgn-btm-2p5 {
+    margin-bottom: 2.5px;
+}
+
+.mgn-btm-min-2p5 {
     margin-bottom: 2.5px;
 }
 
@@ -2366,6 +2382,18 @@ footer.footer-item:hover {
 
 .mgn-btm-min-25 {
     margin-bottom: -25px;
+}
+
+.mgn-btm-25 {
+    margin-bottom: 25px;
+}
+
+.mgn-btm-40 {
+    margin-bottom: 40px;
+}
+
+.mgn-btm-50 {
+    margin-bottom: 50px;
 }
 
 .mgn-btm-min-50 {
