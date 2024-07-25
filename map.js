@@ -2485,7 +2485,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             scrollTrigger: {
                 trigger: "#FS092",
                 start: 'top top',
-                end: '4000% 32%',
+                end: '2000% 32%',
                 pin: true,
                 scrub: true,
                 markers: false,
@@ -2533,96 +2533,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
                 onLeave: () => {
                 },
-            },
-        });
-    }
-
-    //Artificial Intelligence
-    function frame14() {
-
-        const layersToToggle = ['L3_Population', 'ISO-water','L3_AdminBoundaries','L2_AdminBoundaries'];
-        const layersToHide = ['L3_Shelter'];
-
-        var tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#FS10",
-                start: 'top top', //Make it stop near the top, if wanna center it do 'top top'
-                end: '1250% top',
-                pin: true,
-                scrub: true,
-                markers: false,
-
-                onRefresh: self => {
-                    const pinnedElement = self.pin;
-                    pinnedElement.style.width = '100%';
-                    pinnedElement.style.maxWidth = '100%';
-                },
-
-                onEnter: () => {
-                    layersToToggle.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'visible');
-                    });
-                    layersToHide.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'none');
-                    });
-                },
-                onLeave: () => {
-                    layersToToggle.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'visible');
-                    });
-                    layersToHide.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'none');
-                    });
-                },
-                onEnterBack: () => {
-                    layersToToggle.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'visible');
-                    });
-                    layersToHide.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'none');
-                    });
-                },
-                onLeaveBack: () => {
-                    layersToToggle.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'none');
-                    });
-                    layersToHide.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'visible');
-                    });
-                },
-                onUpdate: self => {
-                    const velocity = self.getVelocity();
-                    const center = map.getCenter();
-                    const targetLat = 41.158;
-                    const targetLng = 28.978;
-                    const targetZoom = 8.75;
-
-                    let lngStep, latStep, zoomStep;
-
-                    if (velocity > 0 && window.scrollY > 0) {
-                        // Forward animation steps
-                        lngStep = (targetLng - center.lng) / 30;
-                        latStep = (targetLat - center.lat) / 30;
-                        zoomStep = (targetZoom - map.getZoom()) / 20;
-                    } else if (velocity < 0 && window.scrollY > 0) {
-                        lngStep = (targetLng - center.lng) / 30;
-                        latStep = (targetLat - center.lat) / 30;
-                        zoomStep = (8.75 - map.getZoom()) / 15;
-                    } else {
-                        lngStep = 0;
-                        latStep = 0;
-                        zoomStep = 0;
-                    }
-    
-                    map.easeTo({
-                        center: [center.lng + lngStep, center.lat + latStep],
-                        zoom: map.getZoom() + zoomStep,
-                        duration: 0,
-                        easing: t => t // linear easing
-                    });
-    
-                },
-    
             },
         });
     }
