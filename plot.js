@@ -15,14 +15,16 @@ const geoGenerator = d3.geoPath().projection(projection);
 
 const dataTypes = {
   population: d => d.properties.population,
-  death_toll: d => d.properties.death_toll,
-  shelter: d => d.properties.shelter,
+  death_toll: d => Math.abs(d.properties.death_toll / d.properties.population),
+  shelter: d => Math.abs(d.properties.shelter / d.properties.population),
+  low_damage: d => Math.abs(d.properties.low_damage),
 };
 
 const colorScales = {
   population: d3.scaleSequential(d3.interpolateYlOrRd),
   death_toll: d3.scaleSequential(d3.interpolateMagma),
   shelter: d3.scaleSequential(d3.interpolateGreens),
+  low_dmg: d3.scaleSequential(d3.interpolateGreens),
 };
 
 function handleMouseover(d, event) {
@@ -105,8 +107,13 @@ function handleClick(d, event) {
     const name = d.properties.name;
     const sentenceCaseName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
     const population = d.properties.population;
-    const death_toll = d.properties.death_toll;
-    const shelter = d.properties.shelter;
+    const deathTollRatio = Math.abs(d.properties.death_toll);
+    const shelter = Math.abs(d.properties.shelter);
+    const low_damage = Math.abs(d.properties.low_damage);
+    const medium_damage = Math.abs(d.properties.medium_dam);
+    const heavy_damage = Math.abs(d.properties.heavy_dama);
+    const extremely_heavy_damage = Math.abs(d.properties.extremely_);
+
 
     d3.select('#plot .info')
       .text(`${sentenceCaseName}`)
@@ -118,8 +125,14 @@ function handleClick(d, event) {
           <div class="close-btn" onclick="hidePopup()"><svg width="12" height="12" style="margin-bottom:-3px; margin-right:3px;" viewBox="0 0 59 59" fill="#c8c8c8" xmlns="http://www.w3.org/2000/svg"><path d="M51.3636 58.7273L0.09091 7.45454L7 0.545456L58.2727 51.8182L51.3636 58.7273ZM7 58.7273L0.09091 51.8182L51.3636 0.545456L58.2727 7.45454L7 58.7273Z"/></svg></div>
           <h3 style="text-align: left; margin-top: 0.35em; text-transform: capitalize; line-height: 1em">${sentenceCaseName}</h3><hr class="pop-line">
           <div class="ppu-line"><p class="ppu">Population:</p><p class="ppu">${population.toLocaleString()}</p></div>
-          <div class="ppu-line"><p class="ppu">Shelter:</p><p class="ppu">${shelter.toLocaleString()}</p></div>
-          <div class="ppu-line"><p class="ppu">Death Toll:</p><p class="ppu">${death_toll.toLocaleString()}</p></div>
+          <div class="ppu-line"><p class="ppu">Available Shelters:</p><p class="ppu">${shelter.toLocaleString()}</p></div>
+          <div class="ppu-line"><p class="ppu">Death Toll:</p><p class="ppu">${deathTollRatio}</p></div><br/>
+          <h3 style="text-align: left; margin-top: 0.35em; text-transform: capitalize; line-height: 1em">Building Damage:</h3><hr class="pop-line">
+          <div class="ppu-line"><p class="ppu">Low Damage:</p><p class="ppu">${low_damage}</p></div>
+          <div class="ppu-line"><p class="ppu">Medium Damage:</p><p class="ppu">${medium_damage}</p></div>
+          <div class="ppu-line"><p class="ppu">Heavy Damage:</p><p class="ppu">${heavy_damage}</p></div>
+          <div class="ppu-line"><p class="ppu">Extremely Heavy Damage:</p><p class="ppu">${extremely_heavy_damage}</p></div>
+          
       `)
       .style('display', 'block')
       .style('left', `${event.pageX + 10}px`)
@@ -154,9 +167,14 @@ function switchData(dataType) {
     return;
   }
 
-  currentDataType = dataType;
-  colorScale = colorScales[dataType];
-  colorScale.domain([0, d3.max(topojsonData.objects.tracts.geometries, dataTypes[dataType])]);
+  if (dataType === 'death_toll') {
+    const maxRatio = d3.max(topojsonData.objects.tracts.geometries, d => 
+      Math.abs(d.properties.death_toll / d.properties.population)
+    );
+    colorScale.domain([0, maxRatio]);
+  } else {
+    colorScale.domain([0, d3.max(topojsonData.objects.tracts.geometries, dataTypes[dataType])]);
+  }
 
   const paths = d3.selectAll('#plot g.map path');
 
@@ -268,7 +286,14 @@ function update(topojsonData) {
   updateMap(topojsonData, currentDataType);
 
   colorScale = colorScales[currentDataType];
-  colorScale.domain([0, d3.max(topojsonData.objects.tracts.geometries, dataTypes[currentDataType])]);
+  if (currentDataType === 'death_toll') {
+    const maxRatio = d3.max(topojsonData.objects.tracts.geometries, d => 
+      Math.abs(d.properties.death_toll / d.properties.population)
+    );
+    colorScale.domain([0, maxRatio]);
+  } else {
+    colorScale.domain([0, d3.max(topojsonData.objects.tracts.geometries, dataTypes[currentDataType])]);
+  }
 
   const paths = d3.selectAll('#plot g.map path');
 
