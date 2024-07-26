@@ -500,9 +500,9 @@
                     <div class="controls-container" id="controls">
                         <div class="controls-titlebar"><h3 class="plhdr-w" style="text-align:left">IMM Risk Simulation, Mapped</h3><br><div class="controls-titlebar minfo">Hover over a neighborhood for more</div></div>
                         <div class="toggles" id="toggles">
-                            <button class="toggle-bt toggle-pop" onclick="switchData('population')">Population</button>
+                            <button class="toggle-bt toggle-pop" onclick="switchData('population')" data-default="true">Population</button>
                             <button class="toggle-bt toggle-dt" onclick="switchData('death_toll')">Death Toll</button>
-                            <button class="toggle-bt toggle-sh" onclick="switchData('shelter')">Shelter</button>
+                            <button class="toggle-bt toggle-sh" onclick="switchData('dmg_pop')">Building Damage</button>
                         </div>
                     </div>
                     <div id="popup" class="popup"></div>
@@ -523,6 +523,7 @@
                 <div class="text-container">
                     <p class="c-pg">The situation becomes even more dire as the wait time for structural testing can stretch up to 21 years at the current rate of 120 buildings per day. With the North Anatolian Fault indicating an imminent earthquake, local architects, engineers, and students have initiated alternative methods for identifying structural issues. Using makeshift lists of easily identifiable deficiencies, these grassroots movements on social media have become highly popular among the public with posts sparking conversations and sharing of information at the scale of millions in helping people make crucial  decisions involving their safety. This and many other initiatives has also shown that the solution to Istanbul's testing problem had to be more agile yet granular, and easily scalable.</p>
                 </div>
+                
             </section>
             <section class="fs" id="FS08">
                 <div class="text-container-overlay">
@@ -949,6 +950,23 @@
         <script src="map.js"></script>
         <script src="plot.js"></script>
         <script src="script.js"></script>
+        <script>
+            function initializeMap() {
+               if (document.getElementById('plot01')) {
+                   var defaultButton = document.querySelector('.toggle-bt[data-default="true"]');
+                   if (defaultButton) {
+                       setTimeout(function() {
+                           defaultButton.click();
+                       }, 1000);
+                   } else {
+                   }
+               } else {
+                   setTimeout(initializeMap, 1000);
+               }
+            }
+           
+            window.onload = initializeMap;
+           </script>
         <script src="caption.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
 

@@ -17,15 +17,15 @@ const dataTypes = {
   population: d => d.properties.population,
   death_toll: d => Math.abs(d.properties.death_toll / d.properties.population),
   shelter: d => Math.abs(d.properties.shelter / d.properties.population),
-  low_damage: d => Math.abs(d.properties.low_damage),
+  dmg_pop: d => Math.abs(d.properties.medium_dam / d.properties.population),
 };
 
 const colorScales = {
-  population: d3.scaleSequential(d3.interpolateYlOrRd),
-  death_toll: d3.scaleSequential(d3.interpolateMagma),
+  population: d3.scaleSequential(d3.interpolateGnBu).domain([0, 1]),
+  death_toll: d3.scaleSequential(d3.interpolateMagma).domain([0, 1]),
   shelter: d3.scaleSequential(d3.interpolateGreens),
-  low_dmg: d3.scaleSequential(d3.interpolateGreens),
-};
+  dmg_pop: d3.scaleSequential(d3.schemeYlOrRd[8,9]),
+}
 
 function handleMouseover(d, event) {
   if (d.properties && d.properties.name) {
@@ -84,6 +84,10 @@ function handleMouseout(d, event) {
 }
 
 function handleClick(d, event) {
+  const bbox = this.getBoundingClientRect();
+  const popupx = event.pageX || bbox.x;
+  const popupy = event.pageY || bbox.y;
+
   if (d.properties && d.properties.name) {
     d3.selectAll('#plot g.map path')
       .classed('active', false)
@@ -107,13 +111,17 @@ function handleClick(d, event) {
     const name = d.properties.name;
     const sentenceCaseName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
     const population = d.properties.population;
-    const deathTollRatio = Math.abs(d.properties.death_toll);
+    const deathToll = Math.abs(d.properties.death_toll);
+    const severely_injured = Math.abs(d.properties.severely_in);
+    const needs_hospitalization = Math.abs(d.properties.needs_hosp);
     const shelter = Math.abs(d.properties.shelter);
     const low_damage = Math.abs(d.properties.low_damage);
     const medium_damage = Math.abs(d.properties.medium_dam);
     const heavy_damage = Math.abs(d.properties.heavy_dama);
     const extremely_heavy_damage = Math.abs(d.properties.extremely_);
-
+    const natural_gas = Math.abs(d.properties.natural_ga);
+    const drinking_water = Math.abs(d.properties.drinking_w);
+    const sewage_pipe = Math.abs(d.properties.sewage_pip);
 
     d3.select('#plot .info')
       .text(`${sentenceCaseName}`)
@@ -123,16 +131,21 @@ function handleClick(d, event) {
     d3.select('#popup')
       .html(`
           <div class="close-btn" onclick="hidePopup()"><svg width="12" height="12" style="margin-bottom:-3px; margin-right:3px;" viewBox="0 0 59 59" fill="#c8c8c8" xmlns="http://www.w3.org/2000/svg"><path d="M51.3636 58.7273L0.09091 7.45454L7 0.545456L58.2727 51.8182L51.3636 58.7273ZM7 58.7273L0.09091 51.8182L51.3636 0.545456L58.2727 7.45454L7 58.7273Z"/></svg></div>
-          <h3 style="text-align: left; margin-top: 0.35em; text-transform: capitalize; line-height: 1em">${sentenceCaseName}</h3><hr class="pop-line">
+          <h3 style="text-align:left; margin-bottom:-0.75em;"><span style="text-align: left; margin-top: 0.35em; text-transform: capitalize; line-height: 2em;">${sentenceCaseName}</span><span style="color:#ccc; margin-left: 0.5em; font-size: 0.75em">Mh</span></h3><hr class="pop-line">
           <div class="ppu-line"><p class="ppu">Population:</p><p class="ppu">${population.toLocaleString()}</p></div>
           <div class="ppu-line"><p class="ppu">Available Shelters:</p><p class="ppu">${shelter.toLocaleString()}</p></div>
-          <div class="ppu-line"><p class="ppu">Death Toll:</p><p class="ppu">${deathTollRatio}</p></div><br/>
-          <h3 style="text-align: left; margin-top: 0.35em; text-transform: capitalize; line-height: 1em">Building Damage:</h3><hr class="pop-line">
+          <div class="ppu-line"><p class="ppu">Death Toll:</p><p class="ppu">${deathToll}</p></div>
+          <div class="ppu-line"><p class="ppu">Death Toll:</p><p class="ppu">${severely_injured}</p></div>
+          <div class="ppu-line"><p class="ppu">Death Toll:</p><p class="ppu">${needs_hospitalization}</p></div><br/>
+          <h3 style="text-align: left; margin-top: 0.35em; text-transform: none; line-height: 0.75em"># of Damaged Buildings</h3><hr class="pop-line">
           <div class="ppu-line"><p class="ppu">Low Damage:</p><p class="ppu">${low_damage}</p></div>
           <div class="ppu-line"><p class="ppu">Medium Damage:</p><p class="ppu">${medium_damage}</p></div>
           <div class="ppu-line"><p class="ppu">Heavy Damage:</p><p class="ppu">${heavy_damage}</p></div>
-          <div class="ppu-line"><p class="ppu">Extremely Heavy Damage:</p><p class="ppu">${extremely_heavy_damage}</p></div>
-          
+          <div class="ppu-line"><p class="ppu">Extremely Heavy Damage:</p><p class="ppu">${extremely_heavy_damage}</p></div><br/>
+          <h3 style="text-align: left; margin-top: 0.35em; text-transform: none; line-height: 0.75em">Infrastructural Damage</h3><hr class="pop-line">
+          <div class="ppu-line"><p class="ppu">Natural Gas Lines:</p><p class="ppu">${natural_gas}</p></div>
+          <div class="ppu-line"><p class="ppu">Drinking Water Lines:</p><p class="ppu">${drinking_water}</p></div>
+          <div class="ppu-line"><p class="ppu">Sewage Pipes:</p><p class="ppu">${sewage_pipe}</p></div>
       `)
       .style('display', 'block')
       .style('left', `${event.pageX + 10}px`)
@@ -168,11 +181,18 @@ function switchData(dataType) {
   }
 
   if (dataType === 'death_toll') {
+    colorScale = colorScales[dataType];
     const maxRatio = d3.max(topojsonData.objects.tracts.geometries, d => 
       Math.abs(d.properties.death_toll / d.properties.population)
     );
-    colorScale.domain([0, maxRatio]);
+    colorScale.domain([0, maxRatio, dataTypes[dataType]]);
+  } else if (dataType === 'dmg_pop') {
+    colorScale = colorScales[dataType];
+    const maxRatio = d3.max(topojsonData.objects.tracts.geometries, d => 
+      Math.abs(d.properties.medium_dam / d.properties.population)
+    );
   } else {
+    colorScale = colorScales[dataType];
     colorScale.domain([0, d3.max(topojsonData.objects.tracts.geometries, dataTypes[dataType])]);
   }
 
