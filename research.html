@@ -836,12 +836,42 @@
 
                 <div class="text-container">
                     <p class="c-pg">In short, our workflow encompassed four main steps:</p>
-                    <p class="c-pg">
+                    <p class="c-pg mgn-btm-50">
                         1. Finding street-facing points at which two buildings share one or more surfaces.<br/>
                         Query a street-level image of this adjacency line for further processing.<br/>
                         2. Semantically segmenting the image to find out floor slabs and distances based on street facing elevations.<br/>
                         3. Calculating the distance between floor slabs of buildings from both left and right side of the adjacency line. <br/>
-                        4. Assigning this calculated score back onto the GIS object.</p>
+                        4. Assigning this calculated score back onto the GIS object.
+                    </p>
+
+                    <h2 class="ti-tl-sec">Evaluation</h2>
+                    <hr class="inline-ti-tl"/>
+                    <p class="c-pg">This experiment serves as a proof-of-concept for using zero-shot text-to-mask segmentation in conjunction with raster and geospatial data. For the scope of this study, we utilized a zero-shot image segmentation model. Consequently, we neither generated nor trained our model on any specific set of images or datasets. However, Meta AI Research indicates that the SAM image dataset SA-1B was trained using over 11 million images, with Turkey being prominently represented in the geographic distribution, contributing over 300,000 images to the dataset.</p>
+                    <p class="c-pg">We evaluated the accuracy of zero-shot prompt-based image segmentation for estimating floor-misalignment-related pounding effect in adjacent buildings, across a series of metrics encompassing various processes applied during score generation, on a randomly-selected test group of buildings located in our pilot ZIP code, 34188. In order to achieve this, we compared machine-generated image segmentation results and floor misalignment scores with human-evaluated results across the same images in three distinct ways:</p>
+                    <p class="c-pg">
+                        1.	Annotators rated floor misalignment levels from A (perfectly aligned) to F (completely misaligned).<br/>
+                        2.	Annotators compared AI-generated results with corresponding human evaluations.<br/>
+                        3.	If an issue was found in the post-processed image or score, annotators specified the error based on a comprehensive list of points of failure, ranging from object obstruction to facade misindexing.”
+                    </p>
+                    <section class="numbers-container nc-dark mgn-top-50 mgn-btm-50">
+                        <div class="card">
+                            <h4 class="card-title-top mono">POST-PROCESSING<br/>SUCCESS RATE</h4>
+                            <h4 class="fact-number">65.38%</h4>
+                            <p class="card-description mono fs-smaller">SEGMENTATION AND POST-PROCESSING (E.G. FACADE INDEXING)<span class="card-description-long"></span></p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title-top mono">AI ESTIMATION<br/>SUCCESS RATE</h4>
+                            <h4 class="fact-number">84.61%</h4>
+                            <p class="card-description mono fs-smaller">EXCLUDING MISINDEXING & POST-SEGMENTATION PROCESSING FAILURES<span class="card-description-long"></span></p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title-top mono">POTENTIAL<br/>SUCCESS RATE</h4>
+                            <h4 class="fact-number">97.11%</h4>
+                            <p class="card-description mono fs-smaller">IN THE CASE OF SEGMENTATION SUCCESS RATE BEING 100%<span class="card-description-long"></span></p>
+                        </div>
+                    </section>
+                    <p class="c-pg">Across these results, we have achieved a %84.61 success rate in semantic segmentation of facade elements, with the remaining samples could not be successfully segmented due to extreme facade irregularities, vehicle and object obstruction, extreme or miscalculated perspective, angle and/or heading prior to obtaining street imagery and low raster quality after image processing. </p>
+                    <p class="c-pg">Despite challenges like facade irregularities and obstructions, the results highlight the potential of zero-shot models for practical applications in raster + geospatial use-cases, such as our experiment. Future improvements could leverage the recently released SAM 2.0 model by Meta AI, which offers much higher accuracy rates, and incorporate higher-accuracy geospatial datasets along with more up-to-date raster imagery to enhance segmentation precision.</p>
                 </div>
 
                 <figure class="image-container-fullwidth xlct mgn-sds-auto mgn-top-min-25 mgn-btm-min-10">

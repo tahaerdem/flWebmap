@@ -439,6 +439,17 @@ h2.ti-tl {
     }
 }
 
+h2.ti-tl-sec {
+    font-size: 1.5em;
+    letter-spacing: -0.005em;
+    text-align: left;
+    color: white;
+
+    @media screen and (max-height: 769px) { 
+        font-size: 1.6em;
+    }
+}
+
 h2.title {
     position: relative;
     counter-increment: titleCounter;
@@ -837,6 +848,12 @@ hr.fs-line {
 
 hr.fs-line.no-top {
     margin-top: -4em;
+}
+
+hr.inline-ti-tl {
+    border: none;
+    border-bottom: 2px solid var(--color-stroke-quaternary,#E5E3D6);
+    margin: 0.25em 0 1em 0;
 }
 
 .tb-line {
@@ -1670,6 +1687,11 @@ p.card-description {
     }
 }
 
+.fs-smaller {
+    font-size: 11px !important;
+    font-weight: 500;
+}
+
 .card-description-long {
     color: #949494;
     @media screen and (max-width: 768px) {
@@ -2396,6 +2418,11 @@ footer.footer-item:hover {
 .mgn-btm-50 {
     margin-bottom: 50px;
 }
+
+.mgn-top-50 {
+    margin-top: 50px;
+}
+
 
 .mgn-btm-min-50 {
     margin-bottom: -50px;
