@@ -77,7 +77,7 @@
         </div>
 
         </header>
-        <section class="title-byline">
+        <section class="title-byline" id="#introduction">
             <div class="byline-dateline" id="byLine"><p class="byline">By <a href="http://tahaerdemozturk.com" class="byline-author byline-href"  itemprop="author creator" itemtype="https://schema.org/Person">Taha Erdem Ozturk</a> for <a href="https://c4sr.columbia.edu" class="byline-author byline-href" itemprop="author creator" itemtype="https://schema.org/Organization" href="">Center for Spatial Research</a>,</p><p class="byline">Columbia University in the City of New York</p><p class="dateline">Published on: <time class="dateline" datetime="2024-05-29T13:21:13-04:00">29 May 2024</span></p></div></div>
         </section>
         <section class="title-header">
@@ -200,7 +200,6 @@
                 </div>
             </section>
             <div class="spacer s1h"></div>
-
             <section class="fs fschctr" style="z-index: 100" id="FS00">
                 <p class="fs-chpid" id="chp01">CHAPTER 01</p>
                 <h2 class="fs-title" id="fs00Title">February 6</h2>
@@ -908,7 +907,7 @@
                         4. Assigning this calculated score back onto the GIS object.
                     </p>
 
-                    <h2 class="ti-tl-sec">Evaluation</h2>
+                    <h2 class="ti-tl-sec" id="#evaluation">Evaluation</h2>
                     <hr class="inline-ti-tl"/>
                     <p class="c-pg">This experiment serves as a proof-of-concept for using zero-shot text-to-mask segmentation in conjunction with raster and geospatial data. For the scope of this study, we utilized a zero-shot image segmentation model. Consequently, we neither generated nor trained our model on any specific set of images or datasets. However, Meta AI Research indicates that the SAM image dataset SA-1B was trained using over 11 million images, with Turkey being prominently represented in the geographic distribution, contributing over 300,000 images to the dataset.</p>
                     <p class="c-pg">We evaluated the accuracy of zero-shot prompt-based image segmentation for estimating floor-misalignment-related pounding effect in adjacent buildings, across a series of metrics encompassing various processes applied during score generation, on a randomly-selected test group of buildings located in our pilot ZIP code, 34188. In order to achieve this, we compared machine-generated image segmentation results and floor misalignment scores with human-evaluated results across the same images in three distinct ways:</p>
@@ -1073,92 +1072,93 @@
             <div class="footer-section" id="footer-section">
                 <h3>Sections</h3>
                 <ul>
-                    <li><a href="#">At the Fault Lines</a></li>
-                    <li><a href="#">First Earthquake</a></li>
-                    <li><a href="#">Second Earthquake</a></li>
-                    <li><a href="#">East Anatolian Fault</a></li>
-                    <li><a href="#">North Anatolian Fault</a></li>
-                    <li><a href="#">1999 Earthquake</a></li>
-                    <li><a href="#">Istanbul Earthquake</a></li>
-                    <li><a href="#">Dissecting Collapses</a></li>
-                    <li><a href="#">AI + Computer Vision</a></li>
-                    <li><a href="#">Conclusion</a></li>
+                    <li><a href="#introduction" title="Introduction" aria-label="Introduction">Introduction</a></li>
+                    <li><a href="#chp01" title="February 6" aria-label="February 6">February 6</a></li>
+                    <li><a href="#FS02" title="East Anatolian Fault" aria-label="East Anatolian Fault">East Anatolian Fault</a></li>
+                    <li><a href="#chp02" title="North Anatolian Fault" aria-label="North Anatolian Fault">North Anatolian Fault</a></li>
+                    <li><a href="#chp03" title="1999 Earthquake" aria-label="1999 Earthquake">1999 Earthquake</a></li>
+                    <li><a href="#chp04" title="Istanbul Earthquake" aria-label="Istanbul Earthquake">Istanbul Earthquake</a></li>
+                    <li><a href="#chp05" title="Anatomy of A Collapse" aria-label="Anatomy of A Collapse">Anatomy of A Collapse</a></li>
+                    <li><a href="#chp06" title="AI + Computer Vision" aria-label="AI + Computer Vision">AI + Computer Vision</a></li>
+                    <li><a href="#evaluation" title="Evaluation" aria-label="Evaluation">Evaluation</a></li>
+                    <li><a href="#chp07" title="Interactive Map" aria-label="Interactive Map">Interactive Map</a></li>
                 </ul>
             </div>
             <div class="footer-section" id="footer-section">
                 <h3>Maps</h3>
                 <ul>
-                    <li><a href="#">Feb 6 Earthquakes</a></li>
-                    <li><a href="#">Past NAF Earthquakes</a></li>
-                    <li><a href="#">Istanbul Simulations</a></li>
+                    <li><a href="#chp01" title="Feb 6 Earthquakes" aria-label="Feb 6 Earthquakes">Feb 6 Earthquakes</a></li>
+                    <li><a href="#chp02" title="Past NAF Earthquakes" aria-label="Past NAF Earthquakes">Past NAF Earthquakes</a></li>
+                    <li><a href="#chp03" title="1999 Izmit-Gölcük Earthquake" aria-label="1999 Izmit-Gölcük Earthquake">1999 Izmit-Gölcük Earthquake</a></li>
+                    <li><a href="#chp04" title="The Impending Istanbul Earthquake" aria-label="The Impending Istanbul Earthquake">The Impending Istanbul Earthquake</a></li>
                 </ul>
         
                 <h3>Technologies</h3>
                 <ul>
-                    <li><a href="#">Mapbox</a></li>
-                    <li><a href="#">GroundingDINO</a></li>
-                    <li><a href="#">Segment Anything</a></li>
-                    <li><a href="#">Google StreetView API</a></li>
+                    <li><a href="https://docs.mapbox.com/mapbox-gl-js/guides" title="Mapbox GL JS Documentation" aria-label="Mapbox GL JS Documentation">Mapbox GL JS</a></li>
+                    <li><a href="https://huggingface.co/docs/transformers/en/model_doc/grounding-dino" title="GroundingDINO Documentation" aria-label="GroundingDINO Documentation">GroundingDINO</a></li>
+                    <li><a href="https://segment-anything.com" title="Segment Anything by Meta AI Research" aria-label="Segment Anything by Meta AI Research">Segment Anything</a></li>
+                    <li><a href="https://developers.google.com/maps/documentation/streetview/overview" title="Google StreetView API Documentation" aria-label="Google StreetView API Documentation">Google StreetView API</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Research</h3>
                 <ul>
-                    <li><a href="#">Mentions</a></li>
-                    <li><a href="#">Contributors</a></li>
-                    <li><a href="#">Technologies</a></li>
-                    <li><a href="#">Organizations</a></li>
-                    <li><a href="#">Bibliography</a></li>
+                    <li><a href="#" title="Mentions" aria-label="Mentions">Mentions</a></li>
+                    <li><a href="#" title="Contributors" aria-label="Contributors">Contributors</a></li>
+                    <li><a href="#" title="Technologies" aria-label="Technologies">Technologies</a></li>
+                    <li><a href="#" title="Organizations" aria-label="Organizations">Organizations</a></li>
+                    <li><a href="#" title="Bibliography" aria-label="Bibliography">Bibliography</a></li>
                 </ul>
                 <h3>Development</h3>
                 <ul>
-                    <li><a href="#">Github</a></li>
-                    <li><a href="#">Developer Blog</a></li>
-                    <li><a href="#">Open Source Libraries</a></li>
+                    <li><a href="#" title="Github" aria-label="Github">Github</a></li>
+                    <li><a href="#" title="Developer Blog" aria-label="Developer Blog">Developer Blog</a></li>
+                    <li><a href="#" title="Open Source Libraries" aria-label="Open Source Libraries">Open Source Libraries</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Datasets</h3>
                 <ul>
-                    <li><a href="#">USGS</a></li>
-                    <li><a href="#">OpenStreetMaps</a></li>
-                    <li><a href="#">Istanbul Open Data</a></li>
-                    <li><a href="#">Bogazici University</a></li>
-                    <li><a href="#">Global Earthquake Model</a></li>
-                    <li><a href="#">Columbia University CSR</a></li>
-                    <li><a href="#">FaultLines Open Data Repo</a></li>
-                    <li><a href="#">Istanbul Technical University</a></li>
+                    <li><a href="#" title="USGS" aria-label="United States Geological Survey Datasets">USGS</a></li>
+                    <li><a href="#" title="OpenStreetMaps" aria-label="OpenStreetMaps">OpenStreetMaps</a></li>
+                    <li><a href="#" title="Istanbul Open Data" aria-label="Istanbul Open Data Datasets by Istanbul Metropolitan Municipality">Istanbul Open Data</a></li>
+                    <li><a href="#" title="Bogazici University" aria-label="Bogazici University Kandilli Observatory Seismic Records">Bogazici University</a></li>
+                    <li><a href="#" title="Global Earthquake Model" aria-label="Global Earthquake Model Datasets">Global Earthquake Model</a></li>
+                    <li><a href="#" title="Columbia University CSR" aria-label="Columbia University Center for Spatial Research GIS Datasets">Columbia CSR</a></li>
+                    <li><a href="#" title="FaultLines Open Data Repo" aria-label="FaultLines Open Data Repository">FaultLines Open Data Repo</a></li>
+                    <li><a href="#" title="Istanbul Technical University" aria-label="Istanbul Technical University Datasets">Istanbul Technical University</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>FaultLines</h3>
+                <h3>FaultLines Project</h3>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Interactive Map</a></li>
-                    <li><a href="#">Venture Challenge</a></li>
-                    <li><a href="#">FaultLines on News</a></li>
+                    <li><a href="https://faultlines.ai" title="Home" aria-label="Homepage">FaultLines.ai</a></li>
+                    <li><a href="#chp07" title="Interactive Map" aria-label="Interactive Map">Interactive Map</a></li>
+                    <li><a href="https://www.arch.columbia.edu/venture-challenge" title="Venture Challenge" aria-label="Venture Challenge">Venture Challenge</a></li>
+                    <li><a href="https://brown.columbia.edu/the-winners-of-our-venture-challenge/" title="FaultLines on Brown Institute" aria-label="FaultLines on News">FaultLines on Brown Institute</a></li>
                 </ul>
-                <h3>Taha Erdem Ozturk</h3>
+                <h3>Taha Erdem Öztürk</h3>
                 <ul>
-                    <li><a href="#">Website</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li><a href="#">Research</a></li>
+                    <li><a href="https://tahaerdemozturk.com/about" target="_blank" title="About Taha Erdem Öztürk" aria-label="About Taha Erdem Öztürk">About</a></li>
+                    <li><a href="https://tahaerdemozturk.com" target="_blank" title="Taha Erdem Öztürk - Website" aria-label="Taha Erdem Öztürk - Website">Website</a></li>
+                    <li><a href="https://tahaerdemozturk.com/portfolio" target="_blank" title="Taha Erdem Öztürk - Portfolio" aria-label="Taha Erdem Öztürk - Portfolio">Portfolio</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>About</h3>
                 <ul>
-                    <li><a href="#">CSR</a></li>
-                    <li><a href="#">Columbia GSAPP</a></li>
-                    <li><a href="#">The Brown Institute</a></li>
+                    <li><a href="https://c4sr.columbia.edu" title="Columbia University&#10;Center for Spatial Research" aria-label="Columbia University Center for Spatial Research" target="_blank">CSR</a></li>
+                    <li><a href="https://www.arch.columbia.edu" title="Columbia GSAPP" aria-label="Columbia GSAPP" target="_blank">Columbia GSAPP</a></li>
+                    <li><a href="https://brown.columbia.edu" title="The Brown Institute for Media Innovation" aria-label="The Brown Institute for Media Innovation" target="_blank">The Brown Institute</a></li>
                 </ul>
                 <h3>Support</h3>
                 <ul>
-                    <li><a href="#">Donate</a></li>
+                    <li><a href="#" title="Donate" aria-label="Donate">Donate</a></li>
                 </ul>
-                <h3>Contact</h3>
+                <h3>Email</h3>
                 <ul>
-                    <li><a href="#">teo2109@columbia.edu</a></li>
+                    <li><a href="mailto:teo2109@columbia.edu" title="Email Taha Erdem Öztürk" aria-label="Email Taha Erdem Öztürk">teo2109@columbia.edu</a></li>
                 </ul>
             </div>
             <div class="footer-bottom nsc">
