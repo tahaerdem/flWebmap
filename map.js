@@ -2331,7 +2331,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             scrollTrigger: {
                 trigger: "#FS08",
                 start: 'top top', // Make it stop near the top, if wanna center it do 'top top'
-                end: '2000% top',
+                end: '1500% top',
                 pin: true,
                 scrub: true,
                 markers: false,

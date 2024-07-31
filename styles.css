@@ -2482,6 +2482,14 @@ footer.footer-item:hover {
     margin-top: -100px;
 }
 
+.mgn-top-50 {
+    margin-top: 50px;
+}
+
+.mgn-top-100 {
+    margin-top: 100px;
+}
+
 .mgn-btm-0 {
     margin-bottom: 0;
 }
