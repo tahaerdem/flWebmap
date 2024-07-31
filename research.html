@@ -853,23 +853,27 @@
                         2.	Annotators compared AI-generated results with corresponding human evaluations.<br/>
                         3.	If an issue was found in the post-processed image or score, annotators specified the error based on a comprehensive list of points of failure, ranging from object obstruction to facade misindexing.
                     </p>
-                    <section class="numbers-container nc-dark mgn-top-50 mgn-btm-50">
-                        <div class="card">
-                            <h4 class="card-title-top mono">POST-PROCESSING<br/>SUCCESS RATE</h4>
-                            <h4 class="fact-number">65.38%</h4>
-                            <p class="card-description mono fs-smaller">SEGMENTATION AND POST-PROCESSING (E.G. FACADE INDEXING)<span class="card-description-long"></span></p>
-                        </div>
-                        <div class="card">
-                            <h4 class="card-title-top mono">AI ESTIMATION<br/>SUCCESS RATE</h4>
-                            <h4 class="fact-number">84.61%</h4>
-                            <p class="card-description mono fs-smaller">EXCLUDING MISINDEXING & POST-SEGMENTATION PROCESSING FAILURES<span class="card-description-long"></span></p>
-                        </div>
-                        <div class="card">
-                            <h4 class="card-title-top mono">POTENTIAL<br/>SUCCESS RATE</h4>
-                            <h4 class="fact-number">97.11%</h4>
-                            <p class="card-description mono fs-smaller">IN THE CASE OF SEGMENTATION SUCCESS RATE BEING 100%<span class="card-description-long"></span></p>
-                        </div>
-                    </section>
+                </div>
+
+                <section class="numbers-container nc-dark mgn-top-50 mgn-btm-50">
+                    <div class="card">
+                        <h4 class="card-title-top mono">POST-PROCESSING<br/>SUCCESS RATE</h4>
+                        <h4 class="fact-number">65.38%</h4>
+                        <p class="card-description mono fs-smaller">SEGMENTATION AND POST-PROCESSING (E.G. FACADE INDEXING)<span class="card-description-long"></span></p>
+                    </div>
+                    <div class="card">
+                        <h4 class="card-title-top mono">AI ESTIMATION<br/>SUCCESS RATE</h4>
+                        <h4 class="fact-number">84.61%</h4>
+                        <p class="card-description mono fs-smaller">EXCLUDING MISINDEXING & POST-SEGMENTATION PROCESSING FAILURES<span class="card-description-long"></span></p>
+                    </div>
+                    <div class="card">
+                        <h4 class="card-title-top mono">POTENTIAL<br/>SUCCESS RATE</h4>
+                        <h4 class="fact-number">97.11%</h4>
+                        <p class="card-description mono fs-smaller">IN THE CASE OF SEGMENTATION SUCCESS RATE BEING 100%<span class="card-description-long"></span></p>
+                    </div>
+                </section>
+
+                <div class="text-container">
                     <p class="c-pg">Across these results, we have achieved a %84.61 success rate in semantic segmentation of facade elements, with the remaining samples could not be successfully segmented due to extreme facade irregularities, vehicle and object obstruction, extreme or miscalculated perspective, angle and/or heading prior to obtaining street imagery and low raster quality after image processing. </p>
                     <p class="c-pg">Despite challenges like facade irregularities and obstructions, the results highlight the potential of zero-shot models for practical applications in raster + geospatial use-cases, such as our experiment. Future improvements could leverage the recently released SAM 2.0 model by Meta AI, which offers much higher accuracy rates, and incorporate higher-accuracy geospatial datasets along with more up-to-date raster imagery to enhance segmentation precision.</p>
                 </div>
