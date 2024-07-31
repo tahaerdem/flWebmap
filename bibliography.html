@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bibliography - At the Fault Lines</title>
+
+        <meta name="application-name" content="FaultLines">
+        <meta name="A geospatial intelligence research project. Developed by Taha Erdem Ozturk at the Center for Spatial Research, Columbia GSAPP.">
+        <meta name="apple-mobile-web-app-title" content="FaultLines">
+        <meta name=”keywords” content="geospatial ai, ai, artificial intelligence, spatial research, architecture, earthquake, risk assessment, columbia gsapp">
+        <meta name=”author” content="Taha Erdem Ozturk">
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "about": "A geospatial intelligence research project",
+              "datePublished": "2024-05-29T08:00:00-04:00",
+              "dateModified": "2024-05-29T08:00:00-04:00",
+              "author": [{
+                  "@type": "Person",
+                  "name": "Taha Erdem Ozturk",
+                  "url": "https://tahaerdemozturk.com/"
+                },
+                {
+                   "@type": "Organization",
+                   "name": "Columbia University Center for Spatial Research",
+                   "url": "https://c4sr.columbia.edu"
+                },
+                {
+                   "@type": "Organization",
+                   "name": "FaultLines, LLC",
+                   "url": "https://faultlines.ai"   
+              }]
+            }
+        </script>
+
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="theme-color" content="#FFFDDE" media="(prefers-color-scheme: light)">
+        <meta name="theme-color" content="#FFFDDE" media="(prefers-color-scheme: dark)">
+        <link rel="apple-touch-icon" href="/flWebmap/resources/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/flWebmap/resources/favicon/fl-favicon-32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/flWebmap/resources/favicon/fl-favicon-16.png">
+
+        <link rel="stylesheet" href="styles.css">
+
+        <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+        <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+        <link rel="stylesheet" href="glide.core.min.css">
+        <link href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css' rel='stylesheet' />
+        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js'></script>
+
+        <link rel="preconnect" href="https://rsms.me/">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+        <link rel="stylesheet" href="https://use.typekit.net/oew1nxa.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="map"></div>
+        <div id="geocoder" class="geocoder"></div>
+        <header>
+        <div class="navbar bib-nav" id="bib-nav">
+            <div class="navbar-left">
+                <a href="#" class="navbar-item-cu-short bib-nav" >Columbia<br>GSAPP</a>
+                <a href="#" class="navbar-item-cu-medium bib-nav">Columbia University<br>GSAPP</a>
+                <a href="#" class="navbar-item-cu-long bib-nav">Columbia University<br>Graduate School of Architecture, Planning, and Preservation</a>
+            </div>
+            <div class="navbar-right">
+                <a href="/about.html" class="navbar-item bib-nav">About</a>
+                <a href="/research.html" class="navbar-item bib-nav">Research</a>
+                <a href="/webmap.html" class="navbar-item bib-nav">Interactive Map</a>
+            </div>
+        </div>
+
+        </header>
+        <section class="title-header">
+            <h1 class="title-wrapper main-title bib-title" id="bibTitle">Bibliography</h1><div id="overlay"></div>
+        </section>
+        <section class="title-wrapper bibliography-wrapper">
+        </section>
+        <main>
+
+            <article class="story">
+                <div class="text-container">
+                    <p class="captionable">As the country still grieves for such tremendous loss of life in the South, the possibility of a long-predicted “next big earthquake” in the northwest end of the region has became even more imminent: For a long while many geologists have been alarming the authorities to take action against an Upcoming Istanbul Earthquake that’s predicted to happen in the next 5-10 years as the North Anatolian Fault is known to have reached the end of its current seismic period. Scientist predict that nearly 40% of the population, or more than six million people, might be under life-threatening risk conditions in a scenario of a Magnitude 7.5 earthquake. This situation has been further brought into light by the current mayor of the city, Ekrem Imamoglu, during a television program in February 15, 2023:</p>
+                    <br>
+                    <div class="callout">
+                    <p class="callout">When we took over the job (of mayorship of the megacity), the records of the previous management mentioned 40,000-50,000 risky structures. In the work we have conducted, we are estimating that there are as of now 90,000 structures that are severely damaged, i.e. have a risk of collapsing. Among them are workplaces and houses. We are aware that we have to move very fast (in terms of renewing the structures)
+                    <br>
+                    <br>
+                    -Ekrem Imamoglu, Mayor of istanbul</p></div>
+                    <br>
+                    <p>The aftermath of the recent quakes has alarmed Istanbul Metropolitan Municipality, which has launched various action plans to ensure the safety of the city’s existing building stock by conducting free on-site structural tests, expediting urban renewal projects, and offering financial support and temporary housing for those who live in risky buildings. However, the newly-elected mayor Ekrem Imamoglu states that the increased demand to structural tests and other programs have exhausted the city’s limits.</p>
+                </div>
+                    <figure class="image-container-fullwidth xlct" style="align-self:center;">
+                        <img src="/flWebmap/resources/images/xlct-test-map.svg" width="100%" alt="Before" class="captionable">
+                        <figcaption>Map published by IMM Directorate of Earthquake and Ground Research</figcaption>
+                    </figure>
+                <div class="text-container">
+                    <p class="captionable c-pg">The above map shows that only a small percentage of the city have been able to be tested since 2019, pointing out to a need for an alternative, faster approach. Another significant challenge dates back to 1940s when the country encouraged rural-to-urban migration to solve the increasingly pressing working shortage as Istanbul became an important global production center. Due to the lack of resources and interest in expanding the city for planned low-income housing neighborhoods, the governments have allowed workers to build their own housing on various parts of the city. The term “gecekondu” (which literally means ‘built overnight’) is used today to define the present urban patches and neighborhoods that got swallowed by the fast-sprawling city.</p>
+                </div><br>
+                <h2 class="styled-quote">It may take up to 21 years to get<br>a structural test for your building</h2>
+                <br><br>
+                <div class="text-container">
+                    <p class="captionable c-pg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum.</p>
+                    <p class="c-pg">Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices.</p>
+                </div>
+
+                    <div id="g-rent-green-comp-box" class="g-rent-green-comp-box">
+                        <div id="g-rent-green-comp-Artboard_1" class="g-artboard" data-aspect-ratio="2.044" data-min-width="0">
+                            <img id="g-rent-green-comp-Artboard_1-img" class="g-rent-green-comp-Artboard_1-img g-aiImg" alt="" src="/flWebmap/resources/images/rent-green-comp.jpg"/>
+                            <div id="g-ai0-1" class="g-Layer_1 g-aiAbs" style="top:41.9478%;left:21.4946%;margin-left:-12.7664%;width:31.5329%;">
+                                <p class="g-pstyle0">$1,587</p>
+                            </div>
+                            <div id="g-ai0-2" class="g-Layer_1 g-aiAbs" style="top:41.9478%;left:72.4693%;margin-left:-12.7664%;width:31.5329%;">
+                                <p class="g-pstyle0">$442</p>
+                            </div>
+                            <div id="g-ai0-3" class="g-Layer_1 g-aiAbs" style="top:55.5114%;left:21.4946%;margin-left:-12.7664%;width:31.5329%;">
+                                <p class="g-pstyle1">Levent Mahallesi</p>
+                            </div>
+                            <div id="g-ai0-4" class="g-Layer_1 g-aiAbs" style="top:55.5114%;left:72.5413%;margin-left:-12.7664%;width:31.5329%;">
+                                <p class="g-pstyle1">Çeliktepe Mahallesi</p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption>Satellite images retrieved by using Google Maps API. Real estate data is retrieved from Zingat.com</figcaption>
+                <div class="text-container">
+                    <p class="c-pg">The above collection of satellite imagery aims to show the stark difference in the amount “open space” and average price of monthly rent in various neighborhoods across the city. As the income inequality increases, it also renders people living in “low-income” areas significantly more vulnerable against disasters such as the expected Istanbul Earthquake. Many planned “high-income” neighborhoods and the mentioned “gecekondu” areas are located side-to-side, often only separated by highways, hills, or high-rise buildings that are built as part of urban renewal programs. As pointed out by the mayor, most of AKP’s promised urban renewal projects took place in middle to higher income neighborhoods where developers could achieve higher profit margins. Hence any risk assessment project should point their focus to these often overlooked low-income neighborhoods, where people are comparatively more vulnerable and under higher risk.</p>
+                </div>
+            </article>
+
+            <section class="footnotes">
+                <div class="text-container">
+                    <h2 class="title">Footnotes</h2> 
+                    <hr class="title-line"/>
+                    <p>
+                        <ol>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+                            <li><a class="footnote-li" id="bib-21" href="https://www.law.cornell.edu/uscode/text/29/1001">29 U.S.C. 1001</a><span class="footnote-li">, Federal Trade Commission, “Combatting Online Harms Through Innovation”, Federal Trade Commission, June 2022. </span></li>
+
+                        </ol>
+                    </p>
+                </div>  
+            </section>
+        </main>
+
+        <script src="script.js"></script>
+
+        <div class="back-arrow" id="backArrow" onclick="moveTop()"></div>
+        <footer id="footer">
+            <div class="footer-section" id="footer-section">
+                <h3>Sections</h3>
+                <ul>
+                    <li><a href="#introduction" title="Introduction" aria-label="Introduction">Introduction</a></li>
+                    <li><a href="#chp01" title="February 6" aria-label="February 6">February 6</a></li>
+                    <li><a href="#FS02" title="East Anatolian Fault" aria-label="East Anatolian Fault">East Anatolian Fault</a></li>
+                    <li><a href="#chp02" title="North Anatolian Fault" aria-label="North Anatolian Fault">North Anatolian Fault</a></li>
+                    <li><a href="#chp03" title="1999 Earthquake" aria-label="1999 Earthquake">1999 Earthquake</a></li>
+                    <li><a href="#chp04" title="Istanbul Earthquake" aria-label="Istanbul Earthquake">Istanbul Earthquake</a></li>
+                    <li><a href="#chp05" title="Anatomy of A Collapse" aria-label="Anatomy of A Collapse">Anatomy of A Collapse</a></li>
+                    <li><a href="#chp06" title="AI + Computer Vision" aria-label="AI + Computer Vision">AI + Computer Vision</a></li>
+                    <li><a href="#evaluation" title="Evaluation" aria-label="Evaluation">Evaluation</a></li>
+                    <li><a href="#chp07" title="Interactive Map" aria-label="Interactive Map">Interactive Map</a></li>
+                </ul>
+            </div>
+            <div class="footer-section" id="footer-section">
+                <h3>Maps</h3>
+                <ul>
+                    <li><a href="#chp01" title="Feb 6 Earthquakes" aria-label="Feb 6 Earthquakes">Feb 6 Earthquakes</a></li>
+                    <li><a href="#chp02" title="Past NAF Earthquakes" aria-label="Past NAF Earthquakes">Past NAF Earthquakes</a></li>
+                    <li><a href="#chp03" title="1999 Izmit-Gölcük Earthquake" aria-label="1999 Izmit-Gölcük Earthquake">1999 Izmit-Gölcük Earthquake</a></li>
+                    <li><a href="#chp04" title="The Impending Istanbul Earthquake" aria-label="The Impending Istanbul Earthquake">The Impending Istanbul Earthquake</a></li>
+                </ul>
+        
+                <h3>Technologies</h3>
+                <ul>
+                    <li><a href="https://docs.mapbox.com/mapbox-gl-js/guides" title="Mapbox GL JS Documentation" aria-label="Mapbox GL JS Documentation">Mapbox GL JS</a></li>
+                    <li><a href="https://huggingface.co/docs/transformers/en/model_doc/grounding-dino" title="GroundingDINO Documentation" aria-label="GroundingDINO Documentation">GroundingDINO</a></li>
+                    <li><a href="https://segment-anything.com" title="Segment Anything by Meta AI Research" aria-label="Segment Anything by Meta AI Research">Segment Anything</a></li>
+                    <li><a href="https://developers.google.com/maps/documentation/streetview/overview" title="Google StreetView API Documentation" aria-label="Google StreetView API Documentation">Google StreetView API</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Research</h3>
+                <ul>
+                    <li><a href="#" title="Mentions" aria-label="Mentions">Mentions</a></li>
+                    <li><a href="#" title="Contributors" aria-label="Contributors">Contributors</a></li>
+                    <li><a href="#" title="Technologies" aria-label="Technologies">Technologies</a></li>
+                    <li><a href="#" title="Organizations" aria-label="Organizations">Organizations</a></li>
+                    <li><a href="#" title="Bibliography" aria-label="Bibliography">Bibliography</a></li>
+                </ul>
+                <h3>Development</h3>
+                <ul>
+                    <li><a href="#" title="Github" aria-label="Github">Github</a></li>
+                    <li><a href="#" title="Developer Blog" aria-label="Developer Blog">Developer Blog</a></li>
+                    <li><a href="#" title="Open Source Libraries" aria-label="Open Source Libraries">Open Source Libraries</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Datasets</h3>
+                <ul>
+                    <li><a href="#" title="USGS" aria-label="United States Geological Survey Datasets">USGS</a></li>
+                    <li><a href="#" title="OpenStreetMaps" aria-label="OpenStreetMaps">OpenStreetMaps</a></li>
+                    <li><a href="#" title="Istanbul Open Data" aria-label="Istanbul Open Data Datasets by Istanbul Metropolitan Municipality">Istanbul Open Data</a></li>
+                    <li><a href="#" title="Bogazici University" aria-label="Bogazici University Kandilli Observatory Seismic Records">Bogazici University</a></li>
+                    <li><a href="#" title="Global Earthquake Model" aria-label="Global Earthquake Model Datasets">Global Earthquake Model</a></li>
+                    <li><a href="#" title="Columbia University CSR" aria-label="Columbia University Center for Spatial Research GIS Datasets">Columbia CSR</a></li>
+                    <li><a href="#" title="FaultLines Open Data Repo" aria-label="FaultLines Open Data Repository">FaultLines Open Data Repo</a></li>
+                    <li><a href="#" title="Istanbul Technical University" aria-label="Istanbul Technical University Datasets">Istanbul Technical University</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>FaultLines Project</h3>
+                <ul>
+                    <li><a href="https://faultlines.ai" title="Home" aria-label="Homepage">FaultLines.ai</a></li>
+                    <li><a href="#chp07" title="Interactive Map" aria-label="Interactive Map">Interactive Map</a></li>
+                    <li><a href="https://www.arch.columbia.edu/venture-challenge" title="Venture Challenge" aria-label="Venture Challenge">Venture Challenge</a></li>
+                    <li><a href="https://brown.columbia.edu/the-winners-of-our-venture-challenge/" title="FaultLines on Brown Institute" aria-label="FaultLines on News">FaultLines on Brown Institute</a></li>
+                </ul>
+                <h3>Taha Erdem Öztürk</h3>
+                <ul>
+                    <li><a href="https://tahaerdemozturk.com/about" target="_blank" title="About Taha Erdem Öztürk" aria-label="About Taha Erdem Öztürk">About</a></li>
+                    <li><a href="https://tahaerdemozturk.com" target="_blank" title="Taha Erdem Öztürk - Website" aria-label="Taha Erdem Öztürk - Website">Website</a></li>
+                    <li><a href="https://tahaerdemozturk.com/portfolio" target="_blank" title="Taha Erdem Öztürk - Portfolio" aria-label="Taha Erdem Öztürk - Portfolio">Portfolio</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="https://c4sr.columbia.edu" title="Columbia University&#10;Center for Spatial Research" aria-label="Columbia University Center for Spatial Research" target="_blank">CSR</a></li>
+                    <li><a href="https://www.arch.columbia.edu" title="Columbia GSAPP" aria-label="Columbia GSAPP" target="_blank">Columbia GSAPP</a></li>
+                    <li><a href="https://brown.columbia.edu" title="The Brown Institute for Media Innovation" aria-label="The Brown Institute for Media Innovation" target="_blank">The Brown Institute</a></li>
+                </ul>
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#" title="Donate" aria-label="Donate">Donate</a></li>
+                </ul>
+                <h3>Email</h3>
+                <ul>
+                    <li><a href="mailto:teo2109@columbia.edu" title="Email Taha Erdem Öztürk" aria-label="Email Taha Erdem Öztürk">teo2109@columbia.edu</a></li>
+                </ul>
+            </div>
+            <div class="footer-bottom nsc">
+                <p>&copy; 2024 AT THE FAULT LINES</p>
+                <p>CENTER FOR SPATIAL RESEARCH • COLUMBIA GSAPP</p>
+            </div>
+        </footer>
+        <script>
+            var docWidth = document.documentElement.offsetWidth;
+
+            [].forEach.call(
+            document.querySelectorAll('*'),
+            function(el) {
+                if (el.offsetWidth > docWidth) {
+                console.log(el);
+                }
+            }
+);
+        </script>
+    </body>
+</html>
