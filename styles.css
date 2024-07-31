@@ -1671,7 +1671,6 @@ figcaption.mono::after {
     white-space: pre;
 }
 
-
 p.card-description {
     font-size: 14px;
     text-align: center;
@@ -2685,4 +2684,77 @@ footer.footer-item:hover {
 
 .txct {
     text-align: center !important;
+}
+
+.carousel_bullet {
+    background-color: rgb(30, 30, 30);
+    border: rgb(30, 30, 30) 1px solid;
+    border-radius: 8px;
+    padding: 3px 3px;
+    text-align: center;
+    display: inline-block;
+}
+
+.carousel_bulletcontainer {
+}
+
+.carousel_bullet:hover {
+    background-color: rgb(110, 110, 110);
+    border:  rgb(110, 110, 110) 1px solid;
+}
+
+.carousel_bullet:active {
+    background-color: rgb(218, 218, 218);
+    border:  rgb(218, 218, 218) 1px solid;
+}
+
+.carousel_nav {
+    background-color: rgb(30, 30, 30);
+    border: rgb(30, 30, 30) 1px solid;
+    border-radius: 16px;
+    padding: 4px 8px;
+    text-align: center;
+    display: inline-block;
+}
+
+.carousel_nav:hover {
+    background-color: rgb(110,110,110);
+    border:  rgb(218, 218, 218) 1px solid;
+}
+
+.carousel_nav:active {
+    background-color: rgb(218, 218, 218);
+    border:  rgb(218, 218, 218) 1px solid;
+}
+
+.carousel_dualview {
+    display: inline-flex;
+    gap: 25px;
+}
+
+.glide__slide {
+    opacity: 20%;
+    transition: 200ms ease-in-out;
+}
+
+.glide__slide--active {
+    opacity: 100% !important;
+    transition: 200ms ease-in-out;
+}
+
+.glide__bullet {
+    background-color: rgb(30, 30, 30);
+    border: rgb(30, 30, 30) 1px solid;
+    border-radius: 8px;
+    padding: 3px 3px;
+    text-align: center;
+    display: inline-block;
+    transition: 200ms ease-in-out;
+}
+
+.glide__bullet--active {
+    background-color: rgb(218, 218, 218);
+    border:  rgb(218, 218, 218) 1px solid;
+    padding: 4px 4px;
+    transition: 200ms ease-in-out;
 }
