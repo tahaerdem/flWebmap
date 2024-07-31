@@ -257,6 +257,7 @@
                     var glide = new Glide('.glide', {
                       type: 'carousel',
                       startAt: 1,
+                      perView: 2,
                       gap: 30,
                       autoplay: 4000,
                       focusAt: 'center',
@@ -265,7 +266,7 @@
                         after: 0
                       },
                       breakpoints: {
-                        900: {
+                        600: {
                             perView: 1
                         },
                         1200: {
@@ -1165,5 +1166,17 @@
                 <p>CENTER FOR SPATIAL RESEARCH • COLUMBIA GSAPP</p>
             </div>
         </footer>
+        <script>
+            var docWidth = document.documentElement.offsetWidth;
+
+            [].forEach.call(
+            document.querySelectorAll('*'),
+            function(el) {
+                if (el.offsetWidth > docWidth) {
+                console.log(el);
+                }
+            }
+);
+        </script>
     </body>
 </html>
