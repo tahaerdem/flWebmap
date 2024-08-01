@@ -2861,11 +2861,13 @@ footer.footer-item:hover {
 }
 
 .carousel_bullet:hover {
+    cursor: pointer;
     background-color: rgb(110, 110, 110);
     border:  rgb(110, 110, 110) 1px solid;
 }
 
 .carousel_bullet:active {
+    cursor: pointer;
     background-color: rgb(218, 218, 218);
     border:  rgb(218, 218, 218) 1px solid;
 }
