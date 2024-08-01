@@ -43,7 +43,7 @@ const flMap = new mapboxgl.Map({
     doubleClickZoom: false,
     boxZoom: false,
     dragRotate: false,
-    dragPan: false,
+    dragPan: true,
     touchZoomRotate: false,
     touchPitchHandler: false,
     attributionControl: false,
