@@ -2288,7 +2288,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     function frame13() {    
         const boundariesToToggle = ['L3_AdminBoundaries', 'L2_AdminBoundaries'];
         const layersToToggle = ['L3_Shelter'];
-        const layersToHide = ['settlement-minor-lab','country-label','Turkey-L01','Fault-Paths-L01','Fault-Paths-L03','1939','1939-T','1939-P','1942','1942-T','1942-P','1943','1943-T','1944','1944-T','1944-P','1957','1957-T','1957-P','1967','1967-T','1967-P','1999','1999-T','hillshade'];
+        const layersToHide = ['country-label','Turkey-L01','Fault-Paths-L01','Fault-Paths-L03','1939','1939-T','1939-P','1942','1942-T','1942-P','1943','1943-T','1944','1944-T','1944-P','1957','1957-T','1957-P','1967','1967-T','1967-P','1999','1999-T','hillshade'];
         
         var tl = gsap.timeline({
             scrollTrigger: {
@@ -2576,38 +2576,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 },
 
                 onUpdate: self => {
-                    const progress = self.progress;
-                    const velocity = self.getVelocity();
-                    const center = map.getCenter();
-                    const targetLat = 41.158;
-                    const targetLng = 28.978;
-                    const targetZoom = 8.75;
-                    tabtitle.style.color = '#fff';
-                    tabtitle.style.opacity = (progress * progress) * 100;
-    
-                    let lngStep, latStep, zoomStep;
-    
-                    if (velocity > 0 && window.scrollY > 0) {
-                        // Forward animation steps
-                        lngStep = (targetLng - center.lng) / 30;
-                        latStep = (targetLat - center.lat) / 30;
-                    } else if (velocity < 0 && window.scrollY > 0) {
-                        lngStep = (targetLng - center.lng) / 30;
-                        latStep = (targetLat - center.lat) / 30;
-                        zoomStep = (8.75 - map.getZoom()) / 15;
-                    } else {
-                        lngStep = 0;
-                        latStep = 0;
-                        zoomStep = 0;
-                    }
-    
-                    map.easeTo({
-                        center: [center.lng + lngStep, center.lat + latStep],
-                        zoom: map.getZoom() + zoomStep,
-                        duration: 0,
-                        easing: t => t // linear easing
-                    });
-    
                 },
 
     
