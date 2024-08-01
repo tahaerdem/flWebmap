@@ -318,16 +318,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const startTime = 1675646254342;
         const endTime = 1675689088811;
       
-        const dateDisplay = document.createElement('h3');
-        dateDisplay.style.position = 'fixed';
-        dateDisplay.id = 'date-time-scroll-counter';
-        dateDisplay.style.top = '20px';
-        dateDisplay.style.right = '20px';
-        dateDisplay.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-        dateDisplay.style.padding = '10px';
-        dateDisplay.style.borderRadius = '5px';
-        dateDisplay.style.zIndex = '9999';
-        document.body.appendChild(dateDisplay);
       
         map.on('idle', () => {
           const features = map.querySourceFeatures('composite', {
@@ -397,10 +387,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       
                 map.setFilter(earthquakeLayer, filter);
       
-                const date = new Date(currentDate + (8 * 60 * 60 * 1000));
-                const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
-                const formattedDate = date.toLocaleString('en-US', options);
-                dateDisplay.textContent = `${formattedDate}`;
               },
       
               onLeave: () => {
@@ -2646,6 +2632,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     });
     
                 },
+
     
             },
         });

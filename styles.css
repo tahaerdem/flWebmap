@@ -745,8 +745,29 @@ figcaption {
     margin: 20px 25px 20px 25px;
 
     @media screen and (max-width: 900px) {
-        font-size: smaller;
+        color:#6b6b6b;
     }
+}
+
+figcaption.fgcp-cdt {
+    color:#353535;
+    font-weight: 700;
+}
+
+figcaption.fgcp-mgn-none {
+    margin: 0px !important;
+}
+
+figcaption.fgcp-mgn-btm-none {
+    margin-bottom: 0px !important;
+}
+
+figcaption.fgcp-mgn-btm-min-1em {
+    margin-bottom: -1.5em !important;
+}
+
+figcaption.fgcp-mgn-top-none {
+    margin-top: 0px !important;
 }
 
 section {
