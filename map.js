@@ -410,7 +410,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     function frame05() {
         const layersToToggle = ['feb6-eq-circle-stroke-end', 'feb6-eq-circle-stroke-end-t'];
         const layersToHide = [];
-        const dateDisplay = document.getElementById('date-time-scroll-counter');
         
         var tl = gsap.timeline({
             scrollTrigger: {
@@ -428,8 +427,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     layersToHide.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
-                    let counter = document.getElementById('date-time-scroll-counter');
-                    counter.style.display = "visible";
                 },
 
                 onEnterBack: () => {
@@ -439,8 +436,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     layersToHide.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
-                    let counter = document.getElementById('date-time-scroll-counter');
-                    counter.style.display = "visible";
                 },
 
                 onLeaveBack: () => {
@@ -450,8 +445,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     layersToHide.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
-                    let counter = document.getElementById('date-time-scroll-counter');
-                    counter.style.display = "visible";
                 },
                 
                 onUpdate: self => {
@@ -472,10 +465,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         lngStep = (targetLng - center.lng) / 20;
                         latStep = (targetLat - center.lat) / 20;
                         zoomStep = (7.5 - map.getZoom()) / 15;
-                    } else if (progress > 0.75 && velocity > 0) {
-                        dateDisplay.style.opacity = "0";
-                    } else if (progress < 0.75 && velocity < 0) {
-                        dateDisplay.style.opacity = "1";
                     } else {
                         lngStep = 0;
                         latStep = 0;
@@ -502,8 +491,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     layersToHide.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
-                    let counter = document.getElementById('date-time-scroll-counter');
-                    counter.style.display = "none";
                 },
     
             },
