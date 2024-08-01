@@ -509,16 +509,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 markers: false,
     
                 onEnter: () => {
-                    let counter = document.getElementById('date-time-scroll-counter');
-                    counter.style.display = "none";
                 },
                 onEnterBack: () => {
-                    let counter = document.getElementById('date-time-scroll-counter');
-                    counter.style.display = "none";
                 },
                 onLeaveBack: () => {
-                    let counter = document.getElementById('date-time-scroll-counter');
-                    counter.style.display = "visible";
                 },
     
                 onUpdate: self => {
@@ -556,11 +550,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     container.style.height = `${newContSize}px`;
                     margin.style.marginTop = `${newMarginSize}px`;
                 },
-    
-                onLeave: () => {
-                    let counter = document.getElementById('date-time-scroll-counter');
-                    counter.style.display = "none";
-                },
+
             },
         });
     }
@@ -888,7 +878,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    //North Anatolia Earthquakes
     function frame09() {
         const earthquakeLayers = [
             '1939', '1939-T', '1939-P', '1942', '1942-T', '1942-P', '1943', '1943-T',
@@ -922,29 +911,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
         // Web Worker for heavy computations
         const worker = new Worker(URL.createObjectURL(new Blob([`
             self.onmessage = function(e) {
-                const { earthquakeLayers, sourceLayers, map } = e.data;
-                const coordinatesCache = {};
+                const { earthquakeLayers, featureData } = e.data;
                 const targetPositions = [];
-    
-                earthquakeLayers.forEach(layer => {
-                    for (const sourceLayer of sourceLayers) {
-                        const features = map.querySourceFeatures('composite', {
-                            sourceLayer: sourceLayer,
-                            filter: ['==', 'name', layer]
-                        });
-                        if (features.length > 0) {
-                            coordinatesCache[layer] = features[0].geometry.coordinates[0];
-                            break;
-                        }
-                    }
-                });
     
                 const totalLayers = earthquakeLayers.length;
                 const step = 1 / totalLayers;
     
                 for (let i = 0; i < totalLayers; i++) {
                     const layer = earthquakeLayers[i];
-                    const coordinates = coordinatesCache[layer];
+                    const coordinates = featureData[layer];
                     if (coordinates) {
                         const targetLat = coordinates[1];
                         const targetLng = coordinates[0];
@@ -963,7 +938,22 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
         map.on('styledata', function () {
             if (map.isStyleLoaded()) {
-                worker.postMessage({ earthquakeLayers, sourceLayers, map });
+                const featureData = {};
+    
+                earthquakeLayers.forEach(layer => {
+                    for (const sourceLayer of sourceLayers) {
+                        const features = map.querySourceFeatures('composite', {
+                            sourceLayer: sourceLayer,
+                            filter: ['==', 'name', layer]
+                        });
+                        if (features.length > 0) {
+                            featureData[layer] = features[0].geometry.coordinates[0];
+                            break;
+                        }
+                    }
+                });
+    
+                worker.postMessage({ earthquakeLayers, featureData });
             }
         });
     
@@ -987,7 +977,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             const newVisibleLayers = new Set(earthquakeLayers.slice(0, currentStep + 1));
             const toShow = [...newVisibleLayers].filter(x => !currentVisibleLayers.has(x));
             const toHide = [...currentVisibleLayers].filter(x => !newVisibleLayers.has(x));
-            
+    
             if (toShow.length > 0 || toHide.length > 0) {
                 requestAnimationFrame(() => {
                     toShow.forEach(layerId => map.setLayoutProperty(layerId, 'visibility', 'visible'));
