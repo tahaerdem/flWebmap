@@ -2897,8 +2897,12 @@ function showPopup(e, sourceName, sourceLayer) {
                 <h3>${safetyLevel}</h3>
             </div>
             <div class="flMap-popup-content">
-                <p><strong>Index:</strong> ${feature.properties.index}</p>
-                <p><strong>Adjacency:</strong> <span style="color: ${backgroundColor};">${formattedScore}</span></p>
+                <div class="flMap-popup-row"><p class="flMap-popup-t3">Building Type:</p><p class="flMap-popup-t4">${feature.properties.type}</p></div>
+                <div class="flMap-popup-row"><p class="flMap-popup-t3">Floor:</p><p class="flMap-popup-t4">${feature.properties.story}</p></div>
+                <div class="flMap-popup-row"><p class="flMap-popup-t3">Height:</p><p class="flMap-popup-t4">${feature.properties.height}</p></div>
+                <div class="flMap-popup-row"><p class="flMap-popup-t3">Adjacency Score:</p><p class="flMap-popup-t4 flwptp-rect" style="border: 1.5px solid ${backgroundColor}; color: ${backgroundColor}">${formattedScore}</p></div>
+                <div class="flMap-popup-row"><p class="flMap-popup-t3">District:</p><p class="flMap-popup-t4">${feature.properties.boro}</p></div>
+                <div class="flMap-popup-row"><p class="flMap-popup-t3">ZIP:</p><p class="flMap-popup-t4">${feature.properties.ZIP}</p></div>
             </div>
         </div>
     `;
