@@ -12,6 +12,11 @@ let initialZoom = calculateZoom(viewportWidth);
 
 let flInitialZoom = 19;
 
+const istanbulBounds = [
+    [28.4, 40.7], // Southwest coordinates
+    [29.4, 41.3]  // Northeast coordinates
+];
+
 function checkScrollTop() {
     if (window.scrollY === 0) {
         console.log("The page is scrolled back to the top.");
@@ -47,6 +52,7 @@ const flMap = new mapboxgl.Map({
     touchZoomRotate: false,
     touchPitchHandler: false,
     attributionControl: false,
+    maxBounds: istanbulBounds,
 });
 
 function getScrollPositionY() {
@@ -2293,7 +2299,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS08",
-                start: 'top top', // Make it stop near the top, if wanna center it do 'top top'
+                start: 'top top',
                 end: '1500% top',
                 pin: true,
                 scrub: true,
@@ -2386,6 +2392,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     //Dissecting Collapse intro
     function frame131() {
+        const mapElement = document.getElementById('map');
+
         var tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#FS0911",
@@ -2437,7 +2445,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 },
     
                 onLeave: () => {
+                    mapElement.style.display = 'none';
                 },
+
+                onEnter: () => {
+                    document.getElementById('flMap').style.display = 'none';
+                },
+
+                onLeaveBack: () => {
+                    document.getElementById('flMap').style.display = 'fixed';
+                }
+
             },
         });
     }
@@ -2560,73 +2578,108 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     function frame15() {
         const tabtitle = document.getElementById('tab-title');
+        
+        gsap.set(tabtitle, { opacity: 0 });
+      
         var tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#FS12",
-                start: 'top top',
-                end: '7000% top',
-                pin: true,
-                scrub: true,
-                markers: false,
-
-                onRefresh: self => {
-                    const pinnedElement = self.pin;
-                    pinnedElement.style.width = '100%';
-                    pinnedElement.style.maxWidth = '100%';
-                },
-
-                onUpdate: self => {
-                },
-
-    
+          scrollTrigger: {
+            trigger: "#FS12",
+            start: 'top top',
+            end: '7000% top',
+            pin: true,
+            scrub: true,
+            markers: false,
+            onRefresh: self => {
+              const pinnedElement = self.pin;
+              pinnedElement.style.width = '100%';
+              pinnedElement.style.maxWidth = '100%';
             },
+            onUpdate: self => {
+              const progress = self.progress;
+              gsap.to(tabtitle, {
+                opacity: 1,
+                duration: 1,
+                ease: 'none'
+              });
+            },
+          },
         });
     }
 
-    function frame0001() {
-        var tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#flMap",
-                start: 'top 7%',
-                end: '200% top',
-                pin: true,
-                scrub: true,
-                markers: false,
+    let animationCompleted = false;
 
-                onEnter: () => {
-                },
+    function frame0001() {
+        const maxZoom = 20;
+        const minZoom = 14.5;
+        const mapElement = document.getElementById('flMap');
     
+        return gsap.timeline({
+            scrollTrigger: {
+                trigger: mapElement,
+                start: 'top top',
+                end: '+=200%', // Adjust this value to control the scroll distance for zooming
+                pin: true,
+                pinSpacing: true,
+                scrub: 1,
+                markers: false,
+                onEnter: () => {
+                    flMap.setZoom(maxZoom);
+                },
                 onUpdate: self => {
-                    const progress = self.progress;
-                    const velocity = self.getVelocity();
+                    if (animationCompleted) return;
+    
                     const flcenter = flMap.getCenter();
                     const fltargetLat = 40.998400;
                     const fltargetLng = 28.840361;
+                    const currentZoom = flMap.getZoom();
+                    const zoomRange = maxZoom - minZoom;
+                    const scrollProgress = self.progress;
     
-                    let fllngStep = 0, fllatStep = 0, flzoomStep = 0;
+                    const targetZoom = maxZoom - (zoomRange * scrollProgress);
     
-                    if (window.scrollY > 0) {
-                        fllngStep = (fltargetLng - flcenter.lng) / 10;
-                        fllatStep = (fltargetLat - flcenter.lat) / 10;
-                        if (velocity < 0) {
-                            flzoomStep = (20 - flMap.getZoom()) / 50;
-                        } else if (velocity > 0) {
-                            flzoomStep = (14.5 - flMap.getZoom()) / 25;
-                        }
-                    }
+                    let fllngStep = (fltargetLng - flcenter.lng) * 0.1;
+                    let fllatStep = (fltargetLat - flcenter.lat) * 0.1;
+                    let flzoomStep = (targetZoom - currentZoom) * 0.2;
     
                     flMap.jumpTo({
                         center: [flcenter.lng + fllngStep, flcenter.lat + fllatStep],
-                        zoom: flMap.getZoom() + flzoomStep,
-                        duration: 0,
-                        easing: t => t
+                        zoom: currentZoom + flzoomStep,
+                        duration: 0
                     });
+    
+                    if (currentZoom <= minZoom + 0.1) {
+                        animationCompleted = true;
+                        self.kill(true); // Kill the ScrollTrigger immediately
+                        gsap.set(mapElement, { clearProps: "all" }); // Clear all GSAP-applied properties
+                        
+                        // Enable map interactions
+                        flMap.scrollZoom.enable();
+                        flMap.doubleClickZoom.enable();
+                        flMap.boxZoom.enable();
+                        flMap.touchZoomRotate.enable();
+                        flMap.dragRotate.disable(); // Keep this disabled as per your requirements
+                        flMap.dragPan.enable();
+                        flMap.touchPitch.disable(); // This is equivalent to touchPitchHandler: false
+                        
+                        // Remove attribution control if it exists
+                        if (flMap.getAttributionControl()) {
+                            flMap.removeControl(flMap.getAttributionControl());
+                        }
+                    }
+                },
+                onLeaveBack: self => {
+                    if (!animationCompleted) {
+                        gsap.to(flMap, {
+                            duration: 1,
+                            zoom: maxZoom,
+                            ease: "power2.out",
+                            onUpdate: () => flMap.fire('zoom')
+                        });
+                    }
                 }
             }
         });
     }
-
-
     var master = gsap.timeline();
 
     master
@@ -2783,6 +2836,14 @@ function handleMouseLeave(sourceName, sourceLayer) {
 
     flMap.getCanvas().style.cursor = '';
 }
+
+flMap.on('load', () => {
+    flMap.fitBounds(istanbulBounds, {
+        padding: 20,
+        maxZoom: flInitialZoom,
+        minZoom: 8
+    });
+});
 
 flMap.on('style.load', () => {
     const rightLayerName = '06-40187-RIGHT-Fill';

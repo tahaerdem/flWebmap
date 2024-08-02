@@ -2476,7 +2476,8 @@ footer.footer-item:hover {
 }
 
 #tab-title {
-    color: #000;
+    color: #fff;
+    opacity: 0;
 }
 
 .mgn-sds-auto {
