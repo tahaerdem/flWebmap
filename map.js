@@ -2838,11 +2838,7 @@ function handleMouseLeave(sourceName, sourceLayer) {
 }
 
 flMap.on('load', () => {
-    flMap.fitBounds(istanbulBounds, {
-        padding: 20,
-        maxZoom: flInitialZoom,
-        minZoom: 8
-    });
+
 });
 
 flMap.on('style.load', () => {
