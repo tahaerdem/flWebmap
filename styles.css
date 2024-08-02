@@ -3092,6 +3092,11 @@ footer.footer-item:hover {
     display: inline-block;
 }
 
+.flMap-popup-svi {
+    max-width: inherit;
+    overflow: hidden;
+}
+
 .flMap-popup .mapboxgl-popup-content::after {
     content: '';
     position: absolute;
