@@ -2649,23 +2649,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
                     if (currentZoom <= minZoom + 0.1) {
                         animationCompleted = true;
-                        self.kill(true); // Kill the ScrollTrigger immediately
-                        gsap.set(mapElement, { clearProps: "all" }); // Clear all GSAP-applied properties
-                        
-                        // Enable map interactions
-                        flMap.scrollZoom.enable();
-                        flMap.doubleClickZoom.enable();
-                        flMap.boxZoom.enable();
-                        flMap.touchZoomRotate.enable();
-                        flMap.dragRotate.disable(); // Keep this disabled as per your requirements
-                        flMap.dragPan.enable();
-                        flMap.touchPitch.disable(); // This is equivalent to touchPitchHandler: false
-                        
-                        // Remove attribution control if it exists
-                        if (flMap.getAttributionControl()) {
+                        self.kill(true);
+                        gsap.set(mapElement, { clearProps: "all" });
+                      
+                        gsap.delayedCall(1, function() {
+                          flMap.scrollZoom.enable();
+                          flMap.doubleClickZoom.enable();
+                          flMap.boxZoom.enable();
+                          flMap.touchZoomRotate.enable();
+                          flMap.dragRotate.disable();
+                          flMap.dragPan.enable();
+                          flMap.touchPitch.disable();
+                          
+                          if (flMap.getAttributionControl()) {
                             flMap.removeControl(flMap.getAttributionControl());
-                        }
-                    }
+                          }
+                      
+                          console.log("Map controls enabled after 1 second delay");
+                        });
+                      }
                 },
                 onLeaveBack: self => {
                     if (!animationCompleted) {
