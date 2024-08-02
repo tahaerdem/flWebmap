@@ -2751,6 +2751,7 @@ map.on('style.load', () => {
         'star-intensity': 1
     });
 });
+
 let flBuildingIndex = null;
 const indexNoTab = document.getElementById('index-no');
 const indexNoPlaceholder = document.getElementById('index-no-placeholder');
@@ -2839,6 +2840,87 @@ function handleMouseLeave(sourceName, sourceLayer) {
     flMap.getCanvas().style.cursor = '';
 }
 
+function getColorForAdjacency(adjacency) {
+    const colorStops = [
+        { value: 0.036190871149302, color: "#ed4426" },
+        { value: 0.15, color: "#ed665a" },
+        { value: 0.25, color: "#f2a085" },
+        { value: 0.35, color: "#f2c194" },
+        { value: 0.5, color: "#f8eab4" },
+        { value: 0.75, color: "#d3dfaf" },
+        { value: 1, color: "#a8bd93" },
+        { value: 5, color: "#79b484" }
+    ];
+
+    if (adjacency === 0) return "#FFF27B";
+
+    for (let i = 0; i < colorStops.length - 1; i++) {
+        if (adjacency >= colorStops[i].value && adjacency < colorStops[i + 1].value) {
+            return colorStops[i].color;
+        }
+    }
+
+    return colorStops[colorStops.length - 1].color;
+}
+
+function getSafetyLevel(adjacencyValue) {
+    if (adjacencyValue < 0.036190871149302) {
+        return "Critical Risk";
+    } else if (adjacencyValue < 0.15) {
+        return "High Risk";
+    } else if (adjacencyValue < 0.25) {
+        return "Moderate Risk";
+    } else if (adjacencyValue < 0.35) {
+        return "Low Risk";
+    } else if (adjacencyValue < 0.5) {
+        return "Minimal Risk";
+    } else if (adjacencyValue < 0.75) {
+        return "Negligible Risk";
+    } else {
+        return "No Risk";
+    }
+}
+
+function showPopup(e, sourceName, sourceLayer) {
+    const feature = e.features[0];
+    const coordinates = e.lngLat;
+
+    const adjacencyValue = Number.parseFloat(feature.properties.adjacency);
+    const formattedScore = adjacencyValue.toFixed(3);
+    const backgroundColor = getColorForAdjacency(adjacencyValue);
+    const safetyLevel = getSafetyLevel(adjacencyValue);
+
+    const popupContent = `
+        <div class="flMap-popup-wrapper">
+            <div class="flMap-popup-header" style="background-color: ${backgroundColor};">
+                <p class="mono flMap-popup-small-header">${feature.properties.index}</p>
+                <h3>${safetyLevel}</h3>
+            </div>
+            <div class="flMap-popup-content">
+                <p><strong>Index:</strong> ${feature.properties.index}</p>
+                <p><strong>Adjacency:</strong> <span style="color: ${backgroundColor};">${formattedScore}</span></p>
+            </div>
+        </div>
+    `;
+
+    const popup = new mapboxgl.Popup({
+        className: 'flMap-popup',
+        closeButton: true,
+        maxWidth: '500px'
+    })
+    .setLngLat(coordinates)
+    .setHTML(popupContent)
+    .addTo(flMap);
+
+    // Set background color for header only
+    setTimeout(() => {
+        const popupElement = popup.getElement();
+        const headerElement = popupElement.querySelector('.flMap-popup-header');
+        
+        headerElement.style.backgroundColor = backgroundColor;
+    }, 0);
+}
+
 flMap.on('load', () => {
 
 });
@@ -2855,6 +2937,7 @@ flMap.on('style.load', () => {
     if (flMap.getLayer(rightLayerName)) {
         flMap.on('mouseenter', rightLayerName, (event) => handleMouseEnter(event, rightSourceName, rightSourceLayer));
         flMap.on('mouseleave', rightLayerName, () => handleMouseLeave(rightSourceName, rightSourceLayer));
+        flMap.on('click', rightLayerName, (event) => showPopup(event, rightSourceName, rightSourceLayer));
     } else {
         console.error('Layer does not exist:', rightLayerName);
     }
@@ -2862,6 +2945,7 @@ flMap.on('style.load', () => {
     if (flMap.getLayer(leftLayerName)) {
         flMap.on('mouseenter', leftLayerName, (event) => handleMouseEnter(event, leftSourceName, leftSourceLayer));
         flMap.on('mouseleave', leftLayerName, () => handleMouseLeave(leftSourceName, leftSourceLayer));
+        flMap.on('click', leftLayerName, (event) => showPopup(event, leftSourceName, leftSourceLayer));
     } else {
         console.error('Layer does not exist:', leftLayerName);
     }

@@ -2983,3 +2983,94 @@ footer.footer-item:hover {
     padding: 4px 4px;
     transition: 200ms ease-in-out;
 }
+
+.flMap-popup {
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.1));
+}
+
+.flMap-popup-container {
+    font-family: Arial, sans-serif;
+}
+
+.flMap-popup-header {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 60px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.flMap-popup-small-header {
+    font-size: x-small;
+    font-weight: 600;
+    line-height: 2em;
+}
+
+.flMap-popup-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.flMap-popup-content {
+    background-color: #f8f8f8;
+    padding: 15px 20px;
+}
+
+.flMap-popup-content p {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.flMap-popup-content p strong {
+    color: #333;
+}
+
+.flMap-popup .mapboxgl-popup-content {
+    padding: 0;
+    border-radius: 8px;
+    overflow: visible;
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.flMap-popup .mapboxgl-popup-tip {
+    display: none; /* Hide the default tip */
+}
+
+.flMap-popup .mapboxgl-popup-content::after {
+    content: '';
+    position: absolute;
+    bottom: -11.5px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 20px;
+    height: 20px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid rgb(88, 88, 88);
+    border-right: 1px solid rgb(88, 88, 88);
+}
+
+.flMap-popup .mapboxgl-popup-close-button {
+    color: #333;
+    font-size: 16px;
+    padding: 5px 10px;
+    z-index: 1;
+}
+
+.flMap-popup .mapboxgl-popup-close-button:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.flMap-popup-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.flMap-popup .mapboxgl-popup-content::after {
+    pointer-events: none;
+}
