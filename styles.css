@@ -523,6 +523,49 @@ h2.ti-tl {
     }
 }
 
+span.ti-tl {
+    font-weight: 500;
+    font-size: 2em;
+    letter-spacing: -0.005em;
+    text-align: left;
+    color: white;
+
+    @media screen and (max-height: 769px) { 
+        font-size: 1.6em;
+    }
+}
+
+.ver {
+    font-family: 'Roboto Mono', monospace;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 3px 4px;
+    margin: 0 -25px 0px 4px;
+    color: rgb(225, 85, 85) !important;
+    border: 2px solid rgb(225, 85, 85);
+    background-color: rgb(72, 34, 34);
+
+
+    @media screen and (max-height: 769px) { 
+        font-size: 1.6em;
+    }
+}
+
+.ver:hover {
+    cursor: pointer;
+    color: rgb(246, 136, 136) !important;
+    border: 2px solid rgb(251, 149, 149);
+    background-color: rgb(145, 63, 63);
+}
+
+.ver:active {
+    cursor: pointer;
+    color: rgb(201, 46, 46) !important;
+    border: 2px solid rgb(207, 42, 42);
+    background-color: rgb(211, 127, 127);
+}
+
 h2.ti-tl-sec {
     font-size: 1.5em;
     letter-spacing: -0.005em;
