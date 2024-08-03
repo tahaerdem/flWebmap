@@ -2909,6 +2909,8 @@ function showPopup(e, sourceName, sourceLayer) {
     const formattedScore = adjacencyValue.toFixed(3);
     const backgroundColor = getColorForAdjacency(adjacencyValue);
     const safetyLevel = getSafetyLevel(adjacencyValue);
+    console.log(feature.properties);
+    console.log(sourceName, sourceLayer);
 
     const popupContent = `
         <div class="flMap-popup-wrapper">
@@ -2922,7 +2924,7 @@ function showPopup(e, sourceName, sourceLayer) {
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">Height:</p><p class="flMap-popup-t4">${feature.properties.height}</p></div>
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">District:</p><p class="flMap-popup-t4">${feature.properties.boro}</p></div>
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">ZIP:</p><p class="flMap-popup-t4">${feature.properties.ZIP}</p></div>
-                <div class="flMap-popup-row"><figure class="flMap-popup-svi"><img height="200px" src="/resources/images/prototype-box-1.svg"/></figure></div>
+                <div class="flMap-popup-row"><figure class="flMap-popup-svi"><img height="200px" style="mix-blend-mode: darken;" src="https://github.com/tahaerdem/flWebmap/blob/main/resources/data/svi/40187/${feature.properties['svi1_pth']}?raw=true"/></figure></div>
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">Adjacency Score:</p><p class="flMap-popup-t4 flwptp-rect" style="border: 1.5px solid ${backgroundColor}; color: ${backgroundColor}">${formattedScore}</p></div>
             </div>
         </div>
@@ -2955,11 +2957,11 @@ flMap.on('load', () => {
 flMap.on('style.load', () => {
     const rightLayerName = '06-40187-RIGHT-Fill';
     const rightSourceName = 'composite';
-    const rightSourceLayer = '06T_40187_RIGHT-76c468';
+    const rightSourceLayer = '40187_RIGHT_SVIPATH-6pszjs';
     
     const leftLayerName = '06-40187-LEFT-Fill';
     const leftSourceName = 'composite';
-    const leftSourceLayer = '05T_40187_LEFT-b4m6os';
+    const leftSourceLayer = '40187_LEFT_SVIPATH-2p8qlw';
 
     if (flMap.getLayer(rightLayerName)) {
         flMap.on('mouseenter', rightLayerName, (event) => handleMouseEnter(event, rightSourceName, rightSourceLayer));
