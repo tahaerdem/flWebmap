@@ -2,6 +2,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoidGFoYWVyZGVtb3p0dXJrIiwiYSI6ImNqZmZ1Nm9zNzM4N3gycW1tMGVreHJ0enQifQ.m_BVyHJ6Ukop8vUSasQv2w';
 let viewportWidth = window.innerWidth || document.documentElement.clientWidth;
 let zoom;
+let mapActive = true;
 
 let initialLng = 15.2433;
 let initialLat = -28.9637;
@@ -2304,14 +2305,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 pin: true,
                 scrub: true,
                 markers: false,
-
+    
                 onRefresh: self => {
                     const pinnedElement = self.pin;
                     pinnedElement.style.width = '100%';
                     pinnedElement.style.maxWidth = '100%';
                 },
-
+    
                 onEnter: () => {
+                    mapActive = true;
+                    console.log('Map deactivated');
+                    map.getCanvas().style.opacity = '1';
                     boundariesToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
@@ -2322,18 +2326,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     });
                 },
+
                 onLeave: () => {
-                    boundariesToToggle.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'visible');
-                    });
-                    layersToToggle.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'visible');
-                    });
-                    layersToHide.forEach(layerId => {
-                        map.setLayoutProperty(layerId, 'visibility', 'none');
-                    });
                 },
+                
+                    
                 onEnterBack: () => {
+                    mapActive = true;
+                    console.log('Map reactivated');
+                    map.getCanvas().style.opacity = '1';
                     boundariesToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
@@ -2345,6 +2346,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     });
                 },
                 onLeaveBack: () => {
+                    mapActive = true;
+                    map.getCanvas().style.opacity = '1'; // Show the map
                     boundariesToToggle.forEach(layerId => {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
                     });
@@ -2356,14 +2359,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     });
                 },
                 onUpdate: self => {
+                    if (!mapActive) return;
+    
                     const velocity = self.getVelocity();
                     const center = map.getCenter();
                     const targetLat = 41.158;
                     const targetLng = 28.978;
                     const targetZoom = 8.75;
-
+    
                     let lngStep, latStep, zoomStep;
-
+    
                     if (velocity > 0 && window.scrollY > 0) {
                         lngStep = (targetLng - center.lng) / 30;
                         latStep = (targetLat - center.lat) / 30;
@@ -2377,19 +2382,18 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         latStep = 0;
                         zoomStep = 0;
                     }
-
+    
                     map.easeTo({
                         center: [center.lng + lngStep, center.lat + latStep],
                         zoom: map.getZoom() + zoomStep,
                         duration: 0,
                         easing: t => t // linear easing
                     });
-
                 },
             },
         });
     }
-
+    
     //Dissecting Collapse intro
     function frame131() {
         const mapElement = document.getElementById('map');
@@ -2408,6 +2412,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 onLeaveBack: () => {},
     
                 onUpdate: self => {
+                    map.resize();
+
                     const title = document.getElementById('fs00911Title');
                     const container = document.getElementById('FS0911');
                     const margin = document.getElementById('chp05');
@@ -2476,6 +2482,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 onLeaveBack: () => {},
     
                 onUpdate: self => {
+                    map.resize();
+
                     const title = document.getElementById('fs0092Title');
                     const container = document.getElementById('FS092');
                     const margin = document.getElementById('chp06');
@@ -2534,6 +2542,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 onLeaveBack: () => {},
     
                 onUpdate: self => {
+                    map.resize();
+
                     const title = document.getElementById('fs00112Title');
                     const container = document.getElementById('FS00112');
                     const margin = document.getElementById('chp07');
@@ -2647,7 +2657,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         duration: 0
                     });
     
-                    if (currentZoom <= minZoom + 0.1) {
+                    if (currentZoom <= minZoom + 1) {
                         animationCompleted = true;
                         self.kill(true);
                         gsap.set(mapElement, { clearProps: "all" });
@@ -2668,6 +2678,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
                           console.log("Map controls enabled after 1 second delay");
                         });
                       }
+                },
+                onLeave: self => {
+                    if (!animationCompleted) {
+                        gsap.to(flMap, {
+                            duration: 1,
+                            zoom: maxZoom,
+                            ease: "power2.out",
+                            onUpdate: () => flMap.fire('zoom')
+                        });
+                    }
                 },
                 onLeaveBack: self => {
                     if (!animationCompleted) {
@@ -2902,7 +2922,7 @@ function showPopup(e, sourceName, sourceLayer) {
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">Height:</p><p class="flMap-popup-t4">${feature.properties.height}</p></div>
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">District:</p><p class="flMap-popup-t4">${feature.properties.boro}</p></div>
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">ZIP:</p><p class="flMap-popup-t4">${feature.properties.ZIP}</p></div>
-                <div class="flMap-popup-row"><figure class="flMap-popup-svi"><img height="200px" src="/flWebmap/resources/images/prototype-box-1.svg"/></figure></div>
+                <div class="flMap-popup-row"><figure class="flMap-popup-svi"><img height="200px" src="/resources/images/prototype-box-1.svg"/></figure></div>
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">Adjacency Score:</p><p class="flMap-popup-t4 flwptp-rect" style="border: 1.5px solid ${backgroundColor}; color: ${backgroundColor}">${formattedScore}</p></div>
             </div>
         </div>
@@ -2917,13 +2937,15 @@ function showPopup(e, sourceName, sourceLayer) {
     .setHTML(popupContent)
     .addTo(flMap);
 
-    // Set background color for header only
     setTimeout(() => {
         const popupElement = popup.getElement();
         const headerElement = popupElement.querySelector('.flMap-popup-header');
+        const tipElement = popupElement.querySelector('.mapboxgl-popup-tip');
         
         headerElement.style.backgroundColor = backgroundColor;
-    }, 0);
+        tipElement.style.borderBottomColor = backgroundColor;
+        popupElement.classList.add('flMap-popup-anchor-top');
+   }, 0);
 }
 
 flMap.on('load', () => {

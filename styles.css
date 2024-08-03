@@ -3060,7 +3060,7 @@ footer.footer-item:hover {
 }
 
 .flMap-popup .mapboxgl-popup-tip {
-    display: none; /* Hide the default tip */
+    display: block;
 }
 
 .flMap-popup-t3 {
@@ -3099,6 +3099,7 @@ footer.footer-item:hover {
 
 .flMap-popup .mapboxgl-popup-content::after {
     content: '';
+    opacity: 0;
     position: absolute;
     bottom: -11.5px; /* Adjust as needed */
     left: 50%;
@@ -3133,4 +3134,28 @@ footer.footer-item:hover {
 
 .flMap-popup .mapboxgl-popup-content::after {
     pointer-events: none;
+}
+
+.flMap-popup.flMap-popup-anchor-top .mapboxgl-popup-tip {
+    border-bottom-color: inherit;
+}
+
+.flMap-popup.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+    margin-top: -1px !important;
+}
+
+.flMap-popup.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+    margin-bottom: -1px !important;
+}
+
+.flMap-popup .mapboxgl-popup-tip {
+    display: block;
+    border-top-color: #f8f8f8 !important;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+    border-bottom-color: #f8f8f8;
+}
+
+.flMap-popup.hide-after .mapboxgl-popup-content::after {
+    opacity: 0;
 }
