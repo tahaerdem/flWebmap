@@ -2924,7 +2924,7 @@ function showPopup(e, sourceName, sourceLayer) {
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">Height:</p><p class="flMap-popup-t4">${feature.properties.height}</p></div>
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">District:</p><p class="flMap-popup-t4">${feature.properties.boro}</p></div>
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">ZIP:</p><p class="flMap-popup-t4">${feature.properties.ZIP}</p></div>
-                <div class="flMap-popup-row"><figure class="flMap-popup-svi"><img height="200px" style="mix-blend-mode: darken;" src="https://github.com/tahaerdem/flWebmap/blob/main/resources/data/svi/40187/${feature.properties['svi1_pth']}?raw=true" onerror="this.onerror=null; this.src='https://github.com/tahaerdem/flWebmap/blob/main/resources/prototype-box-3.svg?raw=true';"/></figure></div>
+                <div class="flMap-popup-row"><figure class="flMap-popup-svi"><img height="200px" style="mix-blend-mode: darken;" src="https://github.com/tahaerdem/flWebmap/blob/main/resources/data/svi/40187/${feature.properties['svi1_pth']}?raw=true" onerror="this.onerror=null; this.src='https://github.com/tahaerdem/flWebmap/blob/main/resources/images/prototype-box-3.svg?raw=true';"/></figure></div>
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">Adjacency Score:</p><p class="flMap-popup-t4 flwptp-rect" style="border: 1.5px solid ${backgroundColor}; color: ${backgroundColor}">${formattedScore}</p></div>
             </div>
         </div>
