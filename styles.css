@@ -2811,6 +2811,7 @@ footer.footer-item:hover {
 
 .interactive-map-title {
     display: flex;
+    align-items: center;
 }
 
 .interactive-map-search {
