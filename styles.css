@@ -1573,9 +1573,10 @@ stroke: #fff;
     justify-content: space-between;
     margin: 20px 10vw;
     z-index: 10;
-    @media screen and (max-width: 1200px) {
+    @media screen and (min-width: 901px) and (max-width: 1200px) {
         margin: 20px 40px;
-    }
+    };
+
 }
 
 .container-overlay-main {
@@ -1935,15 +1936,14 @@ figcaption.mono::after {
 p.card-description {
     font-size: 14px;
     text-align: center;
-    @media screen and (max-width: 768px) and (min-width: 400px) {
-        font-size: 11px;
-        text-align: center;
-    }
-    @media screen and (max-width: 400px) {
-        font-size: 11px;
+    text-transform:uppercase;
+
+    @media screen and (max-width: 900px) {
+        font-size: 12px;
         line-height: 0.93rem;
         text-align: center;
         padding:  0 10px 0 10px;
+        margin-top: 20px;
     }
 }
 
@@ -2259,6 +2259,13 @@ h4.timeline.date.bottom {
     background-color: transparent;
     transition: opacity 250ms ease-out;
     z-index: 100;
+}
+
+.carousel-sat-img {
+    width: 290px;
+    @media screen and (max-width: 768px) {
+        width: 200px;
+    }
 }
 
 .back-arrow:hover {
@@ -2866,12 +2873,12 @@ footer.footer-item:hover {
         padding-left: 750px;
         padding-right: 750px;
     }
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 900px) {
         flex-direction: column;
         align-items: center;
         padding: 0px;
         padding-bottom: 20px;
-        gap: 20px;
+        gap: 70px;
     }
 }
 
@@ -2883,8 +2890,22 @@ footer.footer-item:hover {
         font-size: 32px;
         margin: -5px 0 5px 0;
     }
+    @media screen and (max-width: 900px) {
+        font-size: 36px;
+        margin: -5px 0 5px 0;
+    }
+}
+
+.rate-number {
+    font-size: 40px;
+    color: #fff;
+    margin: 20px 0 10px 0;  
+    @media screen and (max-width: 1000px) and (min-width: 401px) {
+        font-size: 32px;
+        margin: -5px 0 5px 0;
+    }
     @media screen and (max-width: 400px) {
-        font-size: 13px;
+        font-size: 36px;
         margin: -5px 0 5px 0;
     }
 }
@@ -2903,6 +2924,21 @@ footer.footer-item:hover {
     }
 }
 
+.no-col {
+    @media screen and (max-width: 900px) {
+        flex-direction: row !important;
+    }
+}
+
+.list-img-icon-sm {
+    width: 80px !important;
+
+    @media screen and (max-width: 900px) {
+        width: 10vw !important;
+    }
+}
+
+
 .list-container .list-item-isolated {
     display: inline-flex;
     justify-content: center;
@@ -2912,6 +2948,10 @@ footer.footer-item:hover {
     border: 2px dashed #fff;
     border-radius: 5px;
     transition: 100ms ease-in;
+
+    @media screen and (max-width: 900px) {
+        margin-bottom: 20px !important;
+    } 
 }
 
 .list-container .list-item {
