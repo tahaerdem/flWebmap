@@ -1366,7 +1366,7 @@ section.provinces {
     max-width: 600px;
     
     @media screen and (max-width: 700px) {
-        margin: 40px 20px;
+        margin: 40px 20px 20px;
     }
 }
 
@@ -1433,17 +1433,6 @@ stroke: #fff;
     }
 }
 
-#plot .controls-container .toggles {
-    display: block;
-    justify-content: space-between;
-    @media screen and (max-width: 900px) {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 10px;
-    }
-}
-
 #plot .bounding-box rect {
     display: none;
     fill: none;
@@ -1474,7 +1463,7 @@ stroke: #fff;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 5px 5px 0 0.75px rgba(0, 0, 0, 0.035);
-    z-index: 1000;
+    z-index: 2000;
 }
 
 #plot .popup .close-btn {
@@ -1506,6 +1495,21 @@ stroke: #fff;
     text-align: left;
     line-height: 0em;
     color:#fff;
+    @media screen and (max-width: 900px) {
+        text-align: center !important;
+    };
+}
+
+#plot .minfo {
+    color:#333;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 500;
+    font-size: x-small;
+    text-transform: uppercase;
+    @media screen and (max-width: 900px) {
+        display: none;
+
+    };
 }
 
 #plot .toggle-bt:hover {
@@ -1535,8 +1539,25 @@ stroke: #fff;
 }
 
 .cartography-container {
+    z-index: 1000;
     margin: 0px 0px 0px 0px;
     width: 100%;
+    @media screen and (max-width: 900px) {
+        margin-top: -35vw;
+        margin-bottom: -5vw;
+    }
+}
+
+#plot .controls-container .toggles {
+    display: block;
+    z-index: 10;
+    justify-content: space-between;
+    @media screen and (max-width: 900px) {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 70vw;
+    }
 }
 
 .ist-p {
@@ -3268,6 +3289,7 @@ footer.footer-item:hover {
 
 .flMap-popup {
     filter: drop-shadow(0 1px 4px rgba(0,0,0,0.1));
+
 }
 
 .flMap-popup-container {
