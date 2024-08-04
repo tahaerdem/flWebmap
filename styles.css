@@ -1458,13 +1458,13 @@ stroke: #fff;
 
 #plot .popup {
     display: none;
+    z-index: 100001;
     position: absolute;
     background-color: white;
     border: 1px solid #eee;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 5px 5px 0 0.75px rgba(0, 0, 0, 0.035);
-    z-index: 2000;
 }
 
 #plot .popup .close-btn {
@@ -1540,7 +1540,7 @@ stroke: #fff;
 }
 
 .cartography-container {
-    z-index: 1000;
+    z-index: 10000;
     margin: 0px 0px 0px 0px;
     width: 100%;
     @media screen and (max-width: 900px) {
@@ -1551,7 +1551,6 @@ stroke: #fff;
 
 #plot .controls-container .toggles {
     display: block;
-    z-index: 10;
     justify-content: space-between;
     @media screen and (max-width: 900px) {
         display: flex;
