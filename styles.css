@@ -1416,7 +1416,6 @@ stroke: #fff;
     width: 100%;
     justify-content: space-between;
     max-width: 600px;
-    z-index: 1001;
     margin-bottom:-5em;
 
     @media screen and (max-width: 900px) {
@@ -1452,13 +1451,12 @@ stroke: #fff;
 
 #plot .boundary path {
     fill: none;
-    stroke: ;
+    stroke: 0;
     stroke-width: 2px;
 }
 
 #plot .popup {
     display: none;
-    z-index: 100001;
     position: absolute;
     background-color: white;
     border: 1px solid #eee;
@@ -1540,7 +1538,6 @@ stroke: #fff;
 }
 
 .cartography-container {
-    z-index: 10000;
     margin: 0px 0px 0px 0px;
     width: 100%;
     @media screen and (max-width: 900px) {
@@ -1552,7 +1549,7 @@ stroke: #fff;
 #plot .controls-container .toggles {
     display: block;
     justify-content: space-between;
-    z-index: 10000;
+
     @media screen and (max-width: 900px) {
         display: flex;
         justify-content: center;

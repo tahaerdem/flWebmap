@@ -2901,6 +2901,12 @@ function getSafetyLevel(adjacencyValue) {
     }
 }
 
+function handleImageError(img) {
+    console.error("Could not find street imagery", img.src);
+    img.src = 'https://github.com/tahaerdem/flWebmap/blob/main/resources/images/prototype-box-3.svg?raw=true';
+    img.onerror = null;
+}
+
 function showPopup(e, sourceName, sourceLayer) {
     const feature = e.features[0];
     const coordinates = e.lngLat;
@@ -2909,8 +2915,8 @@ function showPopup(e, sourceName, sourceLayer) {
     const formattedScore = adjacencyValue.toFixed(3);
     const backgroundColor = getColorForAdjacency(adjacencyValue);
     const safetyLevel = getSafetyLevel(adjacencyValue);
-    console.log(feature.properties);
-    console.log(sourceName, sourceLayer);
+    console.log("ptindex: " + feature.properties['pointindex'] + ", svi-path: " + feature.properties['svi1_pth']);
+
 
     const popupContent = `
         <div class="flMap-popup-wrapper">
@@ -2924,7 +2930,7 @@ function showPopup(e, sourceName, sourceLayer) {
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">Height:</p><p class="flMap-popup-t4">${feature.properties.height}</p></div>
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">District:</p><p class="flMap-popup-t4">${feature.properties.boro}</p></div>
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">ZIP:</p><p class="flMap-popup-t4">${feature.properties.ZIP}</p></div>
-                <div class="flMap-popup-row"><figure class="flMap-popup-svi"><img height="200px" style="mix-blend-mode: darken;" src="https://github.com/tahaerdem/flWebmap/blob/main/resources/data/svi/40187/${feature.properties['svi1_pth']}?raw=true" onerror="this.onerror=null; this.src='https://github.com/tahaerdem/flWebmap/blob/main/resources/images/prototype-box-3.svg?raw=true';"/></figure></div>
+                <div class="flMap-popup-row"><figure class="flMap-popup-svi"><img height="200px" style="mix-blend-mode: darken;" src="https://github.com/tahaerdem/flWebmap/blob/main/resources/data/svi/40187/SVI-${feature.properties['pointindex']}.png?raw=true" onerror="handleImageError(this);"/></figure></div>
                 <div class="flMap-popup-row"><p class="flMap-popup-t3">Adjacency Score:</p><p class="flMap-popup-t4 flwptp-rect" style="border: 1.5px solid ${backgroundColor}; color: ${backgroundColor}">${formattedScore}</p></div>
             </div>
         </div>
@@ -2963,6 +2969,7 @@ flMap.on('style.load', () => {
     const leftSourceName = 'composite';
     const leftSourceLayer = '40187_LEFT_SVIPATH-2p8qlw';
 
+
     if (flMap.getLayer(rightLayerName)) {
         flMap.on('mouseenter', rightLayerName, (event) => handleMouseEnter(event, rightSourceName, rightSourceLayer));
         flMap.on('mouseleave', rightLayerName, () => handleMouseLeave(rightSourceName, rightSourceLayer));
@@ -2979,6 +2986,27 @@ flMap.on('style.load', () => {
         console.error('Layer does not exist:', leftLayerName);
     }
 
+    function handleBuildingClick(event) {
+        const rawLon = event.features[0].properties['nearest_x'];
+        const rawLat = event.features[0].properties['nearest_y'];
+        
+        const currentLon = parseFloat(rawLon).toFixed(4);
+        const currentLat = parseFloat(rawLat).toFixed(4);
+
+        const preClickZoomLevel = flMap.getZoom();
+        const currentZoom = preClickZoomLevel >= 17 ? preClickZoomLevel : 18;
+        
+        console.log(`Longitude: ${currentLon}, Latitude: ${currentLat}, Zoom: ${currentZoom}`);
+    
+        flMap.flyTo({
+            center: [parseFloat(currentLon), parseFloat(currentLat)],
+            zoom: currentZoom
+        });
+    }
+    
+    flMap.on('click', '06-40187-LEFT-Fill', handleBuildingClick);
+    flMap.on('click', '06-40187-RIGHT-Fill', handleBuildingClick);
+
     flMap.on('mousemove', debounce((event) => {
         if (!event.features || !event.features.length) {
             if (flBuildingIndex !== null) {
@@ -2989,7 +3017,11 @@ flMap.on('style.load', () => {
     }, 300));
 });
 
-// Function to filter features based on search input
+
+
+// Attach the handleClick function to both LEFT and RIGHT layers
+
+
 function filterFeatures(searchTerm) {
     const rightLayerName = '06-40187-RIGHT-Fill';
     const leftLayerName = '06-40187-LEFT-Fill';
