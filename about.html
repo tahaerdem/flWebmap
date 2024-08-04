@@ -55,54 +55,136 @@
     <body>
         <header class="navbar" id="navbar">
             <div class="navbar-left">
-                <a href="#" class="navbar-item navbar-item-cu-short bib-nav" >Columbia<br>GSAPP</a>
-                <a href="#" class="navbar-item navbar-item-cu-medium bib-nav">Columbia University<br>GSAPP</a>
-                <a href="#" class="navbar-item navbar-item-cu-long bib-nav">Columbia University<br>Graduate School of Architecture, Planning, and Preservation</a>
+                <a href="/research.html" class="navbar-item-cu-short bib-nav-short ">At the<br>Fault Lines</a>
+                <a href="/research.html" class="navbar-item-cu-medium bib-nav-medium">At the Fault Lines</a>
+                <a href="/research.html" class="navbar-item-cu-long bib-nav-long">At the FaultLines</a>
             </div>
             <div class="navbar-right">
-                <a href="/flWebmap/about.html" class="navbar-item bib-nav">About</a>
-                <a href="/flWebmap/research.html" class="navbar-item bib-nav">Research</a>
-                <a href="/flWebmap/webmap.html" class="navbar-item bib-nav">Interactive Map</a>
+                <a href="/research.html" class="navbar-item bib-nav bib-nav-rsc">Research</a>
+                <a href="/webmap.html" class="navbar-item bib-nav">Map</a>
+                <a href="/webmap.html" class="navbar-item bib-nav">Interactive Map</a>
+                <a href="/about.html" class="navbar-item bib-nav">About</a>
             </div>
         </header>
-        <section class="title-header">
-            <h1 class="title-wrapper bib-title" id="bib-title">ABOUT</h1><div id="overlay"></div>
+        <section class="title-header abt-header">
+            <h1 class="title-wrapper abt-title" id="abt-title">ABOUT</h1><div id="overlay"></div>
         </section>
-        <section class="title-wrapper bibliography-wrapper">
+        <section class="title-wrapper about-wrapper">
         </section>
 
         <main>
-            <article>
-                    <div class="textbox-container tb6">
-                        <div class="textbox ti" id="SEC01-TB02">
-                            <h3 class="title secondary">First Earthquake</h3>
-                            <div class="tb">
-                                <p>
-                                    The 7.8-magnitude earthquake that struck southern Turkey and northern Syria in early February killed tens of thousands of people, flattened wide areas of cities and sent the region, which was already grappling with a refugee crisis and over a decade of war, into a monumental recovery effort.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+            <section class="abt-main">
+                <div class="text-container">
+                    <p class="c-pg">After delving into the history of earthquakes in Turkey, examining corrupt construction practices, and exploring how AI can extract information from street view images, we present the culmination of this research: an interactive map.</p>
+                    <p class="c-pg">This interactive map, the product of a year-long effort at the Center for Spatial Research, allows residents to access critical structural information about their buildings through a simple search interface. The map provides risk insights in a transparent, immersive, and easy-to-digest manner, embodying our commitment to accessibility and user-friendliness.</p>
+                    <p class="c-pg">Initially available for Hurriyet Mahallesi, a densely packed pilot neighborhood with buildings constructed mostly before the 1999 Earthquake, the map offers risk insights on “misaligned floor calculations.” This area, with minimal open spaces or greenery, is notably highlighted in the IMM Earthquake Risk Simulation dataset for its high projected damage and death tolls.</p>
+                    <p class="c-pg">Currently, the map covers selected ZIP codes, but it will gradually expand to encompass all boroughs and ZIP codes across Istanbul. This expansion will increase the number of tests performed and the data used to calculate the overall risk score for each building, ensuring more comprehensive coverage over time.</p>
+                    <p class="c-pg">To use the map, residents can search for building names, door numbers, addresses, and more, limited to the available ZIP codes for now. By hovering over each building, users can access an in-depth risk report and a visual representation of the performed tests. This interface allows anyone to look up their address and access “machine-generated” structural insights.</p>
+                    <p class="c-pg">Transparency is vital when dealing with AI-generated data, especially since much of it results from “blackbox” processes beyond our control. In developing this project, we made sure all computations made on the initial images were visible, explainable, and shareable. We clarified our aims with each computation and used language that encouraged users to critically assess every AI-generated result. This approach ensured that these “risk insights” were understood as fallible and provided citizens with our “training methods,” helping them recognize structural cues in their environments.</p>
+                    <p class="c-pg">We hope this tool will serve as an insightful resource, helping residents understand the structural integrity of their buildings and prompting necessary actions to enhance safety. By making critical information accessible and transparent, we aim to empower residents to engage with their built environment and take informed steps toward improving their safety and resilience.</p>
+                </div>
             </article>
         </main>
 
         <script src="script.js"></script>
-        <div class="back-arrow" id="back-arrow" onclick="moveTop()"></div>
         
-        <footer>
-            <div class="footer">
-                    <div class="footer-item">
-                        <a class="footer-item" href="#">About Us</a>
-                        <a class="footer-item" href="#">Contact Us</a>
-                        <a class="footer-item" href="#">Privacy Policy</a>
-                        <a class="footer-item" href="#">Terms of Use</a>
-                    </div>
-                    <div class="footer-right">
-                        <a class="footer-item" href="#"></a>
-                        <a class="footer-item" href="#"></a>
-                        <a class="footer-item" href="#"></a>
-                </div>
+        <footer class="g-footer">
+            <div class="g-footer-section" id="footer-section">
+                <h3>Sections</h3>
+                <ul>
+                    <li><a href="#introduction" title="Introduction" aria-label="Introduction">Introduction</a></li>
+                    <li><a href="#chp01" title="February 6" aria-label="February 6">February 6</a></li>
+                    <li><a href="#FS02" title="East Anatolian Fault" aria-label="East Anatolian Fault">East Anatolian Fault</a></li>
+                    <li><a href="#chp02" title="North Anatolian Fault" aria-label="North Anatolian Fault">North Anatolian Fault</a></li>
+                    <li><a href="#chp03" title="1999 Earthquake" aria-label="1999 Earthquake">1999 Earthquake</a></li>
+                    <li><a href="#chp04" title="Istanbul Earthquake" aria-label="Istanbul Earthquake">Istanbul Earthquake</a></li>
+                    <li><a href="#chp05" title="Anatomy of A Collapse" aria-label="Anatomy of A Collapse">Anatomy of A Collapse</a></li>
+                    <li><a href="#chp06" title="AI + Computer Vision" aria-label="AI + Computer Vision">AI + Computer Vision</a></li>
+                    <li><a href="#evaluation" title="Evaluation" aria-label="Evaluation">Evaluation</a></li>
+                    <li><a href="#chp07" title="Interactive Map" aria-label="Interactive Map">Interactive Map</a></li>
+                </ul>
             </div>
+            <div class="g-footer-section" id="footer-section">
+                <h3>Maps</h3>
+                <ul>
+                    <li><a href="#chp01" title="Feb 6 Earthquakes" aria-label="Feb 6 Earthquakes">Feb 6 Earthquakes</a></li>
+                    <li><a href="#chp02" title="Past NAF Earthquakes" aria-label="Past NAF Earthquakes">Past NAF Earthquakes</a></li>
+                    <li><a href="#chp03" title="1999 Izmit-Gölcük Earthquake" aria-label="1999 Izmit-Gölcük Earthquake">1999 Izmit-Gölcük Earthquake</a></li>
+                    <li><a href="#chp04" title="The Impending Istanbul Earthquake" aria-label="The Impending Istanbul Earthquake">The Impending Istanbul Earthquake</a></li>
+                </ul>
+        
+                <h3>Technologies</h3>
+                <ul>
+                    <li><a href="https://docs.mapbox.com/mapbox-gl-js/guides" title="Mapbox GL JS Documentation" aria-label="Mapbox GL JS Documentation">Mapbox GL JS</a></li>
+                    <li><a href="https://huggingface.co/docs/transformers/en/model_doc/grounding-dino" title="GroundingDINO Documentation" aria-label="GroundingDINO Documentation">GroundingDINO</a></li>
+                    <li><a href="https://segment-anything.com" title="Segment Anything by Meta AI Research" aria-label="Segment Anything by Meta AI Research">Segment Anything</a></li>
+                    <li><a href="https://developers.google.com/maps/documentation/streetview/overview" title="Google StreetView API Documentation" aria-label="Google StreetView API Documentation">Google StreetView API</a></li>
+                </ul>
+            </div>
+            <div class="g-footer-section">
+                <h3>Research</h3>
+                <ul>
+                    <li><a href="#" title="Mentions" aria-label="Mentions">Mentions</a></li>
+                    <li><a href="#" title="Contributors" aria-label="Contributors">Contributors</a></li>
+                    <li><a href="#" title="Technologies" aria-label="Technologies">Technologies</a></li>
+                    <li><a href="#" title="Organizations" aria-label="Organizations">Organizations</a></li>
+                    <li><a href="#" title="Bibliography" aria-label="Bibliography">Bibliography</a></li>
+                </ul>
+                <h3>Development</h3>
+                <ul>
+                    <li><a href="#" title="Github" aria-label="Github">Github</a></li>
+                    <li><a href="#" title="Developer Blog" aria-label="Developer Blog">Developer Blog</a></li>
+                    <li><a href="#" title="Open Source Libraries" aria-label="Open Source Libraries">Open Source Libraries</a></li>
+                </ul>
+            </div>
+            <div class="g-footer-section">
+                <h3>Datasets</h3>
+                <ul>
+                    <li><a href="#" title="USGS" aria-label="United States Geological Survey Datasets">USGS</a></li>
+                    <li><a href="#" title="OpenStreetMaps" aria-label="OpenStreetMaps">OpenStreetMaps</a></li>
+                    <li><a href="#" title="Istanbul Open Data" aria-label="Istanbul Open Data Datasets by Istanbul Metropolitan Municipality">Istanbul Open Data</a></li>
+                    <li><a href="#" title="Bogazici University" aria-label="Bogazici University Kandilli Observatory Seismic Records">Bogazici University</a></li>
+                    <li><a href="#" title="Global Earthquake Model" aria-label="Global Earthquake Model Datasets">Global Earthquake Model</a></li>
+                    <li><a href="#" title="Columbia University CSR" aria-label="Columbia University Center for Spatial Research GIS Datasets">Columbia CSR</a></li>
+                    <li><a href="#" title="FaultLines Open Data Repo" aria-label="FaultLines Open Data Repository">FaultLines Open Data Repo</a></li>
+                    <li><a href="#" title="Istanbul Technical University" aria-label="Istanbul Technical University Datasets">Istanbul Technical University</a></li>
+                </ul>
+            </div>
+            <div class="g-footer-section">
+                <h3>FaultLines Project</h3>
+                <ul>
+                    <li><a href="https://faultlines.ai" title="Home" aria-label="Homepage">FaultLines.ai</a></li>
+                    <li><a href="#chp07" title="Interactive Map" aria-label="Interactive Map">Interactive Map</a></li>
+                    <li><a href="https://www.arch.columbia.edu/venture-challenge" title="Venture Challenge" aria-label="Venture Challenge">Venture Challenge</a></li>
+                    <li><a href="https://brown.columbia.edu/the-winners-of-our-venture-challenge/" title="FaultLines on Brown Institute" aria-label="FaultLines on News">FaultLines on Brown Institute</a></li>
+                </ul>
+                <h3>Taha Erdem Öztürk</h3>
+                <ul>
+                    <li><a href="https://tahaerdemozturk.com/about" target="_blank" title="About Taha Erdem Öztürk" aria-label="About Taha Erdem Öztürk">About</a></li>
+                    <li><a href="https://tahaerdemozturk.com" target="_blank" title="Taha Erdem Öztürk - Website" aria-label="Taha Erdem Öztürk - Website">Website</a></li>
+                    <li><a href="https://tahaerdemozturk.com/portfolio" target="_blank" title="Taha Erdem Öztürk - Portfolio" aria-label="Taha Erdem Öztürk - Portfolio">Portfolio</a></li>
+                </ul>
+            </div>
+            <div class="g-footer-section">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="https://c4sr.columbia.edu" title="Columbia University&#10;Center for Spatial Research" aria-label="Columbia University Center for Spatial Research" target="_blank">CSR</a></li>
+                    <li><a href="https://www.arch.columbia.edu" title="Columbia GSAPP" aria-label="Columbia GSAPP" target="_blank">Columbia GSAPP</a></li>
+                    <li><a href="https://brown.columbia.edu" title="The Brown Institute for Media Innovation" aria-label="The Brown Institute for Media Innovation" target="_blank">The Brown Institute</a></li>
+                </ul>
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#" title="Donate" aria-label="Donate">Donate</a></li>
+                </ul>
+                <h3>Email</h3>
+                <ul>
+                    <li><a href="mailto:teo2109@columbia.edu" title="Email Taha Erdem Öztürk" aria-label="Email Taha Erdem Öztürk">teo2109@columbia.edu</a></li>
+                </ul>
+            </div>
+            <div class="g-footer-bottom nsc">
+                <p class="g-ft-p">&copy; 2024 AT THE FAULT LINES</p>
+                <p class="g-ft-p">CENTER FOR SPATIAL RESEARCH • COLUMBIA GSAPP</p>
+            </div>
+        </footer>
     </body>
-
 </html>
