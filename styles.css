@@ -2604,8 +2604,9 @@ footer.footer-item:hover {
     letter-spacing:-0.035em;
     font-size:500%;
     text-align:center;
-    @media screen and (max-width: 769px) {
-        font-size:350%;
+    @media screen and (max-width: 900px) {
+        font-size: 9vw;
+        margin-top: -10px;
     }
 }
 
@@ -3052,6 +3053,16 @@ footer.footer-item:hover {
 .list-img .list-img-item:not(:hover) {
     width: 160px;
     transition: 100ms ease-in;
+}
+
+.list-img-icon-md {
+    width: 160px !important;
+    margin: 0 -10px 0 -10px;
+
+    @media screen and (max-width: 900px) {
+        width: 25vw !important;
+        margin: 0 -15px 0 -15px;
+    }
 }
 
 #structural-deficiencies-container {
