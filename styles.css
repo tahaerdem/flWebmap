@@ -818,9 +818,9 @@ h4 {
 }
 
 figcaption {
-    font-family: 'Helvetica Neue', 'neue-haas-grotesk-text', 'Inter', sans-serif;
+    font-family: 'Roboto Mono', monospace;
     font-weight: 500;
-    font-size: 9.5px;
+    font-size: small;
     line-height: 1.5625em;
     letter-spacing: -0.001em;
     text-align: center;
@@ -830,6 +830,7 @@ figcaption {
 
     @media screen and (max-width: 900px) {
         color:#6b6b6b;
+        font-size: small;
     }
 }
 
