@@ -2772,96 +2772,6 @@ map.on('style.load', () => {
     });
 });
 
-let flBuildingIndex = null;
-let hoveredBuildingIndex = null;
-
-const indexNoTab = document.getElementById('index-no');
-const indexNoPlaceholder = document.getElementById('index-no-placeholder');
-const featureIdMap = new Map();
-
-function generateUniqueId(source, sourceLayer, index) {
-    return `${source}-${sourceLayer}-${index}`;
-}
-
-function debounce(func, wait) {
-    let timeout;
-    return function () {
-        const context = this;
-        const args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(context, args), wait);
-    };
-}
-
-function handleMouseEnter(event, sourceName, sourceLayer) {
-    if (!event.features || event.features.length === 0) {
-        return;
-    }
-
-    const feature = event.features[0];
-    const newBuildingIndex = feature.properties.index;
-    const uniqueId = generateUniqueId(sourceName, sourceLayer, newBuildingIndex);
-
-    // Store the mapping of unique identifier to the actual feature ID
-    featureIdMap.set(uniqueId, feature.id);
-
-    if (flBuildingIndex !== null && flBuildingIndex !== uniqueId) {
-        const previousFeatureId = featureIdMap.get(flBuildingIndex);
-        if (previousFeatureId !== undefined) {
-            flMap.setFeatureState(
-                {
-                    source: sourceName,
-                    sourceLayer: sourceLayer,
-                    id: previousFeatureId
-                },
-                {
-                    hover: false
-                }
-            );
-        }
-    }
-
-    flBuildingIndex = uniqueId;
-    indexNoTab.textContent = newBuildingIndex;
-    indexNoPlaceholder.style.display = 'inline';
-
-    flMap.setFeatureState(
-        {
-            source: sourceName,
-            sourceLayer: sourceLayer,
-            id: feature.id
-        },
-        {
-            hover: true
-        }
-    );
-    flMap.getCanvas().style.cursor = 'pointer';
-}
-
-function handleMouseLeave(sourceName, sourceLayer) {
-    if (flBuildingIndex !== null) {
-        const featureId = featureIdMap.get(flBuildingIndex);
-        if (featureId !== undefined) {
-            flMap.setFeatureState(
-                {
-                    source: sourceName,
-                    sourceLayer: sourceLayer,
-                    id: featureId
-                },
-                {
-                    hover: false
-                }
-            );
-        }
-    }
-    
-    flBuildingIndex = null;
-    indexNoTab.textContent = null;
-    indexNoPlaceholder.style.display = 'none';
-
-    flMap.getCanvas().style.cursor = '';
-}
-
 function getColorForAdjacency(adjacency) {
     const colorStops = [
         { value: 0.036190871149302, color: "#ed4426" },
@@ -2912,14 +2822,11 @@ function handleImageError(img) {
 function showPopup(e, sourceLayer) {
     const feature = e.features[0];
     const coordinates = e.lngLat;
-
     const adjacencyValue = Number.parseFloat(feature.properties.adjacency);
     const formattedScore = adjacencyValue.toFixed(3);
     const backgroundColor = getColorForAdjacency(adjacencyValue);
     const safetyLevel = getSafetyLevel(adjacencyValue);
     console.log("ptindex: " + feature.properties['pointindex'] + ", svi-path: " + feature.properties['svi1_pth']);
-
-
     const popupContent = `
         <div class="flMap-popup-wrapper">
             <div class="flMap-popup-header" style="background-color: ${backgroundColor};">
@@ -2937,25 +2844,37 @@ function showPopup(e, sourceLayer) {
             </div>
         </div>
     `;
-
     const popup = new mapboxgl.Popup({
         className: 'flMap-popup',
         closeButton: true,
         maxWidth: '500px'
     })
-    .setLngLat(coordinates)
-    .setHTML(popupContent)
-    .addTo(flMap);
+        .setLngLat(coordinates)
+        .setHTML(popupContent)
+        .addTo(flMap);
+    
+    // Add Escape key listener
+    const escapeListener = (e) => {
+        if (e.key === 'Escape') {
+            popup.remove();
+            document.removeEventListener('keydown', escapeListener);
+        }
+    };
+    document.addEventListener('keydown', escapeListener);
+    
+    // Remove the listener when the popup is closed
+    popup.on('close', () => {
+        document.removeEventListener('keydown', escapeListener);
+    });
 
     setTimeout(() => {
         const popupElement = popup.getElement();
         const headerElement = popupElement.querySelector('.flMap-popup-header');
         const tipElement = popupElement.querySelector('.mapboxgl-popup-tip');
-        
         headerElement.style.backgroundColor = backgroundColor;
         tipElement.style.borderBottomColor = backgroundColor;
         popupElement.classList.add('flMap-popup-anchor-top');
-   }, 0);
+    }, 0);
 }
 
 flMap.on('load', () => {
@@ -2969,6 +2888,12 @@ flMap.on('load', () => {
     type: 'geojson',
     data: `https://files.cargocollective.com/c483709/40187_RIGHT_SVIPATH.geojson`,
     generateId: true
+    });
+
+    flMap.addSource('40187_ADJACENCY_SERVERSOURCE', {
+        type: 'geojson',
+        data: `https://files.cargocollective.com/c483709/40187_ADJACENCY.geojson`,
+        generateId: true
     });
 
     //40187 Buildings Left Fill Layer
@@ -3346,8 +3271,43 @@ flMap.on('load', () => {
             'text-occlusion-opacity': 1
         }
     }); 
-});
 
+    // 40187 Adjacency Points Layer
+    flMap.addLayer({
+        id: '40187_ADJACENCY',
+        type: 'circle',
+        source: '40187_ADJACENCY_SERVERSOURCE',
+        paint: {
+            'circle-radius': [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                15,
+                0,
+                15.5,
+                1,
+                16.35,
+                3,
+                16.75,
+                4
+            ],
+            'circle-color': "#f05229",
+            'circle-opacity': 1,
+            'circle-stroke-color': "#fbfaf3",
+            'circle-stroke-width': [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                15,
+                0,
+                15.25,
+                1.35,
+                16,
+                1.65
+            ]
+        }
+    });
+});
 
 flMap.on('style.load', () => {
     let leftBuildingID = null;
@@ -3477,7 +3437,6 @@ flMap.on('style.load', () => {
     flMap.on('click', '40187_BUILDINGS_LEFT', handleBuildingClick);
     flMap.on('click', '40187_BUILDINGS_RIGHT', handleBuildingClick);
 });
-
 
 // Attach the handleClick function to both LEFT and RIGHT layers
 function filterFeatures(searchTerm) {
