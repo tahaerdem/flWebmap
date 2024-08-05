@@ -2773,6 +2773,8 @@ map.on('style.load', () => {
 });
 
 let flBuildingIndex = null;
+let hoveredBuildingIndex = null;
+
 const indexNoTab = document.getElementById('index-no');
 const indexNoPlaceholder = document.getElementById('index-no-placeholder');
 const featureIdMap = new Map();
@@ -2907,7 +2909,7 @@ function handleImageError(img) {
     img.onerror = null;
 }
 
-function showPopup(e, sourceName, sourceLayer) {
+function showPopup(e, sourceLayer) {
     const feature = e.features[0];
     const coordinates = e.lngLat;
 
@@ -2957,74 +2959,530 @@ function showPopup(e, sourceName, sourceLayer) {
 }
 
 flMap.on('load', () => {
+    flMap.addSource('40187_LEFT_SVIPATH_SERVERSOURCE', {
+        type: 'geojson',
+        data: `https://files.cargocollective.com/c483709/40187_LEFT_SVIPATH.geojson`,
+        generateId: true
+    });
 
+    flMap.addSource('40187_RIGHT_SVIPATH_SERVERSOURCE', {
+    type: 'geojson',
+    data: `https://files.cargocollective.com/c483709/40187_RIGHT_SVIPATH.geojson`,
+    generateId: true
+    });
+
+    //40187 Buildings Left Fill Layer
+    flMap.addLayer({
+        id: '40187_BUILDINGS_LEFT',
+        type: 'fill',
+        source: '40187_LEFT_SVIPATH_SERVERSOURCE',
+        filter: [
+            "!=",
+            ["get", "adjacency"],
+            0
+        ],
+        paint: {
+            'fill-color': [
+                "case",
+                [
+                    "boolean",
+                    [
+                        "feature-state",
+                        "hover"
+                    ],
+                    false
+                ],
+                "#FFF27B",
+                [
+                    "case",
+                    [
+                        "==",
+                        ["get", "adjacency"],
+                        0
+                    ],
+                    [
+                        "interpolate",
+                        ["linear"],
+                        ["get", "adjacency"],
+                        0.036190871149302,
+                        "#ed4426",
+                        0.15,
+                        "#ed665a",
+                        0.25,
+                        "#f2a085",
+                        0.35,
+                        "#f2c194",
+                        0.5,
+                        "#f8eab4",
+                        0.75,
+                        "#d3dfaf",
+                        1,
+                        "#a8bd93",
+                        5,
+                        "#79b484"
+                    ],
+                    [
+                        "interpolate",
+                        ["linear"],
+                        ["get", "adjacency"],
+                        0.036190871149302,
+                        "#ed4426",
+                        0.15,
+                        "#ed665a",
+                        0.25,
+                        "#f2a085",
+                        0.35,
+                        "#f2c194",
+                        0.5,
+                        "#f8eab4",
+                        0.75,
+                        "#d3dfaf",
+                        1,
+                        "#a8bd93",
+                        5,
+                        "#79b484"
+                    ]
+                ]
+            ],
+            'fill-opacity': [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                13.75,
+                0,
+                15,
+                0.75,
+                22,
+                0.75
+            ],
+            'fill-outline-color': 'rgba(0, 0, 0, 0)'
+        }
+    });
+    
+    //40187 Buildings Right Fill Layer
+    flMap.addLayer({
+        id: '40187_BUILDINGS_RIGHT',
+        type: 'fill',
+        source: '40187_RIGHT_SVIPATH_SERVERSOURCE',
+        filter: [
+            "!=",
+            ["get", "adjacency"],
+            0
+        ],
+        paint: {
+            'fill-color': [
+                "case",
+                [
+                    "boolean",
+                    [
+                        "feature-state",
+                        "hover"
+                    ],
+                    false
+                ],
+                "#FFF27B",
+                [
+                    "case",
+                    [
+                        "==",
+                        ["get", "adjacency"],
+                        0
+                    ],
+                    [
+                        "interpolate",
+                        ["linear"],
+                        ["get", "adjacency"],
+                        0.036190871149302,
+                        "#ed4426",
+                        0.15,
+                        "#ed665a",
+                        0.25,
+                        "#f2a085",
+                        0.35,
+                        "#f2c194",
+                        0.5,
+                        "#f8eab4",
+                        0.75,
+                        "#d3dfaf",
+                        1,
+                        "#a8bd93",
+                        5,
+                        "#79b484"
+                    ],
+                    [
+                        "interpolate",
+                        ["linear"],
+                        ["get", "adjacency"],
+                        0.036190871149302,
+                        "#ed4426",
+                        0.15,
+                        "#ed665a",
+                        0.25,
+                        "#f2a085",
+                        0.35,
+                        "#f2c194",
+                        0.5,
+                        "#f8eab4",
+                        0.75,
+                        "#d3dfaf",
+                        1,
+                        "#a8bd93",
+                        5,
+                        "#79b484"
+                    ]
+                ]
+            ],
+            'fill-opacity': [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                13.75,
+                0,
+                15,
+                0.75,
+                22,
+                0.75
+            ],
+            'fill-outline-color': 'rgba(0, 0, 0, 0)'
+        }
+    });
+    
+    // 40187 Buildings Left Boundary Layer
+    flMap.addLayer({
+        id: '40187_BUILDINGS_BOUNDARY_LEFT',
+        type: 'line',
+        source: '40187_LEFT_SVIPATH_SERVERSOURCE',
+        paint: {
+            'line-color': [
+                "case",
+                [
+                    "boolean",
+                    [
+                        "feature-state",
+                        "hover"
+                    ],
+                    false
+                ],
+                "#839bfc",
+                "#1c7ce9"
+            ],
+            'line-opacity': [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                13,
+                0,
+                16,
+                1
+            ],
+            'line-width': [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                0,
+                1,
+                14.5,
+                1,
+                17,
+                2
+            ]
+        }
+    });
+
+    // 40187 Buildings Right Boundary Layer
+    flMap.addLayer({
+        id: '40187_BUILDINGS_BOUNDARY_RIGHT',
+        type: 'line',
+        source: '40187_RIGHT_SVIPATH_SERVERSOURCE',
+        paint: {
+            'line-color': [
+                "case",
+                [
+                    "boolean",
+                    [
+                        "feature-state",
+                        "hover"
+                    ],
+                    false
+                ],
+                "#f4a794",
+                "#FC5849"
+            ],
+            'line-opacity': [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                13,
+                0,
+                16,
+                1
+            ],
+            'line-width': [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                0,
+                1,
+                14.5,
+                1,
+                17,
+                2
+            ]
+        }
+    });
+
+    // 40187 Buildings Index Left Symbol Layer
+    flMap.addLayer({
+        id: '40187_BUILDINGS_INDEX_LEFT',
+        type: 'symbol',
+        source: '40187_LEFT_SVIPATH_SERVERSOURCE',
+        layout: {
+            'text-field': 'L',
+            'text-font': [
+                "Source Sans Pro Bold",
+                "Arial Unicode MS Regular"
+            ],
+            'text-size': [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                14,
+                9,
+                16,
+                11
+            ],
+            'text-letter-spacing': 0,
+            'text-line-height': 1.2,
+            'text-max-width': 10,
+            'text-justify': 'center',
+            'text-anchor': 'center',
+            'text-padding': 2,
+            'symbol-placement': 'point',
+            'symbol-spacing': 250,
+            'text-max-angle': 45,
+            'text-allow-overlap': false,
+            'icon-allow-overlap': false,
+            'text-ignore-placement': true,
+            'text-pitch-alignment': 'auto',
+            'sort-key': [
+                "case",
+                ["<", ["get", "id"], 900],
+                ["interpolate", ["linear"], ["zoom"], 15.5, 0, 16.25, 1],
+                ["interpolate", ["linear"], ["zoom"], 16.25, 0, 17, 1]
+            ]
+        },
+        paint: {
+            'text-color': '#a6a5a1',
+            'text-opacity': [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                16,
+                0,
+                16.5,
+                1
+            ],
+            'text-halo-color': '#fafafa',
+            'text-halo-width': 1,
+            'text-halo-blur': 0,
+            'text-occlusion-opacity': 1
+        }
+    });
+    
+    // 40187 Buildings Index Right Symbol Layer
+    flMap.addLayer({
+        id: '40187_BUILDINGS_INDEX_RIGHT',
+        type: 'symbol',
+        source: '40187_RIGHT_SVIPATH_SERVERSOURCE',
+        layout: {
+            'text-field': 'R',
+            'text-font': [
+                "Source Sans Pro Bold",
+                "Arial Unicode MS Regular"
+            ],
+            'text-size': [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                14,
+                9,
+                16,
+                11
+            ],
+            'text-letter-spacing': 0,
+            'text-line-height': 1.2,
+            'text-max-width': 10,
+            'text-justify': 'center',
+            'text-anchor': 'center',
+            'text-padding': 2,
+            'symbol-placement': 'point',
+            'symbol-spacing': 250,
+            'text-max-angle': 45,
+            'text-allow-overlap': false,
+            'icon-allow-overlap': false,
+            'text-ignore-placement': true,
+            'text-pitch-alignment': 'auto',
+            'sort-key': [
+                "case",
+                ["<", ["get", "id"], 900],
+                ["interpolate", ["linear"], ["zoom"], 15.5, 0, 16.25, 1],
+                ["interpolate", ["linear"], ["zoom"], 16.25, 0, 17, 1]
+            ]
+        },
+        paint: {
+            'text-color': '#a6a5a1',
+            'text-opacity': [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                16,
+                0,
+                16.5,
+                1
+            ],
+            'text-halo-color': '#fafafa',
+            'text-halo-width': 1,
+            'text-halo-blur': 0,
+            'text-occlusion-opacity': 1
+        }
+    }); 
 });
 
+
 flMap.on('style.load', () => {
-    const rightLayerName = '06-40187-RIGHT-Fill';
-    const rightSourceName = 'composite';
-    const rightSourceLayer = '40187_RIGHT_SVIPATH-6pszjs';
+    let leftBuildingID = null;
+    let rightBuildingID = null;
+
+
+    flMap.on('mousemove', '40187_BUILDINGS_LEFT', (event) => {
+        flMap.getCanvas().style.cursor = 'pointer';
+
+      if (event.features.length === 0) return;
+
+      if (leftBuildingID) {
+        flMap.removeFeatureState({
+          source: '40187_LEFT_SVIPATH_SERVERSOURCE',
+          id: leftBuildingID
+        });
+      }
+
+      leftBuildingID = event.features[0].id;
+
+      flMap.setFeatureState(
+        {
+          source: '40187_LEFT_SVIPATH_SERVERSOURCE',
+          id: leftBuildingID
+        },
+        {
+          hover: true
+        }
+      );
+    });
+
+    flMap.on('mouseleave', '40187_BUILDINGS_LEFT', () => {
+      if (leftBuildingID) {
+        flMap.setFeatureState(
+          {
+            source: '40187_LEFT_SVIPATH_SERVERSOURCE',
+            id: leftBuildingID
+          },
+          {
+            hover: false
+          }
+        );
+      }
+      leftBuildingID = null;
+      flMap.getCanvas().style.cursor = '';
+    });
+
+    flMap.on('mousemove', '40187_BUILDINGS_RIGHT', (event) => {
+        flMap.getCanvas().style.cursor = 'pointer';
+        if (event.features.length === 0) return;
+        if (rightBuildingID) {
+            flMap.removeFeatureState({
+                source: '40187_RIGHT_SVIPATH_SERVERSOURCE',
+                id: rightBuildingID
+            });
+        }
+        rightBuildingID = event.features[0].id;
+        flMap.setFeatureState(
+            {
+                source: '40187_RIGHT_SVIPATH_SERVERSOURCE',
+                id: rightBuildingID
+            },
+            {
+                hover: true
+            }
+        );
+    });
     
-    const leftLayerName = '06-40187-LEFT-Fill';
-    const leftSourceName = 'composite';
-    const leftSourceLayer = '40187_LEFT_SVIPATH-2p8qlw';
+    flMap.on('mouseleave', '40187_BUILDINGS_RIGHT', () => {
+        if (rightBuildingID) {
+            flMap.setFeatureState(
+                {
+                    source: '40187_RIGHT_SVIPATH_SERVERSOURCE',
+                    id: rightBuildingID
+                },
+                {
+                    hover: false
+                }
+            );
+        }
+        rightBuildingID = null;
+        flMap.getCanvas().style.cursor = '';
+    });
+
+    flMap.on('click', '40187_BUILDINGS_LEFT', () => {
+        if (leftBuildingID) {
+            flMap.setFeatureState(
+                {
+                    source: '40187_LEFT_SVIPATH_SERVERSOURCE',
+                    id: leftBuildingID
+                },
+                {
+                    hover: false
+                }
+            );
+        }
+        leftBuildingID = null;
+        flMap.getCanvas().style.cursor = '';
+    });
+
+    flMap.on('click', '40187_BUILDINGS_LEFT', (event) => showPopup(event, '40187_BUILDINGS_SVIPATH_SERVERSOURCE'));
+    flMap.on('click', '40187_BUILDINGS_RIGHT', (event) => showPopup(event, '40187_BUILDINGS_SVIPATH_SERVERSOURCE'));
 
 
-    if (flMap.getLayer(rightLayerName)) {
-        flMap.on('mouseenter', rightLayerName, (event) => handleMouseEnter(event, rightSourceName, rightSourceLayer));
-        flMap.on('mouseleave', rightLayerName, () => handleMouseLeave(rightSourceName, rightSourceLayer));
-        flMap.on('click', rightLayerName, (event) => showPopup(event, rightSourceName, rightSourceLayer));
-    } else {
-        console.error('Layer does not exist:', rightLayerName);
-    }
-
-    if (flMap.getLayer(leftLayerName)) {
-        flMap.on('mouseenter', leftLayerName, (event) => handleMouseEnter(event, leftSourceName, leftSourceLayer));
-        flMap.on('mouseleave', leftLayerName, () => handleMouseLeave(leftSourceName, leftSourceLayer));
-        flMap.on('click', leftLayerName, (event) => showPopup(event, leftSourceName, leftSourceLayer));
-    } else {
-        console.error('Layer does not exist:', leftLayerName);
-    }
 
     function handleBuildingClick(event) {
-        const rawLon = event.features[0].properties['nearest_x'];
-        const rawLat = event.features[0].properties['nearest_y'];
+        if (event.features.length === 0) return;
+    
+        const feature = event.features[0];
+        const rawLon = feature.properties['nearest_x'];
+        const rawLat = feature.properties['nearest_y'];
         
-        const currentLon = parseFloat(rawLon).toFixed(4);
-        const currentLat = parseFloat(rawLat).toFixed(4);
-
+        const currentLon = parseFloat(rawLon);
+        const currentLat = parseFloat(rawLat);
+    
         const preClickZoomLevel = flMap.getZoom();
-        const currentZoom = preClickZoomLevel >= 17 ? preClickZoomLevel : 18;
-        
-        console.log(`Longitude: ${currentLon}, Latitude: ${currentLat}, Zoom: ${currentZoom}`);
+        const currentZoom = Math.max(preClickZoomLevel, 18);
+    
+        console.log(`Longitude: ${currentLon.toFixed(4)}, Latitude: ${currentLat.toFixed(4)}, Zoom: ${currentZoom}`);
     
         flMap.flyTo({
-            center: [parseFloat(currentLon), parseFloat(currentLat)],
+            center: [currentLon, currentLat],
             zoom: currentZoom
         });
     }
     
-    flMap.on('click', '06-40187-LEFT-Fill', handleBuildingClick);
-    flMap.on('click', '06-40187-RIGHT-Fill', handleBuildingClick);
-
-    flMap.on('mousemove', debounce((event) => {
-        if (!event.features || !event.features.length) {
-            if (flBuildingIndex !== null) {
-                handleMouseLeave(rightSourceName, rightSourceLayer);
-                handleMouseLeave(leftSourceName, leftSourceLayer);
-            }
-        }
-    }, 300));
+    flMap.on('click', '40187_BUILDINGS_LEFT', handleBuildingClick);
+    flMap.on('click', '40187_BUILDINGS_RIGHT', handleBuildingClick);
 });
 
 
-
 // Attach the handleClick function to both LEFT and RIGHT layers
-
-
 function filterFeatures(searchTerm) {
-    const rightLayerName = '06-40187-RIGHT-Fill';
-    const leftLayerName = '06-40187-LEFT-Fill';
+    const rightLayerName = '40187_BUILDINGS_RIGHT';
+    const leftLayerName = '40187_BUILDINGS_LEFT';
 
     // Clear all hover states first
     flMap.queryRenderedFeatures({
@@ -3033,7 +3491,6 @@ function filterFeatures(searchTerm) {
         flMap.setFeatureState(
             {
                 source: feature.source,
-                sourceLayer: feature.sourceLayer,
                 index: feature.index
             },
             {
@@ -3050,7 +3507,6 @@ function filterFeatures(searchTerm) {
         flMap.setFeatureState(
             {
                 source: feature.source,
-                sourceLayer: feature.sourceLayer,
                 id: feature.id
             },
             {
@@ -3067,7 +3523,6 @@ function filterFeatures(searchTerm) {
         flMap.setFeatureState(
             {
                 source: feature.source,
-                sourceLayer: feature.sourceLayer,
                 id: feature.id
             },
             {
@@ -3096,8 +3551,8 @@ function debounce(func, wait) {
 
 // Function to handle clearing search results
 function clearSearchResults() {
-    const rightLayerName = '06-40187-RIGHT-Fill';
-    const leftLayerName = '06-40187-LEFT-Fill';
+    const rightLayerName = '40187_BUILDINGS_RIGHT';
+    const leftLayerName = '40187_BUILDINGS_LEFT';
 
     flMap.queryRenderedFeatures({
         layers: [rightLayerName, leftLayerName]
@@ -3105,7 +3560,6 @@ function clearSearchResults() {
         flMap.setFeatureState(
             {
                 source: feature.source,
-                sourceLayer: feature.sourceLayer,
                 id: feature.id
             },
             {
