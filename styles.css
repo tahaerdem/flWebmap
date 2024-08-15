@@ -1792,7 +1792,7 @@ figure {
 
 .image-wrapper {
     position: relative;
-    width: 49.9%; /* Adjust the width to ensure there's space between the images */
+    width: 49.9%;
 }
 
 .image-wrapper img {
