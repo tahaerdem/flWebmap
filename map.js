@@ -3559,4 +3559,3 @@ function spinGlobe() {
 map.on('moveend', () => {
     spinGlobe();
 });
-
