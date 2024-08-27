@@ -1549,6 +1549,7 @@ stroke: #fff;
 #plot .controls-container .toggles {
     display: block;
     justify-content: space-between;
+    z-index: 2000;
 
     @media screen and (max-width: 900px) {
         display: flex;
