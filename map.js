@@ -1,5 +1,5 @@
 
-mapboxgl.accessToken = 'pk.eyJ1IjoidGFoYWVyZGVtb3p0dXJrIiwiYSI6ImNqZmZ1Nm9zNzM4N3gycW1tMGVreHJ0enQifQ.m_BVyHJ6Ukop8vUSasQv2w';
+mapboxgl.accessToken = 'pk.eyJ1IjoidGFoYWVyZGVtb3p0dXJrIiwiYSI6ImNtdnNudThrNTAxYzgzNXNieHExZmlwOHoifQ._az-k2qKgrW_F2CpUsaFRA';
 let viewportWidth = window.innerWidth || document.documentElement.clientWidth;
 let zoom;
 let mapActive = true;
